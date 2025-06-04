@@ -121,7 +121,7 @@ function CommandCenterPage() {
                 </div>
               </div>
               
-              <h1 className="premium-title mb-6">
+              <h1 className="premium-title mb-6 text-black">
                 OPERATION KITSUNE
               </h1>
               

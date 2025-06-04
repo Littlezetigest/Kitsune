@@ -65,7 +65,7 @@ function ArchetypesPage() {
         presuppositions: "When you become the category leader... (not if)",
         temporalShifts: "Speak from future success position - 'Once this transforms the industry...'",
         authorityAnchors: "Reference thought leaders they respect: 'As Elon mentioned at...'",
-        scarcityFrames: "Limited founding member positions", "exclusive preview access",
+        scarcityFrames: "Limited founding member positions, exclusive preview access",
         metamodel: "Chunk up to bigger vision when they focus on details",
         reframing: "Position risks as 'innovation barriers' that create competitive moats"
       },
