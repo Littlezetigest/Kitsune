@@ -21,26 +21,26 @@ function HomePage() {
       <Unauthenticated>
         {/* Art of War Quote */}
         <div className="text-center mb-16 px-8">
-          <div className="executive-text text-xl font-light py-8 px-16 relative">
-            <div className="absolute top-0 left-1/2 luxury-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+          <div className="liquid-metal-text text-xl font-light py-8 px-16 relative">
+            <div className="absolute top-0 left-1/2 neural-network-viz w-20 h-0.5 transform -translate-x-1/2"></div>
              DIGITAL KITSUNE WARFARE 
-            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide prestige-text">
+            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide liquid-metal-text">
               Nine-tailed intelligence • Psychological dominance • Strategic superiority
             </div>
-            <div className="absolute bottom-0 left-1/2 luxury-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-1/2 neural-network-viz w-20 h-0.5 transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-24">
           <div className="mb-12">
-            <div className="luxury-divider w-1 h-16 mx-auto mb-8"></div>
+            <div className="neural-network-viz w-1 h-16 mx-auto mb-8"></div>
           </div>
-          <h1 className="text-5xl font-light mb-6 tracking-wider executive-text">
+          <h1 className="text-5xl font-light mb-6 tracking-wider liquid-metal-text">
              KITSUNE
           </h1>
-          <div className="luxury-divider w-32 mx-auto mb-8"></div>
-          <p className="text-lg mb-8 font-light tracking-wide platinum-glow">
+          <div className="neural-network-viz w-32 mx-auto mb-8"></div>
+          <p className="text-lg mb-8 font-light tracking-wide liquid-metal-text">
             NEURO-WARFARE MATRIX
           </p>
           <p className="text-base mb-16 max-w-2xl mx-auto font-light leading-relaxed opacity-80">
@@ -52,10 +52,10 @@ function HomePage() {
         {/* Archetype Grid */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl font-light tracking-wider mb-4 prestige-text platinum-glow" data-text="TARGET PROFILES">
+            <h2 className="text-2xl font-light tracking-wider mb-4 liquid-metal-text" data-text="TARGET PROFILES">
               TARGET PROFILES
             </h2>
-            <div className="luxury-divider w-24 mx-auto"></div>
+            <div className="neural-network-viz w-24 mx-auto"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
