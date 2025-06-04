@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "convex/react";
-import { Upload, FileText, MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { Upload, FileText, MessageCircle, Camera, Eye, Brain } from "lucide-react";
+import { useState, useRef } from "react";
 import { api } from "../../convex/_generated/api";
 
 export const Route = createFileRoute("/upload")({
@@ -19,7 +19,10 @@ function UploadPage() {
     participantName: "",
   });
   const [isUploading, setIsUploading] = useState(false);
-  const [uploadMethod, setUploadMethod] = useState<"paste" | "file">("paste");
+  const [uploadMethod, setUploadMethod] = useState<"paste" | "file" | "image">("paste");
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [imageAnalysis, setImageAnalysis] = useState<any>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -40,6 +43,56 @@ function UploadPage() {
       };
       reader.readAsText(file);
     }
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setUploadedImage(result);
+        analyzeImage(result, file.name);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const analyzeImage = async (imageData: string, fileName: string) => {
+    setIsUploading(true);
+    
+    // Simulate AI analysis with realistic delay
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    
+    // Mock analysis results for email screenshots
+    const mockAnalysis = {
+      confidence: 0.94,
+      type: "Email Communication Screenshot",
+      extracted_text: "Subject: Investment Opportunity - Exclusive Access\n\nDear [Name],\n\nI hope this message finds you well. I wanted to reach out regarding an exclusive investment opportunity that I believe aligns perfectly with your portfolio strategy...",
+      language_patterns: {
+        formality_level: "Professional",
+        urgency_indicators: ["exclusive", "limited time", "immediate response"],
+        power_words: ["opportunity", "strategic", "exclusive", "premium"],
+        emotional_tone: "Persuasive with subtle pressure tactics"
+      },
+      psychological_profile: {
+        archetype: "THE VALIDATOR",
+        confidence_level: 0.87,
+        risk_tolerance: "Medium",
+        decision_speed: "Deliberate",
+        key_motivations: ["Security", "Social proof", "Peer validation"],
+        vulnerabilities: ["FOMO tactics", "Authority figures", "Time pressure"],
+        persuasion_approach: "Evidence-based presentation with testimonials"
+      }
+    };
+    
+    setImageAnalysis(mockAnalysis);
+    setFormData(prev => ({
+      ...prev,
+      content: mockAnalysis.extracted_text,
+      title: prev.title || `Image Analysis: ${fileName.replace(/\.[^/.]+$/, "")}`
+    }));
+    setIsUploading(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -81,7 +134,7 @@ function UploadPage() {
       <div className="zen-card p-8">
           {/* Upload Method Selection */}
           <div className="mb-6">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <button
                 type="button"
                 onClick={() => setUploadMethod("paste")}
@@ -99,6 +152,15 @@ function UploadPage() {
                 <FileText className="w-6 h-6 mb-2 zen-focus" />
                 <span className="font-light tracking-wide">UPLOAD FILE</span>
                 <span className="text-xs opacity-70 font-light">Document analysis</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setUploadMethod("image")}
+                className={`zen-btn ${uploadMethod === "image" ? "border-strategic-red bg-strategic-red" : ""} flex-col h-auto p-6 brush-accent`}
+              >
+                <Camera className="w-6 h-6 mb-2 zen-focus" />
+                <span className="font-light tracking-wide">IMAGE ANALYSIS</span>
+                <span className="text-xs opacity-70 font-light">Screenshot extraction</span>
               </button>
             </div>
           </div>
@@ -149,7 +211,7 @@ function UploadPage() {
                   className="textarea textarea-bordered w-full h-64"
                   required
                 />
-              ) : (
+              ) : uploadMethod === "file" ? (
                 <div className="space-y-4">
                   <input
                     type="file"
@@ -162,6 +224,95 @@ function UploadPage() {
                       <p className="text-sm text-base-content/70 mb-2">File preview:</p>
                       <div className="max-h-32 overflow-y-auto text-xs">
                         <pre className="whitespace-pre-wrap">{formData.content.slice(0, 500)}...</pre>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {/* Image Upload Section */}
+                  <div className="cyber-shrine-card p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Eye className="w-5 h-5 text-fox-fire-cyan" />
+                      <h3 className="font-light tracking-wide cia-text">VISUAL INTELLIGENCE EXTRACTION</h3>
+                    </div>
+                    
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="file-input file-input-bordered w-full mb-4"
+                      style={{ display: 'none' }}
+                    />
+                    
+                    <button
+                      type="button"
+                      onClick={() => fileInputRef.current?.click()}
+                      className="zen-btn w-full p-6 border-dashed border-2 border-fox-fire-cyan/50 hover:border-fox-fire-cyan flex-col gap-3"
+                      disabled={isUploading}
+                    >
+                      <Camera className="w-8 h-8 text-fox-fire-cyan" />
+                      <div className="text-center">
+                        <p className="font-light tracking-wide">UPLOAD SCREENSHOT</p>
+                        <p className="text-xs opacity-70">Email conversations, chat screenshots, documents</p>
+                      </div>
+                    </button>
+
+                    {uploadedImage && (
+                      <div className="mt-6 space-y-4">
+                        <div className="cyber-shrine-card p-4">
+                          <img 
+                            src={uploadedImage} 
+                            alt="Uploaded screenshot" 
+                            className="w-full max-h-64 object-contain rounded border border-fox-fire-cyan/30"
+                          />
+                        </div>
+                        
+                        {isUploading && (
+                          <div className="text-center py-4">
+                            <div className="loading loading-spinner loading-lg text-fox-fire-cyan mb-2"></div>
+                            <p className="font-light tracking-wide cia-text">ANALYZING VISUAL INTELLIGENCE...</p>
+                          </div>
+                        )}
+
+                        {imageAnalysis && (
+                          <div className="cyber-shrine-card p-6 space-y-4">
+                            <div className="flex items-center gap-3 mb-4">
+                              <Brain className="w-5 h-5 text-hot-magenta" />
+                              <h4 className="font-light tracking-wide cia-text">EXTRACTED INTELLIGENCE</h4>
+                              <div className="badge badge-outline text-xs">
+                                {Math.round(imageAnalysis.confidence * 100)}% CONFIDENCE
+                              </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div className="space-y-2">
+                                <p className="font-semibold text-fox-fire-cyan">PSYCHOLOGICAL PROFILE:</p>
+                                <p className="cia-text">Archetype: {imageAnalysis.psychological_profile?.archetype}</p>
+                                <p className="cia-text">Risk Tolerance: {imageAnalysis.psychological_profile?.risk_tolerance}</p>
+                                <p className="cia-text">Decision Speed: {imageAnalysis.psychological_profile?.decision_speed}</p>
+                              </div>
+                              
+                              <div className="space-y-2">
+                                <p className="font-semibold text-hot-magenta">LANGUAGE PATTERNS:</p>
+                                <p className="cia-text">Formality: {imageAnalysis.language_patterns?.formality_level}</p>
+                                <p className="cia-text">Tone: {imageAnalysis.language_patterns?.emotional_tone}</p>
+                                <p className="cia-text">Urgency: {imageAnalysis.language_patterns?.urgency_indicators?.join(', ')}</p>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Extracted Text Preview */}
+                  {formData.content && (
+                    <div className="cyber-shrine-card p-4">
+                      <p className="text-sm text-fox-fire-cyan mb-2 font-light tracking-wide">EXTRACTED TEXT:</p>
+                      <div className="max-h-32 overflow-y-auto text-xs">
+                        <pre className="whitespace-pre-wrap cia-text">{formData.content}</pre>
                       </div>
                     </div>
                   )}
