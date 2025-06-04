@@ -4,7 +4,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useMutation } from "convex/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
-import { Target, Zap, Shield, Sword, Eye, Users, Crown, Gem, FileText, Trash2, Dragon } from "lucide-react";
+import { Target, Zap, Shield, Sword, Eye, Users, Crown, Gem, FileText, Trash2, Flame } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 
 const conversationsQueryOptions = convexQuery(api.conversations.getUserConversations, {});
@@ -20,53 +20,60 @@ function HomePage() {
     <div className="not-prose">
       <Unauthenticated>
         {/* Art of War Quote */}
-        <div className="text-center mb-8 px-8">
-          <div className="matrix-text text-lg font-mono italic border-l-4 border-r-4 border-matrix-green py-4 px-8 bg-black/50">
-            "知己知彼，百战不殆" — Know yourself and know your enemy, and you will never be defeated
+        <div className="text-center mb-16 px-8">
+          <div className="calligraphic-text text-xl font-light py-8 px-16 relative">
+            <div className="absolute top-0 left-1/2 w-16 h-px bg-strategic-red transform -translate-x-1/2"></div>
+            知己知彼，百战不殆
+            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide">
+              Know yourself and know your enemy, and you will never be defeated
+            </div>
+            <div className="absolute bottom-0 left-1/2 w-16 h-px bg-strategic-red transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-6">
-            <div className="dragon-glow">
-              <Dragon className="w-16 h-16" style={{color: 'var(--dragon-red)'}} />
-            </div>
+        <div className="text-center mb-24">
+          <div className="mb-12">
+            <div className="w-1 h-16 bg-strategic-red mx-auto mb-8"></div>
           </div>
-          <h1 className="dragon-text text-6xl font-bold mb-4 dragonGlitch">
-            DRAGON MATRIX WAR ROOM
+          <h1 className="text-5xl font-light mb-6 tracking-wider">
+            KITSUNE
           </h1>
-          <p className="text-xl mb-8 matrix-text">
-            TACTICAL PSYCHOLOGICAL WARFARE COMMAND CENTER
+          <div className="w-24 h-px bg-strategic-red mx-auto mb-8"></div>
+          <p className="text-lg mb-8 font-light tracking-wide strategic-emphasis">
+            TACTICAL ANALYSIS SYSTEM
           </p>
-          <p className="text-lg mb-12 max-w-4xl mx-auto" style={{color: 'var(--pure-white)'}}>
-            Advanced psychological analysis system that decodes enemy archetypes, 
-            exploits strategic vulnerabilities, and weaponizes persuasion for total victory.
+          <p className="text-base mb-16 max-w-2xl mx-auto font-light leading-relaxed opacity-80">
+            Strategic intelligence platform for psychological analysis and tactical communication.
+            Every interaction calculated. Every response purposeful.
           </p>
         </div>
 
         {/* Archetype Grid */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8 dragon-text">
-            TARGET ARCHETYPES
-          </h2>
-          <div className="grid md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="mb-24">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl font-light tracking-wider mb-4">
+              TARGET PROFILES
+            </h2>
+            <div className="w-12 h-px bg-strategic-red mx-auto"></div>
+          </div>
+          <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
-              { name: "PRINCE/CHILD", icon: Crown, color: "var(--dragon-red)" },
-              { name: "WARRIOR/SOLDIER", icon: Sword, color: "var(--matrix-green)" },
-              { name: "JOKER/AFFAIRIST", icon: Zap, color: "var(--pure-white)" },
-              { name: "EMPEROR/DADDY", icon: Shield, color: "var(--dragon-red)" },
-              { name: "SAGE/ORACLE", icon: Eye, color: "var(--matrix-green)" },
-              { name: "GUARDIAN/PROTECTOR", icon: Shield, color: "var(--pure-white)" },
-              { name: "PIONEER/EXPLORER", icon: Target, color: "var(--dragon-red)" },
-              { name: "COLLECTOR/CURATOR", icon: Gem, color: "var(--matrix-green)" }
+              { name: "PRINCE", icon: Crown },
+              { name: "WARRIOR", icon: Sword },
+              { name: "JOKER", icon: Zap },
+              { name: "EMPEROR", icon: Shield },
+              { name: "SAGE", icon: Eye },
+              { name: "GUARDIAN", icon: Shield },
+              { name: "PIONEER", icon: Target },
+              { name: "COLLECTOR", icon: Gem }
             ].map((archetype) => (
-              <div key={archetype.name} className="dragon-archetype-card text-center">
+              <div key={archetype.name} className="zen-archetype-card text-center group">
                 <archetype.icon 
-                  className="w-12 h-12 mx-auto mb-3 dragon-glow" 
-                  style={{color: archetype.color}}
+                  className="w-8 h-8 mx-auto mb-4 zen-focus opacity-60 group-hover:opacity-100" 
+                  style={{color: 'var(--pure-white)'}}
                 />
-                <h3 className="font-bold text-sm" style={{color: archetype.color}}>
+                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">
                   {archetype.name}
                 </h3>
               </div>
@@ -75,45 +82,46 @@ function HomePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 max-w-7xl mx-auto">
-          <div className="dragon-card p-6 text-center">
-            <Target className="w-12 h-12 mx-auto mb-4 matrix-glow" style={{color: 'var(--matrix-green)'}} />
-            <h3 className="font-bold mb-2" style={{color: 'var(--matrix-green)'}}>PERSONALITY MATRIX</h3>
-            <p className="text-sm opacity-80">
-              Core traits and psychological behaviors with pulsing matrix indicators
+        <div className="grid md:grid-cols-2 gap-1 mb-24 max-w-4xl mx-auto">
+          <div className="zen-card p-12 text-center group">
+            <Target className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
+            <h3 className="font-light mb-4 tracking-wide">ANALYSIS</h3>
+            <p className="text-sm opacity-60 font-light leading-relaxed">
+              Psychological profiling through communication pattern analysis
             </p>
           </div>
           
-          <div className="dragon-card p-6 text-center">
-            <Shield className="w-12 h-12 mx-auto mb-4 dragon-glow danger-warning" />
-            <h3 className="font-bold mb-2 danger-warning">STRATEGIC VULNERABILITIES</h3>
-            <p className="text-sm opacity-80">
-              Art of War weaknesses with glowing warning icons and tactical breach points
+          <div className="zen-card p-12 text-center group">
+            <Shield className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
+            <h3 className="font-light mb-4 tracking-wide">VULNERABILITIES</h3>
+            <p className="text-sm opacity-60 font-light leading-relaxed">
+              Strategic weaknesses identified through behavioral patterns
             </p>
           </div>
           
-          <div className="dragon-card p-6 text-center">
-            <Sword className="w-12 h-12 mx-auto mb-4 dragon-glow" style={{color: 'var(--dragon-red)'}} />
-            <h3 className="font-bold mb-2" style={{color: 'var(--dragon-red)'}}>48 LAWS ARSENAL</h3>
-            <p className="text-sm opacity-80">
-              Interactive weapon buttons with hover effects revealing attack vectors
+          <div className="zen-card p-12 text-center group">
+            <Sword className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
+            <h3 className="font-light mb-4 tracking-wide">TACTICS</h3>
+            <p className="text-sm opacity-60 font-light leading-relaxed">
+              Strategic influence techniques based on psychological principles
             </p>
           </div>
           
-          <div className="dragon-card p-6 text-center">
-            <Dragon className="w-12 h-12 mx-auto mb-4 matrix-glow" style={{color: 'var(--matrix-green)'}} />
-            <h3 className="font-bold mb-2" style={{color: 'var(--matrix-green)'}}>WAR ROOM SIMULATOR</h3>
-            <p className="text-sm opacity-80">
-              Interactive AI embodying target personality with dragon matrix rating system
+          <div className="zen-card p-12 text-center group">
+            <Eye className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
+            <h3 className="font-light mb-4 tracking-wide">SIMULATION</h3>
+            <p className="text-sm opacity-60 font-light leading-relaxed">
+              Practice environment for strategic communication training
             </p>
           </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center mb-24">
+          <div className="w-px h-16 bg-strategic-red mx-auto mb-8"></div>
           <SignInButton mode="modal">
-            <button className="dragon-btn text-lg px-12 py-4">
-              🐉 ENTER THE DRAGON MATRIX
+            <button className="zen-btn text-sm tracking-widest">
+              ENTER
             </button>
           </SignInButton>
         </div>
@@ -142,61 +150,64 @@ function InvestorTargetsList() {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="text-4xl font-bold dragon-text">TARGET DOSSIERS</h2>
-        <Link to="/upload" className="dragon-btn">
-          🎯 UPLOAD NEW INTEL
+      <div className="flex justify-between items-center mb-16">
+        <div>
+          <h2 className="text-2xl font-light tracking-wider">TARGET DOSSIERS</h2>
+          <div className="w-12 h-px bg-strategic-red mt-2"></div>
+        </div>
+        <Link to="/upload" className="zen-btn text-xs tracking-widest">
+          UPLOAD INTEL
         </Link>
       </div>
 
       {conversations.length === 0 ? (
-        <div className="text-center py-16">
-          <div className="dragon-card p-12 max-w-2xl mx-auto">
-            <FileText className="w-24 h-24 mx-auto mb-6 matrix-glow" style={{color: 'var(--matrix-green)'}} />
-            <h3 className="text-2xl font-bold mb-4 dragon-text">NO TARGETS ACQUIRED</h3>
-            <p className="mb-8 text-lg" style={{color: 'var(--pure-white)'}}>
-              Upload enemy communications to begin psychological analysis and strategic planning
+        <div className="text-center py-24">
+          <div className="zen-card p-16 max-w-xl mx-auto">
+            <div className="w-px h-12 bg-strategic-red mx-auto mb-8"></div>
+            <h3 className="text-lg font-light mb-6 tracking-wide">NO TARGETS ACQUIRED</h3>
+            <p className="mb-12 text-sm opacity-60 font-light leading-relaxed">
+              Upload communications to begin psychological analysis and strategic planning
             </p>
-            <Link to="/upload" className="dragon-btn text-lg px-8 py-4">
-              🎯 INITIATE TARGET ACQUISITION
+            <Link to="/upload" className="zen-btn text-xs tracking-widest">
+              INITIATE ACQUISITION
             </Link>
           </div>
         </div>
       ) : (
-        <div className="grid gap-6">
+        <div className="grid gap-1">
           {conversations.map((conversation) => (
-            <div key={conversation._id} className="dragon-card p-6 hover:border-color-[var(--matrix-green)]">
+            <div key={conversation._id} className="zen-card p-8">
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Target className="w-6 h-6 dragon-glow" style={{color: 'var(--dragon-red)'}} />
-                    <h3 className="text-xl font-bold" style={{color: 'var(--pure-white)'}}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <Target className="w-4 h-4 opacity-60" />
+                    <h3 className="text-lg font-light tracking-wide">
                       {conversation.title}
                     </h3>
                   </div>
                   {conversation.participantName && (
-                    <p className="text-lg mb-2" style={{color: 'var(--matrix-green)'}}>
-                      TARGET: {conversation.participantName}
+                    <p className="text-sm mb-2 strategic-emphasis font-medium">
+                      {conversation.participantName}
                     </p>
                   )}
-                  <p className="text-sm opacity-70">
-                    INTEL ACQUIRED: {new Date(conversation.uploadedAt).toLocaleDateString()}
+                  <p className="text-xs opacity-50 font-light tracking-wide">
+                    {new Date(conversation.uploadedAt).toLocaleDateString()}
                   </p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-4">
                   <Link 
                     to="/analysis/$conversationId" 
                     params={{ conversationId: conversation._id }}
-                    className="dragon-button px-6 py-3"
+                    className="zen-btn text-xs tracking-widest"
                   >
-                    ⚡ ANALYZE TARGET
+                    ANALYZE
                   </Link>
                   <button 
                     onClick={() => handleDelete(conversation._id, conversation.title)}
-                    className="delete-button px-4 py-3"
+                    className="p-3 border border-strategic-red bg-void-black hover:bg-strategic-red transition-colors opacity-60 hover:opacity-100"
                     title="Delete Target"
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>

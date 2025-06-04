@@ -100,7 +100,7 @@ function RootComponent() {
                 />
                 <div className="drawer-content container mx-auto flex flex-col h-full">
                   {/* Navbar */}
-                  <header className="dragon-nav navbar shadow-sm">
+                  <header className="zen-nav navbar shadow-sm">
                     <div className="navbar-start">
                       <label
                         htmlFor="drawer-toggle"
@@ -110,33 +110,33 @@ function RootComponent() {
                       </label>
                       <Link
                         to="/"
-                        className="dragon-text text-2xl font-bold tracking-wider"
+                        className="calligraphic-text text-xl font-light tracking-widest"
                       >
-                        🐉 DRAGON MATRIX WAR ROOM
+                        KITSUNE
                       </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
-                      <nav className="flex">
+                      <nav className="flex gap-1">
                         <Link
                           to="/"
-                          className="dragon-btn mr-2"
+                          className="zen-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          📊 TARGETS
+                          TARGETS
                         </Link>
                         <Link
                           to="/upload"
-                          className="dragon-btn mr-2"
+                          className="zen-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          🎯 INTEL UPLOAD
+                          UPLOAD
                         </Link>
                         <Link
                           to="/simulator"
-                          className="dragon-btn"
+                          className="zen-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          ⚔️ WAR ROOM
+                          SIMULATE
                         </Link>
                       </nav>
                     </div>
@@ -152,8 +152,9 @@ function RootComponent() {
                   <main className="flex-1 p-4 prose prose-invert max-w-none relative z-10">
                     <Outlet />
                   </main>
-                  <footer className="footer footer-center p-4 text-base-content">
-                    <p>© {new Date().getFullYear()} Dragon Matrix War Room</p>
+                  <footer className="footer footer-center p-8 text-base-content">
+                    <div className="w-12 h-px bg-strategic-red mx-auto mb-4"></div>
+                    <p className="text-xs opacity-40 font-light tracking-widest">© {new Date().getFullYear()}</p>
                   </footer>
                 </div>
                 {/* Sidebar content for mobile */}
@@ -171,27 +172,27 @@ function RootComponent() {
                           <Link
                             to="/"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 dragon-btn mb-2"
+                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
                           >
-                            📊 TARGETS
+                            TARGETS
                           </Link>
                         </li>
                         <li>
                           <Link
                             to="/upload"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 dragon-btn mb-2"
+                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
                           >
-                            🎯 INTEL UPLOAD
+                            UPLOAD
                           </Link>
                         </li>
                         <li>
                           <Link
                             to="/simulator"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 dragon-btn mb-2"
+                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
                           >
-                            ⚔️ WAR ROOM
+                            SIMULATE
                           </Link>
                         </li>
                       </ul>
