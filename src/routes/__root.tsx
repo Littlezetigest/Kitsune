@@ -119,24 +119,31 @@ function RootComponent() {
                       <nav className="flex gap-2">
                         <Link
                           to="/"
-                          className="cyber-btn text-xs tracking-widest holographic-accent"
+                          className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            TARGETS
                         </Link>
                         <Link
                           to="/upload"
-                          className="cyber-btn text-xs tracking-widest holographic-accent"
+                          className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            UPLOAD
                         </Link>
                         <Link
                           to="/simulator"
-                          className="cyber-btn text-xs tracking-widest holographic-accent"
+                          className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            SIMULATE
+                        </Link>
+                        <Link
+                          to="/archetypes"
+                          className="fox-fire-btn text-xs tracking-widest"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                           ARCHETYPES
                         </Link>
                       </nav>
                     </div>
@@ -171,7 +178,7 @@ function RootComponent() {
                           <Link
                             to="/"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             TARGETS
                           </Link>
@@ -180,7 +187,7 @@ function RootComponent() {
                           <Link
                             to="/upload"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             UPLOAD
                           </Link>
@@ -189,9 +196,18 @@ function RootComponent() {
                           <Link
                             to="/simulator"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 zen-btn mb-2 text-xs tracking-widest"
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             SIMULATE
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/archetypes"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
+                          >
+                            ARCHETYPES
                           </Link>
                         </li>
                       </ul>

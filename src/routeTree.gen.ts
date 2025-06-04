@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as UploadImport } from './routes/upload'
 import { Route as SimulatorImport } from './routes/simulator'
+import { Route as ArchetypesImport } from './routes/archetypes'
 import { Route as IndexImport } from './routes/index'
 import { Route as AnalysisConversationIdImport } from './routes/analysis.$conversationId'
 
@@ -27,6 +28,12 @@ const UploadRoute = UploadImport.update({
 const SimulatorRoute = SimulatorImport.update({
   id: '/simulator',
   path: '/simulator',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ArchetypesRoute = ArchetypesImport.update({
+  id: '/archetypes',
+  path: '/archetypes',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -51,6 +58,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/archetypes': {
+      id: '/archetypes'
+      path: '/archetypes'
+      fullPath: '/archetypes'
+      preLoaderRoute: typeof ArchetypesImport
       parentRoute: typeof rootRoute
     }
     '/simulator': {
@@ -81,6 +95,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/archetypes': typeof ArchetypesRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
@@ -88,6 +103,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/archetypes': typeof ArchetypesRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
@@ -96,6 +112,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/archetypes': typeof ArchetypesRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
@@ -103,15 +120,32 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
+  fullPaths:
+    | '/'
+    | '/archetypes'
+    | '/simulator'
+    | '/upload'
+    | '/analysis/$conversationId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
-  id: '__root__' | '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
+  to:
+    | '/'
+    | '/archetypes'
+    | '/simulator'
+    | '/upload'
+    | '/analysis/$conversationId'
+  id:
+    | '__root__'
+    | '/'
+    | '/archetypes'
+    | '/simulator'
+    | '/upload'
+    | '/analysis/$conversationId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArchetypesRoute: typeof ArchetypesRoute
   SimulatorRoute: typeof SimulatorRoute
   UploadRoute: typeof UploadRoute
   AnalysisConversationIdRoute: typeof AnalysisConversationIdRoute
@@ -119,6 +153,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArchetypesRoute: ArchetypesRoute,
   SimulatorRoute: SimulatorRoute,
   UploadRoute: UploadRoute,
   AnalysisConversationIdRoute: AnalysisConversationIdRoute,
@@ -135,6 +170,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/archetypes",
         "/simulator",
         "/upload",
         "/analysis/$conversationId"
@@ -142,6 +178,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/archetypes": {
+      "filePath": "archetypes.tsx"
     },
     "/simulator": {
       "filePath": "simulator.tsx"
