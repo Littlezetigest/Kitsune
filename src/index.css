@@ -1103,9 +1103,8 @@
     backdrop-filter: blur(32px);
     position: relative;
     overflow: hidden;
-    box-shadow: var(--fox-fire-glow);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   }
   
   .cyber-shrine-card::before {
@@ -1115,35 +1114,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: var(--shrine-hologram);
-    background-size: 400% 100%;
-    animation: holographicShimmer 4s ease-in-out infinite;
-  }
-  
-  .cyber-shrine-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--holographic-panel);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-  }
-  
-  .cyber-shrine-card:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 
-      var(--fox-fire-glow),
-      var(--magenta-pulse),
-      0 10px 40px rgba(0, 255, 255, 0.2);
-    border-color: var(--hot-magenta);
-  }
-  
-  .cyber-shrine-card:hover::after {
-    opacity: 1;
+    background: var(--fox-fire-cyan);
   }
   
   /* Hexagonal HUD Grid */

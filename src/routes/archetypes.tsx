@@ -12,6 +12,18 @@ function ArchetypesPage() {
       name: "THE VISIONARY",
       icon: Eye,
       color: "var(--fox-fire-cyan)",
+      representation: `
+    ████████╗██╗  ██╗███████╗
+    ╚══██╔══╝██║  ██║██╔════╝
+       ██║   ███████║█████╗  
+       ██║   ██╔══██║██╔══╝  
+       ██║   ██║  ██║███████╗
+       ╚═╝   ╚═╝  ╚═╝╚══════╝
+      ╔═══════ VISIONARY ═══════╗
+      ║   🔮 Future-Focused     ║
+      ║   ⚡ Risk Embracer      ║  
+      ║   🚀 Paradigm Shifter   ║
+      ╚═════════════════════════╝`,
       description: "Seeks cutting-edge opportunities and revolutionary technologies",
       coreMotivations: [
         "Being first to market with breakthrough innovations",
@@ -48,6 +60,15 @@ function ArchetypesPage() {
         timing: "Strike while opportunity feels limited",
         validation: "Show other visionaries already engaged"
       },
+      nlpTactics: {
+        sensoryLanguage: "Visual dominance - use 'envision', 'picture this', 'see the future'",
+        presuppositions: "When you become the category leader... (not if)",
+        temporalShifts: "Speak from future success position - 'Once this transforms the industry...'",
+        authorityAnchors: "Reference thought leaders they respect: 'As Elon mentioned at...'",
+        scarcityFrames: "Limited founding member positions", "exclusive preview access",
+        metamodel: "Chunk up to bigger vision when they focus on details",
+        reframing: "Position risks as 'innovation barriers' that create competitive moats"
+      },
       credibilityMarkers: [
         "Discusses emerging technologies naturally",
         "References cutting-edge research and trends",
@@ -65,6 +86,18 @@ function ArchetypesPage() {
       name: "THE VALIDATOR",
       icon: Shield,
       color: "var(--hot-magenta)",
+      representation: `
+    ██╗   ██╗ █████╗ ██╗     
+    ██║   ██║██╔══██╗██║     
+    ██║   ██║███████║██║     
+    ╚██╗ ██╔╝██╔══██║██║     
+     ╚████╔╝ ██║  ██║███████╗
+      ╚═══╝  ╚═╝  ╚═╝╚══════╝
+      ╔═══════ VALIDATOR ═══════╗
+      ║   🛡️  Risk Minimizer    ║
+      ║   📊 Data Dependent     ║  
+      ║   👥 Peer Validation    ║
+      ╚═════════════════════════╝`,
       description: "Risk-averse investor who follows proven patterns and seeks extensive social proof",
       coreMotivations: [
         "Minimizing downside risk and capital preservation",
@@ -101,6 +134,15 @@ function ArchetypesPage() {
         timing: "Allow extended evaluation period",
         validation: "Reference similar successful investments"
       },
+      nlpTactics: {
+        sensoryLanguage: "Kinesthetic - 'solid foundation', 'concrete evidence', 'substantial proof'",
+        presuppositions: "Assume their need for validation is wisdom: 'Your careful approach...'",
+        temporalShifts: "Past tense references - 'Companies that have demonstrated...'",
+        authorityAnchors: "Quote respected institutions: 'According to McKinsey research...'",
+        evidenceStacking: "Layer multiple proof points in sequence",
+        metamodel: "Chunk down to specific details when they generalize",
+        pacing: "Match their deliberate communication style - speak slower, pause more"
+      },
       credibilityMarkers: [
         "Requests detailed financial projections",
         "Asks for comparable company analysis",
@@ -118,6 +160,18 @@ function ArchetypesPage() {
       name: "THE CONTROLLER", 
       icon: Crown,
       color: "var(--shrine-gold)",
+      representation: `
+    ██████╗ ██████╗ ███╗   ██╗
+    ██╔══██╗██╔══██╗████╗  ██║
+    ██║  ██║██████╔╝██╔██╗ ██║
+    ██║  ██║██╔══██╗██║╚██╗██║
+    ██████╔╝██║  ██║██║ ╚████║
+    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝
+      ╔══════ CONTROLLER ═══════╗
+      ║   👑 Strategic Command  ║
+      ║   📋 Detail Oriented    ║  
+      ║   🎯 Control Focused    ║
+      ╚═════════════════════════╝`,
       description: "Analytical investor who demands detailed information and strategic control",
       coreMotivations: [
         "Maintaining control over investment outcomes",
@@ -154,6 +208,15 @@ function ArchetypesPage() {
         timing: "Allow for detailed evaluation and negotiation",
         validation: "Offer board seats or advisory roles"
       },
+      nlpTactics: {
+        sensoryLanguage: "Auditory - 'sounds strategic', 'hear your expertise', 'resonates with'",
+        presuppositions: "Assume their expertise: 'With your strategic background...'",
+        temporalShifts: "Future perfect - 'When we've successfully implemented your guidance...'",
+        authorityAnchors: "Position them as the authority: 'As someone with your experience...'",
+        controlFrames: "Offer illusion of control: 'How would you structure this?'",
+        metamodel: "Use their precision against overanalysis - provide exhaustive detail",
+        mirroring: "Adopt their formal communication style and technical language"
+      },
       credibilityMarkers: [
         "Asks detailed operational questions",
         "Discusses governance and control structures",
@@ -171,6 +234,18 @@ function ArchetypesPage() {
       name: "THE STATUS SEEKER",
       icon: Crown,
       color: "var(--neon-green)",
+      representation: `
+    ███████╗████████╗ █████╗ 
+    ██╔════╝╚══██╔══╝██╔══██╗
+    ███████╗   ██║   ███████║
+    ╚════██║   ██║   ██╔══██║
+    ███████║   ██║   ██║  ██║
+    ╚══════╝   ╚═╝   ╚═╝  ╚═╝
+      ╔═══ STATUS SEEKER ════╗
+      ║   🏆 Prestige Hunter  ║
+      ║   🌟 Recognition Seeker║  
+      ║   💎 Elite Networker  ║
+      ╚═════════════════════╝`,
       description: "Prestige-driven investor motivated by recognition and association with winners",
       coreMotivations: [
         "Building prestigious investment portfolio",
@@ -575,6 +650,15 @@ function ArchetypesPage() {
                         </h3>
                       </div>
                       
+                      {/* ASCII Representation */}
+                      {archetype.representation && (
+                        <div className="mb-6">
+                          <pre className="text-xs font-mono text-center p-4 cyber-shrine-card" style={{color: archetype.color, lineHeight: '1.2'}}>
+                            {archetype.representation}
+                          </pre>
+                        </div>
+                      )}
+                      
                       <p className="text-base opacity-80 mb-8 leading-relaxed">
                         {archetype.description}
                       </p>
@@ -700,6 +784,28 @@ function ArchetypesPage() {
                         </div>
                       </div>
                     </div>
+                    
+                    {/* Advanced NLP Tactics */}
+                    {archetype.nlpTactics && (
+                      <div className="mt-8 pt-8 border-t border-gray-700/30">
+                        <h4 className="text-lg font-light mb-6 spirit-hologram" data-text="TACTICAL LINGUISTICS">
+                          TACTICAL LINGUISTICS
+                        </h4>
+                        
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {Object.entries(archetype.nlpTactics).map(([key, value]) => (
+                            <div key={key} className="cyber-shrine-card p-4">
+                              <div className="text-xs uppercase tracking-wider mb-2" style={{color: archetype.color}}>
+                                {key.replace(/([A-Z])/g, ' $1').trim().toUpperCase()}
+                              </div>
+                              <div className="text-xs opacity-80 leading-relaxed">
+                                {Array.isArray(value) ? value.join(', ') : value}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
