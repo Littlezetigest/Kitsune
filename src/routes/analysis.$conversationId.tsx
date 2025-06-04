@@ -42,8 +42,8 @@ function AnalysisPage() {
   const generateRemodeling = useMutation(api.selfAnalysis.generateCharacterRemodeling);
 
   // Get user profile and remodeling data
-  const userProfile = useQuery(api.selfAnalysis.getUserProfile, conversation ? { userId: conversation.userId } : "skip");
-  const characterRemodeling = useQuery(api.selfAnalysis.getCharacterRemodeling, 
+  const userProfile = useQuery(api.selfAnalysisMutations.getUserProfile, conversation ? { userId: conversation.userId } : "skip");
+  const characterRemodeling = useQuery(api.selfAnalysisMutations.getCharacterRemodeling, 
     conversation ? { targetAnalysisId: "mock_analysis_id" as Id<"analyses"> } : "skip"
   );
   

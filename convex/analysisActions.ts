@@ -83,7 +83,7 @@ export const analyzeConversation = action({
     // Create analysis record
     const analysisId: any = await ctx.runMutation(api.analysis.createAnalysis, {
       conversationId: args.conversationId,
-      primaryArchetype: archetypeAnalysis.primary,
+      primaryArchetype: archetypeAnalysis.primary as "PRINCE" | "CHILD" | "WARRIOR" | "SOLDIER" | "JOKER" | "AFFAIRIST" | "EMPEROR" | "DADDY" | "SAGE" | "ORACLE" | "GUARDIAN" | "PROTECTOR" | "PIONEER" | "EXPLORER" | "COLLECTOR" | "CURATOR",
       archetypeConfidence: archetypeAnalysis.confidence,
       personalityMatrix,
       vulnerabilities: vulnerabilityAnalysis,
