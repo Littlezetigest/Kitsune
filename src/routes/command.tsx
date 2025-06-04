@@ -8,12 +8,10 @@ export const Route = createFileRoute("/command")({
 });
 
 function CommandCenterPage() {
-  const [accessLevel, setAccessLevel] = useState<'CLASSIFIED' | 'SECRET' | 'TOP_SECRET'>('CLASSIFIED');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleAuthentication = () => {
     setIsAuthenticated(true);
-    setAccessLevel('TOP_SECRET');
   };
 
   const modules = [
@@ -22,8 +20,6 @@ function CommandCenterPage() {
       description: "Active investor intelligence files",
       icon: Target,
       route: "/",
-      classification: "SECRET",
-      threat_level: "MEDIUM",
       color: "var(--fox-fire-cyan)"
     },
     {
@@ -31,8 +27,6 @@ function CommandCenterPage() {
       description: "Psychological warfare profiles",
       icon: Brain,
       route: "/archetypes",
-      classification: "TOP_SECRET",
-      threat_level: "HIGH",
       color: "var(--hot-magenta)"
     },
     {
@@ -40,8 +34,6 @@ function CommandCenterPage() {
       description: "Upload and process new intelligence",
       icon: Shield,
       route: "/upload",
-      classification: "SECRET",
-      threat_level: "LOW",
       color: "var(--shrine-gold)"
     },
     {
@@ -49,18 +41,14 @@ function CommandCenterPage() {
       description: "Strategic conversation modeling",
       icon: Zap,
       route: "/simulator",
-      classification: "TOP_SECRET",
-      threat_level: "HIGH",
       color: "var(--neon-green)"
     },
     {
-      name: "IMAGE ANALYSIS",
-      description: "Visual intelligence processing",
-      icon: Eye,
-      route: "/vision",
-      classification: "TOP_SECRET",
-      threat_level: "CRITICAL",
-      color: "var(--electric-arterial)"
+      name: "YOUR PROFILE",
+      description: "Personal investor communication analysis",
+      icon: Users,
+      route: "/profile",
+      color: "var(--electric-blue)"
     }
   ];
 
@@ -129,7 +117,7 @@ function CommandCenterPage() {
                   <Lock className="w-8 h-8" style={{color: 'var(--electric-arterial)'}} />
                 )}
                 <div className="text-xs tracking-[0.3em] opacity-60">
-                  CLASSIFICATION: {accessLevel}
+                  ACCESS STATUS: {isAuthenticated ? 'AUTHENTICATED' : 'PENDING'}
                 </div>
               </div>
               
@@ -148,7 +136,7 @@ function CommandCenterPage() {
                   onClick={handleAuthentication}
                   className="fox-fire-btn text-lg tracking-widest px-8 py-4 mb-6"
                 >
-                  AUTHENTICATE CLEARANCE
+                  AUTHENTICATE ACCESS
                 </button>
               )}
             </div>
@@ -183,16 +171,16 @@ function CommandCenterPage() {
                 
                 <div className="space-y-4 text-black bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text">
                   <p className="text-sm leading-relaxed">
-                    <strong>THREAT ASSESSMENT:</strong> Target investors are classified by sophistication 
-                    level and vulnerability profile. High-value targets require advanced psychological 
-                    manipulation techniques, while lower-tier subjects respond to basic social proof 
+                    <strong>INVESTOR ASSESSMENT:</strong> Target investors are categorized by sophistication 
+                    level and communication preferences. High-value targets require advanced psychological 
+                    persuasion techniques, while others respond to basic social proof 
                     and authority positioning strategies.
                   </p>
                   
                   <p className="text-sm leading-relaxed">
                     <strong>OPERATIONAL SECURITY:</strong> All intelligence gathering and analysis 
-                    operates under TOP SECRET clearance. Psychological profiles contain highly 
-                    sensitive personal vulnerability data that could compromise targets if exposed.
+                    operates under strict confidentiality protocols. Psychological profiles contain 
+                    sensitive personal data that must be protected at all times.
                   </p>
                 </div>
               </div>
@@ -227,24 +215,9 @@ function CommandCenterPage() {
                       
                       <div className="space-y-2">
                         <div className="flex justify-between text-xs">
-                          <span className="opacity-60">CLASSIFICATION:</span>
+                          <span className="opacity-60">STATUS:</span>
                           <span className="font-medium" style={{color: module.color}}>
-                            {module.classification}
-                          </span>
-                        </div>
-                        
-                        <div className="flex justify-between text-xs">
-                          <span className="opacity-60">THREAT LEVEL:</span>
-                          <span 
-                            className="font-medium"
-                            style={{
-                              color: module.threat_level === 'CRITICAL' ? 'var(--electric-arterial)' :
-                                     module.threat_level === 'HIGH' ? 'var(--hot-magenta)' :
-                                     module.threat_level === 'MEDIUM' ? 'var(--shrine-gold)' :
-                                     'var(--neon-green)'
-                            }}
-                          >
-                            {module.threat_level}
+                            OPERATIONAL
                           </span>
                         </div>
                       </div>
