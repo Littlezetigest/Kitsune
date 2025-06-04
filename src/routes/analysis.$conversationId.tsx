@@ -303,7 +303,7 @@ function AnalysisPage() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="hologram-text text-5xl font-bold mb-4 sakura-glitch">
-          🦊 KITSUNE PSYCHOLOGICAL WARFARE SUITE
+           KITSUNE PSYCHOLOGICAL WARFARE SUITE
         </h1>
         <div className="flex items-center justify-center gap-4 mb-4">
           <Target className="w-8 h-8 fox-fire-glow" style={{color: 'var(--hot-pink)'}} />
@@ -322,7 +322,7 @@ function AnalysisPage() {
         {/* Analysis Type Selector */}
         <div className="flex justify-center gap-4 mb-6">
           {[
-            { id: 'target', label: '🎯 TARGET ANALYSIS', icon: Target, desc: 'Analyze other party' },
+            { id: 'target', label: ' TARGET ANALYSIS', icon: Target, desc: 'Analyze other party' },
             { id: 'self', label: '🪞 SELF ANALYSIS', icon: User, desc: 'Analyze your patterns' },
             { id: 'remodeling', label: '🔀 CHARACTER REMODELING', icon: Shuffle, desc: 'Adaptation strategy' }
           ].map((view) => (
@@ -354,7 +354,7 @@ function AnalysisPage() {
                 className="cyber-btn px-6 py-3 bg-[var(--cyber-green)] text-black"
               >
                 <RefreshCw className="w-5 h-5 inline mr-2" />
-                🧠 ANALYZE YOUR COMMUNICATION PATTERNS
+                 ANALYZE YOUR COMMUNICATION PATTERNS
               </button>
             )}
             
@@ -364,7 +364,7 @@ function AnalysisPage() {
                 className="cyber-btn px-6 py-3 bg-gray-500 text-gray-300 cursor-not-allowed"
               >
                 <Shuffle className="w-5 h-5 inline mr-2" />
-                🎭 FEATURE COMING SOON - REQUIRES REAL ANALYSIS DATA
+                 FEATURE COMING SOON - REQUIRES REAL ANALYSIS DATA
               </button>
             )}
           </div>
@@ -423,9 +423,9 @@ function AnalysisPage() {
       <div className="flex justify-center mb-8">
         <div className="flex gap-2 flex-wrap">
           {analysisView === 'target' && [
-            { id: 'target-matrix', label: '📊 PERSONALITY MATRIX', icon: BarChart3 },
-            { id: 'target-vulnerabilities', label: '🛡️ VULNERABILITIES', icon: AlertTriangle },
-            { id: 'target-arsenal', label: '⚔️ 48 LAWS ARSENAL', icon: Sword },
+            { id: 'target-matrix', label: ' PERSONALITY MATRIX', icon: BarChart3 },
+            { id: 'target-vulnerabilities', label: ' VULNERABILITIES', icon: AlertTriangle },
+            { id: 'target-arsenal', label: ' 48 LAWS ARSENAL', icon: Sword },
             { id: 'target-codex', label: '💬 COMPLIMENT CODEX', icon: Star }
           ].map((tab) => (
             <button
@@ -438,10 +438,10 @@ function AnalysisPage() {
           ))}
           
           {analysisView === 'self' && [
-            { id: 'self-matrix', label: '📊 YOUR PROFILE', icon: User },
+            { id: 'self-matrix', label: ' YOUR PROFILE', icon: User },
             { id: 'self-vulnerabilities', label: '⚠️ YOUR WEAKNESSES', icon: AlertTriangle },
-            { id: 'self-violations', label: '📜 POWER LAW VIOLATIONS', icon: Brain },
-            { id: 'self-nlp', label: '🧠 NLP PROFILE', icon: Activity }
+            { id: 'self-violations', label: ' POWER LAW VIOLATIONS', icon: Brain },
+            { id: 'self-nlp', label: ' NLP PROFILE', icon: Activity }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -453,10 +453,10 @@ function AnalysisPage() {
           ))}
 
           {analysisView === 'remodeling' && [
-            { id: 'remodeling-persona', label: '🎭 ADAPTIVE PERSONA', icon: Shuffle },
+            { id: 'remodeling-persona', label: ' ADAPTIVE PERSONA', icon: Shuffle },
             { id: 'remodeling-communication', label: '💬 COMMUNICATION SHIFTS', icon: RefreshCw },
-            { id: 'remodeling-mitigation', label: '🛡️ VULNERABILITY FIXES', icon: Shield },
-            { id: 'remodeling-synergy', label: '⚡ SYNERGY ANALYSIS', icon: Zap }
+            { id: 'remodeling-mitigation', label: ' VULNERABILITY FIXES', icon: Shield },
+            { id: 'remodeling-synergy', label: ' SYNERGY ANALYSIS', icon: Zap }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -1047,7 +1047,7 @@ function AnalysisPage() {
             className="cyber-btn text-xl px-12 py-4 inline-flex items-center gap-3"
           >
             <ExternalLink className="w-6 h-6" />
-            ⚔️ ENTER WAR ROOM SIMULATOR
+             ENTER WAR ROOM SIMULATOR
           </Link>
         </div>
       </div>
@@ -1055,7 +1055,7 @@ function AnalysisPage() {
       {/* Digital Kitsune Evolution Feedback */}
       <div className="cyber-card p-8">
         <h2 className="text-3xl font-bold text-center mb-6 hologram-text">
-          🦊 DIGITAL KITSUNE EVOLUTION FEEDBACK
+           DIGITAL KITSUNE EVOLUTION FEEDBACK
         </h2>
         <div className="grid md:grid-cols-4 gap-6">
           {[
@@ -1110,7 +1110,7 @@ function AnalysisPage() {
               className="input input-bordered flex-1 max-w-md bg-black/50 border-[var(--neon-blue)] text-[var(--neon-blue)]"
             />
             <button className="weapon-button px-6 py-3">
-              📡 TRANSMIT EVOLUTION
+               TRANSMIT EVOLUTION
             </button>
           </div>
         </div>

@@ -21,26 +21,26 @@ function HomePage() {
       <Unauthenticated>
         {/* Art of War Quote */}
         <div className="text-center mb-16 px-8">
-          <div className="hologram-text text-xl font-light py-8 px-16 relative sakura-glitch">
-            <div className="absolute top-0 left-1/2 neon-divider w-20 h-0.5 transform -translate-x-1/2"></div>
-            🦊 DIGITAL KITSUNE WARFARE 🌸
-            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide circuit-text">
+          <div className="executive-text text-xl font-light py-8 px-16 relative">
+            <div className="absolute top-0 left-1/2 luxury-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+             DIGITAL KITSUNE WARFARE 
+            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide prestige-text">
               Nine-tailed intelligence • Psychological dominance • Strategic superiority
             </div>
-            <div className="absolute bottom-0 left-1/2 neon-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-1/2 luxury-divider w-20 h-0.5 transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-24">
           <div className="mb-12">
-            <div className="neon-divider w-1 h-16 mx-auto mb-8"></div>
+            <div className="luxury-divider w-1 h-16 mx-auto mb-8"></div>
           </div>
-          <h1 className="text-5xl font-light mb-6 tracking-wider hologram-text sakura-glitch">
-            🦊 KITSUNE
+          <h1 className="text-5xl font-light mb-6 tracking-wider executive-text">
+             KITSUNE
           </h1>
-          <div className="neon-divider w-32 mx-auto mb-8"></div>
-          <p className="text-lg mb-8 font-light tracking-wide neon-emphasis">
+          <div className="luxury-divider w-32 mx-auto mb-8"></div>
+          <p className="text-lg mb-8 font-light tracking-wide platinum-glow">
             NEURO-WARFARE MATRIX
           </p>
           <p className="text-base mb-16 max-w-2xl mx-auto font-light leading-relaxed opacity-80">
@@ -52,10 +52,10 @@ function HomePage() {
         {/* Archetype Grid */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl font-light tracking-wider mb-4 glitch-text fox-fire-glow" data-text="TARGET PROFILES">
+            <h2 className="text-2xl font-light tracking-wider mb-4 prestige-text platinum-glow" data-text="TARGET PROFILES">
               TARGET PROFILES
             </h2>
-            <div className="neon-divider w-24 mx-auto"></div>
+            <div className="luxury-divider w-24 mx-auto"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
@@ -68,12 +68,12 @@ function HomePage() {
               { name: "PIONEER", icon: Target },
               { name: "COLLECTOR", icon: Gem }
             ].map((archetype) => (
-              <div key={archetype.name} className="cyber-archetype-card text-center group circuit-pattern">
+              <div key={archetype.name} className="luxury-archetype-card text-center group">
                 <archetype.icon 
-                  className="w-8 h-8 mx-auto mb-4 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" 
-                  style={{color: 'var(--fox-fire)'}}
+                  className="w-8 h-8 mx-auto mb-4 platinum-glow opacity-60 group-hover:opacity-100 transition-all" 
+                  style={{color: 'var(--platinum-blue)'}}
                 />
-                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity circuit-text">
+                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity prestige-text">
                   {archetype.name}
                 </h3>
               </div>
@@ -83,33 +83,33 @@ function HomePage() {
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 gap-4 mb-24 max-w-4xl mx-auto">
-          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
-            <Target className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" />
-            <h3 className="font-light mb-4 tracking-wide circuit-text">NEURAL ANALYSIS</h3>
+          <div className="luxury-card p-12 text-center group luxury-frame">
+            <Target className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" />
+            <h3 className="font-light mb-4 tracking-wide prestige-text">NEURAL ANALYSIS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               AI-powered psychological mapping through digital communication forensics
             </p>
           </div>
           
-          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
-            <Shield className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--hot-pink)'}} />
-            <h3 className="font-light mb-4 tracking-wide circuit-text">EXPLOIT VECTORS</h3>
+          <div className="luxury-card p-12 text-center group luxury-frame">
+            <Shield className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--imperial-gold)'}} />
+            <h3 className="font-light mb-4 tracking-wide prestige-text">EXPLOIT VECTORS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Quantum vulnerability scanning for maximum psychological leverage
             </p>
           </div>
           
-          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
-            <Sword className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--golden-circuit)'}} />
-            <h3 className="font-light mb-4 tracking-wide circuit-text">CYBER TACTICS</h3>
+          <div className="luxury-card p-12 text-center group luxury-frame">
+            <Sword className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--vermillion-gold)'}} />
+            <h3 className="font-light mb-4 tracking-wide prestige-text">CYBER TACTICS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Digital warfare protocols optimized for neural manipulation
             </p>
           </div>
           
-          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
-            <Eye className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--electric-blue)'}} />
-            <h3 className="font-light mb-4 tracking-wide circuit-text">MATRIX SIMULATION</h3>
+          <div className="luxury-card p-12 text-center group luxury-frame">
+            <Eye className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--celestial-blue)'}} />
+            <h3 className="font-light mb-4 tracking-wide prestige-text">MATRIX SIMULATION</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Virtual reality training environment for psychological dominance
             </p>
@@ -121,7 +121,7 @@ function HomePage() {
           <div className="neon-divider w-px h-16 mx-auto mb-8"></div>
           <SignInButton mode="modal">
             <button className="cyber-btn text-sm tracking-widest holographic-accent">
-              JACK IN 🦊
+              JACK IN 
             </button>
           </SignInButton>
         </div>
@@ -156,7 +156,7 @@ function InvestorTargetsList() {
           <div className="neon-divider w-16 h-0.5 mt-3"></div>
         </div>
         <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
-          UPLOAD INTEL 📡
+          UPLOAD INTEL 
         </Link>
       </div>
 
@@ -164,12 +164,12 @@ function InvestorTargetsList() {
         <div className="text-center py-24">
           <div className="cyber-card p-16 max-w-xl mx-auto geometric-border circuit-pattern">
             <div className="neon-divider w-px h-12 mx-auto mb-8"></div>
-            <h3 className="text-lg font-light mb-6 tracking-wide hologram-text sakura-glitch">🦊 NO TARGETS ACQUIRED</h3>
+            <h3 className="text-lg font-light mb-6 tracking-wide hologram-text sakura-glitch"> NO TARGETS ACQUIRED</h3>
             <p className="mb-12 text-sm opacity-60 font-light leading-relaxed">
               Upload communications to begin psychological analysis and strategic planning
             </p>
             <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
-              INITIATE SCAN 🌸
+              INITIATE SCAN 
             </Link>
           </div>
         </div>
@@ -182,12 +182,12 @@ function InvestorTargetsList() {
                   <div className="flex items-center gap-4 mb-4">
                     <Target className="w-4 h-4 opacity-60 fox-fire-glow" style={{color: 'var(--fox-fire)'}} />
                     <h3 className="text-lg font-light tracking-wide hologram-text">
-                      🎯 {conversation.title}
+                       {conversation.title}
                     </h3>
                   </div>
                   {conversation.participantName && (
                     <p className="text-sm mb-2 neon-emphasis font-medium">
-                      🦊 {conversation.participantName}
+                       {conversation.participantName}
                     </p>
                   )}
                   <p className="text-xs opacity-50 font-light tracking-wide">
@@ -200,7 +200,7 @@ function InvestorTargetsList() {
                     params={{ conversationId: conversation._id }}
                     className="cyber-btn text-xs tracking-widest holographic-accent"
                   >
-                    ANALYZE 🧠
+                    ANALYZE 
                   </Link>
                   <button 
                     onClick={() => handleDelete(conversation._id, conversation.title)}

@@ -112,7 +112,7 @@ function RootComponent() {
                         to="/"
                         className="hologram-text text-xl font-light tracking-widest sakura-glitch"
                       >
-                        🦊 KITSUNE
+                         KITSUNE
                       </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
@@ -122,21 +122,21 @@ function RootComponent() {
                           className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          🎯 TARGETS
+                           TARGETS
                         </Link>
                         <Link
                           to="/upload"
                           className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          📡 UPLOAD
+                           UPLOAD
                         </Link>
                         <Link
                           to="/simulator"
                           className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          ⚔️ SIMULATE
+                           SIMULATE
                         </Link>
                       </nav>
                     </div>
@@ -153,7 +153,7 @@ function RootComponent() {
                   </main>
                   <footer className="footer footer-center p-8 text-base-content">
                     <div className="neon-divider w-12 h-px mx-auto mb-4"></div>
-                    <p className="text-xs opacity-40 font-light tracking-widest circuit-text">© {new Date().getFullYear()} 🦊</p>
+                    <p className="text-xs opacity-40 font-light tracking-widest circuit-text">© {new Date().getFullYear()} </p>
                   </footer>
                 </div>
                 {/* Sidebar content for mobile */}
@@ -207,7 +207,7 @@ function RootComponent() {
               <header className="navbar bg-base-100 shadow-sm border-b border-base-300">
                 <div className="container mx-auto flex justify-between w-full">
                   <div className="navbar-start">
-                    <h1 className="hologram-text font-bold">🦊 KITSUNE WAR ROOM</h1>
+                    <h1 className="hologram-text font-bold"> KITSUNE WAR ROOM</h1>
                   </div>
                   <div className="navbar-end">
                     <SignInButton mode="modal">

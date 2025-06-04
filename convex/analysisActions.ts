@@ -6,7 +6,7 @@ import { api } from "./_generated/api";
 
 // Investor Archetype Analysis Patterns
 const ARCHETYPE_PATTERNS = {
-  'PRINCE': ['deserve', 'entitled', 'special', 'unique', 'exclusive', 'premium', 'bespoke', 'elite'],
+  'PRINCE': ['deserve', 'entitled', 'special', 'unique', 'exclusive', 'premium', 'bespoke', 'elite', 'luxury', 'sophisticated', 'distinguished', 'prestigious', 'exceptional', 'superior', 'refined', 'caliber', 'tier', 'echelon', 'distinction', 'pedigree', 'provenance', 'curated', 'discerning', 'artisanal', 'couture', 'finest', 'paramount', 'exemplary', 'unparalleled'],
   'CHILD': ['excited', 'fun', 'new', 'shiny', 'cool', 'awesome', 'amazing', 'wow'],
   'WARRIOR': ['fight', 'battle', 'win', 'conquer', 'dominate', 'crush', 'defeat', 'victory'],
   'SOLDIER': ['discipline', 'order', 'structure', 'rules', 'systematic', 'proven', 'reliable'],

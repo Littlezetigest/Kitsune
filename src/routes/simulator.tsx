@@ -276,7 +276,7 @@ function WarRoomSimulator() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="hologram-text text-5xl font-bold mb-4 sakura-glitch">
-          ⚔️ WAR ROOM SIMULATOR
+           WAR ROOM SIMULATOR
         </h1>
         <p className="text-xl" style={{color: 'var(--hot-pink)'}}>
           Practice psychological warfare against AI-powered investor personalities
@@ -321,7 +321,7 @@ function WarRoomSimulator() {
                       )}
                     </div>
                     <div className="weapon-button px-6 py-3">
-                      🎯 ENGAGE TARGET
+                       ENGAGE TARGET
                     </div>
                   </div>
                 </div>
@@ -546,7 +546,7 @@ function WarRoomSimulator() {
               }}
               className="w-full cyber-btn"
             >
-              🎯 SELECT NEW TARGET
+               SELECT NEW TARGET
             </button>
           </div>
         </div>
