@@ -66,7 +66,6 @@ export const analyzeConversation = action({
     }
 
     const text: string = conversation.content.toLowerCase();
-    const words: string[] = text.split(/\s+/);
 
     // Analyze investor archetype
     const archetypeAnalysis = analyzeInvestorArchetype(text);
@@ -186,7 +185,7 @@ function analyzeStrategicVulnerabilities(text: string) {
   return vulnerabilities;
 }
 
-function createPersonalityMatrix(archetypeAnalysis: any, behaviorAnalysis: any) {
+function createPersonalityMatrix(behaviorAnalysis: any) {
   return {
     riskTolerance: behaviorAnalysis.riskTolerance,
     decisionSpeed: behaviorAnalysis.decisionSpeed,
@@ -229,12 +228,3 @@ function extractMatchingWords(text: string, patterns: string[]): string[] {
   return [...new Set(found)]; // Remove duplicates
 }
 
-function extractPowerWords(text: string): string[] {
-  const powerPatterns = ['must', 'should', 'need', 'have to', 'require', 'demand', 'insist'];
-  return extractMatchingWords(text, powerPatterns);
-}
-
-function extractNeedWords(text: string): string[] {
-  const needPatterns = ['want', 'need', 'desire', 'wish', 'hope', 'require', 'seek'];
-  return extractMatchingWords(text, needPatterns);
-}

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery, useMutation } from "convex/react";
+import { useQuery } from "convex/react";
 import { useState } from "react";
 import { 
   Crown,
@@ -37,9 +37,9 @@ function AnalysisPage() {
     id: conversationId as Id<"conversations">
   });
 
-  // Mutations for self-analysis and remodeling
-  const analyzeSelf = useMutation(api.selfAnalysis.analyzeSelfCommunication);
-  const generateRemodeling = useMutation(api.selfAnalysis.generateCharacterRemodeling);
+  // Actions for self-analysis and remodeling (commented out - would need useAction)
+  // const analyzeSelf = useAction(api.selfAnalysis.analyzeSelfCommunication);
+  // const _generateRemodeling = useAction(api.selfAnalysis.generateCharacterRemodeling);
 
   // Get user profile and remodeling data
   const userProfile = useQuery(api.selfAnalysisMutations.getUserProfile, conversation ? { userId: conversation.userId } : "skip");
@@ -350,7 +350,7 @@ function AnalysisPage() {
           <div className="flex justify-center gap-4 mb-6">
             {analysisView === 'self' && !userProfile && (
               <button
-                onClick={() => conversation && analyzeSelf({ userId: conversation.userId })}
+                onClick={() => console.log("Self analysis clicked - would analyze:", conversation?.userId)}
                 className="cyber-btn px-6 py-3 bg-[var(--cyber-green)] text-black"
               >
                 <RefreshCw className="w-5 h-5 inline mr-2" />

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Authenticated } from "convex/react";
-import { Eye, Shield, Target, Brain, Zap, Users, Crown, Gem, ChevronRight, Lock, Unlock } from "lucide-react";
+import { Shield, Target, Brain, Zap, Users, ChevronRight, Lock, Unlock } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/command")({

@@ -96,7 +96,7 @@ export const generateRecommendations = mutation({
       lawsArsenal: generate48LawsArsenal(args.archetype, args.vulnerabilities),
       complimentCodex: generateComplimentCodex(args.archetype),
       approachStrategies: generateApproachStrategies(args.archetype, args.vulnerabilities),
-      simulatorConfig: generateSimulatorConfig(args.archetype, args.behaviorProfile),
+      simulatorConfig: generateSimulatorConfig(args.archetype),
       createdAt: Date.now(),
     });
   },
@@ -184,7 +184,7 @@ function generateApproachStrategies(archetype: string, vulnerabilities: string[]
   return strategies;
 }
 
-function generateSimulatorConfig(archetype: string, behaviorProfile: any) {
+function generateSimulatorConfig(archetype: string) {
   const configs: Record<string, any> = {
     'PRINCE': {
       responsePatterns: ['That\'s an interesting perspective...', 'I\'ve seen similar opportunities before', 'What makes this special?'],

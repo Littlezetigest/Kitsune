@@ -605,7 +605,7 @@ function ArchetypesPage() {
             </div>
             
             <div className="grid md:grid-cols-2 gap-8 mb-16">
-              {evaluationCriteria.map((criteria, index) => (
+              {evaluationCriteria.map((criteria, _index) => (
                 <div key={criteria.category} className="ultra-premium-card p-8 depth-layer-3">
                   <Brain className="w-8 h-8 mb-6 opacity-80" style={{color: 'var(--fox-fire-cyan)'}} />
                   <h3 className="text-xl font-light mb-6 spirit-hologram" data-text={criteria.category}>
@@ -634,7 +634,7 @@ function ArchetypesPage() {
             </div>
             
             <div className="grid gap-8">
-              {archetypes.map((archetype, index) => (
+              {archetypes.map((archetype, _index) => (
                 <div key={archetype.name} className="ultra-premium-card p-12 depth-layer-2">
                   <div className="grid lg:grid-cols-3 gap-8">
                     

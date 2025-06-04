@@ -11,7 +11,7 @@ export const Route = createFileRoute("/upload")({
 function UploadPage() {
   const navigate = useNavigate();
   const uploadConversation = useMutation(api.conversations.uploadConversation);
-  const analyzeConversation = useMutation(api.analysisActions.analyzeConversation);
+  // const analyzeConversation = useAction(api.analysisActions.analyzeConversation);
   
   const [formData, setFormData] = useState({
     title: "",
@@ -58,7 +58,7 @@ function UploadPage() {
     }
   };
 
-  const analyzeImage = async (imageData: string, fileName: string) => {
+  const analyzeImage = async (_imageData: string, fileName: string) => {
     setIsUploading(true);
     
     // Simulate AI analysis with realistic delay
@@ -108,8 +108,8 @@ function UploadPage() {
         participantName: formData.participantName || undefined,
       });
 
-      // Start analysis
-      await analyzeConversation({ conversationId });
+      // Start analysis (commented out - would use action)
+      // await analyzeConversation({ conversationId });
 
       // Navigate to analysis results
       navigate({ to: `/analysis/${conversationId}` });

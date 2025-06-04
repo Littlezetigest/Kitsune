@@ -1,6 +1,6 @@
 "use node";
 
-import { action, mutation, query } from "./_generated/server";
+import { action } from "./_generated/server";
 import { v } from "convex/values";
 import { api } from "./_generated/api";
 import type { Id } from "./_generated/dataModel";
@@ -47,7 +47,7 @@ export const analyzeSelfCommunication = action({
   args: { userId: v.id("users") },
   handler: async (ctx, args): Promise<Id<"userProfiles">> => {
     // Get all war room sessions for this user (mock data for now)
-    const sessions = [] as any[];
+    // const _sessions = [] as any[];
 
     // Use mock data since no war room sessions exist yet
     const mockUserMessages = [
@@ -207,7 +207,7 @@ function analyzeUserCommunicationStyle(text: string) {
   };
 }
 
-function identifyUserVulnerabilities(text: string, messages: string[]) {
+function identifyUserVulnerabilities(text: string, _messages: string[]) {
   const vulnerabilities = [] as any[];
 
   for (const [vulnType, patterns] of Object.entries(SELF_ANALYSIS_PATTERNS.vulnerabilities)) {
@@ -225,7 +225,7 @@ function identifyUserVulnerabilities(text: string, messages: string[]) {
   return vulnerabilities;
 }
 
-function identifyPowerLawViolations(text: string, messages: string[]) {
+function identifyPowerLawViolations(text: string, _messages: string[]) {
   const violations = [] as any[];
   
   const lawMappings = {
@@ -452,7 +452,7 @@ function getSkillsForTarget(targetAnalysis: any): string[] {
   return skills[targetAnalysis.primaryArchetype] || ["Adaptive communication"];
 }
 
-function generatePracticeScenarios(userProfile: any, targetAnalysis: any): string[] {
+function generatePracticeScenarios(_userProfile: any, _targetAnalysis: any): string[] {
   return [
     "Practice pitching to their archetype type",
     "Role-play handling their common objections",
@@ -481,7 +481,7 @@ function identifyConflicts(userProfile: any, targetAnalysis: any): string[] {
   return conflicts;
 }
 
-function identifyHarmony(userProfile: any, targetAnalysis: any): string[] {
+function identifyHarmony(_userProfile: any, _targetAnalysis: any): string[] {
   return ["Shared goal of successful outcomes", "Mutual respect for competence"];
 }
 

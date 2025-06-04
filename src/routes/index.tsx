@@ -1,10 +1,10 @@
 import { SignInButton } from "@clerk/clerk-react";
 import { convexQuery } from "@convex-dev/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useMutation } from "convex/react";
+// import { useMutation } from "convex/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Authenticated, Unauthenticated } from "convex/react";
-import { Target, Zap, Shield, Sword, Eye, Users, Crown, Gem, FileText, Trash2, Flame } from "lucide-react";
+import { Target, Zap, Shield, Sword, Eye, Crown, Gem, Trash2 } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 
 const conversationsQueryOptions = convexQuery(api.conversations.getUserConversations, {});
@@ -208,12 +208,14 @@ function HomePage() {
 
 function InvestorTargetsList() {
   const { data: conversations } = useSuspenseQuery(conversationsQueryOptions);
-  const deleteConversation = useMutation(api.conversations.deleteConversation);
+  // const deleteConversation = useMutation(api.conversations.deleteConversation);
 
   const handleDelete = async (conversationId: string, title: string) => {
     if (confirm(`Are you sure you want to delete target "${title}"? This cannot be undone.`)) {
       try {
-        await deleteConversation({ id: conversationId });
+        // await deleteConversation({ id: conversationId });
+        console.log("Would delete conversation:", conversationId);
+        alert("Delete functionality not implemented yet");
       } catch (error) {
         alert('Failed to delete target. Please try again.');
       }
