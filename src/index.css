@@ -1002,9 +1002,10 @@
   
   .matrix-char {
     position: absolute;
-    color: var(--matrix-green);
-    font-family: monospace;
+    color: #00ff41;
+    font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
     animation: matrixRain 3s linear infinite;
+    text-shadow: 0 0 10px #00ff41;
   }
   
   /* KITSUNE CYBER-SHRINE COMPONENTS NEO-TOKYO 2077 */
@@ -1819,16 +1820,19 @@
     position: absolute;
     animation: matrixRain 8s linear infinite;
     filter: blur(0.5px);
+    color: #00ff41;
+    font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+    text-shadow: 0 0 10px #00ff41;
   }
   
   .matrix-char:nth-child(odd) {
-    color: var(--fox-fire-cyan);
     animation-duration: 12s;
+    opacity: 0.8;
   }
   
   .matrix-char:nth-child(3n) {
-    color: var(--hot-magenta);
     animation-duration: 6s;
+    opacity: 0.6;
   }
   
   .war-room-btn {

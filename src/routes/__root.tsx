@@ -31,7 +31,7 @@ function MatrixRain() {
     const matrixBg = document.getElementById('matrix-bg');
     if (!matrixBg) return;
 
-    const chars = '01兵法戦術勝利敗北龍虎陰陽攻守進退知己知彼百戦不殆兵者詭道攻其無備出其不意善戦者立於不敗之地故兵無常勢水無常形上兵伐謀其次伐交兵貴勝不貴久故善戦者求之於勢';
+    const chars = '武士刀侍忍者将軍大名切腹武道剣術忠義名誉義理恥知勇仁礼誠makoto bushido katana samurai shogun daimyo seppuku budo kendo giri shame chi yu jin rei makoto';
     
     const createMatrixChar = () => {
       const char = document.createElement('div');
