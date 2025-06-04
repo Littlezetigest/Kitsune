@@ -21,26 +21,26 @@ function HomePage() {
       <Unauthenticated>
         {/* Art of War Quote */}
         <div className="text-center mb-16 px-8">
-          <div className="liquid-metal-text text-xl font-light py-8 px-16 relative">
-            <div className="absolute top-0 left-1/2 neural-network-viz w-20 h-0.5 transform -translate-x-1/2"></div>
+          <div className="spirit-hologram text-xl font-light py-8 px-16 relative hex-grid" data-text="DIGITAL KITSUNE WARFARE">
+            <div className="absolute top-0 left-1/2 bamboo-divider w-20 h-0.5 transform -translate-x-1/2"></div>
              DIGITAL KITSUNE WARFARE 
-            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide liquid-metal-text">
+            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide spirit-hologram" data-text="Nine-tailed intelligence • Psychological dominance • Strategic superiority">
               Nine-tailed intelligence • Psychological dominance • Strategic superiority
             </div>
-            <div className="absolute bottom-0 left-1/2 neural-network-viz w-20 h-0.5 transform -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-1/2 bamboo-divider w-20 h-0.5 transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-24">
           <div className="mb-12">
-            <div className="neural-network-viz w-1 h-16 mx-auto mb-8"></div>
+            <div className="shrine-lantern w-1 h-16 mx-auto mb-8"></div>
           </div>
-          <h1 className="text-5xl font-light mb-6 tracking-wider liquid-metal-text">
+          <h1 className="text-5xl font-light mb-6 tracking-wider spirit-hologram kitsune-trail" data-text="KITSUNE">
              KITSUNE
           </h1>
-          <div className="neural-network-viz w-32 mx-auto mb-8"></div>
-          <p className="text-lg mb-8 font-light tracking-wide liquid-metal-text">
+            <div className="torii-gate w-32 h-2 mx-auto mb-8"></div>
+          <p className="text-lg mb-8 font-light tracking-wide spirit-hologram" data-text="NEURO-WARFARE MATRIX">
             NEURO-WARFARE MATRIX
           </p>
           <p className="text-base mb-16 max-w-2xl mx-auto font-light leading-relaxed opacity-80">
@@ -52,10 +52,10 @@ function HomePage() {
         {/* Archetype Grid */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl font-light tracking-wider mb-4 liquid-metal-text" data-text="TARGET PROFILES">
+            <h2 className="text-2xl font-light tracking-wider mb-4 spirit-hologram" data-text="TARGET PROFILES">
               TARGET PROFILES
             </h2>
-            <div className="neural-network-viz w-24 mx-auto"></div>
+            <div className="bamboo-divider w-24 mx-auto"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
@@ -68,12 +68,12 @@ function HomePage() {
               { name: "PIONEER", icon: Target },
               { name: "COLLECTOR", icon: Gem }
             ].map((archetype) => (
-              <div key={archetype.name} className="luxury-archetype-card text-center group">
+              <div key={archetype.name} className="cyber-shrine-card text-center group digital-noise">
                 <archetype.icon 
-                  className="w-8 h-8 mx-auto mb-4 platinum-glow opacity-60 group-hover:opacity-100 transition-all" 
-                  style={{color: 'var(--platinum-blue)'}}
+                  className="w-8 h-8 mx-auto mb-4 opacity-60 group-hover:opacity-100 transition-all" 
+                  style={{color: 'var(--fox-fire-cyan)'}}
                 />
-                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity prestige-text">
+                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity spirit-hologram" data-text="{archetype.name}">
                   {archetype.name}
                 </h3>
               </div>
@@ -82,34 +82,34 @@ function HomePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-4 mb-24 max-w-4xl mx-auto">
-          <div className="luxury-card p-12 text-center group luxury-frame">
-            <Target className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" />
-            <h3 className="font-light mb-4 tracking-wide prestige-text">NEURAL ANALYSIS</h3>
+        <div className="grid md:grid-cols-2 gap-4 mb-24 max-w-4xl mx-auto hex-grid">
+          <div className="shrine-console p-12 text-center group kitsune-trail">
+            <Target className="w-6 h-6 mx-auto mb-6 spirit-hologram opacity-60 group-hover:opacity-100 transition-all" />
+            <h3 className="font-light mb-4 tracking-wide spirit-hologram">NEURAL ANALYSIS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               AI-powered psychological mapping through digital communication forensics
             </p>
           </div>
           
-          <div className="luxury-card p-12 text-center group luxury-frame">
-            <Shield className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--imperial-gold)'}} />
-            <h3 className="font-light mb-4 tracking-wide prestige-text">EXPLOIT VECTORS</h3>
+          <div className="shrine-console p-12 text-center group kitsune-trail">
+            <Shield className="w-6 h-6 mx-auto mb-6 spirit-hologram opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--hot-magenta)'}} />
+            <h3 className="font-light mb-4 tracking-wide spirit-hologram">EXPLOIT VECTORS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Quantum vulnerability scanning for maximum psychological leverage
             </p>
           </div>
           
-          <div className="luxury-card p-12 text-center group luxury-frame">
-            <Sword className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--vermillion-gold)'}} />
-            <h3 className="font-light mb-4 tracking-wide prestige-text">CYBER TACTICS</h3>
+          <div className="shrine-console p-12 text-center group kitsune-trail">
+            <Sword className="w-6 h-6 mx-auto mb-6 spirit-hologram opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--shrine-gold)'}} />
+            <h3 className="font-light mb-4 tracking-wide spirit-hologram">CYBER TACTICS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Digital warfare protocols optimized for neural manipulation
             </p>
           </div>
           
-          <div className="luxury-card p-12 text-center group luxury-frame">
-            <Eye className="w-6 h-6 mx-auto mb-6 platinum-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--celestial-blue)'}} />
-            <h3 className="font-light mb-4 tracking-wide prestige-text">MATRIX SIMULATION</h3>
+          <div className="shrine-console p-12 text-center group kitsune-trail">
+            <Eye className="w-6 h-6 mx-auto mb-6 spirit-hologram opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--neon-green)'}} />
+            <h3 className="font-light mb-4 tracking-wide spirit-hologram">MATRIX SIMULATION</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
               Virtual reality training environment for psychological dominance
             </p>
@@ -118,9 +118,9 @@ function HomePage() {
 
         {/* CTA */}
         <div className="text-center mb-24">
-          <div className="neon-divider w-px h-16 mx-auto mb-8"></div>
+          <div className="shrine-lantern w-px h-16 mx-auto mb-8"></div>
           <SignInButton mode="modal">
-            <button className="cyber-btn text-sm tracking-widest holographic-accent">
+            <button className="fox-fire-btn text-sm tracking-widest">
               JACK IN 
             </button>
           </SignInButton>
@@ -155,20 +155,20 @@ function InvestorTargetsList() {
           <h2 className="text-2xl font-light tracking-wider glitch-text fox-fire-glow" data-text="TARGET DOSSIERS">TARGET DOSSIERS</h2>
           <div className="neon-divider w-16 h-0.5 mt-3"></div>
         </div>
-        <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
+        <Link to="/upload" className="fox-fire-btn text-xs tracking-widest">
           UPLOAD INTEL 
         </Link>
       </div>
 
       {conversations.length === 0 ? (
         <div className="text-center py-24">
-          <div className="cyber-card p-16 max-w-xl mx-auto geometric-border circuit-pattern">
+          <div className="cyber-shrine-card p-16 max-w-xl mx-auto geometric-border circuit-pattern">
             <div className="neon-divider w-px h-12 mx-auto mb-8"></div>
             <h3 className="text-lg font-light mb-6 tracking-wide hologram-text sakura-glitch"> NO TARGETS ACQUIRED</h3>
             <p className="mb-12 text-sm opacity-60 font-light leading-relaxed">
               Upload communications to begin psychological analysis and strategic planning
             </p>
-            <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
+            <Link to="/upload" className="fox-fire-btn text-xs tracking-widest">
               INITIATE SCAN 
             </Link>
           </div>
@@ -176,7 +176,7 @@ function InvestorTargetsList() {
       ) : (
         <div className="grid gap-1">
           {conversations.map((conversation) => (
-            <div key={conversation._id} className="cyber-card p-8 geometric-border circuit-pattern">
+            <div key={conversation._id} className="cyber-shrine-card p-8 geometric-border circuit-pattern">
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-4">
@@ -198,7 +198,7 @@ function InvestorTargetsList() {
                   <Link 
                     to="/analysis/$conversationId" 
                     params={{ conversationId: conversation._id }}
-                    className="cyber-btn text-xs tracking-widest holographic-accent"
+                    className="fox-fire-btn text-xs tracking-widest"
                   >
                     ANALYZE 
                   </Link>
