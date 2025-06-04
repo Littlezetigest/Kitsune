@@ -69,35 +69,36 @@ function UploadPage() {
 
   return (
     <div className="not-prose max-w-4xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Upload Conversation</h1>
-        <p className="text-base-content/70">
-          Upload a chat history or email conversation to analyze communication patterns and get strategic insights.
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-light mb-4 tracking-wider brush-stroke-text">UPLOAD INTELLIGENCE</h1>
+        <div className="artistic-divider w-24 mx-auto mb-6"></div>
+        <p className="text-base-content/70 font-light leading-relaxed max-w-2xl mx-auto">
+          Upload communications to begin psychological analysis and strategic planning.
+          Every message reveals patterns. Every pattern reveals vulnerabilities.
         </p>
       </div>
 
-      <div className="card bg-base-200 shadow-lg">
-        <div className="card-body">
+      <div className="zen-card p-8">
           {/* Upload Method Selection */}
           <div className="mb-6">
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
                 onClick={() => setUploadMethod("paste")}
-                className={`btn ${uploadMethod === "paste" ? "btn-primary" : "btn-outline"} flex-col h-auto p-4`}
+                className={`zen-btn ${uploadMethod === "paste" ? "border-strategic-red bg-strategic-red" : ""} flex-col h-auto p-6 brush-accent`}
               >
-                <MessageCircle className="w-6 h-6 mb-2" />
-                <span>Paste Text</span>
-                <span className="text-xs opacity-70">Copy and paste conversation</span>
+                <MessageCircle className="w-6 h-6 mb-2 zen-focus" />
+                <span className="font-light tracking-wide">PASTE TEXT</span>
+                <span className="text-xs opacity-70 font-light">Direct conversation input</span>
               </button>
               <button
                 type="button"
                 onClick={() => setUploadMethod("file")}
-                className={`btn ${uploadMethod === "file" ? "btn-primary" : "btn-outline"} flex-col h-auto p-4`}
+                className={`zen-btn ${uploadMethod === "file" ? "border-strategic-red bg-strategic-red" : ""} flex-col h-auto p-6 brush-accent`}
               >
-                <FileText className="w-6 h-6 mb-2" />
-                <span>Upload File</span>
-                <span className="text-xs opacity-70">Upload .txt, .md, or other text files</span>
+                <FileText className="w-6 h-6 mb-2 zen-focus" />
+                <span className="font-light tracking-wide">UPLOAD FILE</span>
+                <span className="text-xs opacity-70 font-light">Document analysis</span>
               </button>
             </div>
           </div>
@@ -173,29 +174,41 @@ function UploadPage() {
               <button
                 type="submit"
                 disabled={!formData.content.trim() || isUploading}
-                className={`btn btn-primary ${isUploading ? "loading" : ""}`}
+                className="zen-btn w-full text-sm tracking-widest brush-accent"
               >
                 {isUploading ? (
                   <span className="loading loading-spinner loading-sm mr-2"></span>
                 ) : (
                   <Upload className="w-4 h-4 mr-2" />
                 )}
-                {isUploading ? "Analyzing..." : "Upload & Analyze"}
+                {isUploading ? "ANALYZING..." : "INITIATE ANALYSIS"}
               </button>
             </div>
           </form>
 
-          {/* Tips */}
-          <div className="mt-8 p-4 bg-info/10 rounded-lg">
-            <h3 className="font-semibold mb-2 text-info">💡 Tips for better analysis:</h3>
-            <ul className="text-sm space-y-1 text-base-content/70">
-              <li>• Include complete conversations rather than snippets</li>
-              <li>• Focus on text from one person for accurate profiling</li>
-              <li>• Remove sensitive information before uploading</li>
-              <li>• Longer conversations provide more accurate analysis</li>
+          {/* Strategic Guidelines */}
+          <div className="mt-8 zen-card p-6 border border-strategic-red/30">
+            <h3 className="font-light mb-4 text-lg tracking-wide brush-stroke-text strategic-emphasis">TACTICAL GUIDELINES</h3>
+            <div className="artistic-divider w-16 h-0.5 mb-4"></div>
+            <ul className="text-sm space-y-2 font-light leading-relaxed opacity-80">
+              <li className="flex items-start gap-2">
+                <span className="text-strategic-red mt-1">▸</span>
+                <span>Complete conversations yield superior intelligence</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-strategic-red mt-1">▸</span>
+                <span>Single-person focus maximizes profiling accuracy</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-strategic-red mt-1">▸</span>
+                <span>Sanitize sensitive data before intelligence upload</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-strategic-red mt-1">▸</span>
+                <span>Extended dialogue enhances psychological mapping</span>
+              </li>
             </ul>
           </div>
-        </div>
       </div>
     </div>
   );

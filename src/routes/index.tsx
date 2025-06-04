@@ -22,24 +22,24 @@ function HomePage() {
         {/* Art of War Quote */}
         <div className="text-center mb-16 px-8">
           <div className="calligraphic-text text-xl font-light py-8 px-16 relative">
-            <div className="absolute top-0 left-1/2 w-16 h-px bg-strategic-red transform -translate-x-1/2"></div>
+            <div className="absolute top-0 left-1/2 artistic-divider w-20 h-0.5 transform -translate-x-1/2"></div>
             知己知彼，百战不殆
             <div className="text-sm mt-4 opacity-70 font-normal tracking-wide">
               Know yourself and know your enemy, and you will never be defeated
             </div>
-            <div className="absolute bottom-0 left-1/2 w-16 h-px bg-strategic-red transform -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-1/2 artistic-divider w-20 h-0.5 transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-24">
           <div className="mb-12">
-            <div className="w-1 h-16 bg-strategic-red mx-auto mb-8"></div>
+            <div className="artistic-divider w-1 h-16 mx-auto mb-8"></div>
           </div>
-          <h1 className="text-5xl font-light mb-6 tracking-wider">
+          <h1 className="text-5xl font-light mb-6 tracking-wider brush-stroke-text">
             KITSUNE
           </h1>
-          <div className="w-24 h-px bg-strategic-red mx-auto mb-8"></div>
+          <div className="artistic-divider w-32 mx-auto mb-8"></div>
           <p className="text-lg mb-8 font-light tracking-wide strategic-emphasis">
             TACTICAL ANALYSIS SYSTEM
           </p>
@@ -52,10 +52,10 @@ function HomePage() {
         {/* Archetype Grid */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl font-light tracking-wider mb-4">
+            <h2 className="text-2xl font-light tracking-wider mb-4 brush-stroke-text">
               TARGET PROFILES
             </h2>
-            <div className="w-12 h-px bg-strategic-red mx-auto"></div>
+            <div className="artistic-divider w-24 mx-auto"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
@@ -152,8 +152,8 @@ function InvestorTargetsList() {
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-16">
         <div>
-          <h2 className="text-2xl font-light tracking-wider">TARGET DOSSIERS</h2>
-          <div className="w-12 h-px bg-strategic-red mt-2"></div>
+          <h2 className="text-2xl font-light tracking-wider brush-stroke-text">TARGET DOSSIERS</h2>
+          <div className="artistic-divider w-16 h-0.5 mt-3"></div>
         </div>
         <Link to="/upload" className="zen-btn text-xs tracking-widest">
           UPLOAD INTEL
@@ -163,7 +163,7 @@ function InvestorTargetsList() {
       {conversations.length === 0 ? (
         <div className="text-center py-24">
           <div className="zen-card p-16 max-w-xl mx-auto">
-            <div className="w-px h-12 bg-strategic-red mx-auto mb-8"></div>
+            <div className="artistic-divider w-px h-12 mx-auto mb-8"></div>
             <h3 className="text-lg font-light mb-6 tracking-wide">NO TARGETS ACQUIRED</h3>
             <p className="mb-12 text-sm opacity-60 font-light leading-relaxed">
               Upload communications to begin psychological analysis and strategic planning
@@ -204,10 +204,10 @@ function InvestorTargetsList() {
                   </Link>
                   <button 
                     onClick={() => handleDelete(conversation._id, conversation.title)}
-                    className="p-3 border border-strategic-red bg-void-black hover:bg-strategic-red transition-colors opacity-60 hover:opacity-100"
+                    className="p-3 border border-strategic-red bg-void-black hover:bg-strategic-red transition-colors opacity-60 hover:opacity-100 brush-accent relative overflow-hidden"
                     title="Delete Target"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4 relative z-10" />
                   </button>
                 </div>
               </div>
