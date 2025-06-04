@@ -31,7 +31,7 @@ function MatrixRain() {
     const matrixBg = document.getElementById('matrix-bg');
     if (!matrixBg) return;
 
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    const chars = '01兵法戦術勝利敗北龍虎陰陽攻守進退知己知彼百戦不殆';
     
     const createMatrixChar = () => {
       const char = document.createElement('div');
@@ -100,7 +100,7 @@ function RootComponent() {
                 />
                 <div className="drawer-content container mx-auto flex flex-col h-full">
                   {/* Navbar */}
-                  <header className="war-room-nav navbar shadow-sm">
+                  <header className="dragon-nav navbar shadow-sm">
                     <div className="navbar-start">
                       <label
                         htmlFor="drawer-toggle"
@@ -110,30 +110,30 @@ function RootComponent() {
                       </label>
                       <Link
                         to="/"
-                        className="hologram-text text-2xl font-bold tracking-wider"
+                        className="dragon-text text-2xl font-bold tracking-wider"
                       >
-                        🦊 KITSUNE WAR ROOM
+                        🐉 DRAGON MATRIX WAR ROOM
                       </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                       <nav className="flex">
                         <Link
                           to="/"
-                          className="cyber-btn mr-2"
+                          className="dragon-btn mr-2"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                           📊 TARGETS
                         </Link>
                         <Link
                           to="/upload"
-                          className="cyber-btn mr-2"
+                          className="dragon-btn mr-2"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                           🎯 INTEL UPLOAD
                         </Link>
                         <Link
                           to="/simulator"
-                          className="cyber-btn"
+                          className="dragon-btn"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                           ⚔️ WAR ROOM
@@ -153,7 +153,7 @@ function RootComponent() {
                     <Outlet />
                   </main>
                   <footer className="footer footer-center p-4 text-base-content">
-                    <p>© {new Date().getFullYear()} Kitsune</p>
+                    <p>© {new Date().getFullYear()} Dragon Matrix War Room</p>
                   </footer>
                 </div>
                 {/* Sidebar content for mobile */}
@@ -171,7 +171,7 @@ function RootComponent() {
                           <Link
                             to="/"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 cyber-btn mb-2"
+                            className="flex items-center p-2 dragon-btn mb-2"
                           >
                             📊 TARGETS
                           </Link>
@@ -180,7 +180,7 @@ function RootComponent() {
                           <Link
                             to="/upload"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 cyber-btn mb-2"
+                            className="flex items-center p-2 dragon-btn mb-2"
                           >
                             🎯 INTEL UPLOAD
                           </Link>
@@ -189,7 +189,7 @@ function RootComponent() {
                           <Link
                             to="/simulator"
                             onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 cyber-btn mb-2"
+                            className="flex items-center p-2 dragon-btn mb-2"
                           >
                             ⚔️ WAR ROOM
                           </Link>

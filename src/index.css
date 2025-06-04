@@ -5,45 +5,62 @@
     cyberpunk;
 }
 
-/* Cyberpunk Kitsune War Room Theme */
+/* Dragon Matrix War Room Theme */
 :root {
-  --neon-blue: #00d4ff;
-  --hot-pink: #ff006e;
-  --electric-purple: #8338ec;
-  --golden-circuit: #ffbe0b;
-  --cyber-green: #39ff14;
-  --shadow-black: #0a0a0f;
-  --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+  --dragon-red: #dc2626;
+  --blood-red: #991b1b;
+  --matrix-green: #00ff41;
+  --pure-white: #ffffff;
+  --shadow-black: #000000;
+  --dark-gray: #1a1a1a;
+  --light-gray: #404040;
+  --crimson-glow: 0 0 10px #dc2626, 0 0 20px #dc2626, 0 0 40px #dc2626;
+  --matrix-glow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 40px #00ff41;
 }
 
 @layer base {
   body {
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #16213e 100%);
-    color: var(--neon-blue);
-    font-family: 'Inter', 'Orbitron', monospace;
+    background: linear-gradient(135deg, var(--shadow-black) 0%, var(--dark-gray) 50%, var(--blood-red) 100%);
+    color: var(--pure-white);
+    font-family: 'Inter', 'Courier New', monospace;
     min-height: 100vh;
     background-attachment: fixed;
   }
   
-  .fox-fire-glow {
-    animation: foxFirePulse 3s ease-in-out infinite;
-    filter: drop-shadow(var(--neon-glow));
+  .dragon-glow {
+    animation: dragonPulse 3s ease-in-out infinite;
+    filter: drop-shadow(var(--crimson-glow));
   }
   
-  @keyframes foxFirePulse {
+  .matrix-glow {
+    animation: matrixPulse 2s ease-in-out infinite;
+    filter: drop-shadow(var(--matrix-glow));
+  }
+  
+  @keyframes dragonPulse {
     0%, 100% { opacity: 0.8; transform: scale(1); }
     50% { opacity: 1; transform: scale(1.05); }
   }
   
-  @keyframes glitchSakura {
+  @keyframes matrixPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+  }
+  
+  @keyframes dragonGlitch {
     0%, 98% { transform: translateX(0); }
     99% { transform: translateX(2px); }
     100% { transform: translateX(-2px); }
   }
   
-  @keyframes hologramFlicker {
-    0%, 100% { opacity: 1; text-shadow: 0 0 5px currentColor; }
-    50% { opacity: 0.8; text-shadow: 0 0 10px currentColor, 0 0 15px currentColor; }
+  @keyframes dragonFlicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--dragon-red); }
+    50% { opacity: 0.8; text-shadow: 0 0 10px var(--dragon-red), 0 0 15px var(--dragon-red); }
+  }
+  
+  @keyframes matrixFlicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--matrix-green); }
+    50% { opacity: 0.8; text-shadow: 0 0 10px var(--matrix-green), 0 0 15px var(--matrix-green); }
   }
   
   @keyframes matrixRain {
@@ -53,17 +70,17 @@
     100% { transform: translateY(100vh); opacity: 0; }
   }
   
-  .cyber-card {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 110, 0.1) 100%);
-    border: 1px solid var(--neon-blue);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 212, 255, 0.3);
+  .dragon-card {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid var(--dragon-red);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(220, 38, 38, 0.3);
     backdrop-filter: blur(10px);
     border-radius: 12px;
   }
   
-  .cyber-card:hover {
-    border-color: var(--hot-pink);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 0, 110, 0.5);
+  .dragon-card:hover {
+    border-color: var(--matrix-green);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(0, 255, 65, 0.5);
     transform: translateY(-2px);
     transition: all 0.3s ease;
   }
@@ -74,32 +91,53 @@
                 linear-gradient(45deg, var(--neon-blue), var(--hot-pink), var(--golden-circuit)) border-box;
   }
   
-  .hologram-text {
-    animation: hologramFlicker 2s ease-in-out infinite;
-    background: linear-gradient(45deg, var(--neon-blue), var(--hot-pink));
+  .dragon-text {
+    animation: dragonFlicker 2s ease-in-out infinite;
+    background: linear-gradient(45deg, var(--dragon-red), var(--pure-white));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
   }
   
-  .weapon-button {
-    background: linear-gradient(45deg, rgba(255, 190, 11, 0.2), rgba(131, 56, 236, 0.2));
-    border: 1px solid var(--golden-circuit);
-    color: var(--golden-circuit);
+  .matrix-text {
+    animation: matrixFlicker 1.5s ease-in-out infinite;
+    color: var(--matrix-green);
+    text-shadow: 0 0 10px var(--matrix-green);
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .dragon-button {
+    background: linear-gradient(45deg, rgba(220, 38, 38, 0.2), rgba(0, 0, 0, 0.8));
+    border: 1px solid var(--dragon-red);
+    color: var(--pure-white);
     transition: all 0.3s ease;
     border-radius: 8px;
   }
   
-  .weapon-button:hover {
-    background: linear-gradient(45deg, rgba(255, 190, 11, 0.4), rgba(131, 56, 236, 0.4));
-    box-shadow: 0 0 20px var(--golden-circuit);
+  .dragon-button:hover {
+    background: linear-gradient(45deg, rgba(220, 38, 38, 0.4), rgba(0, 255, 65, 0.2));
+    box-shadow: 0 0 20px var(--dragon-red);
     transform: scale(1.05);
   }
   
-  .vulnerability-warning {
-    color: var(--hot-pink);
-    text-shadow: 0 0 10px var(--hot-pink);
+  .delete-button {
+    background: linear-gradient(45deg, var(--blood-red), var(--shadow-black));
+    border: 1px solid var(--dragon-red);
+    color: var(--pure-white);
+    transition: all 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    background: linear-gradient(45deg, var(--dragon-red), var(--blood-red));
+    box-shadow: 0 0 15px var(--dragon-red);
+    transform: scale(1.02);
+  }
+  
+  .danger-warning {
+    color: var(--dragon-red);
+    text-shadow: 0 0 10px var(--dragon-red);
     animation: pulseWarning 2s ease-in-out infinite;
   }
   
@@ -113,8 +151,8 @@
     animation: glitchSakura 4s infinite;
   }
   
-  .kitsune-rating {
-    background: linear-gradient(90deg, var(--cyber-green), var(--neon-blue), var(--hot-pink));
+  .dragon-rating {
+    background: linear-gradient(90deg, var(--dragon-red), var(--matrix-green), var(--pure-white));
     height: 4px;
     border-radius: 2px;
     box-shadow: 0 0 10px currentColor;
@@ -133,40 +171,40 @@
   
   .matrix-char {
     position: absolute;
-    color: var(--cyber-green);
+    color: var(--matrix-green);
     font-family: monospace;
     animation: matrixRain 3s linear infinite;
   }
 }
 
 @layer components {
-  .cyber-btn {
+  .dragon-btn {
     @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
-    background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
-    border: 1px solid var(--neon-blue);
-    color: white;
+    background: linear-gradient(45deg, var(--dragon-red), var(--shadow-black));
+    border: 1px solid var(--dragon-red);
+    color: var(--pure-white);
   }
   
-  .cyber-btn:hover {
-    box-shadow: 0 0 25px var(--neon-blue);
+  .dragon-btn:hover {
+    box-shadow: 0 0 25px var(--dragon-red);
     transform: translateY(-2px);
   }
   
-  .archetype-card {
+  .dragon-archetype-card {
     @apply p-6 rounded-xl transition-all duration-500;
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
-    border: 2px solid var(--neon-blue);
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(0, 0, 0, 0.8));
+    border: 2px solid var(--dragon-red);
     backdrop-filter: blur(15px);
   }
   
-  .archetype-card.active {
-    border-color: var(--golden-circuit);
-    box-shadow: 0 0 40px rgba(255, 190, 11, 0.4);
+  .dragon-archetype-card.active {
+    border-color: var(--matrix-green);
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.4);
   }
   
-  .war-room-nav {
-    background: linear-gradient(90deg, rgba(10, 10, 15, 0.9), rgba(26, 10, 46, 0.9));
-    border-bottom: 2px solid var(--neon-blue);
+  .dragon-nav {
+    background: linear-gradient(90deg, var(--shadow-black), var(--dark-gray));
+    border-bottom: 2px solid var(--dragon-red);
     backdrop-filter: blur(20px);
   }
 }
