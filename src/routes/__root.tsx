@@ -31,7 +31,7 @@ function MatrixRain() {
     const matrixBg = document.getElementById('matrix-bg');
     if (!matrixBg) return;
 
-    const chars = '01兵法戦術勝利敗北龍虎陰陽攻守進退知己知彼百戦不殆';
+    const chars = '01兵法戦術勝利敗北龍虎陰陽攻守進退知己知彼百戦不殆兵者詭道攻其無備出其不意善戦者立於不敗之地故兵無常勢水無常形上兵伐謀其次伐交兵貴勝不貴久故善戦者求之於勢';
     
     const createMatrixChar = () => {
       const char = document.createElement('div');
@@ -118,6 +118,13 @@ function RootComponent() {
                     <div className="navbar-center hidden lg:flex">
                       <nav className="flex gap-2">
                         <Link
+                          to="/command"
+                          className="fox-fire-btn text-xs tracking-widest"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                           COMMAND
+                        </Link>
+                        <Link
                           to="/"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
@@ -144,6 +151,13 @@ function RootComponent() {
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            ARCHETYPES
+                        </Link>
+                        <Link
+                          to="/vision"
+                          className="fox-fire-btn text-xs tracking-widest"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                           VISION
                         </Link>
                       </nav>
                     </div>
@@ -174,6 +188,15 @@ function RootComponent() {
                     <div className="flex-1">
                       <div className="menu-title mb-4">Menu</div>
                       <ul className="space-y-2">
+                        <li>
+                          <Link
+                            to="/command"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
+                          >
+                            COMMAND
+                          </Link>
+                        </li>
                         <li>
                           <Link
                             to="/"
@@ -208,6 +231,15 @@ function RootComponent() {
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             ARCHETYPES
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/vision"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
+                          >
+                            VISION
                           </Link>
                         </li>
                       </ul>
