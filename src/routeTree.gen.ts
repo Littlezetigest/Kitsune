@@ -11,21 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as VisionImport } from './routes/vision'
 import { Route as UploadImport } from './routes/upload'
 import { Route as SimulatorImport } from './routes/simulator'
+import { Route as ProfileImport } from './routes/profile'
 import { Route as CommandImport } from './routes/command'
 import { Route as ArchetypesImport } from './routes/archetypes'
 import { Route as IndexImport } from './routes/index'
 import { Route as AnalysisConversationIdImport } from './routes/analysis.$conversationId'
 
 // Create/Update Routes
-
-const VisionRoute = VisionImport.update({
-  id: '/vision',
-  path: '/vision',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const UploadRoute = UploadImport.update({
   id: '/upload',
@@ -36,6 +30,12 @@ const UploadRoute = UploadImport.update({
 const SimulatorRoute = SimulatorImport.update({
   id: '/simulator',
   path: '/simulator',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileRoute = ProfileImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -88,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandImport
       parentRoute: typeof rootRoute
     }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileImport
+      parentRoute: typeof rootRoute
+    }
     '/simulator': {
       id: '/simulator'
       path: '/simulator'
@@ -100,13 +107,6 @@ declare module '@tanstack/react-router' {
       path: '/upload'
       fullPath: '/upload'
       preLoaderRoute: typeof UploadImport
-      parentRoute: typeof rootRoute
-    }
-    '/vision': {
-      id: '/vision'
-      path: '/vision'
-      fullPath: '/vision'
-      preLoaderRoute: typeof VisionImport
       parentRoute: typeof rootRoute
     }
     '/analysis/$conversationId': {
@@ -125,9 +125,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
-  '/vision': typeof VisionRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -135,9 +135,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
-  '/vision': typeof VisionRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -146,9 +146,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
-  '/vision': typeof VisionRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -158,27 +158,27 @@ export interface FileRouteTypes {
     | '/'
     | '/archetypes'
     | '/command'
+    | '/profile'
     | '/simulator'
     | '/upload'
-    | '/vision'
     | '/analysis/$conversationId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/archetypes'
     | '/command'
+    | '/profile'
     | '/simulator'
     | '/upload'
-    | '/vision'
     | '/analysis/$conversationId'
   id:
     | '__root__'
     | '/'
     | '/archetypes'
     | '/command'
+    | '/profile'
     | '/simulator'
     | '/upload'
-    | '/vision'
     | '/analysis/$conversationId'
   fileRoutesById: FileRoutesById
 }
@@ -187,9 +187,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArchetypesRoute: typeof ArchetypesRoute
   CommandRoute: typeof CommandRoute
+  ProfileRoute: typeof ProfileRoute
   SimulatorRoute: typeof SimulatorRoute
   UploadRoute: typeof UploadRoute
-  VisionRoute: typeof VisionRoute
   AnalysisConversationIdRoute: typeof AnalysisConversationIdRoute
 }
 
@@ -197,9 +197,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArchetypesRoute: ArchetypesRoute,
   CommandRoute: CommandRoute,
+  ProfileRoute: ProfileRoute,
   SimulatorRoute: SimulatorRoute,
   UploadRoute: UploadRoute,
-  VisionRoute: VisionRoute,
   AnalysisConversationIdRoute: AnalysisConversationIdRoute,
 }
 
@@ -216,9 +216,9 @@ export const routeTree = rootRoute
         "/",
         "/archetypes",
         "/command",
+        "/profile",
         "/simulator",
         "/upload",
-        "/vision",
         "/analysis/$conversationId"
       ]
     },
@@ -231,14 +231,14 @@ export const routeTree = rootRoute
     "/command": {
       "filePath": "command.tsx"
     },
+    "/profile": {
+      "filePath": "profile.tsx"
+    },
     "/simulator": {
       "filePath": "simulator.tsx"
     },
     "/upload": {
       "filePath": "upload.tsx"
-    },
-    "/vision": {
-      "filePath": "vision.tsx"
     },
     "/analysis/$conversationId": {
       "filePath": "analysis.$conversationId.tsx"

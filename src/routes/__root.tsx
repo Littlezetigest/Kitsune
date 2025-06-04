@@ -153,11 +153,11 @@ function RootComponent() {
                            ARCHETYPES
                         </Link>
                         <Link
-                          to="/vision"
+                          to="/profile"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                           VISION
+                           YOUR PROFILE
                         </Link>
                       </nav>
                     </div>
@@ -235,11 +235,11 @@ function RootComponent() {
                         </li>
                         <li>
                           <Link
-                            to="/vision"
+                            to="/profile"
                             onClick={() => setIsSidebarOpen(false)}
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
-                            VISION
+                            YOUR PROFILE
                           </Link>
                         </li>
                       </ul>
