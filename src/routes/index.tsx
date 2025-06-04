@@ -21,27 +21,27 @@ function HomePage() {
       <Unauthenticated>
         {/* Art of War Quote */}
         <div className="text-center mb-16 px-8">
-          <div className="calligraphic-text text-xl font-light py-8 px-16 relative">
-            <div className="absolute top-0 left-1/2 artistic-divider w-20 h-0.5 transform -translate-x-1/2"></div>
-            知己知彼，百战不殆
-            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide">
-              Know yourself and know your enemy, and you will never be defeated
+          <div className="hologram-text text-xl font-light py-8 px-16 relative sakura-glitch">
+            <div className="absolute top-0 left-1/2 neon-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+            🦊 DIGITAL KITSUNE WARFARE 🌸
+            <div className="text-sm mt-4 opacity-70 font-normal tracking-wide circuit-text">
+              Nine-tailed intelligence • Psychological dominance • Strategic superiority
             </div>
-            <div className="absolute bottom-0 left-1/2 artistic-divider w-20 h-0.5 transform -translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-1/2 neon-divider w-20 h-0.5 transform -translate-x-1/2"></div>
           </div>
         </div>
 
         {/* Hero Section */}
         <div className="text-center mb-24">
           <div className="mb-12">
-            <div className="artistic-divider w-1 h-16 mx-auto mb-8"></div>
+            <div className="neon-divider w-1 h-16 mx-auto mb-8"></div>
           </div>
-          <h1 className="text-5xl font-light mb-6 tracking-wider brush-stroke-text">
-            KITSUNE
+          <h1 className="text-5xl font-light mb-6 tracking-wider hologram-text sakura-glitch">
+            🦊 KITSUNE
           </h1>
-          <div className="artistic-divider w-32 mx-auto mb-8"></div>
-          <p className="text-lg mb-8 font-light tracking-wide strategic-emphasis">
-            TACTICAL ANALYSIS SYSTEM
+          <div className="neon-divider w-32 mx-auto mb-8"></div>
+          <p className="text-lg mb-8 font-light tracking-wide neon-emphasis">
+            NEURO-WARFARE MATRIX
           </p>
           <p className="text-base mb-16 max-w-2xl mx-auto font-light leading-relaxed opacity-80">
             Strategic intelligence platform for psychological analysis and tactical communication.
@@ -52,10 +52,10 @@ function HomePage() {
         {/* Archetype Grid */}
         <div className="mb-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl font-light tracking-wider mb-4 brush-stroke-text">
+            <h2 className="text-2xl font-light tracking-wider mb-4 glitch-text fox-fire-glow" data-text="TARGET PROFILES">
               TARGET PROFILES
             </h2>
-            <div className="artistic-divider w-24 mx-auto"></div>
+            <div className="neon-divider w-24 mx-auto"></div>
           </div>
           <div className="grid md:grid-cols-4 gap-1 max-w-6xl mx-auto">
             {[
@@ -68,12 +68,12 @@ function HomePage() {
               { name: "PIONEER", icon: Target },
               { name: "COLLECTOR", icon: Gem }
             ].map((archetype) => (
-              <div key={archetype.name} className="zen-archetype-card text-center group">
+              <div key={archetype.name} className="cyber-archetype-card text-center group circuit-pattern">
                 <archetype.icon 
-                  className="w-8 h-8 mx-auto mb-4 zen-focus opacity-60 group-hover:opacity-100" 
-                  style={{color: 'var(--pure-white)'}}
+                  className="w-8 h-8 mx-auto mb-4 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" 
+                  style={{color: 'var(--fox-fire)'}}
                 />
-                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">
+                <h3 className="font-light text-xs tracking-widest opacity-70 group-hover:opacity-100 transition-opacity circuit-text">
                   {archetype.name}
                 </h3>
               </div>
@@ -82,46 +82,46 @@ function HomePage() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 gap-1 mb-24 max-w-4xl mx-auto">
-          <div className="zen-card p-12 text-center group">
-            <Target className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
-            <h3 className="font-light mb-4 tracking-wide">ANALYSIS</h3>
+        <div className="grid md:grid-cols-2 gap-4 mb-24 max-w-4xl mx-auto">
+          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
+            <Target className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" />
+            <h3 className="font-light mb-4 tracking-wide circuit-text">NEURAL ANALYSIS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
-              Psychological profiling through communication pattern analysis
+              AI-powered psychological mapping through digital communication forensics
             </p>
           </div>
           
-          <div className="zen-card p-12 text-center group">
-            <Shield className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
-            <h3 className="font-light mb-4 tracking-wide">VULNERABILITIES</h3>
+          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
+            <Shield className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--hot-pink)'}} />
+            <h3 className="font-light mb-4 tracking-wide circuit-text">EXPLOIT VECTORS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
-              Strategic weaknesses identified through behavioral patterns
+              Quantum vulnerability scanning for maximum psychological leverage
             </p>
           </div>
           
-          <div className="zen-card p-12 text-center group">
-            <Sword className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
-            <h3 className="font-light mb-4 tracking-wide">TACTICS</h3>
+          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
+            <Sword className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--golden-circuit)'}} />
+            <h3 className="font-light mb-4 tracking-wide circuit-text">CYBER TACTICS</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
-              Strategic influence techniques based on psychological principles
+              Digital warfare protocols optimized for neural manipulation
             </p>
           </div>
           
-          <div className="zen-card p-12 text-center group">
-            <Eye className="w-6 h-6 mx-auto mb-6 zen-focus opacity-60 group-hover:opacity-100" />
-            <h3 className="font-light mb-4 tracking-wide">SIMULATION</h3>
+          <div className="cyber-card p-12 text-center group geometric-border circuit-pattern">
+            <Eye className="w-6 h-6 mx-auto mb-6 fox-fire-glow opacity-60 group-hover:opacity-100 transition-all" style={{color: 'var(--electric-blue)'}} />
+            <h3 className="font-light mb-4 tracking-wide circuit-text">MATRIX SIMULATION</h3>
             <p className="text-sm opacity-60 font-light leading-relaxed">
-              Practice environment for strategic communication training
+              Virtual reality training environment for psychological dominance
             </p>
           </div>
         </div>
 
         {/* CTA */}
         <div className="text-center mb-24">
-          <div className="w-px h-16 bg-strategic-red mx-auto mb-8"></div>
+          <div className="neon-divider w-px h-16 mx-auto mb-8"></div>
           <SignInButton mode="modal">
-            <button className="zen-btn text-sm tracking-widest">
-              ENTER
+            <button className="cyber-btn text-sm tracking-widest holographic-accent">
+              JACK IN 🦊
             </button>
           </SignInButton>
         </div>
@@ -152,42 +152,42 @@ function InvestorTargetsList() {
     <div className="max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-16">
         <div>
-          <h2 className="text-2xl font-light tracking-wider brush-stroke-text">TARGET DOSSIERS</h2>
-          <div className="artistic-divider w-16 h-0.5 mt-3"></div>
+          <h2 className="text-2xl font-light tracking-wider glitch-text fox-fire-glow" data-text="TARGET DOSSIERS">TARGET DOSSIERS</h2>
+          <div className="neon-divider w-16 h-0.5 mt-3"></div>
         </div>
-        <Link to="/upload" className="zen-btn text-xs tracking-widest">
-          UPLOAD INTEL
+        <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
+          UPLOAD INTEL 📡
         </Link>
       </div>
 
       {conversations.length === 0 ? (
         <div className="text-center py-24">
-          <div className="zen-card p-16 max-w-xl mx-auto">
-            <div className="artistic-divider w-px h-12 mx-auto mb-8"></div>
-            <h3 className="text-lg font-light mb-6 tracking-wide">NO TARGETS ACQUIRED</h3>
+          <div className="cyber-card p-16 max-w-xl mx-auto geometric-border circuit-pattern">
+            <div className="neon-divider w-px h-12 mx-auto mb-8"></div>
+            <h3 className="text-lg font-light mb-6 tracking-wide hologram-text sakura-glitch">🦊 NO TARGETS ACQUIRED</h3>
             <p className="mb-12 text-sm opacity-60 font-light leading-relaxed">
               Upload communications to begin psychological analysis and strategic planning
             </p>
-            <Link to="/upload" className="zen-btn text-xs tracking-widest">
-              INITIATE ACQUISITION
+            <Link to="/upload" className="cyber-btn text-xs tracking-widest holographic-accent">
+              INITIATE SCAN 🌸
             </Link>
           </div>
         </div>
       ) : (
         <div className="grid gap-1">
           {conversations.map((conversation) => (
-            <div key={conversation._id} className="zen-card p-8">
+            <div key={conversation._id} className="cyber-card p-8 geometric-border circuit-pattern">
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-4">
-                    <Target className="w-4 h-4 opacity-60" />
-                    <h3 className="text-lg font-light tracking-wide">
-                      {conversation.title}
+                    <Target className="w-4 h-4 opacity-60 fox-fire-glow" style={{color: 'var(--fox-fire)'}} />
+                    <h3 className="text-lg font-light tracking-wide hologram-text">
+                      🎯 {conversation.title}
                     </h3>
                   </div>
                   {conversation.participantName && (
-                    <p className="text-sm mb-2 strategic-emphasis font-medium">
-                      {conversation.participantName}
+                    <p className="text-sm mb-2 neon-emphasis font-medium">
+                      🦊 {conversation.participantName}
                     </p>
                   )}
                   <p className="text-xs opacity-50 font-light tracking-wide">
@@ -198,13 +198,13 @@ function InvestorTargetsList() {
                   <Link 
                     to="/analysis/$conversationId" 
                     params={{ conversationId: conversation._id }}
-                    className="zen-btn text-xs tracking-widest"
+                    className="cyber-btn text-xs tracking-widest holographic-accent"
                   >
-                    ANALYZE
+                    ANALYZE 🧠
                   </Link>
                   <button 
                     onClick={() => handleDelete(conversation._id, conversation.title)}
-                    className="p-3 border border-strategic-red bg-void-black hover:bg-strategic-red transition-colors opacity-60 hover:opacity-100 brush-accent relative overflow-hidden"
+                    className="p-3 border-2 border-hot-pink bg-cyber-black hover:bg-hot-pink transition-colors opacity-60 hover:opacity-100 holographic-accent relative overflow-hidden geometric-border"
                     title="Delete Target"
                   >
                     <Trash2 className="w-4 h-4 relative z-10" />

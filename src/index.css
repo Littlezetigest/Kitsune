@@ -5,46 +5,84 @@
     cyberpunk;
 }
 
-/* Zen Samurai Artistic Minimalism */
+/* Mystical Japanese Kitsune Shrine Aesthetics */
 :root {
-  --void-black: #000000;
-  --deep-black: #0a0a0a;
-  --strategic-red: #cc0000;
-  --action-red: #ff1a1a;
-  --crimson-brush: #b8001f;
-  --vermillion: #e53e3e;
-  --burgundy-ink: #8b0000;
+  --void-black: #0a0a0f;
+  --midnight-blue: #1a1a2e;
+  --deep-indigo: #16213e;
+  --shrine-purple: #2d1b69;
+  --fox-fire-blue: #4fc3f7;
+  --ethereal-blue: #64b5f6;
+  --shrine-orange: #ff6b35;
+  --sacred-gold: #ffd700;
+  --bamboo-green: #6b8e23;
   --pure-white: #ffffff;
-  --clarity-white: #f8f8f8;
-  --ink-gray: #1a1a1a;
-  --paper-white: #fafafa;
-  --minimal-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --strategic-glow: 0 0 20px rgba(204, 0, 0, 0.4);
-  --brush-shadow: 0 4px 16px rgba(204, 0, 0, 0.2);
-  --artistic-glow: 0 0 30px rgba(184, 0, 31, 0.3);
-  --ink-drip: 0 8px 32px rgba(139, 0, 0, 0.4);
+  --scroll-white: #faf9f6;
+  --mist-gray: #e8e8e8;
+  --spirit-shadow: 0 0 20px rgba(79, 195, 247, 0.4);
+  --fox-fire-glow: 0 0 30px rgba(79, 195, 247, 0.6);
+  --shrine-glow: 0 0 25px rgba(255, 107, 53, 0.5);
+  --golden-glow: 0 0 15px rgba(255, 215, 0, 0.4);
+  --mystical-gradient: linear-gradient(135deg, var(--midnight-blue), var(--deep-indigo), var(--shrine-purple));
+  --fox-fire-gradient: linear-gradient(45deg, var(--fox-fire-blue), var(--ethereal-blue), var(--shrine-orange), var(--sacred-gold));
 }
 
 @layer base {
   body {
-    background: var(--void-black);
-    color: var(--pure-white);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--mystical-gradient);
+    color: var(--scroll-white);
+    font-family: 'Noto Serif JP', 'Crimson Text', serif, system-ui;
+    position: relative;
     min-height: 100vh;
-    line-height: 1.618; /* Golden ratio */
+    line-height: 1.618;
+    overflow-x: hidden;
   }
   
-  .zen-focus {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(79, 195, 247, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
   }
   
-  .strategic-presence {
-    box-shadow: var(--minimal-shadow);
-    transition: box-shadow 0.3s ease;
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20% 30%, rgba(79, 195, 247, 0.3), transparent),
+      radial-gradient(2px 2px at 40% 70%, rgba(255, 215, 0, 0.2), transparent),
+      radial-gradient(1px 1px at 60% 20%, rgba(255, 107, 53, 0.4), transparent),
+      radial-gradient(1px 1px at 80% 80%, rgba(79, 195, 247, 0.3), transparent);
+    background-size: 200px 200px, 150px 150px, 100px 100px, 300px 300px;
+    animation: foxFireOrb 12s infinite linear;
+    pointer-events: none;
+    z-index: -2;
   }
   
-  .strategic-presence:hover {
-    box-shadow: var(--strategic-glow);
+  .spirit-focus {
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .shrine-presence {
+    box-shadow: var(--spirit-shadow);
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .shrine-presence:hover {
+    box-shadow: var(--fox-fire-glow);
+    transform: translateY(-2px);
   }
   
   @keyframes zenBreathe {
@@ -62,103 +100,148 @@
     100% { width: 100%; }
   }
   
-  @keyframes brushStroke {
+  @keyframes neonPulse {
+    0%, 100% { 
+      text-shadow: 
+        0 0 5px currentColor,
+        0 0 10px currentColor,
+        0 0 15px currentColor,
+        0 0 20px currentColor;
+    }
+    50% { 
+      text-shadow: 
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor,
+        0 0 40px currentColor;
+    }
+  }
+  
+  @keyframes matrixShift {
     0% { 
-      transform: scaleX(0) rotate(-2deg);
-      opacity: 0;
+      background-position: 0% 50%;
+      filter: brightness(1);
+    }
+    25% {
+      background-position: 100% 50%;
+      filter: brightness(1.2);
     }
     50% {
-      transform: scaleX(0.7) rotate(-1deg);
-      opacity: 0.8;
+      background-position: 100% 100%;
+      filter: brightness(1.5);
     }
-    100% { 
-      transform: scaleX(1) rotate(0deg);
+    75% {
+      background-position: 0% 100%;
+      filter: brightness(1.2);
+    }
+    100% {
+      background-position: 0% 50%;
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes foxFireShimmer {
+    0% { 
+      background-position: 0% 50%;
+      filter: brightness(1) hue-rotate(0deg);
+    }
+    25% {
+      background-position: 100% 50%;
+      filter: brightness(1.3) hue-rotate(10deg);
+    }
+    50% {
+      background-position: 100% 100%;
+      filter: brightness(1.6) hue-rotate(20deg);
+    }
+    75% {
+      background-position: 0% 100%;
+      filter: brightness(1.3) hue-rotate(10deg);
+    }
+    100% {
+      background-position: 0% 50%;
+      filter: brightness(1) hue-rotate(0deg);
+    }
+  }
+  
+  @keyframes foxFireOrb {
+    0% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-25%) translateX(10px);
+    }
+    50% {
+      transform: translateY(-50%) translateX(-5px);
+    }
+    75% {
+      transform: translateY(-75%) translateX(15px);
+    }
+    100% {
+      transform: translateY(-100%) translateX(0);
+    }
+  }
+  
+  @keyframes sakuraDrift {
+    0% {
+      transform: translateY(-10px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(calc(100vh + 10px)) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes kitsuneWisp {
+    0%, 100% {
+      transform: translateX(0) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translateX(10px) scale(1.1);
       opacity: 1;
     }
   }
   
-  @keyframes inkFlow {
-    0% { 
-      background-position: 0% 50%;
+  @keyframes spiritPulse {
+    0%, 100% { 
+      text-shadow: 
+        0 0 5px var(--fox-fire-blue),
+        0 0 10px var(--fox-fire-blue),
+        0 0 15px var(--fox-fire-blue),
+        0 0 20px var(--shrine-orange);
+      filter: brightness(1);
     }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
+    50% { 
+      text-shadow: 
+        0 0 10px var(--fox-fire-blue),
+        0 0 20px var(--ethereal-blue),
+        0 0 30px var(--shrine-orange),
+        0 0 40px var(--sacred-gold);
+      filter: brightness(1.3);
     }
   }
   
-  @keyframes paperTexture {
-    0%, 100% { filter: brightness(1) contrast(1); }
-    50% { filter: brightness(1.02) contrast(1.01); }
-  }
-  
-  .calligraphic-text {
-    font-weight: 300;
-    letter-spacing: 0.05em;
+  .hologram-text {
+    font-weight: 400;
+    letter-spacing: 0.1em;
     position: relative;
-    background: linear-gradient(135deg, var(--pure-white), var(--clarity-white), var(--pure-white));
-    background-size: 300% 300%;
-    animation: paperTexture 4s ease-in-out infinite;
+    background: var(--holographic-gradient);
+    background-size: 400% 400%;
+    animation: hologramShift 3s ease-in-out infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
   }
   
-  .calligraphic-text::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--strategic-red), var(--crimson-brush), var(--burgundy-ink));
-    background-size: 200% 100%;
-    animation: brushStroke 0.8s ease-out, inkFlow 3s ease-in-out infinite 0.8s;
-    border-radius: 1px;
-    box-shadow: 0 2px 4px rgba(204, 0, 0, 0.3);
-  }
-  
-  .brush-accent {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .brush-accent::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, 
-      transparent 40%, 
-      var(--crimson-brush) 50%, 
-      var(--vermillion) 60%, 
-      transparent 70%);
-    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: -1;
-  }
-  
-  .brush-accent:hover::before {
-    left: 100%;
-  }
-  
-  .strategic-emphasis {
-    background: linear-gradient(135deg, 
-      var(--strategic-red), 
-      var(--crimson-brush), 
-      var(--vermillion));
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 500;
-    position: relative;
-    animation: inkFlow 3s ease-in-out infinite;
-  }
-  
-  .strategic-emphasis::after {
+  .hologram-text::after {
     content: '';
     position: absolute;
     bottom: -2px;
@@ -166,10 +249,173 @@
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, 
-      var(--strategic-red), 
-      var(--crimson-brush));
-    opacity: 0.6;
-    border-radius: 0.5px;
+      transparent,
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
+      var(--fox-fire),
+      transparent);
+    background-size: 200% 100%;
+    animation: hologramShift 2s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
+  }
+  
+  .fox-fire-glow {
+    filter: drop-shadow(0 0 5px var(--fox-fire)) drop-shadow(0 0 10px var(--fox-fire));
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+  
+  .geometric-border {
+    position: relative;
+    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+  }
+  
+  .geometric-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--holographic-gradient);
+    background-size: 400% 400%;
+    animation: hologramShift 3s ease-in-out infinite;
+    clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);
+    z-index: -1;
+  }
+  
+  .holographic-accent {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .holographic-accent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, 
+      transparent 30%, 
+      var(--electric-blue) 40%, 
+      var(--hot-pink) 50%, 
+      var(--sacred-gold) 60%, 
+      transparent 70%);
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    filter: blur(1px);
+  }
+  
+  .holographic-accent:hover::before {
+    left: 100%;
+  }
+  
+  .kitsune-rating {
+    background: linear-gradient(90deg, 
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
+      var(--fox-fire));
+    background-size: 200% 100%;
+    animation: hologramShift 3s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
+    border-radius: 2px;
+  }
+  
+  .vulnerability-warning {
+    color: var(--hot-pink);
+    text-shadow: 
+      0 0 5px var(--hot-pink),
+      0 0 10px var(--hot-pink);
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+  
+  .weapon-button {
+    background: linear-gradient(45deg, var(--golden-circuit), var(--fox-fire));
+    border: 2px solid var(--golden-circuit);
+    color: var(--cyber-black);
+    clip-path: polygon(6px 0%, 100% 0%, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0% 100%, 0% 6px);
+    box-shadow: 
+      0 0 15px var(--golden-circuit),
+      inset 0 0 10px rgba(255, 204, 0, 0.3);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--cyber-black);
+  }
+  
+  .weapon-button:hover {
+    background: linear-gradient(45deg, var(--fox-fire), var(--electric-blue));
+    border-color: var(--fox-fire);
+    box-shadow: 
+      0 0 25px var(--fox-fire),
+      0 0 35px rgba(0, 255, 170, 0.5),
+      inset 0 0 15px rgba(0, 255, 170, 0.3);
+    transform: scale(1.1) rotateZ(2deg);
+  }
+  
+  .red-emphasis {
+    color: var(--crimson-red);
+    font-weight: 500;
+    text-shadow: 
+      0 0 5px var(--crimson-red),
+      0 0 10px var(--crimson-red),
+      0 0 20px var(--crimson-red);
+    animation: neonPulse 2s ease-in-out infinite;
+    position: relative;
+  }
+  
+  .red-emphasis::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent,
+      var(--crimson-red),
+      var(--fire-red),
+      transparent);
+    box-shadow: 0 0 10px var(--crimson-red);
+    animation: neonPulse 3s ease-in-out infinite;
+  }
+  
+  .circuit-pattern {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .circuit-pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(90deg, transparent 49%, var(--golden-circuit) 50%, transparent 51%),
+      linear-gradient(0deg, transparent 49%, var(--golden-circuit) 50%, transparent 51%);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    animation: circuitFlow 4s ease-in-out infinite;
+    z-index: -1;
+  }
+  
+  .sakura-glitch {
+    position: relative;
+    animation: sakuraGlitch 4s infinite;
+  }
+  
+  .sakura-glitch::before {
+    content: '🌸';
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--hot-pink);
+    filter: blur(1px);
+    opacity: 0.7;
+    animation: sakuraGlitch 4s infinite reverse;
   }
   
   @keyframes matrixRain {
@@ -179,63 +425,65 @@
     100% { transform: translateY(100vh); opacity: 0; }
   }
   
-  .zen-card {
-    background: var(--deep-black);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: var(--minimal-shadow);
-    border-radius: 0;
+  .cyber-card {
+    background: linear-gradient(135deg, var(--cyber-black) 0%, var(--shadow-black) 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
     position: relative;
     overflow: hidden;
+    clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
   }
   
-  .zen-card::before {
+  .cyber-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--holographic-gradient);
+    background-size: 400% 400%;
+    animation: hologramShift 4s ease-in-out infinite;
+    clip-path: polygon(15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%, 0% 15px);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cyber-card::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, 
-      var(--strategic-red) 0%, 
-      var(--crimson-brush) 30%, 
-      var(--vermillion) 60%, 
-      var(--burgundy-ink) 100%);
-    background-size: 300% 100%;
-    transform: scaleX(0);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    border-radius: 0 0 2px 2px;
-    box-shadow: var(--brush-shadow);
-  }
-  
-  .zen-card::after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 5%;
-    right: 5%;
-    height: 1px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      rgba(204, 0, 0, 0.3), 
+      transparent,
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
       transparent);
+    background-size: 200% 100%;
+    animation: hologramShift 2s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
     opacity: 0;
-    transition: opacity 0.4s ease 0.2s;
+    transition: opacity 0.3s ease;
   }
   
-  .zen-card:hover::before {
-    transform: scaleX(1);
-    animation: inkFlow 2s ease-in-out infinite 0.6s;
-  }
-  
-  .zen-card:hover::after {
+  .cyber-card:hover::before {
     opacity: 1;
   }
   
-  .zen-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--artistic-glow);
-    transition: all 0.4s ease;
-    transform: translateY(-2px);
+  .cyber-card:hover::after {
+    opacity: 1;
+  }
+  
+  .cyber-card:hover {
+    box-shadow: 
+      var(--neon-shadow),
+      inset 0 0 20px rgba(0, 212, 255, 0.1);
+    transform: translateY(-5px) scale(1.02);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .neon-border {
@@ -331,18 +579,23 @@
 }
 
 @layer components {
-  .zen-btn {
+  .cyber-btn {
     @apply px-8 py-4 font-medium transition-all duration-300;
-    background: var(--void-black);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--pure-white);
+    background: linear-gradient(135deg, var(--cyber-black), var(--shadow-black));
+    border: 2px solid var(--electric-blue);
+    color: var(--cyber-white);
     position: relative;
     overflow: hidden;
-    border-radius: 0;
-    box-shadow: inset 0 0 0 1px transparent;
+    clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: 'Orbitron', monospace;
+    box-shadow: 
+      0 0 10px rgba(0, 136, 255, 0.3),
+      inset 0 0 10px rgba(0, 212, 255, 0.1);
   }
   
-  .zen-btn::before {
+  .cyber-btn::before {
     content: '';
     position: absolute;
     top: 0;
@@ -350,78 +603,80 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, 
-      var(--strategic-red) 0%, 
-      var(--crimson-brush) 30%, 
-      var(--vermillion) 70%, 
-      var(--strategic-red) 100%);
-    background-size: 200% 200%;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
+      var(--fox-fire));
+    background-size: 400% 400%;
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: hologramShift 3s ease-in-out infinite;
     z-index: -1;
   }
   
-  .zen-btn::after {
+  .cyber-btn::after {
     content: '';
     position: absolute;
     top: -2px;
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(45deg, 
-      var(--burgundy-ink), 
-      var(--crimson-brush), 
-      var(--vermillion), 
-      var(--strategic-red));
+    background: var(--holographic-gradient);
     background-size: 400% 400%;
     z-index: -2;
     opacity: 0;
     transition: opacity 0.3s ease;
-    animation: inkFlow 3s ease-in-out infinite;
+    animation: hologramShift 4s ease-in-out infinite;
+    clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px);
   }
   
-  .zen-btn:hover::before {
+  .cyber-btn:hover::before {
     left: 0;
-    animation: inkFlow 2s ease-in-out infinite;
   }
   
-  .zen-btn:hover::after {
-    opacity: 0.3;
+  .cyber-btn:hover::after {
+    opacity: 0.7;
   }
   
-  .zen-btn:hover {
-    color: var(--pure-white);
-    border-color: var(--crimson-brush);
+  .cyber-btn:hover {
+    color: var(--cyber-white);
+    border-color: var(--hot-pink);
     box-shadow: 
-      inset 0 0 0 1px var(--strategic-red),
-      var(--artistic-glow),
-      0 4px 12px rgba(204, 0, 0, 0.2);
-    transform: translateY(-1px);
+      0 0 20px var(--hot-pink),
+      0 0 30px rgba(255, 0, 128, 0.3),
+      inset 0 0 20px rgba(0, 212, 255, 0.2);
+    transform: translateY(-3px) scale(1.05);
+    text-shadow: 0 0 10px var(--hot-pink);
   }
   
-  .zen-archetype-card {
+  .cyber-archetype-card {
     @apply p-8 transition-all duration-500;
-    background: var(--deep-black);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, var(--cyber-black), var(--shadow-black));
+    border: 2px solid transparent;
     position: relative;
     overflow: hidden;
+    clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
+    box-shadow: 
+      0 0 15px rgba(0, 212, 255, 0.2),
+      inset 0 0 15px rgba(0, 136, 255, 0.1);
   }
   
-  .zen-archetype-card::before {
+  .cyber-archetype-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      transparent 0%, 
-      rgba(204, 0, 0, 0.02) 50%, 
-      transparent 100%);
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--holographic-gradient);
+    background-size: 400% 400%;
+    animation: hologramShift 5s ease-in-out infinite;
+    clip-path: polygon(12px 0%, 100% 0%, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0% 100%, 0% 12px);
     opacity: 0;
     transition: opacity 0.4s ease;
-    z-index: 0;
+    z-index: -1;
   }
   
-  .zen-archetype-card::after {
+  .cyber-archetype-card::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -429,106 +684,158 @@
     width: 0;
     height: 3px;
     background: linear-gradient(90deg, 
-      var(--burgundy-ink), 
-      var(--strategic-red), 
-      var(--crimson-brush), 
-      var(--vermillion));
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
+      var(--fox-fire));
     background-size: 300% 100%;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     transform: translateX(-50%);
-    border-radius: 2px 2px 0 0;
-    box-shadow: 0 -2px 8px rgba(204, 0, 0, 0.3);
+    box-shadow: 0 0 15px currentColor;
+    animation: hologramShift 3s ease-in-out infinite;
   }
   
-  .zen-archetype-card:hover::before {
+  .cyber-archetype-card:hover::before {
     opacity: 1;
   }
   
-  .zen-archetype-card:hover::after {
-    width: 80%;
-    animation: inkFlow 2s ease-in-out infinite;
+  .cyber-archetype-card:hover::after {
+    width: 90%;
   }
   
-  .zen-archetype-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--ink-drip);
-    border-color: rgba(204, 0, 0, 0.3);
+  .cyber-archetype-card:hover {
+    transform: translateY(-5px) rotateX(5deg);
+    box-shadow: 
+      var(--neon-shadow),
+      0 10px 30px rgba(0, 212, 255, 0.3),
+      inset 0 0 30px rgba(0, 255, 170, 0.1);
   }
   
-  .zen-archetype-card > * {
+  .cyber-archetype-card > * {
     position: relative;
     z-index: 1;
   }
   
-  .zen-nav {
-    background: var(--void-black);
-    border-bottom: 2px solid transparent;
-    border-image: linear-gradient(90deg, 
-      transparent, 
-      var(--strategic-red), 
-      var(--crimson-brush), 
-      var(--strategic-red), 
-      transparent) 1;
+  .cyber-nav {
+    background: linear-gradient(135deg, var(--cyber-black), var(--shadow-black));
+    border-bottom: 2px solid var(--electric-blue);
     backdrop-filter: blur(20px);
+    position: relative;
+    box-shadow: 
+      0 0 20px rgba(0, 212, 255, 0.3),
+      inset 0 -2px 10px rgba(0, 136, 255, 0.2);
+  }
+  
+  .cyber-nav::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      var(--electric-blue) 20%, 
+      var(--hot-pink) 40%, 
+      var(--golden-circuit) 60%, 
+      var(--fox-fire) 80%, 
+      transparent 100%);
+    background-size: 200% 100%;
+    animation: hologramShift 3s ease-in-out infinite;
+    box-shadow: 0 0 10px currentColor;
+  }
+  
+  .cyber-nav::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--holographic-gradient);
+    background-size: 400% 400%;
+    animation: hologramShift 6s ease-in-out infinite;
+    opacity: 0.05;
+    z-index: -1;
+  }
+  
+  .neon-divider {
+    height: 2px;
+    background: linear-gradient(90deg, 
+      transparent,
+      var(--electric-blue),
+      var(--hot-pink),
+      var(--golden-circuit),
+      var(--fox-fire),
+      var(--hot-pink),
+      var(--electric-blue),
+      transparent);
+    background-size: 200% 100%;
+    animation: hologramShift 2s ease-in-out infinite;
+    box-shadow: 
+      0 0 10px currentColor,
+      0 2px 15px rgba(0, 212, 255, 0.3);
     position: relative;
   }
   
-  .zen-nav::before {
+  .neon-divider::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: inherit;
+    filter: blur(2px);
+    opacity: 0.5;
+    z-index: -1;
+  }
+  
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+    color: var(--cyber-white);
+    text-shadow: 
+      0 0 5px var(--electric-blue),
+      0 0 10px var(--hot-pink);
+  }
+  
+  .glitch-text::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--hot-pink);
+    z-index: -1;
+    animation: sakuraGlitch 0.3s infinite;
+  }
+  
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--electric-blue);
+    z-index: -2;
+    animation: sakuraGlitch 0.3s infinite reverse;
+  }
+  
+  .circuit-text {
+    position: relative;
+    color: var(--golden-circuit);
+    text-shadow: 0 0 10px var(--golden-circuit);
+    font-family: 'Orbitron', monospace;
+  }
+  
+  .circuit-text::after {
     content: '';
     position: absolute;
     bottom: -2px;
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(204, 0, 0, 0.3) 20%, 
-      rgba(184, 0, 31, 0.5) 50%, 
-      rgba(204, 0, 0, 0.3) 80%, 
-      transparent 100%);
-    animation: inkFlow 4s ease-in-out infinite;
-  }
-  
-  .artistic-divider {
-    height: 2px;
-    background: linear-gradient(90deg, 
-      transparent, 
-      var(--burgundy-ink), 
-      var(--strategic-red), 
-      var(--crimson-brush), 
-      var(--vermillion), 
-      var(--crimson-brush), 
-      var(--strategic-red), 
-      var(--burgundy-ink), 
-      transparent);
-    background-size: 200% 100%;
-    animation: inkFlow 3s ease-in-out infinite;
-    border-radius: 1px;
-    box-shadow: 0 2px 8px rgba(204, 0, 0, 0.3);
-  }
-  
-  .brush-stroke-text {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .brush-stroke-text::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: -5%;
-    right: -5%;
-    height: 3px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      var(--strategic-red) 20%, 
-      var(--crimson-brush) 50%, 
-      var(--vermillion) 80%, 
-      transparent 100%);
-    background-size: 200% 100%;
-    border-radius: 2px;
-    transform: rotate(-1deg);
-    animation: brushStroke 0.8s ease-out, inkFlow 3s ease-in-out infinite 0.8s;
-    box-shadow: 0 2px 6px rgba(204, 0, 0, 0.4);
+    background: var(--golden-circuit);
+    box-shadow: 0 0 5px var(--golden-circuit);
+    animation: circuitFlow 2s ease-in-out infinite;
   }
 }

@@ -100,43 +100,43 @@ function RootComponent() {
                 />
                 <div className="drawer-content container mx-auto flex flex-col h-full">
                   {/* Navbar */}
-                  <header className="zen-nav navbar shadow-sm">
+                  <header className="cyber-nav navbar shadow-sm">
                     <div className="navbar-start">
                       <label
                         htmlFor="drawer-toggle"
                         className="btn btn-square btn-ghost drawer-button lg:hidden mr-2"
                       >
-                        <Menu className="w-5 h-5" />
+                        <Menu className="w-5 h-5 fox-fire-glow" style={{color: 'var(--fox-fire)'}} />
                       </label>
                       <Link
                         to="/"
-                        className="calligraphic-text text-xl font-light tracking-widest"
+                        className="hologram-text text-xl font-light tracking-widest sakura-glitch"
                       >
-                        KITSUNE
+                        🦊 KITSUNE
                       </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
-                      <nav className="flex gap-1">
+                      <nav className="flex gap-2">
                         <Link
                           to="/"
-                          className="zen-btn text-xs tracking-widest"
+                          className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          TARGETS
+                          🎯 TARGETS
                         </Link>
                         <Link
                           to="/upload"
-                          className="zen-btn text-xs tracking-widest"
+                          className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          UPLOAD
+                          📡 UPLOAD
                         </Link>
                         <Link
                           to="/simulator"
-                          className="zen-btn text-xs tracking-widest"
+                          className="cyber-btn text-xs tracking-widest holographic-accent"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          SIMULATE
+                          ⚔️ SIMULATE
                         </Link>
                       </nav>
                     </div>
@@ -144,17 +144,16 @@ function RootComponent() {
                       <UserButton />
                     </div>
                   </header>
-                  {/* Matrix Background Effect */}
-                  <div className="matrix-bg" id="matrix-bg"></div>
-                  <MatrixRain />
+                  {/* Cyberpunk Background Effects */}
+                  <div className="cyber-particles" id="cyber-particles"></div>
                   
                   {/* Main content */}
                   <main className="flex-1 p-4 prose prose-invert max-w-none relative z-10">
                     <Outlet />
                   </main>
                   <footer className="footer footer-center p-8 text-base-content">
-                    <div className="w-12 h-px bg-strategic-red mx-auto mb-4"></div>
-                    <p className="text-xs opacity-40 font-light tracking-widest">© {new Date().getFullYear()}</p>
+                    <div className="neon-divider w-12 h-px mx-auto mb-4"></div>
+                    <p className="text-xs opacity-40 font-light tracking-widest circuit-text">© {new Date().getFullYear()} 🦊</p>
                   </footer>
                 </div>
                 {/* Sidebar content for mobile */}
