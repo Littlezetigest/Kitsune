@@ -39,7 +39,6 @@ function AnalysisPage() {
 
   // Actions for self-analysis and remodeling (commented out - would need useAction)
   // const analyzeSelf = useAction(api.selfAnalysis.analyzeSelfCommunication);
-  // const _generateRemodeling = useAction(api.selfAnalysis.generateCharacterRemodeling);
 
   // Get user profile and remodeling data
   const userProfile = useQuery(api.selfAnalysisMutations.getUserProfile, conversation ? { userId: conversation.userId } : "skip");

@@ -77,7 +77,7 @@ export const analyzeConversation = action({
     const vulnerabilityAnalysis = analyzeStrategicVulnerabilities(text);
     
     // Create personality matrix
-    const personalityMatrix = createPersonalityMatrix(archetypeAnalysis, behaviorAnalysis);
+    const personalityMatrix = createPersonalityMatrix(behaviorAnalysis);
 
     // Create analysis record
     const analysisId: any = await ctx.runMutation(api.analysis.createAnalysis, {

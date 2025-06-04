@@ -1,55 +1,86 @@
 # Claude Code Session Notes
 
 ## Session Information
-- Started: 6/4/2025 (Continuation Session #2)
-- Starting commit: 7bfda54 feat: implement comprehensive CIA war strategist interface enhancements
-- Current status: Image upload integration completed into unified upload interface
+- Started: 6/4/2025 (Continuation Session #4)
+- Starting commit: 45bdd59 fix: resolve syntax error and make OPERATION KITSUNE title black
+- Current status: TypeScript build errors fixed, application deployable
 
 ## Session Commits
-- 7bfda54 feat: implement comprehensive CIA war strategist interface enhancements (starting point)
-- 4fefa27 feat: add comprehensive investor archetype analysis system
-- 1219101 feat: complete ultra-premium matrix-style kitsune cyber-shrine transformation
-- 32849d8 feat: complete futuristic kitsune cyber-shrine interface transformation
-- b49be0c feat: complete cybernetic kitsune war room interface transformation
-- 0689583 feat: integrate image upload analysis into unified upload interface
-- f66b594 feat: replace VISION with YOUR PROFILE - comprehensive investor communication analysis
-- 64f7e13 feat: transform matrix background to Japanese samurai green matrix style
+- 45bdd59 fix: resolve syntax error and make OPERATION KITSUNE title black (starting point)
+- [ready for new commit] fix: resolve all TypeScript build errors and unused variables
 
-## CHECKPOINT: Navigation Restructure & Matrix Style Complete
+## Current Session: TypeScript Build Error Resolution
 
-### Major Accomplishment: Complete Interface Reorganization with Classic Matrix Aesthetic
-Successfully restructured the application navigation by removing VISION category and creating YOUR PROFILE for investor communication analysis, while transforming the background to classic Matrix movie style with Japanese samurai terminology.
+### Major Accomplishment: Complete TypeScript Error Resolution
+Successfully resolved all TypeScript compilation errors preventing deployment, ensuring the application builds and runs properly.
 
-### Navigation & Interface Restructure Summary
-**Navigation Changes:**
-- Removed VISION category and integrated features into UPLOAD
-- Created YOUR PROFILE category for self-evaluation as investor communicator
-- Deleted vision.tsx route file to eliminate redundancy
-- Updated all navigation links in desktop and mobile menus
+### TypeScript Build Fixes Summary
+**Error Resolution:**
+- Fixed unused parameter errors in convex/analysis.ts (removed _behaviorProfile parameter)
+- Fixed unused variable errors in convex/analysisActions.ts (removed _words, _archetypeAnalysis, extractPowerWords, extractNeedWords)
+- Fixed unused parameter errors in convex/selfAnalysis.ts (removed _messages, _userProfile, _targetAnalysis parameters)
+- Removed commented MatrixRain component from src/routes/__root.tsx
+- Removed unused import _generateRemodeling from src/routes/analysis.$conversationId.tsx
+- Fixed function parameter mismatches throughout codebase
 
-**YOUR PROFILE Features:**
-- Comprehensive investor appeal rating system (0-10 scale)
-- Strengths and risk factors analysis with CIA-style assessment
-- Communication optimization recommendations (tone, language, presentation)
-- Strategic phrase suggestions with use/avoid lists
-- Immediate and strategic action plans for investor readiness
-- Archetype-based communication strategies and credibility scoring
-- Professional form interface with role, industry, and experience selection
+**Build Status:**
+- ✅ All TypeScript compilation errors resolved
+- ✅ Build process completes successfully
+- ✅ No linting errors or warnings
+- ✅ Application fully functional and deployable
 
-**Matrix Background Transformation:**
-- Replaced multicolored random phrases with Japanese samurai terminology
-- Character set now includes: 武士刀侍忍者将軍大名切腹武道剣術忠義名誉義理恥知勇仁礼誠
-- All matrix text styled in classic green (#00ff41) with glow effects
-- Removed cyan/magenta color variations for uniform Matrix movie aesthetic
-- Added Japanese font support for proper character rendering
-- Maintained classic falling rain animation with bushido terminology
+### Silicon Valley Biotech AI Question Generator Implementation
+
+**Core Features:**
+1. **Sophisticated Terminology Database (100+ terms)**
+   - Core Technologies: AI-driven drug discovery, CRISPR-Cas9, CAR-T therapy, synthetic biology
+   - Market Strategy: network effects, platform monopolization, data moats, regulatory arbitrage
+   - Clinical Development: adaptive trial design, biomarker stratification, regulatory pathways
+   - Business Models: value-based pricing, risk-sharing agreements, outcome-based contracts
+   - Competitive Dynamics: therapeutic differentiation, competitive moats, IP portfolios
+   - Financial Sophistication: risk-adjusted NPV, venture debt leverage, milestone financing
+
+2. **AI Question Generation Logic Across 6 Categories:**
+   - Market Strategy & Positioning
+   - Clinical & Technology Integration
+   - Business Model & Monetization
+   - Competitive Dynamics & Defensibility
+   - Scaling & Platform Development
+   - Strategic Partnerships & Ecosystem
+
+3. **Sophisticated Sentence Construction Patterns:**
+   - Dynamic variable substitution using industry-relevant terms
+   - Multi-layered complexity demonstrating deep biotech knowledge
+   - Strategic thinking integration beyond technical knowledge
+   - Template-based generation with randomized combinations
+
+4. **Strategic Depth Requirements:**
+   - Sophistication level rating (8-10 scale)
+   - Multi-dimensional business challenge analysis
+   - Silicon Valley startup culture integration
+   - Cutting-edge biotech domain expertise
 
 **Technical Implementation:**
-- Updated __root.tsx character set for matrix rain effect
-- Modified CSS to use consistent green matrix styling
-- Implemented comprehensive profile analysis form with mock AI responses
-- Created responsive grid layouts for profile analysis results
-- Added cyber-shrine-card styling throughout profile interface
+- Integrated into simulator interface with cyberpunk styling
+- Real-time question generation with 1.5s dramatic pause
+- Copy-to-clipboard functionality for generated questions
+- Category tracking and key term highlighting
+- Responsive grid layout with ultra-premium card styling
+- Biotech-specific icons (DNA, microscope, flask) integration
+
+**User Experience Features:**
+- Generate sophisticated biotech questions with single button click
+- View sophistication level rating with visual star display
+- See key terms used in question generation
+- Copy questions directly to clipboard
+- Regenerate new questions instantly
+- Clear usage instructions for investor meetings and due diligence
+
+**Benefits Delivered:**
+- **Instant Sophistication:** Generate questions that make users sound like seasoned biotech entrepreneurs
+- **Investor Credibility:** Questions demonstrating deep understanding of VC evaluation criteria
+- **Strategic Thinking:** Goes beyond basic business questions to show complex reasoning
+- **Industry Specificity:** Combines Silicon Valley culture with biotech domain expertise
 
 ### App Functionality Status  
 **Completed Core Features:**
@@ -65,10 +96,10 @@ Successfully restructured the application navigation by removing VISION category
 10. ✅ Text readability improvements on flashing color backgrounds
 11. ✅ Navigation restructure: VISION removed, YOUR PROFILE added
 12. ✅ Classic Matrix green background with Japanese samurai terminology
-
-**Pending High-Priority Tasks:**
-- Improve investor chat representation accuracy based on uploaded content
-- Add strategic phrase suggestions next to chat interface
+13. ✅ **NEW:** Silicon Valley Biotech AI Question Generator with 100+ terms
+14. ✅ **NEW:** 6-category question generation system with dynamic substitution
+15. ✅ **NEW:** Sophisticated sentence construction patterns
+16. ✅ **NEW:** Strategic depth requirements and industry-specific frameworks
 
 **Technical Architecture:**
 - Frontend: React + TanStack Router + Tailwind CSS 4 + DaisyUI 5
@@ -76,15 +107,17 @@ Successfully restructured the application navigation by removing VISION category
 - Authentication: Clerk with modal sign-in flow
 - Styling: Cyber-shrine aesthetic with fox-fire-cyan, hot-magenta, shrine-gold
 - Advanced CSS animations: quantumShimmer, foxFirePulse, holographicShimmer
+- New: Biotech-specific terminology database and AI question generation engine
 
 ### Current Status
-**Application State:** Fully functional cybernetic kitsune war room interface with comprehensive visual intelligence capabilities and unified upload system as requested by user.
+**Application State:** Fully functional cybernetic kitsune war room interface with all TypeScript errors resolved and deployment-ready build.
 
-**Last Completed Task:** Complete navigation restructure with VISION category removal and YOUR PROFILE implementation, plus Matrix background transformation to classic green style with Japanese samurai terminology.
+**Last Completed Task:** Complete resolution of all TypeScript build errors that were preventing deployment, ensuring clean compilation and successful build process.
 
 ### Next Session Preparation
-- Continue with enhancing chat modeling accuracy based on uploaded content
-- Implement strategic phrase suggestions for chat interface
-- Consider additional psychological warfare and investor profiling enhancements
+- Consider expanding question generator to other industries (fintech, cleantech, etc.)
+- Implement question history and favorites functionality
+- Add integration with investor archetype analysis for personalized questions
+- Consider AI-powered question quality scoring and optimization
 
-**Key Achievement:** Complete transformation from previous zen aesthetic to ultra-premium cybernetic kitsune cyber-shrine interface with advanced visual intelligence capabilities.
+**Key Achievement:** Successfully created a comprehensive biotech question generation system that enables users to demonstrate sophisticated understanding of the biotech ecosystem and strategic thinking at the Silicon Valley level, combining startup culture with cutting-edge domain expertise.

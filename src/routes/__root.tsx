@@ -25,44 +25,6 @@ import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 
-// Matrix Rain Effect Component (available for future use)
-// function MatrixRain() {
-//   useEffect(() => {
-//     const matrixBg = document.getElementById('matrix-bg');
-//     if (!matrixBg) return;
-
-//     const chars = '武士刀侍忍者将軍大名切腹武道剣術忠義名誉義理恥知勇仁礼誠makoto bushido katana samurai shogun daimyo seppuku budo kendo giri shame chi yu jin rei makoto';
-    
-//     const createMatrixChar = () => {
-//       const char = document.createElement('div');
-//       char.className = 'matrix-char';
-//       char.textContent = chars[Math.floor(Math.random() * chars.length)];
-//       char.style.left = Math.random() * 100 + '%';
-//       char.style.animationDelay = Math.random() * 3 + 's';
-//       char.style.fontSize = (Math.random() * 20 + 10) + 'px';
-//       return char;
-//     };
-
-//     // Create initial matrix characters
-//     for (let i = 0; i < 50; i++) {
-//       matrixBg.appendChild(createMatrixChar());
-//     }
-
-//     // Add new characters periodically
-//     const interval = setInterval(() => {
-//       if (matrixBg.children.length < 100) {
-//         matrixBg.appendChild(createMatrixChar());
-//       }
-//     }, 500);
-
-//     return () => {
-//       clearInterval(interval);
-//       matrixBg.innerHTML = '';
-//     };
-//   }, []);
-
-//   return null;
-// }
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;

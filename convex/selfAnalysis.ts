@@ -47,7 +47,6 @@ export const analyzeSelfCommunication = action({
   args: { userId: v.id("users") },
   handler: async (ctx, args): Promise<Id<"userProfiles">> => {
     // Get all war room sessions for this user (mock data for now)
-    // const _sessions = [] as any[];
 
     // Use mock data since no war room sessions exist yet
     const mockUserMessages = [
@@ -67,10 +66,10 @@ export const analyzeSelfCommunication = action({
     const communicationStyle = analyzeUserCommunicationStyle(fullText);
     
     // Identify vulnerabilities
-    const vulnerabilities = identifyUserVulnerabilities(fullText, userMessages);
+    const vulnerabilities = identifyUserVulnerabilities(fullText);
     
     // Identify power law violations
-    const powerLawViolations = identifyPowerLawViolations(fullText, userMessages);
+    const powerLawViolations = identifyPowerLawViolations(fullText);
     
     // Analyze NLP profile
     const nlpProfile = analyzeUserNLPProfile(fullText);
@@ -207,7 +206,7 @@ function analyzeUserCommunicationStyle(text: string) {
   };
 }
 
-function identifyUserVulnerabilities(text: string, _messages: string[]) {
+function identifyUserVulnerabilities(text: string) {
   const vulnerabilities = [] as any[];
 
   for (const [vulnType, patterns] of Object.entries(SELF_ANALYSIS_PATTERNS.vulnerabilities)) {
@@ -225,7 +224,7 @@ function identifyUserVulnerabilities(text: string, _messages: string[]) {
   return vulnerabilities;
 }
 
-function identifyPowerLawViolations(text: string, _messages: string[]) {
+function identifyPowerLawViolations(text: string) {
   const violations = [] as any[];
   
   const lawMappings = {
@@ -333,7 +332,7 @@ function generateCharacterDevelopment(userProfile: any, targetAnalysis: any) {
     strengthsToAmplify: identifyStrengths(userProfile),
     weaknessesToMask: identifyWeaknesses(userProfile),
     newSkillsToAcquire: getSkillsForTarget(targetAnalysis),
-    practiceScenarios: generatePracticeScenarios(userProfile, targetAnalysis)
+    practiceScenarios: generatePracticeScenarios()
   };
 }
 
@@ -343,7 +342,7 @@ function analyzeSynergy(userProfile: any, targetAnalysis: any) {
   return {
     compatibilityScore,
     conflictPoints: identifyConflicts(userProfile, targetAnalysis),
-    harmonyPoints: identifyHarmony(userProfile, targetAnalysis),
+    harmonyPoints: identifyHarmony(),
     optimalInteractionStyle: getOptimalStyle(userProfile, targetAnalysis)
   };
 }
@@ -452,7 +451,7 @@ function getSkillsForTarget(targetAnalysis: any): string[] {
   return skills[targetAnalysis.primaryArchetype] || ["Adaptive communication"];
 }
 
-function generatePracticeScenarios(_userProfile: any, _targetAnalysis: any): string[] {
+function generatePracticeScenarios(): string[] {
   return [
     "Practice pitching to their archetype type",
     "Role-play handling their common objections",
@@ -481,7 +480,7 @@ function identifyConflicts(userProfile: any, targetAnalysis: any): string[] {
   return conflicts;
 }
 
-function identifyHarmony(_userProfile: any, _targetAnalysis: any): string[] {
+function identifyHarmony(): string[] {
   return ["Shared goal of successful outcomes", "Mutual respect for competence"];
 }
 
