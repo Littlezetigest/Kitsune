@@ -43,9 +43,7 @@ function AnalysisPage() {
 
   // Get user profile and remodeling data
   const userProfile = useQuery(api.selfAnalysisMutations.getUserProfile, conversation ? { userId: conversation.userId } : "skip");
-  const characterRemodeling = useQuery(api.selfAnalysisMutations.getCharacterRemodeling, 
-    conversation ? { targetAnalysisId: "mock_analysis_id" as Id<"analyses"> } : "skip"
-  );
+  const characterRemodeling = useQuery(api.selfAnalysisMutations.getCharacterRemodeling, "skip");
   
   // Mock analysis data for demonstration (in real app, this would come from the database)
   const mockAnalysis = {
@@ -362,14 +360,11 @@ function AnalysisPage() {
             
             {analysisView === 'remodeling' && !characterRemodeling && userProfile && (
               <button
-                onClick={() => conversation && generateRemodeling({ 
-                  userId: conversation.userId, 
-                  targetAnalysisId: "mock_analysis_id" as Id<"analyses"> 
-                })}
-                className="cyber-btn px-6 py-3 bg-[var(--hot-pink)] text-black"
+                disabled
+                className="cyber-btn px-6 py-3 bg-gray-500 text-gray-300 cursor-not-allowed"
               >
                 <Shuffle className="w-5 h-5 inline mr-2" />
-                🎭 GENERATE CHARACTER REMODELING
+                🎭 FEATURE COMING SOON - REQUIRES REAL ANALYSIS DATA
               </button>
             )}
           </div>
