@@ -11,13 +11,34 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UploadImport } from './routes/upload'
+import { Route as SimulatorImport } from './routes/simulator'
 import { Route as IndexImport } from './routes/index'
+import { Route as AnalysisConversationIdImport } from './routes/analysis.$conversationId'
 
 // Create/Update Routes
+
+const UploadRoute = UploadImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SimulatorRoute = SimulatorImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AnalysisConversationIdRoute = AnalysisConversationIdImport.update({
+  id: '/analysis/$conversationId',
+  path: '/analysis/$conversationId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -32,6 +53,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorImport
+      parentRoute: typeof rootRoute
+    }
+    '/upload': {
+      id: '/upload'
+      path: '/upload'
+      fullPath: '/upload'
+      preLoaderRoute: typeof UploadImport
+      parentRoute: typeof rootRoute
+    }
+    '/analysis/$conversationId': {
+      id: '/analysis/$conversationId'
+      path: '/analysis/$conversationId'
+      fullPath: '/analysis/$conversationId'
+      preLoaderRoute: typeof AnalysisConversationIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/simulator': typeof SimulatorRoute
+  '/upload': typeof UploadRoute
+  '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/simulator': typeof SimulatorRoute
+  '/upload': typeof UploadRoute
+  '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/simulator': typeof SimulatorRoute
+  '/upload': typeof UploadRoute
+  '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
+  id: '__root__' | '/' | '/simulator' | '/upload' | '/analysis/$conversationId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  SimulatorRoute: typeof SimulatorRoute
+  UploadRoute: typeof UploadRoute
+  AnalysisConversationIdRoute: typeof AnalysisConversationIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  SimulatorRoute: SimulatorRoute,
+  UploadRoute: UploadRoute,
+  AnalysisConversationIdRoute: AnalysisConversationIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +134,23 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/simulator",
+        "/upload",
+        "/analysis/$conversationId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/simulator": {
+      "filePath": "simulator.tsx"
+    },
+    "/upload": {
+      "filePath": "upload.tsx"
+    },
+    "/analysis/$conversationId": {
+      "filePath": "analysis.$conversationId.tsx"
     }
   }
 }

@@ -25,6 +25,45 @@ import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 
+// Matrix Rain Effect Component
+function MatrixRain() {
+  useEffect(() => {
+    const matrixBg = document.getElementById('matrix-bg');
+    if (!matrixBg) return;
+
+    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    
+    const createMatrixChar = () => {
+      const char = document.createElement('div');
+      char.className = 'matrix-char';
+      char.textContent = chars[Math.floor(Math.random() * chars.length)];
+      char.style.left = Math.random() * 100 + '%';
+      char.style.animationDelay = Math.random() * 3 + 's';
+      char.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      return char;
+    };
+
+    // Create initial matrix characters
+    for (let i = 0; i < 50; i++) {
+      matrixBg.appendChild(createMatrixChar());
+    }
+
+    // Add new characters periodically
+    const interval = setInterval(() => {
+      if (matrixBg.children.length < 100) {
+        matrixBg.appendChild(createMatrixChar());
+      }
+    }, 500);
+
+    return () => {
+      clearInterval(interval);
+      matrixBg.innerHTML = '';
+    };
+  }, []);
+
+  return null;
+}
+
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
   convexClient: ConvexReactClient;
@@ -61,7 +100,7 @@ function RootComponent() {
                 />
                 <div className="drawer-content container mx-auto flex flex-col h-full">
                   {/* Navbar */}
-                  <header className="navbar bg-base-100 shadow-sm border-b border-base-300">
+                  <header className="war-room-nav navbar shadow-sm">
                     <div className="navbar-start">
                       <label
                         htmlFor="drawer-toggle"
@@ -71,22 +110,33 @@ function RootComponent() {
                       </label>
                       <Link
                         to="/"
-                        className="btn btn-ghost normal-case text-xl"
+                        className="hologram-text text-2xl font-bold tracking-wider"
                       >
-                        Fullstack Vibe Coding
+                        🦊 KITSUNE WAR ROOM
                       </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                       <nav className="flex">
                         <Link
                           to="/"
-                          className="btn btn-ghost"
-                          activeProps={{
-                            className: "btn btn-ghost btn-active",
-                          }}
+                          className="cyber-btn mr-2"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                          Home
+                          📊 TARGETS
+                        </Link>
+                        <Link
+                          to="/upload"
+                          className="cyber-btn mr-2"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                          🎯 INTEL UPLOAD
+                        </Link>
+                        <Link
+                          to="/simulator"
+                          className="cyber-btn"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                          ⚔️ WAR ROOM
                         </Link>
                       </nav>
                     </div>
@@ -94,12 +144,16 @@ function RootComponent() {
                       <UserButton />
                     </div>
                   </header>
+                  {/* Matrix Background Effect */}
+                  <div className="matrix-bg" id="matrix-bg"></div>
+                  <MatrixRain />
+                  
                   {/* Main content */}
-                  <main className="flex-1 p-4 prose prose-invert max-w-none">
+                  <main className="flex-1 p-4 prose prose-invert max-w-none relative z-10">
                     <Outlet />
                   </main>
                   <footer className="footer footer-center p-4 text-base-content">
-                    <p>© {new Date().getFullYear()} Fullstack Vibe Coding</p>
+                    <p>© {new Date().getFullYear()} Kitsune</p>
                   </footer>
                 </div>
                 {/* Sidebar content for mobile */}
@@ -117,12 +171,27 @@ function RootComponent() {
                           <Link
                             to="/"
                             onClick={() => setIsSidebarOpen(false)}
-                            activeProps={{
-                              className: "active",
-                            }}
-                            className="flex items-center p-2"
+                            className="flex items-center p-2 cyber-btn mb-2"
                           >
-                            Home
+                            📊 TARGETS
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/upload"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 cyber-btn mb-2"
+                          >
+                            🎯 INTEL UPLOAD
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/simulator"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 cyber-btn mb-2"
+                          >
+                            ⚔️ WAR ROOM
                           </Link>
                         </li>
                       </ul>
@@ -138,7 +207,7 @@ function RootComponent() {
               <header className="navbar bg-base-100 shadow-sm border-b border-base-300">
                 <div className="container mx-auto flex justify-between w-full">
                   <div className="navbar-start">
-                    <h1 className="font-semibold">Fullstack Vibe Coding</h1>
+                    <h1 className="hologram-text font-bold">🦊 KITSUNE WAR ROOM</h1>
                   </div>
                   <div className="navbar-end">
                     <SignInButton mode="modal">

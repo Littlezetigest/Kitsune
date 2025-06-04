@@ -2,11 +2,171 @@
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
   themes:
-    light --default,
-    dark --prefersdark;
+    cyberpunk;
 }
 
-/* Custom font family is preserved */
-body {
-  font-family: Arial, Helvetica, sans-serif;
+/* Cyberpunk Kitsune War Room Theme */
+:root {
+  --neon-blue: #00d4ff;
+  --hot-pink: #ff006e;
+  --electric-purple: #8338ec;
+  --golden-circuit: #ffbe0b;
+  --cyber-green: #39ff14;
+  --shadow-black: #0a0a0f;
+  --neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+}
+
+@layer base {
+  body {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 50%, #16213e 100%);
+    color: var(--neon-blue);
+    font-family: 'Inter', 'Orbitron', monospace;
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+  
+  .fox-fire-glow {
+    animation: foxFirePulse 3s ease-in-out infinite;
+    filter: drop-shadow(var(--neon-glow));
+  }
+  
+  @keyframes foxFirePulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+  
+  @keyframes glitchSakura {
+    0%, 98% { transform: translateX(0); }
+    99% { transform: translateX(2px); }
+    100% { transform: translateX(-2px); }
+  }
+  
+  @keyframes hologramFlicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px currentColor; }
+    50% { opacity: 0.8; text-shadow: 0 0 10px currentColor, 0 0 15px currentColor; }
+  }
+  
+  @keyframes matrixRain {
+    0% { transform: translateY(-100vh); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+  }
+  
+  .cyber-card {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 110, 0.1) 100%);
+    border: 1px solid var(--neon-blue);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(0, 212, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+  }
+  
+  .cyber-card:hover {
+    border-color: var(--hot-pink);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 0, 110, 0.5);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+  
+  .neon-border {
+    border: 2px solid transparent;
+    background: linear-gradient(var(--shadow-black), var(--shadow-black)) padding-box,
+                linear-gradient(45deg, var(--neon-blue), var(--hot-pink), var(--golden-circuit)) border-box;
+  }
+  
+  .hologram-text {
+    animation: hologramFlicker 2s ease-in-out infinite;
+    background: linear-gradient(45deg, var(--neon-blue), var(--hot-pink));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+  }
+  
+  .weapon-button {
+    background: linear-gradient(45deg, rgba(255, 190, 11, 0.2), rgba(131, 56, 236, 0.2));
+    border: 1px solid var(--golden-circuit);
+    color: var(--golden-circuit);
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+  
+  .weapon-button:hover {
+    background: linear-gradient(45deg, rgba(255, 190, 11, 0.4), rgba(131, 56, 236, 0.4));
+    box-shadow: 0 0 20px var(--golden-circuit);
+    transform: scale(1.05);
+  }
+  
+  .vulnerability-warning {
+    color: var(--hot-pink);
+    text-shadow: 0 0 10px var(--hot-pink);
+    animation: pulseWarning 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulseWarning {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  
+  .sakura-glitch {
+    position: relative;
+    animation: glitchSakura 4s infinite;
+  }
+  
+  .kitsune-rating {
+    background: linear-gradient(90deg, var(--cyber-green), var(--neon-blue), var(--hot-pink));
+    height: 4px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px currentColor;
+  }
+  
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+  }
+  
+  .matrix-char {
+    position: absolute;
+    color: var(--cyber-green);
+    font-family: monospace;
+    animation: matrixRain 3s linear infinite;
+  }
+}
+
+@layer components {
+  .cyber-btn {
+    @apply px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    background: linear-gradient(45deg, var(--neon-blue), var(--electric-purple));
+    border: 1px solid var(--neon-blue);
+    color: white;
+  }
+  
+  .cyber-btn:hover {
+    box-shadow: 0 0 25px var(--neon-blue);
+    transform: translateY(-2px);
+  }
+  
+  .archetype-card {
+    @apply p-6 rounded-xl transition-all duration-500;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+    border: 2px solid var(--neon-blue);
+    backdrop-filter: blur(15px);
+  }
+  
+  .archetype-card.active {
+    border-color: var(--golden-circuit);
+    box-shadow: 0 0 40px rgba(255, 190, 11, 0.4);
+  }
+  
+  .war-room-nav {
+    background: linear-gradient(90deg, rgba(10, 10, 15, 0.9), rgba(26, 10, 46, 0.9));
+    border-bottom: 2px solid var(--neon-blue);
+    backdrop-filter: blur(20px);
+  }
 }
