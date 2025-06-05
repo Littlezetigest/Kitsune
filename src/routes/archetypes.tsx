@@ -16,7 +16,7 @@ function ArchetypesPage() {
 
   const archetypes = [
     {
-      name: "THE PRINCE / CHILD / WEAK",
+      name: "THE PRINCE",
       icon: Target,
       description: "Experience-Driven Investor",
       characterProfile: "Doesn't know how to make money, provide, or take social responsibility. Lazy, unmotivated, can't sell or make goals. Can be rich but lacks drive. Knows how to talk well but can't react in emergencies. Loves freedom over material things - easily spends on experiences like mountain trips, dance lessons, yoga, gym memberships, vitamins, concerts, surfing. Prone to being influenced by charismatic Joker types.",

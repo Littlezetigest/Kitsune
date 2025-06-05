@@ -168,18 +168,18 @@ function RootComponent() {
                            COMMAND
                         </Link>
                         <Link
-                          to="/"
-                          className="fox-fire-btn text-xs tracking-widest"
-                          onClick={() => setIsSidebarOpen(false)}
-                        >
-                           TARGETS
-                        </Link>
-                        <Link
                           to="/upload"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            UPLOAD
+                        </Link>
+                        <Link
+                          to="/"
+                          className="fox-fire-btn text-xs tracking-widest"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                           TARGETS
                         </Link>
                         <Link
                           to="/simulator"
@@ -242,20 +242,20 @@ function RootComponent() {
                         </li>
                         <li>
                           <Link
-                            to="/"
-                            onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
-                          >
-                            TARGETS
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
                             to="/upload"
                             onClick={() => setIsSidebarOpen(false)}
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             UPLOAD
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
+                          >
+                            TARGETS
                           </Link>
                         </li>
                         <li>
