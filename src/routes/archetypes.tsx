@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Authenticated } from "convex/react";
-import { Target, Shield, Eye, Crown, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronRight } from "lucide-react";
+import { Target, Shield, Crown, AlertTriangle, ChevronDown, ChevronRight, Zap, Star, Brain, Compass } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/archetypes")({
@@ -16,438 +16,622 @@ function ArchetypesPage() {
 
   const archetypes = [
     {
-      name: "THE VISIONARY",
-      icon: Eye,
-      description: "Seeks cutting-edge opportunities and revolutionary technologies",
-      coreMotivations: [
-        "Being first to market with breakthrough innovations",
-        "Creating transformative impact on society",
-        "Building legendary companies that reshape industries"
-      ],
-      psychologyProfile: {
-        decisionSpeed: "Fast - Makes intuitive leaps",
-        riskTolerance: "High - Embraces uncertainty for massive returns",
-        validationNeeds: "Future vision alignment, not past performance",
-        communicationStyle: "Big picture concepts, visionary language"
-      },
-      strengths: [
-        "Quick to recognize disruptive potential",
-        "Comfortable with ambiguity and uncertainty", 
-        "Willing to bet on unproven technologies",
-        "Drives innovation through bold investments"
-      ],
-      weaknesses: [
-        "May overlook fundamental business basics",
-        "Susceptible to hype and buzzwords",
-        "Can be impatient with execution details",
-        "Risk of backing style over substance"
+      name: "THE PRINCE / CHILD / WEAK",
+      icon: Target,
+      description: "Experience-Driven Investor",
+      characterProfile: "Doesn't know how to make money, provide, or take social responsibility. Lazy, unmotivated, can't sell or make goals. Can be rich but lacks drive. Knows how to talk well but can't react in emergencies. Loves freedom over material things - easily spends on experiences like mountain trips, dance lessons, yoga, gym memberships, vitamins, concerts, surfing. Prone to being influenced by charismatic Joker types.",
+      sunTzuVulnerabilities: [
+        "\"Know yourself and know your enemy\" - They don't know their own investment capabilities or limits",
+        "\"All warfare is based on deception\" - Easily deceived by lifestyle narratives and experiential promises",
+        "Can't handle pressure or crisis situations in investments",
+        "Lacks strategic discipline and long-term planning",
+        "Prone to emotional investment decisions based on lifestyle appeal"
       ],
       strategicVulnerabilities: [
         {
-          vulnerability: "FOMO Exploitation",
-          description: "Fear of missing the next unicorn drives irrational urgency",
-          sunTzu: "兵貴勝，不貴久 - Speed is essential in war, but haste makes waste",
-          powerLaw: "Law 1: Never Outshine the Master - Present opportunity as their discovery",
-          tactics: [
-            "Create artificial scarcity with limited timeframes",
-            "Reference competitors who 'missed out' on previous opportunities",
-            "Use future-tense language to paint vivid success scenarios"
-          ]
-        },
-        {
-          vulnerability: "Ego-Driven Validation",
-          description: "Need to be seen as prescient and ahead of the curve",
-          sunTzu: "故善戰者，求之於勢 - The skillful strategist uses positioning",
-          powerLaw: "Law 6: Court Attention at All Costs - Feed their need for recognition",
-          tactics: [
-            "Position them as industry thought leader in communications",
-            "Offer exclusive access to 'invite-only' opportunities",
-            "Reference their past successful predictions in presentations"
-          ]
-        },
-        {
-          vulnerability: "Complexity Aversion",
-          description: "Preference for simple, elegant narratives over messy reality",
+          vulnerability: "Lifestyle Fantasy Exploitation",
+          description: "Dreams of freedom and experiences override financial discipline",
           sunTzu: "兵者，詭道也 - All warfare is based on deception",
-          powerLaw: "Law 3: Conceal Your Intentions - Hide operational complexities",
+          powerLaw: "Law 27: Play on People's Need to Believe - Extremely susceptible to lifestyle transformation promises",
           tactics: [
-            "Lead with compelling vision before revealing implementation details",
-            "Use metaphors and analogies from successful tech companies",
-            "Frame challenges as 'execution details' to be solved later"
+            "Frame investments as lifestyle enhancements and exclusive experiences",
+            "Appeal to their desire for adventure and freedom",
+            "Use experiential language and visual imagery",
+            "Create investment narratives around travel and personal growth"
+          ]
+        },
+        {
+          vulnerability: "Influence Susceptibility",
+          description: "Easily manipulated by charismatic personalities",
+          sunTzu: "知己知彼，百戰不殆 - They don't know themselves or others",
+          powerLaw: "Law 1: Never Outshine the Master - They love being flattered and made to feel sophisticated",
+          tactics: [
+            "Position charismatic intermediaries as deal champions",
+            "Use social proof from influencer-type personalities",
+            "Create exclusive community feel around investments",
+            "Leverage FOMO through lifestyle peer pressure"
+          ]
+        },
+        {
+          vulnerability: "Crisis Incapacity",
+          description: "Cannot handle emergency situations or pressure decisions",
+          sunTzu: "兵貴勝，不貴久 - They cannot act swiftly in crisis",
+          powerLaw: "Law 33: Discover Each Man's Thumbscrew - Their need for experiences and adventure",
+          tactics: [
+            "Exploit their inability to analyze downside risks",
+            "Create time pressure during their vulnerable moments",
+            "Structure deals that seem low-maintenance but aren't",
+            "Hide complexity behind lifestyle benefits"
           ]
         }
-      ]
+      ],
+      exploitationStrategy: "Frame investments as lifestyle enhancements and exclusive experiences while exploiting their inability to analyze downside risks."
     },
     {
-      name: "THE VALIDATOR",
-      icon: CheckCircle,
-      description: "Methodical analyst who relies on data, metrics, and proven track records",
-      coreMotivations: [
-        "Minimizing downside risk through thorough analysis",
-        "Building sustainable, profitable portfolios",
-        "Backing proven business models and teams"
+      name: "THE WARRIOR / SOLDIER",
+      icon: Shield,
+      description: "Traditional Value Investor",
+      characterProfile: "Concrete goals, inflexible thinking. Don't bend, only go in straight lines. Military/soldier mentality. Mildly limited intelligence, less flexibility. Give practical, understandable, necessary things - a fur coat so you don't freeze, a bag because the old one is torn, pays for repairs because the ceiling is collapsing.",
+      sunTzuVulnerabilities: [
+        "\"All warfare is based on deception\" - Too straightforward to recognize sophisticated schemes",
+        "\"Supreme excellence is breaking enemy's resistance without fighting\" - Always want direct confrontation",
+        "Rigid thinking makes them predictable in negotiations",
+        "Cannot adapt when investment thesis changes rapidly",
+        "Miss opportunities requiring creative or flexible approaches"
       ],
-      psychologyProfile: {
-        decisionSpeed: "Deliberate - Requires extensive due diligence",
-        riskTolerance: "Conservative - Prefers proven models",
-        validationNeeds: "Historical performance, concrete metrics",
-        communicationStyle: "Data-driven, analytical discourse"
-      },
-      strengths: [
-        "Excellent at spotting red flags early",
-        "Thorough understanding of fundamentals",
-        "Builds sustainable long-term portfolios",
-        "Strong risk management capabilities"
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Rigid Thinking Exploitation",
+          description: "Inflexible mental models make them predictable",
+          sunTzu: "兵者，詭道也 - They cannot recognize deception",
+          powerLaw: "Law 8: Make Other People Come to You - They'll charge straight into logical traps",
+          tactics: [
+            "Present straightforward value propositions hiding complex elements",
+            "Use their predictable patterns against them in negotiations",
+            "Create situations where their rigidity becomes weakness",
+            "Exploit their inability to adapt to changing circumstances"
+          ]
+        },
+        {
+          vulnerability: "Practical Necessity Focus",
+          description: "Only respond to immediate, concrete needs",
+          sunTzu: "攻其無備，出其不意 - Attack where unprepared",
+          powerLaw: "Law 13: Appeal to Self-Interest - Show concrete, practical benefits and necessity",
+          tactics: [
+            "Frame opportunities as solving immediate practical problems",
+            "Use military/construction analogies they understand",
+            "Focus on necessity and utility over growth potential",
+            "Present clear, linear cause-and-effect relationships"
+          ]
+        },
+        {
+          vulnerability: "Uncertainty Aversion",
+          description: "Struggle with ambiguous or rapidly changing situations",
+          sunTzu: "故兵無常勢，水無常形 - They cannot flow like water",
+          powerLaw: "Law 17: Keep Others in Suspended Terror - Their rigid nature struggles with uncertainty",
+          tactics: [
+            "Create controlled uncertainty to trigger their discomfort",
+            "Force quick decisions in ambiguous situations",
+            "Exploit their inability to handle market volatility",
+            "Use their inflexibility during market chaos"
+          ]
+        }
       ],
-      weaknesses: [
-        "May miss early-stage opportunities",
-        "Analysis paralysis in fast-moving markets",
-        "Conservative approach limits upside",
-        "Slow to adapt to new paradigms"
+      exploitationStrategy: "Present straightforward value propositions while hiding complex strategic elements they can't adapt to."
+    },
+    {
+      name: "THE JOKER / AFFAIRIST",
+      icon: Zap,
+      description: "Deal-Maker Investor",
+      characterProfile: "Always selling things. All entrepreneurs, all people who sell. Work through schemes, very flexible, great negotiators. Can adjust and be different things. Gives emotions and memories - spa evenings in romantic settings, picnics with Eiffel Tower views, huge bouquets for social media bragging. Likes to shock and stick in memory.",
+      sunTzuVulnerabilities: [
+        "\"He who is prudent and lies in wait for an enemy who is not, will be victorious\" - Always moving, rarely patient",
+        "Overconfidence in their adaptability and deal-making skills",
+        "Their flexibility can become inconsistency in investment strategy",
+        "Susceptible to deals that stroke their ego as master dealmakers",
+        "Can be out-maneuvered by more patient, strategic opponents"
+      ],
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Ego-Driven Deal Making",
+          description: "Need to be seen as the smartest dealmaker in the room",
+          sunTzu: "驕兵必敗 - Pride comes before the fall",
+          powerLaw: "Law 21: Play a Sucker to Catch a Sucker - They think they're always the smartest in the room",
+          tactics: [
+            "Let them think they're getting the better deal initially",
+            "Structure terms that benefit you long-term",
+            "Appeal to their reputation as master negotiators",
+            "Create complex deals that stroke their intellectual vanity"
+          ]
+        },
+        {
+          vulnerability: "Constant Motion Weakness",
+          description: "Always moving and scheming, rarely patient or strategic",
+          sunTzu: "善戰者，先為不可勝 - Good warriors first become invincible",
+          powerLaw: "Law 48: Assume Formlessness - Be more adaptable than they are",
+          tactics: [
+            "Use their impatience against them in negotiations",
+            "Force them into positions requiring patience",
+            "Exploit their need for constant action and stimulation",
+            "Out-maneuver them through strategic stillness"
+          ]
+        },
+        {
+          vulnerability: "Scheme Complexity Addiction",
+          description: "Drawn to overly complex deals and structures",
+          sunTzu: "兵者，詭道也 - Match their deceptive nature but stay ahead",
+          powerLaw: "Law 3: Conceal Your Intentions - Match their deceptive nature but stay one step ahead",
+          tactics: [
+            "Create deals with hidden long-term advantages",
+            "Use their love of complexity against them",
+            "Structure multiple exit strategies they can't see",
+            "Leverage their overconfidence in scheme detection"
+          ]
+        }
+      ],
+      exploitationStrategy: "Let them think they're getting the better deal while structuring terms that benefit you long-term."
+    },
+    {
+      name: "THE EMPEROR / DADDY",
+      icon: Crown,
+      description: "Power-Driven Investor",
+      characterProfile: "Boss mentality, creates new businesses. Likes naive people, enjoys having people under their system. Knows luxury attributes and will share the importance of branded things and latest iPhones. You can ask for cars, apartments, money for beauty, traveling, language learning, educational courses.",
+      sunTzuVulnerabilities: [
+        "\"Pride goes before destruction\" - Their ego is their greatest weakness",
+        "\"The supreme art of war is to subdue enemy without fighting\" - Expect direct challenges to authority",
+        "Surrounded by yes-men, poor independent intelligence gathering",
+        "Vulnerable to flattery about their business acumen and success",
+        "Miss opportunities that don't fit their established power patterns"
+      ],
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Ego-Driven Authority",
+          description: "Need to be recognized as the dominant authority figure",
+          sunTzu: "驕兵必敗 - Their ego is their greatest weakness",
+          powerLaw: "Law 1: Never Outshine the Master - Critical - their ego must be preserved at all costs",
+          tactics: [
+            "Always present them as the visionary leader",
+            "Structure deals where they appear to be in control",
+            "Use sophisticated business flattery consistently",
+            "Position yourself as the vehicle for their legacy"
+          ]
+        },
+        {
+          vulnerability: "Mentorship Complex",
+          description: "Enjoy controlling and mentoring naive people",
+          sunTzu: "知彼知己，百戰不殆 - They prefer weaker opponents",
+          powerLaw: "Law 11: Learn to Keep People Dependent - They do this, so reverse it subtly",
+          tactics: [
+            "Appeal to their desire to mentor and guide",
+            "Present yourself as the eager student initially",
+            "Gradually become indispensable to their operations",
+            "Leverage their need to feel superior and wise"
+          ]
+        },
+        {
+          vulnerability: "Luxury Status Obsession",
+          description: "Fixated on luxury brands and status symbols",
+          sunTzu: "攻其所愛 - Attack what they cherish most",
+          powerLaw: "Law 16: Use Absence to Increase Respect - Make yourself scarce to increase value",
+          tactics: [
+            "Frame opportunities in terms of exclusive luxury access",
+            "Appeal to their knowledge of premium brands and status",
+            "Create scarcity around high-status investment opportunities",
+            "Use their material desires to influence decisions"
+          ]
+        }
+      ],
+      exploitationStrategy: "Appeal to their desire to mentor and control while positioning yourself as the vehicle for their legacy and power expansion."
+    },
+    {
+      name: "THE SAGE / ORACLE",
+      icon: Brain,
+      description: "Analytical Perfectionist",
+      characterProfile: "Deep analytical thinking, seeks complete understanding before action. Loves research, data, and theoretical frameworks. Can become paralyzed by analysis. Values wisdom and comprehensive knowledge above quick gains.",
+      sunTzuVulnerabilities: [
+        "\"Rapidity is the essence of war\" - Analysis paralysis in time-sensitive situations",
+        "\"In chaos, there is opportunity\" - Struggle with incomplete information environments",
+        "Overthinking leads to missed opportunities",
+        "Vulnerable to information overload and decision fatigue",
+        "Miss forest for trees in complex deal structures"
       ],
       strategicVulnerabilities: [
         {
           vulnerability: "Analysis Paralysis",
-          description: "Endless data requests to delay difficult decisions",
-          sunTzu: "攻其無備，出其不意 - Attack where they are unprepared",
-          powerLaw: "Law 25: Re-Create Yourself - Become their trusted data source",
+          description: "Overthinking prevents timely action and decision-making",
+          sunTzu: "兵貴神速 - Speed is essential, but they analyze endlessly",
+          powerLaw: "Law 25: Re-Create Yourself - Present data that challenges their existing models",
           tactics: [
-            "Provide overwhelming amounts of supporting data upfront",
-            "Create detailed financial models with conservative projections",
-            "Reference multiple independent validation sources"
+            "Overwhelm with sophisticated data while creating time pressure",
+            "Force reliance on your analysis through information control",
+            "Create decision fatigue through excessive options",
+            "Use their need for complete understanding against them"
           ]
         },
         {
-          vulnerability: "Impostor Syndrome",
-          description: "Fear that their analytical approach will miss breakthrough opportunities",
-          sunTzu: "善戰者，立於不敗之地 - Good fighters position themselves beyond defeat",
-          powerLaw: "Law 15: Crush Your Enemy Totally - Eliminate their self-doubt",
+          vulnerability: "Theoretical Framework Obsession",
+          description: "Prefer theoretical models over practical execution",
+          sunTzu: "紙上談兵 - Armchair strategists fail in real battle",
+          powerLaw: "Law 28: Enter Action with Boldness - Their cautiousness is exploitable",
           tactics: [
-            "Acknowledge their analytical superiority in past decisions",
-            "Frame opportunity as 'hidden in plain sight' requiring their skills",
-            "Provide case studies where analytical approach identified winners"
-          ]
-        },
-        {
-          vulnerability: "Metric Manipulation",
-          description: "Over-reliance on historical metrics that may not predict future",
-          sunTzu: "故兵無常勢，水無常形 - Military tactics are like water",
-          powerLaw: "Law 32: Play to People's Fantasies - Show them the metrics they want",
-          tactics: [
-            "Present metrics in most favorable light without lying",
-            "Focus on leading indicators over lagging ones",
-            "Use cohort analysis to show positive trends"
-          ]
-        }
-      ]
-    },
-    {
-      name: "THE CONTROLLER",
-      icon: Shield,
-      description: "Focuses on control, governance, and protective measures",
-      coreMotivations: [
-        "Maintaining control over investment outcomes",
-        "Protecting against downside scenarios",
-        "Ensuring proper governance and oversight"
-      ],
-      psychologyProfile: {
-        decisionSpeed: "Cautious - Extensive risk assessment",
-        riskTolerance: "Low to moderate - Control-focused",
-        validationNeeds: "Governance structures, protection mechanisms",
-        communicationStyle: "Risk-focused, protective language"
-      },
-      strengths: [
-        "Excellent at identifying potential risks",
-        "Strong governance and oversight focus",
-        "Protects against worst-case scenarios",
-        "Ensures proper legal and financial structures"
-      ],
-      weaknesses: [
-        "May over-engineer protection mechanisms",
-        "Can stifle entrepreneurial creativity",
-        "Risk-averse to breakthrough opportunities",
-        "May focus too much on downside protection"
-      ],
-      strategicVulnerabilities: [
-        {
-          vulnerability: "Control Illusion",
-          description: "False belief that all risks can be anticipated and mitigated",
-          sunTzu: "上兵伐謀，其次伐交 - Supreme excellence is winning without fighting",
-          powerLaw: "Law 31: Control the Options - Structure deal to give them control",
-          tactics: [
-            "Offer board seats, protective provisions, and veto rights",
-            "Create detailed risk mitigation frameworks",
-            "Provide regular reporting and transparency mechanisms"
+            "Present opportunities wrapped in academic frameworks",
+            "Use their love of theoretical models to mask practical risks",
+            "Exploit gap between their analysis and execution capability",
+            "Create urgency that forces action despite incomplete analysis"
           ]
         },
         {
           vulnerability: "Perfectionism Paralysis",
-          description: "Endless pursuit of perfect risk mitigation prevents action",
-          sunTzu: "故善戰者，立於不敗之地 - Position yourself where you cannot lose",
-          powerLaw: "Law 40: Despise the Free Lunch - Make them pay for protection",
+          description: "Need for perfect information prevents timely decisions",
+          sunTzu: "完美是善的敵人 - Perfect is the enemy of good",
+          powerLaw: "Law 34: Be Royal in Your Fashion - Present confidence they lack in uncertainty",
           tactics: [
-            "Structure deals with multiple layers of downside protection",
-            "Offer liquidation preferences and anti-dilution provisions",
-            "Create milestone-based funding with kill switches"
-          ]
-        },
-        {
-          vulnerability: "Unknown Unknown Anxiety",
-          description: "Paralyzing fear of risks that cannot be identified or quantified",
-          sunTzu: "知己知彼，百戰不殆 - Know yourself and your enemy",
-          powerLaw: "Law 17: Keep Others in Suspense - Control information flow",
-          tactics: [
-            "Provide comprehensive due diligence packages",
-            "Create scenario planning for multiple risk factors",
-            "Establish regular check-ins and monitoring systems"
+            "Show controlled vulnerability to gain their trust",
+            "Demonstrate decisive action capability they lack",
+            "Create situations requiring imperfect but timely decisions",
+            "Use their perfectionism to delay competing opportunities"
           ]
         }
-      ]
+      ],
+      exploitationStrategy: "Overwhelm with sophisticated data while creating time pressure that forces reliance on your analysis."
     },
     {
-      name: "THE STATUS SEEKER",
-      icon: Crown,
-      description: "Driven by prestige, recognition, and social validation",
-      coreMotivations: [
-        "Building prestigious investment portfolio",
-        "Gaining recognition in investment community",
-        "Associating with high-profile deals and founders"
-      ],
-      psychologyProfile: {
-        decisionSpeed: "Variable - Influenced by social dynamics",
-        riskTolerance: "Moderate to high - For prestigious deals",
-        validationNeeds: "Social proof, prestigious associations",
-        communicationStyle: "Status-conscious, network-focused"
-      },
-      strengths: [
-        "Strong network and relationship building",
-        "Good at identifying trending opportunities",
-        "Attracts high-quality deal flow",
-        "Excellent at marketing and promotion"
-      ],
-      weaknesses: [
-        "May prioritize prestige over fundamentals",
-        "Susceptible to groupthink and trends",
-        "Can be influenced by social pressure",
-        "May overlook solid but unglamorous deals"
+      name: "THE GUARDIAN / PROTECTOR",
+      icon: Shield,
+      description: "Security-Focused Conservative",
+      characterProfile: "Risk-averse, focuses on wealth preservation and downside protection. Conservative approach to all investments. Spreads risk across multiple areas for safety. Always looking for guarantees and security.",
+      sunTzuVulnerabilities: [
+        "\"Opportunities multiply as they are seized\" - Fear prevents acting on opportunities",
+        "\"Security against defeat implies defensive tactics\" - Always reactive, never proactive",
+        "Defensive mindset limits offensive investment strategies",
+        "Paralyzed by potential downside scenarios",
+        "Susceptible to loss aversion manipulation"
       ],
       strategicVulnerabilities: [
         {
-          vulnerability: "Social Proof Dependency",
-          description: "Decisions heavily influenced by what other prestigious investors are doing",
-          sunTzu: "兵者，詭道也 - War is the art of deception",
-          powerLaw: "Law 5: So Much Depends on Reputation - Associate with their desired status",
+          vulnerability: "Loss Aversion Manipulation",
+          description: "Fear of loss outweighs potential for gain",
+          sunTzu: "善戰者，立於不敗之地 - They seek invincible positions but miss opportunities",
+          powerLaw: "Law 29: Plan All the Way to the End - Show complete safe path",
           tactics: [
-            "Name-drop other prestigious investors who are interested",
-            "Position opportunity as 'invite-only' for select investors",
-            "Create sense that missing this would damage their reputation"
+            "Amplify downside of missing opportunities",
+            "Provide detailed risk mitigation frameworks",
+            "Frame inaction as the riskiest choice",
+            "Use comprehensive safety narratives to overcome paralysis"
           ]
         },
         {
-          vulnerability: "Prestige Addiction",
-          description: "Prioritizes high-profile deals over fundamentally sound investments",
-          sunTzu: "攻其無備，出其不意 - Strike where they don't expect",
-          powerLaw: "Law 6: Court Attention at All Costs - Make the deal seem prestigious",
+          vulnerability: "Security Theater Obsession",
+          description: "Focus on appearance of safety over actual risk management",
+          sunTzu: "兵不厭詐 - They want guarantees in an uncertain world",
+          powerLaw: "Law 40: Despise the Free Lunch - Make them pay for protection to value it",
           tactics: [
-            "Emphasize media coverage and PR potential of investment",
-            "Highlight founder's prestigious background and connections",
-            "Create opportunities for them to take credit publicly"
+            "Structure deals with multiple layers of apparent protection",
+            "Charge premium for security features they demand",
+            "Create elaborate protective provisions that favor you",
+            "Use their need for guarantees to justify complex terms"
           ]
         },
         {
-          vulnerability: "Competition Compulsion",
-          description: "Cannot resist opportunities their peers are pursuing",
-          sunTzu: "故善戰者，求之於勢 - The expert in war uses momentum",
-          powerLaw: "Law 46: Never Appear Too Perfect - Let them 'win' the competition",
+          vulnerability: "Diversification Paralysis",
+          description: "Spread resources too thin for meaningful impact",
+          sunTzu: "兵力分散，必敗無疑 - Divided forces ensure defeat",
+          powerLaw: "Law 23: Concentrate Your Forces - They spread resources too thin for safety",
           tactics: [
-            "Create competitive dynamics with other status-seeking investors",
-            "Structure process to feel like exclusive access or victory",
-            "Allow them to negotiate minor wins to feel superior"
+            "Exploit their scattered investment approach",
+            "Create multiple small opportunities that seem safer",
+            "Use their diversification obsession to reduce their influence",
+            "Benefit from their inability to concentrate resources effectively"
           ]
         }
-      ]
+      ],
+      exploitationStrategy: "Amplify downside of missing opportunities while providing detailed risk mitigation frameworks."
+    },
+    {
+      name: "THE PIONEER / EXPLORER",
+      icon: Compass,
+      description: "Innovation-Driven Risk-Taker",
+      characterProfile: "Seeks new frontiers and breakthrough opportunities. First to explore new markets and technologies. High risk tolerance but scattered focus. Always looking for the next big thing.",
+      sunTzuVulnerabilities: [
+        "\"He who knows when to fight and when not to fight will be victorious\" - They fight every battle",
+        "Scattered focus across too many fronts",
+        "\"Invincibility lies in defense\" - Always on offense, poor defense",
+        "Overconfidence in ability to spot trends",
+        "Susceptible to FOMO on revolutionary opportunities"
+      ],
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Shiny Object Syndrome",
+          description: "Constantly distracted by new opportunities and trends",
+          sunTzu: "專心致志者勝 - Those who focus win, but they scatter attention",
+          powerLaw: "Law 36: Disdain Things You Cannot Have - Make opportunities seem scarce",
+          tactics: [
+            "Feed their ego about being early adopters",
+            "Create urgency around limited access to transformative deals",
+            "Exploit their FOMO with exclusive opportunity narratives",
+            "Use their scattered focus to prevent deep due diligence"
+          ]
+        },
+        {
+          vulnerability: "Trend Overconfidence",
+          description: "Believe they can predict and ride every new wave",
+          sunTzu: "驕者必敗 - The overconfident will surely fail",
+          powerLaw: "Law 47: Don't Go Past the Mark - They always push too far",
+          tactics: [
+            "Exploit their overconfidence in trend identification",
+            "Create false signals that trigger their investment instincts",
+            "Use their need to be first to push them into premature decisions",
+            "Leverage their inability to know when to stop"
+          ]
+        },
+        {
+          vulnerability: "Revolutionary Narrative Addiction",
+          description: "Drawn to stories of transformation and disruption",
+          sunTzu: "兵者，詭道也 - They're susceptible to revolutionary deception",
+          powerLaw: "Law 32: Play to People's Fantasies - Appeal to their vision of being transformative",
+          tactics: [
+            "Frame opportunities as paradigm-shifting breakthroughs",
+            "Use language of revolution and transformation",
+            "Position them as visionary pioneers of new era",
+            "Exploit their desire to be associated with historic change"
+          ]
+        }
+      ],
+      exploitationStrategy: "Feed their ego about being early adopters while creating urgency around limited access to transformative deals."
+    },
+    {
+      name: "THE COLLECTOR / CURATOR",
+      icon: Star,
+      description: "Portfolio-Focused Accumulator",
+      characterProfile: "Focuses on building impressive investment portfolios. Values appearance and prestige of holdings. Collects notable deals and trophy investments. Motivated by portfolio aesthetics and bragging rights.",
+      sunTzuVulnerabilities: [
+        "\"All warfare is based on deception\" - They value appearance over substance",
+        "Pride in collection makes them predictable",
+        "\"Know your enemy\" - Focus on assets, not people behind them",
+        "Vulnerable to status-based manipulation",
+        "Miss fundamentals while chasing prestigious deals"
+      ],
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Trophy Asset Obsession",
+          description: "Prioritize prestigious investments over fundamentally sound ones",
+          sunTzu: "外表欺人 - Appearances can be deceiving, but they're fooled by prestige",
+          powerLaw: "Law 37: Create Compelling Spectacles - They're drawn to impressive presentations",
+          tactics: [
+            "Appeal to their desire for trophy assets",
+            "Hide fundamental weaknesses through prestigious positioning",
+            "Create investment opportunities that enhance portfolio appearance",
+            "Use their vanity about collection quality against sound judgment"
+          ]
+        },
+        {
+          vulnerability: "Exclusivity Addiction",
+          description: "Need for rare and exclusive investment opportunities",
+          sunTzu: "稀為貴 - Rarity creates perceived value",
+          powerLaw: "Law 16: Use Absence to Increase Respect - Make deals seem exclusive and rare",
+          tactics: [
+            "Create artificial scarcity around investment opportunities",
+            "Use invitation-only positioning for deals",
+            "Exploit their need to have what others cannot",
+            "Structure exclusive access that they'll pay premium for"
+          ]
+        },
+        {
+          vulnerability: "Portfolio Aesthetics Focus",
+          description: "More concerned with how portfolio looks than how it performs",
+          sunTzu: "實勝於名 - Substance should triumph over reputation, but they choose appearance",
+          powerLaw: "Law 32: Play to People's Fantasies - Appeal to their vision of perfect portfolio",
+          tactics: [
+            "Present opportunities that enhance portfolio's visual appeal",
+            "Focus on how investment looks to others rather than returns",
+            "Exploit their need for diversified, impressive-looking holdings",
+            "Use their desire for bragging rights to justify poor terms"
+          ]
+        }
+      ],
+      exploitationStrategy: "Appeal to their desire for trophy assets while hiding fundamental weaknesses through prestigious positioning."
     }
   ];
 
   return (
-    <div className="min-h-screen relative">
-      {/* Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="shrine-void absolute inset-0"></div>
-      </div>
-
-      <div className="morphing-grid opacity-20"></div>
-
-      <Authenticated>
-        <div className="max-w-7xl mx-auto px-8 py-16 relative z-10">
-          
-          {/* Header */}
-          <div className="text-center mb-20">
-            <h1 className="premium-title mb-8">
-              ARCHETYPE INTELLIGENCE
-            </h1>
-            <div className="bamboo-divider w-48 mx-auto mb-12"></div>
-            <p className="premium-subtitle mb-8">
-              PSYCHOLOGICAL WARFARE PROFILING SYSTEM
+    <Authenticated>
+      <div className="max-w-7xl mx-auto px-8 py-16 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center mb-20">
+          <h1 className="premium-title mb-8">
+            STRATEGIC VULNERABILITIES & APPLICABLE LAWS
+          </h1>
+          <div className="bamboo-divider w-48 mx-auto mb-12"></div>
+          <p className="premium-subtitle mb-8">
+            COMPREHENSIVE INVESTOR ARCHETYPE WARFARE MATRIX
+          </p>
+          <div className="max-w-4xl mx-auto">
+            <p className="text-xl font-light leading-relaxed opacity-90">
+              Advanced psychological warfare profiling system combining character analysis, Sun Tzu strategic principles,
+              and 48 Laws of Power applications for systematic investor manipulation and exploitation.
             </p>
-            <div className="max-w-4xl mx-auto">
-              <p className="text-xl font-light leading-relaxed opacity-90">
-                Advanced psychological profiling framework for investor analysis, vulnerability assessment,
-                and strategic persuasion protocol development. Each archetype represents distinct behavioral
-                patterns with specific exploitation vectors and optimal engagement strategies.
-              </p>
-            </div>
           </div>
-
-          {/* Archetype Profiles */}
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-light tracking-wider mb-8 premium-subtitle">
-                INVESTOR ARCHETYPES
-              </h2>
-              <div className="bamboo-divider w-32 mx-auto"></div>
-            </div>
-            
-            <div className="space-y-4">
-              {archetypes.map((archetype) => (
-                <div key={archetype.name} className="ultra-premium-card">
-                  {/* Compact Clickable Header */}
-                  <button
-                    onClick={() => toggleArchetype(archetype.name)}
-                    className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-all"
-                  >
-                    <div className="flex items-center gap-4">
-                      <archetype.icon 
-                        className="w-6 h-6" 
-                        style={{color: 'var(--matrix-green)'}} 
-                      />
-                      <div className="text-left">
-                        <h3 className="text-lg font-light">
-                          {archetype.name}
-                        </h3>
-                        <span className="text-sm opacity-60">{archetype.description}</span>
-                      </div>
-                    </div>
-                    {expandedArchetype === archetype.name ? (
-                      <ChevronDown className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
-                    ) : (
-                      <ChevronRight className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
-                    )}
-                  </button>
-
-                  {/* Expandable Details */}
-                  {expandedArchetype === archetype.name && (
-                    <div className="px-6 pb-6 border-t border-white/10">
-                      <div className="grid lg:grid-cols-3 gap-8 pt-6">
-                        
-                        {/* Core Profile */}
-                        <div className="lg:col-span-1">
-                          <h4 className="text-lg font-light mb-6">CORE MOTIVATIONS</h4>
-                          <ul className="space-y-2 text-sm opacity-70">
-                            {archetype.coreMotivations.map((motivation, idx) => (
-                              <li key={idx} className="flex items-start gap-2">
-                                <Target className="w-3 h-3 mt-1 flex-shrink-0" style={{color: 'var(--matrix-green)'}} />
-                                {motivation}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Psychology Profile */}
-                        <div className="lg:col-span-1">
-                          <h4 className="text-lg font-light mb-6">PSYCHOLOGICAL PROFILE</h4>
-                          <div className="space-y-4">
-                            {Object.entries(archetype.psychologyProfile).map(([key, value]) => (
-                              <div key={key} className="border-l-2 pl-4" style={{borderColor: 'var(--matrix-green)'}}>
-                                <div className="text-xs uppercase tracking-wider opacity-60 mb-1">
-                                  {key.replace(/([A-Z])/g, ' $1').toUpperCase()}
-                                </div>
-                                <div className="text-sm opacity-80">{value}</div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Strengths, Weaknesses & Vulnerabilities */}
-                        <div className="lg:col-span-1">
-                          <div className="space-y-6">
-                            <div>
-                              <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
-                                <CheckCircle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
-                                STRENGTHS
-                              </h5>
-                              <ul className="space-y-2 text-sm opacity-70">
-                                {archetype.strengths.map((strength, idx) => (
-                                  <li key={idx} className="flex items-start gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
-                                    {strength}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            <div>
-                              <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
-                                <XCircle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
-                                WEAKNESSES
-                              </h5>
-                              <ul className="space-y-2 text-sm opacity-70">
-                                {archetype.weaknesses.map((weakness, idx) => (
-                                  <li key={idx} className="flex items-start gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
-                                    {weakness}
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-
-                            <div>
-                              <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
-                                <AlertTriangle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
-                                STRATEGIC VULNERABILITIES
-                              </h5>
-                              <div className="space-y-4">
-                                {archetype.strategicVulnerabilities.map((vuln, idx) => (
-                                  <div key={idx} className="border-l-2 pl-4 space-y-2" style={{borderColor: 'var(--matrix-green)'}}>
-                                    <div className="text-sm font-medium opacity-90">{vuln.vulnerability}</div>
-                                    <div className="text-xs opacity-70">{vuln.description}</div>
-                                    <div className="space-y-1">
-                                      <div className="text-xs">
-                                        <span className="opacity-60">SUN TZU:</span>
-                                        <span className="ml-2 opacity-80">{vuln.sunTzu}</span>
-                                      </div>
-                                      <div className="text-xs">
-                                        <span className="opacity-60">48 LAWS:</span>
-                                        <span className="ml-2 opacity-80">{vuln.powerLaw}</span>
-                                      </div>
-                                    </div>
-                                    <div className="text-xs opacity-60">
-                                      <div className="font-medium mb-1">TACTICS:</div>
-                                      <ul className="space-y-1">
-                                        {vuln.tactics.map((tactic, tacticIdx) => (
-                                          <li key={tacticIdx} className="flex items-start gap-2">
-                                            <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
-                                            {tactic}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
         </div>
-      </Authenticated>
-    </div>
+
+        {/* Archetype Profiles */}
+        <div className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light tracking-wider mb-8 premium-subtitle">
+              INVESTOR ARCHETYPE VULNERABILITIES
+            </h2>
+            <div className="bamboo-divider w-32 mx-auto"></div>
+          </div>
+          
+          <div className="space-y-4">
+            {archetypes.map((archetype) => (
+              <div key={archetype.name} className="ultra-premium-card">
+                {/* Compact Clickable Header */}
+                <button
+                  onClick={() => toggleArchetype(archetype.name)}
+                  className="w-full p-6 flex items-center justify-between hover:bg-white/5 transition-all"
+                >
+                  <div className="flex items-center gap-4">
+                    <archetype.icon 
+                      className="w-6 h-6" 
+                      style={{color: 'var(--matrix-green)'}} 
+                    />
+                    <div className="text-left">
+                      <h3 className="text-lg font-light">
+                        {archetype.name}
+                      </h3>
+                      <span className="text-sm opacity-60">{archetype.description}</span>
+                    </div>
+                  </div>
+                  {expandedArchetype === archetype.name ? 
+                    <ChevronDown className="w-5 h-5" style={{color: 'var(--matrix-green)'}} /> : 
+                    <ChevronRight className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                  }
+                </button>
+
+                {/* Expanded Content */}
+                {expandedArchetype === archetype.name && (
+                  <div className="border-t border-gray-700 p-6">
+                    <div className="grid md:grid-cols-1 gap-8">
+                      
+                      {/* Character Profile */}
+                      <div className="mb-6">
+                        <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
+                          <Target className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
+                          CHARACTER PROFILE
+                        </h5>
+                        <p className="text-sm opacity-80 leading-relaxed">
+                          {archetype.characterProfile}
+                        </p>
+                      </div>
+
+                      {/* Sun Tzu Vulnerabilities */}
+                      <div className="mb-6">
+                        <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
+                          <AlertTriangle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
+                          SUN TZU VULNERABILITIES
+                        </h5>
+                        <ul className="space-y-2 text-sm opacity-70">
+                          {archetype.sunTzuVulnerabilities.map((vulnerability, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
+                              {vulnerability}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Strategic Vulnerabilities */}
+                      <div>
+                        <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
+                          <AlertTriangle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
+                          STRATEGIC VULNERABILITIES & 48 LAWS APPLICATIONS
+                        </h5>
+                        <div className="space-y-4">
+                          {archetype.strategicVulnerabilities.map((vuln, idx) => (
+                            <div key={idx} className="border-l-2 pl-4 space-y-2" style={{borderColor: 'var(--matrix-green)'}}>
+                              <div className="text-sm font-medium opacity-90">{vuln.vulnerability}</div>
+                              <div className="text-xs opacity-70">{vuln.description}</div>
+                              <div className="space-y-1">
+                                <div className="text-xs">
+                                  <span className="opacity-60">SUN TZU:</span>
+                                  <span className="ml-2 opacity-80">{vuln.sunTzu}</span>
+                                </div>
+                                <div className="text-xs">
+                                  <span className="opacity-60">48 LAWS:</span>
+                                  <span className="ml-2 opacity-80">{vuln.powerLaw}</span>
+                                </div>
+                              </div>
+                              <div className="text-xs opacity-60">
+                                <div className="font-medium mb-1">EXPLOITATION TACTICS:</div>
+                                <ul className="space-y-1">
+                                  {vuln.tactics.map((tactic, tacticIdx) => (
+                                    <li key={tacticIdx} className="flex items-start gap-2">
+                                      <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
+                                      {tactic}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Exploitation Strategy */}
+                      <div className="mt-6 p-4 bg-red-500/10 rounded border border-red-500/30">
+                        <h5 className="text-sm font-medium mb-2 text-red-400">EXPLOITATION STRATEGY</h5>
+                        <p className="text-sm opacity-80">{archetype.exploitationStrategy}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Cross-Archetype Principles */}
+        <div className="mb-32">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-light tracking-wider mb-8 premium-subtitle">
+              CROSS-ARCHETYPE STRATEGIC PRINCIPLES
+            </h2>
+            <div className="bamboo-divider w-32 mx-auto"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="ultra-premium-card p-6">
+              <h3 className="text-xl font-light mb-4 flex items-center gap-2">
+                <Brain className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                UNIVERSAL VULNERABILITIES
+              </h3>
+              <ul className="space-y-3 text-sm">
+                <li className="flex items-start gap-2">
+                  <span style={{color: 'var(--matrix-green)'}}>•</span>
+                  <span><strong>Confirmation Bias</strong> - All archetypes seek information confirming existing beliefs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{color: 'var(--matrix-green)'}}>•</span>
+                  <span><strong>Loss Aversion</strong> - Fear of missing out outweighs potential gains across all types</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{color: 'var(--matrix-green)'}}>•</span>
+                  <span><strong>Social Proof</strong> - Even Controllers and Protectors are influenced by peer behavior</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{color: 'var(--matrix-green)'}}>•</span>
+                  <span><strong>Authority Bias</strong> - Credible sources affect all archetypes differently but consistently</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span style={{color: 'var(--matrix-green)'}}>•</span>
+                  <span><strong>Anchoring Effect</strong> - First impressions and numbers disproportionately influence decisions</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="ultra-premium-card p-6">
+              <h3 className="text-xl font-light mb-4 flex items-center gap-2">
+                <Crown className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                WARFARE MATRIX PRINCIPLE
+              </h3>
+              <div className="text-sm space-y-3">
+                <p className="opacity-80 leading-relaxed">
+                  Each archetype's greatest strength becomes their exploitable weakness when their core psychological 
+                  drivers are systematically manipulated through coordinated application of Sun Tzu's strategic principles 
+                  and Greene's power dynamics.
+                </p>
+                <div className="p-3 bg-yellow-500/10 rounded border border-yellow-500/30">
+                  <p className="text-xs font-medium text-yellow-400">
+                    STRATEGIC PRINCIPLE: Target the ego through strength-weakness inversion while maintaining plausible deniability.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </Authenticated>
   );
 }
