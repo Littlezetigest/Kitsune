@@ -40,10 +40,66 @@
   --holographic-panel: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(57, 255, 20, 0.08) 100%);
 }
 
-/* Disable animations for stable matrix green theme */
-* {
-  animation: none !important;
-  transition: all 0.3s ease !important;
+/* Quote Rain Animation */
+.quote-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.quote-drop {
+  position: absolute;
+  color: var(--matrix-green);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  opacity: 0.6;
+  white-space: nowrap;
+  animation: quoteFall linear infinite;
+  text-shadow: 0 0 10px var(--matrix-green);
+}
+
+@keyframes quoteFall {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Restore temple atmosphere */
+.temple-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.shrine-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.02) 0%, transparent 50%);
+  animation: shrineGlow 20s ease-in-out infinite;
+}
+
+@keyframes shrineGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
 }
 
 /* Override color animations with stable matrix green */

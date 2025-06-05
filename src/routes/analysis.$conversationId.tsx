@@ -40,9 +40,15 @@ function AnalysisPage() {
   // Actions for self-analysis and remodeling (commented out - would need useAction)
   // const analyzeSelf = useAction(api.selfAnalysis.analyzeSelfCommunication);
 
-  // Get user profile and remodeling data
-  const userProfile = useQuery(api.selfAnalysisMutations.getUserProfile, conversation ? { userId: conversation.userId } : "skip");
-  const characterRemodeling = useQuery(api.selfAnalysisMutations.getCharacterRemodeling, "skip");
+  // Get user profile and remodeling data - handle conditional queries properly
+  const userProfile = useQuery(
+    api.selfAnalysisMutations.getUserProfile, 
+    conversation ? { userId: conversation.userId } : "skip"
+  );
+  const characterRemodeling = useQuery(
+    api.selfAnalysisMutations.getCharacterRemodeling, 
+    conversation ? { userId: conversation.userId } : "skip"
+  );
   
   // Mock analysis data for demonstration (in real app, this would come from the database)
   const mockAnalysis = {
@@ -136,6 +142,57 @@ function AnalysisPage() {
         triggerPhrases: ["expand your influence", "strengthen your position", "strategic advantage"]
       }
     ]
+  };
+
+  // Business Leader Feedback System
+  const businessLeaderFeedback = {
+    leaders: [
+      {
+        name: "Warren Buffett",
+        title: "Chairman & CEO, Berkshire Hathaway",
+        archetype: "VALIDATOR",
+        feedback: {
+          targetAnalysis: "This EMPEROR archetype assessment rings true. I've seen many successful investors who need to feel in control. The ego vulnerability is spot-on - acknowledge their past wins before presenting new opportunities.",
+          approach: "Focus on long-term value creation and competitive moats. Present clear, data-driven fundamentals rather than growth projections.",
+          warning: "Avoid hype or get-rich-quick angles. This investor type respects substance over style."
+        }
+      },
+      {
+        name: "Ray Dalio",
+        title: "Founder, Bridgewater Associates",
+        archetype: "CONTROLLER",
+        feedback: {
+          targetAnalysis: "The personality matrix correctly identifies high analytical depth and control needs. The impatience vulnerability could be the key leverage point.",
+          approach: "Create detailed risk assessment frameworks and provide multiple scenario analyses. Show how you've stress-tested the opportunity.",
+          warning: "Never present incomplete information or appear unprepared for tough questions."
+        }
+      },
+      {
+        name: "Marc Andreessen",
+        title: "Co-founder, Andreessen Horowitz",
+        archetype: "VISIONARY",
+        feedback: {
+          targetAnalysis: "EMPEROR types often overlook technological disruption. The status vulnerability can be exploited by positioning this as a forward-thinking move.",
+          approach: "Frame the opportunity in terms of technological competitive advantage and market positioning for the future.",
+          warning: "Don't get lost in technical details. Focus on strategic implications and market transformation."
+        }
+      },
+      {
+        name: "Mary Meeker",
+        title: "Partner, Bond Capital", 
+        archetype: "VALIDATOR",
+        feedback: {
+          targetAnalysis: "The keyword pattern analysis is valuable. 'Control' and 'authority' words will resonate strongly with this archetype.",
+          approach: "Use data visualization and trend analysis to support your points. Show market size and growth trajectory clearly.",
+          warning: "Avoid making claims without solid data backing. This type will fact-check everything."
+        }
+      }
+    ],
+    consensus: {
+      strengths: "Strong archetype identification and vulnerability assessment",
+      concerns: "Need more specific tactical examples for this investor type",
+      recommendation: "Focus on control and authority themes while providing comprehensive risk mitigation"
+    }
   };
 
   // Mock user profile data
@@ -425,7 +482,8 @@ function AnalysisPage() {
             { id: 'target-matrix', label: ' PERSONALITY MATRIX', icon: BarChart3 },
             { id: 'target-vulnerabilities', label: ' VULNERABILITIES', icon: AlertTriangle },
             { id: 'target-arsenal', label: ' 48 LAWS ARSENAL', icon: Sword },
-            { id: 'target-codex', label: '💬 COMPLIMENT CODEX', icon: Star }
+            { id: 'target-codex', label: '💬 COMPLIMENT CODEX', icon: Star },
+            { id: 'target-feedback', label: '🏆 LEADER FEEDBACK', icon: Crown }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -643,6 +701,70 @@ function AnalysisPage() {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeSection === 'target-feedback' && (
+        <div className="space-y-6">
+          <h2 className="text-3xl font-bold text-center mb-8" style={{color: 'var(--golden-circuit)'}}>
+            BUSINESS LEADER FEEDBACK
+          </h2>
+          <div className="mb-8 cyber-card p-6">
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Crown className="w-6 h-6" style={{color: 'var(--golden-circuit)'}} />
+              Expert Consensus
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-4 bg-green-500/10 rounded border border-green-500/30">
+                <h4 className="font-bold text-green-400 mb-2">STRENGTHS</h4>
+                <p className="text-sm">{businessLeaderFeedback.consensus.strengths}</p>
+              </div>
+              <div className="p-4 bg-yellow-500/10 rounded border border-yellow-500/30">
+                <h4 className="font-bold text-yellow-400 mb-2">CONCERNS</h4>
+                <p className="text-sm">{businessLeaderFeedback.consensus.concerns}</p>
+              </div>
+              <div className="p-4 bg-blue-500/10 rounded border border-blue-500/30">
+                <h4 className="font-bold text-blue-400 mb-2">RECOMMENDATION</h4>
+                <p className="text-sm">{businessLeaderFeedback.consensus.recommendation}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid gap-6">
+            {businessLeaderFeedback.leaders.map((leader, index) => (
+              <div key={index} className="cyber-card p-6">
+                <div className="flex items-center gap-4 mb-4">
+                  <Crown className="w-10 h-10" style={{color: 'var(--golden-circuit)'}} />
+                  <div>
+                    <h3 className="text-xl font-bold" style={{color: 'var(--golden-circuit)'}}>
+                      {leader.name}
+                    </h3>
+                    <p className="text-sm opacity-70">{leader.title}</p>
+                    <span className="inline-block px-2 py-1 bg-blue-500/20 rounded text-xs mt-1">
+                      {leader.archetype}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="p-4 bg-[var(--golden-circuit)]/10 rounded border border-[var(--golden-circuit)]/30">
+                    <h4 className="font-bold mb-2" style={{color: 'var(--golden-circuit)'}}>TARGET ANALYSIS</h4>
+                    <p className="text-sm">{leader.feedback.targetAnalysis}</p>
+                  </div>
+                  
+                  <div className="p-4 bg-green-500/10 rounded border border-green-500/30">
+                    <h4 className="font-bold mb-2 text-green-400">RECOMMENDED APPROACH</h4>
+                    <p className="text-sm">{leader.feedback.approach}</p>
+                  </div>
+                  
+                  <div className="p-4 bg-red-500/10 rounded border border-red-500/30">
+                    <h4 className="font-bold mb-2 text-red-400">WARNING</h4>
+                    <p className="text-sm">{leader.feedback.warning}</p>
+                  </div>
                 </div>
               </div>
             ))}

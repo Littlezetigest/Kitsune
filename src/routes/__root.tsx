@@ -25,6 +25,85 @@ import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { api } from "../../convex/_generated/api";
 
+// Quote Rain Component for Enhanced Atmosphere
+function QuoteRain() {
+  useEffect(() => {
+    const sunTzuQuotes = [
+      "知己知彼，百戰不殆",
+      "兵者，詭道也", 
+      "故善戰者，求之於勢",
+      "攻其無備，出其不意",
+      "兵貴勝，不貴久",
+      "上兵伐謀，其次伐交",
+      "善戰者，立於不敗之地",
+      "故兵無常勢，水無常形",
+      "All warfare is based on deception",
+      "Supreme excellence is breaking the enemy's resistance without fighting",
+      "If you know the enemy and know yourself, you need not fear",
+      "Rapidity is the essence of war",
+      "Energy may be likened to the bending of a crossbow",
+      "The clever combatant looks to the effect of combined energy"
+    ];
+
+    const powerLaws = [
+      "Never outshine the master",
+      "Never trust friends, use enemies", 
+      "Conceal your intentions",
+      "Always say less than necessary",
+      "Guard your reputation",
+      "Court attention at all costs",
+      "Get others to do work for you",
+      "Make others come to you",
+      "Win through actions, not argument",
+      "Avoid the unhappy and unlucky",
+      "Learn to keep people dependent",
+      "Use selective honesty",
+      "Pose as a friend, work as spy",
+      "Crush your enemy totally"
+    ];
+
+    function createQuoteDrop() {
+      const container = document.querySelector('.quote-rain');
+      if (!container) return;
+
+      const allQuotes = [...sunTzuQuotes, ...powerLaws];
+      const quote = allQuotes[Math.floor(Math.random() * allQuotes.length)];
+      
+      const drop = document.createElement('div');
+      drop.className = 'quote-drop';
+      drop.textContent = quote;
+      drop.style.left = Math.random() * 100 + '%';
+      drop.style.animationDuration = (8 + Math.random() * 12) + 's';
+      drop.style.animationDelay = Math.random() * 2 + 's';
+      
+      container.appendChild(drop);
+      
+      setTimeout(() => {
+        if (drop.parentNode) {
+          drop.parentNode.removeChild(drop);
+        }
+      }, 20000);
+    }
+
+    const interval = setInterval(createQuoteDrop, 1500);
+    
+    // Create initial drops
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createQuoteDrop, i * 500);
+    }
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <div className="quote-rain"></div>
+      <div className="temple-atmosphere">
+        <div className="shrine-particles"></div>
+      </div>
+    </>
+  );
+}
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -48,7 +127,9 @@ function RootComponent() {
     >
       <ConvexProviderWithClerk client={convex} useAuth={useClerkAuth}>
         <QueryClientProvider client={queryClient}>
-          <div className="min-h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col relative">
+            {/* Quote Rain and Temple Atmosphere */}
+            <QuoteRain />
             <Authenticated>
               <EnsureUser />
               {/* Mobile sidebar drawer */}

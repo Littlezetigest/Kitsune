@@ -42,11 +42,40 @@ function ArchetypesPage() {
         "Can be impatient with execution details",
         "Risk of backing style over substance"
       ],
-      vulnerabilities: [
-        "FOMO on next big thing",
-        "Ego-driven decision making",
-        "Overconfidence in pattern recognition",
-        "Dismissal of traditional metrics"
+      strategicVulnerabilities: [
+        {
+          vulnerability: "FOMO Exploitation",
+          description: "Fear of missing the next unicorn drives irrational urgency",
+          sunTzu: "兵貴勝，不貴久 - Speed is essential in war, but haste makes waste",
+          powerLaw: "Law 1: Never Outshine the Master - Present opportunity as their discovery",
+          tactics: [
+            "Create artificial scarcity with limited timeframes",
+            "Reference competitors who 'missed out' on previous opportunities",
+            "Use future-tense language to paint vivid success scenarios"
+          ]
+        },
+        {
+          vulnerability: "Ego-Driven Validation",
+          description: "Need to be seen as prescient and ahead of the curve",
+          sunTzu: "故善戰者，求之於勢 - The skillful strategist uses positioning",
+          powerLaw: "Law 6: Court Attention at All Costs - Feed their need for recognition",
+          tactics: [
+            "Position them as industry thought leader in communications",
+            "Offer exclusive access to 'invite-only' opportunities",
+            "Reference their past successful predictions in presentations"
+          ]
+        },
+        {
+          vulnerability: "Complexity Aversion",
+          description: "Preference for simple, elegant narratives over messy reality",
+          sunTzu: "兵者，詭道也 - All warfare is based on deception",
+          powerLaw: "Law 3: Conceal Your Intentions - Hide operational complexities",
+          tactics: [
+            "Lead with compelling vision before revealing implementation details",
+            "Use metaphors and analogies from successful tech companies",
+            "Frame challenges as 'execution details' to be solved later"
+          ]
+        }
       ]
     },
     {
@@ -76,11 +105,40 @@ function ArchetypesPage() {
         "Conservative approach limits upside",
         "Slow to adapt to new paradigms"
       ],
-      vulnerabilities: [
-        "Overwhelm with too much data",
-        "Fear of missing 'obvious' opportunities",
-        "Paralysis from conflicting metrics",
-        "Imposter syndrome about intuition"
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Analysis Paralysis",
+          description: "Endless data requests to delay difficult decisions",
+          sunTzu: "攻其無備，出其不意 - Attack where they are unprepared",
+          powerLaw: "Law 25: Re-Create Yourself - Become their trusted data source",
+          tactics: [
+            "Provide overwhelming amounts of supporting data upfront",
+            "Create detailed financial models with conservative projections",
+            "Reference multiple independent validation sources"
+          ]
+        },
+        {
+          vulnerability: "Impostor Syndrome",
+          description: "Fear that their analytical approach will miss breakthrough opportunities",
+          sunTzu: "善戰者，立於不敗之地 - Good fighters position themselves beyond defeat",
+          powerLaw: "Law 15: Crush Your Enemy Totally - Eliminate their self-doubt",
+          tactics: [
+            "Acknowledge their analytical superiority in past decisions",
+            "Frame opportunity as 'hidden in plain sight' requiring their skills",
+            "Provide case studies where analytical approach identified winners"
+          ]
+        },
+        {
+          vulnerability: "Metric Manipulation",
+          description: "Over-reliance on historical metrics that may not predict future",
+          sunTzu: "故兵無常勢，水無常形 - Military tactics are like water",
+          powerLaw: "Law 32: Play to People's Fantasies - Show them the metrics they want",
+          tactics: [
+            "Present metrics in most favorable light without lying",
+            "Focus on leading indicators over lagging ones",
+            "Use cohort analysis to show positive trends"
+          ]
+        }
       ]
     },
     {
@@ -110,11 +168,40 @@ function ArchetypesPage() {
         "Risk-averse to breakthrough opportunities",
         "May focus too much on downside protection"
       ],
-      vulnerabilities: [
-        "Fear of loss of control",
-        "Anxiety about unknown risks",
-        "Perfectionism in risk mitigation",
-        "Difficulty with ambiguous situations"
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Control Illusion",
+          description: "False belief that all risks can be anticipated and mitigated",
+          sunTzu: "上兵伐謀，其次伐交 - Supreme excellence is winning without fighting",
+          powerLaw: "Law 31: Control the Options - Structure deal to give them control",
+          tactics: [
+            "Offer board seats, protective provisions, and veto rights",
+            "Create detailed risk mitigation frameworks",
+            "Provide regular reporting and transparency mechanisms"
+          ]
+        },
+        {
+          vulnerability: "Perfectionism Paralysis",
+          description: "Endless pursuit of perfect risk mitigation prevents action",
+          sunTzu: "故善戰者，立於不敗之地 - Position yourself where you cannot lose",
+          powerLaw: "Law 40: Despise the Free Lunch - Make them pay for protection",
+          tactics: [
+            "Structure deals with multiple layers of downside protection",
+            "Offer liquidation preferences and anti-dilution provisions",
+            "Create milestone-based funding with kill switches"
+          ]
+        },
+        {
+          vulnerability: "Unknown Unknown Anxiety",
+          description: "Paralyzing fear of risks that cannot be identified or quantified",
+          sunTzu: "知己知彼，百戰不殆 - Know yourself and your enemy",
+          powerLaw: "Law 17: Keep Others in Suspense - Control information flow",
+          tactics: [
+            "Provide comprehensive due diligence packages",
+            "Create scenario planning for multiple risk factors",
+            "Establish regular check-ins and monitoring systems"
+          ]
+        }
       ]
     },
     {
@@ -144,11 +231,40 @@ function ArchetypesPage() {
         "Can be influenced by social pressure",
         "May overlook solid but unglamorous deals"
       ],
-      vulnerabilities: [
-        "Fear of missing prestigious opportunities",
-        "Need for social validation",
-        "Competition with peer investors",
-        "Ego-driven decision making"
+      strategicVulnerabilities: [
+        {
+          vulnerability: "Social Proof Dependency",
+          description: "Decisions heavily influenced by what other prestigious investors are doing",
+          sunTzu: "兵者，詭道也 - War is the art of deception",
+          powerLaw: "Law 5: So Much Depends on Reputation - Associate with their desired status",
+          tactics: [
+            "Name-drop other prestigious investors who are interested",
+            "Position opportunity as 'invite-only' for select investors",
+            "Create sense that missing this would damage their reputation"
+          ]
+        },
+        {
+          vulnerability: "Prestige Addiction",
+          description: "Prioritizes high-profile deals over fundamentally sound investments",
+          sunTzu: "攻其無備，出其不意 - Strike where they don't expect",
+          powerLaw: "Law 6: Court Attention at All Costs - Make the deal seem prestigious",
+          tactics: [
+            "Emphasize media coverage and PR potential of investment",
+            "Highlight founder's prestigious background and connections",
+            "Create opportunities for them to take credit publicly"
+          ]
+        },
+        {
+          vulnerability: "Competition Compulsion",
+          description: "Cannot resist opportunities their peers are pursuing",
+          sunTzu: "故善戰者，求之於勢 - The expert in war uses momentum",
+          powerLaw: "Law 46: Never Appear Too Perfect - Let them 'win' the competition",
+          tactics: [
+            "Create competitive dynamics with other status-seeking investors",
+            "Structure process to feel like exclusive access or victory",
+            "Allow them to negotiate minor wins to feel superior"
+          ]
+        }
       ]
     }
   ];
@@ -288,16 +404,37 @@ function ArchetypesPage() {
                             <div>
                               <h5 className="text-sm font-medium mb-3 opacity-80 flex items-center gap-2">
                                 <AlertTriangle className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
-                                VULNERABILITIES
+                                STRATEGIC VULNERABILITIES
                               </h5>
-                              <ul className="space-y-2 text-sm opacity-70">
-                                {archetype.vulnerabilities.map((vulnerability, idx) => (
-                                  <li key={idx} className="flex items-start gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
-                                    {vulnerability}
-                                  </li>
+                              <div className="space-y-4">
+                                {archetype.strategicVulnerabilities.map((vuln, idx) => (
+                                  <div key={idx} className="border-l-2 pl-4 space-y-2" style={{borderColor: 'var(--matrix-green)'}}>
+                                    <div className="text-sm font-medium opacity-90">{vuln.vulnerability}</div>
+                                    <div className="text-xs opacity-70">{vuln.description}</div>
+                                    <div className="space-y-1">
+                                      <div className="text-xs">
+                                        <span className="opacity-60">SUN TZU:</span>
+                                        <span className="ml-2 opacity-80">{vuln.sunTzu}</span>
+                                      </div>
+                                      <div className="text-xs">
+                                        <span className="opacity-60">48 LAWS:</span>
+                                        <span className="ml-2 opacity-80">{vuln.powerLaw}</span>
+                                      </div>
+                                    </div>
+                                    <div className="text-xs opacity-60">
+                                      <div className="font-medium mb-1">TACTICS:</div>
+                                      <ul className="space-y-1">
+                                        {vuln.tactics.map((tactic, tacticIdx) => (
+                                          <li key={tacticIdx} className="flex items-start gap-2">
+                                            <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{backgroundColor: 'var(--matrix-green)'}}></div>
+                                            {tactic}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </div>
                                 ))}
-                              </ul>
+                              </div>
                             </div>
                           </div>
                         </div>
