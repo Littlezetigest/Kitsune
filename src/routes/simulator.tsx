@@ -300,7 +300,7 @@ function WarRoomSimulator() {
             </div>
           ) : (
             <div className="grid gap-6">
-              {conversations.map((conversation) => (
+              {conversations.map((conversation: any) => (
                 <div 
                   key={conversation._id} 
                   className="cyber-card p-6 cursor-pointer hover:border-[var(--golden-circuit)] transition-all"

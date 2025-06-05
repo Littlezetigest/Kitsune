@@ -249,7 +249,7 @@ function InvestorTargetsList() {
         </div>
       ) : (
         <div className="grid gap-1">
-          {conversations.map((conversation) => (
+          {conversations.map((conversation: any) => (
             <div key={conversation._id} className="cyber-shrine-card p-8 geometric-border circuit-pattern">
               <div className="flex justify-between items-start">
                 <div className="flex-1">

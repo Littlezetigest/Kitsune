@@ -61,30 +61,70 @@ function UploadPage() {
   const analyzeImage = async (_imageData: string, fileName: string) => {
     setIsUploading(true);
     
-    // Simulate AI analysis with realistic delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    // Mock analysis results for email screenshots
-    const mockAnalysis = {
-      confidence: 0.94,
-      type: "Email Communication Screenshot",
-      extracted_text: "Subject: Investment Opportunity - Exclusive Access\n\nDear [Name],\n\nI hope this message finds you well. I wanted to reach out regarding an exclusive investment opportunity that I believe aligns perfectly with your portfolio strategy...",
-      language_patterns: {
-        formality_level: "Professional",
-        urgency_indicators: ["exclusive", "limited time", "immediate response"],
-        power_words: ["opportunity", "strategic", "exclusive", "premium"],
-        emotional_tone: "Persuasive with subtle pressure tactics"
-      },
-      psychological_profile: {
-        archetype: "THE VALIDATOR",
-        confidence_level: 0.87,
-        risk_tolerance: "Medium",
-        decision_speed: "Deliberate",
-        key_motivations: ["Security", "Social proof", "Peer validation"],
-        vulnerabilities: ["FOMO tactics", "Authority figures", "Time pressure"],
-        persuasion_approach: "Evidence-based presentation with testimonials"
+    try {
+      // Determine content type based on file name or content analysis
+      let contentType: "email_chain" | "chat_screenshot" | "meeting_transcript" | "voice_memo" | "document_text" | "social_media" = "chat_screenshot";
+      
+      if (fileName.toLowerCase().includes('email') || fileName.toLowerCase().includes('mail')) {
+        contentType = "email_chain";
+      } else if (fileName.toLowerCase().includes('transcript') || fileName.toLowerCase().includes('meeting')) {
+        contentType = "meeting_transcript";
+      } else if (fileName.toLowerCase().includes('social') || fileName.toLowerCase().includes('twitter') || fileName.toLowerCase().includes('linkedin')) {
+        contentType = "social_media";
       }
-    };
+
+      // Enhanced image analysis with OCR simulation
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+      // Enhanced mock analysis results with advanced patterns
+      const mockAnalysis = {
+        confidence: 0.94,
+        contentType,
+        type: "Enhanced Content Analysis",
+        extracted_text: "Subject: Investment Opportunity - Exclusive Access\n\nDear [Name],\n\nI hope this message finds you well. I wanted to reach out regarding an exclusive investment opportunity that I believe aligns perfectly with your portfolio strategy. This is a limited-time opportunity with significant upside potential. Our previous investors have seen 15x returns. I'd love to discuss this further at your earliest convenience.\n\nBest regards,\n[Investor Name]",
+        
+        // Communication DNA Analysis
+        communication_dna: {
+          cadence: { averageSentenceLength: 18.5, responseRhythm: "immediate", punctuationStyle: "professional" },
+          formality: { level: 8.2, businessJargon: ["portfolio strategy", "upside potential", "returns"], contractions: 0 },
+          personality: { directness: 7.1, assertiveness: 6.8, empathy: 5.2, humor: "minimal" }
+        },
+        
+        // Linguistic Fingerprint
+        linguistic_fingerprint: {
+          signature_phrases: ["I hope this finds you well", "at your earliest convenience", "I'd love to discuss"],
+          catchphrases: ["exclusive access", "limited-time opportunity"],
+          vocabulary_signature: { uniqueWords: ["upside", "portfolio"], metaphors: [], analogies: [] },
+          mannerisms: { fillerWords: [], greetingStyle: "formal", emailSignature: "professional" }
+        },
+        
+        // Investment Philosophy
+        investment_philosophy: {
+          riskProfile: "moderate-aggressive",
+          sectors: ["technology", "growth-stage"],
+          evaluationCriteria: { teamImportance: 7, productFocus: 8, marketSize: "large" },
+          decisionTriggers: { positiveSignals: ["proven returns", "limited access"], redFlags: [], accelerators: ["time pressure"] }
+        },
+        
+        // Emotional Profile
+        emotional_profile: {
+          baseline: { defaultMood: "professional", emotionalRange: 4, volatility: 2 },
+          triggers: { excitement: ["exclusive opportunity"], pressure: ["limited time"], trust: ["previous success"] },
+          negotiation: { pressureResponse: "persistent", competitive: 6, collaborative: 5 }
+        },
+        
+        // Advanced Psychological Profile
+        psychological_profile: {
+          archetype: "THE VALIDATOR",
+          confidence_level: 0.87,
+          risk_tolerance: "Medium-High",
+          decision_speed: "Deliberate",
+          key_motivations: ["Exclusive access", "Proven returns", "Strategic positioning"],
+          vulnerabilities: ["FOMO tactics", "Authority validation", "Time pressure"],
+          persuasion_approach: "Evidence-based with social proof and urgency",
+          communication_style: "Professional with subtle pressure"
+        }
+      };
     
     setImageAnalysis(mockAnalysis);
     setFormData(prev => ({
@@ -92,7 +132,11 @@ function UploadPage() {
       content: mockAnalysis.extracted_text,
       title: prev.title || `Image Analysis: ${fileName.replace(/\.[^/.]+$/, "")}`
     }));
-    setIsUploading(false);
+    } catch (error) {
+      console.error('Image analysis failed:', error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -108,12 +152,17 @@ function UploadPage() {
         participantName: formData.participantName || undefined,
       });
 
-      // Start analysis (commented out - would use action)
-      // await analyzeConversation({ conversationId });
+      // Start enhanced analysis if we have advanced data
+      if (imageAnalysis && 'contentType' in imageAnalysis) {
+        // In production, this would call the advanced analysis action
+        // await runAdvancedAnalysis({ conversationId, contentType: imageAnalysis.contentType });
+        console.log('Enhanced analysis would be triggered for:', imageAnalysis.contentType);
+      }
 
       // Navigate to analysis results
       navigate({ to: `/analysis/${conversationId}` });
     } catch (error) {
+      console.error('Upload failed:', error);
       console.error("Upload failed:", error);
     } finally {
       setIsUploading(false);
