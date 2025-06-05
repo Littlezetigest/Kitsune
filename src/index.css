@@ -17,6 +17,8 @@
   --matrix-green-glow: #66ff99;
   --spirit-white: #ffffff;
   --cyber-silver: #c0c0c0;
+  --pure-white: var(--matrix-green);
+  --silk-white: var(--matrix-green);
   
   /* Matrix green gradients */
   --shrine-void: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
@@ -63,7 +65,7 @@
 @layer base {
   body {
     background: var(--shrine-void);
-    color: var(--spirit-white);
+    color: var(--matrix-green);
     font-family: 'Inter Variable', 'Orbitron', 'JetBrains Mono', 'Noto Sans JP', system-ui, monospace;
     font-weight: 300;
     position: relative;
@@ -1307,24 +1309,24 @@
     line-height: 1.2;
     white-space: pre;
     animation: matrixDrop linear infinite;
-    color: var(--neon-green);
+    color: var(--matrix-green);
     text-shadow: 0 0 10px currentColor;
   }
   
   .matrix-column:nth-child(even) {
-    color: var(--fox-fire-cyan);
+    color: var(--matrix-green);
     animation-duration: 8s;
     font-size: 16px;
   }
   
   .matrix-column:nth-child(3n) {
-    color: var(--hot-magenta);
+    color: var(--matrix-green-bright);
     animation-duration: 12s;
     font-size: 14px;
   }
   
   .matrix-column:nth-child(5n) {
-    color: var(--shrine-gold);
+    color: var(--matrix-green-dark);
     animation-duration: 6s;
     font-size: 20px;
   }
@@ -1431,7 +1433,7 @@
   
   .enhanced-readability {
     background: rgba(0, 0, 0, 0.8) !important;
-    color: #ffffff !important;
+    color: var(--matrix-green) !important;
     padding: 2px 6px !important;
     border-radius: 4px !important;
     backdrop-filter: blur(10px) !important;
@@ -1661,7 +1663,7 @@
     @apply px-8 py-4 font-light transition-all duration-500;
     background: var(--spirit-interface);
     border: 2px solid var(--fox-fire-cyan);
-    color: var(--spirit-white);
+    color: var(--matrix-green);
     backdrop-filter: blur(28px);
     border-radius: 0;
     font-weight: 300;

@@ -10,7 +10,8 @@
 - f34053a fix: resolve all TypeScript build errors and unused variables
 - 278bdc0 fix: resolve deployment build errors and clean up problematic files
 - e8c605f fix: update Vercel build command to avoid Convex authentication error
-- [ready for commit] feat: implement stable matrix green theme and compact archetype UI
+- c0d784b feat: implement stable matrix green theme and compact archetype UI
+- [ready for commit] feat: remove CIA sections and ensure all text is matrix green
 
 ## Current Session: TypeScript Build Error Resolution
 
@@ -33,6 +34,10 @@ Successfully resolved all TypeScript compilation errors, deployment issues, and 
 - Implemented stable matrix green color theme (removed flashing animations)
 - Redesigned archetype interface with smaller icons and clickable expandable details
 - Created compact list layout for better UX and performance
+- Removed Intel Tracking Matrix section from archetypes page
+- Removed CIA Strategic Assessment section from command center
+- Updated all background text and matrix effects to use consistent green colors
+- Made body text color matrix green instead of white for better theme consistency
 
 **Build Status:**
 - ✅ All TypeScript compilation errors resolved

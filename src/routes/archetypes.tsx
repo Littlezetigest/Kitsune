@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Authenticated } from "convex/react";
-import { Brain, Target, Shield, Eye, Crown, Zap, TrendingUp, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronRight } from "lucide-react";
+import { Target, Shield, Eye, Crown, AlertTriangle, CheckCircle, XCircle, ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/archetypes")({
@@ -309,52 +309,6 @@ function ArchetypesPage() {
             </div>
           </div>
 
-          {/* Intel Tracking System */}
-          <div className="mb-32">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-light tracking-wider mb-8 premium-subtitle">
-                INTEL TRACKING MATRIX
-              </h2>
-              <div className="bamboo-divider w-32 mx-auto"></div>
-            </div>
-            
-            <div className="ultra-premium-card p-12 depth-layer-2">
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center">
-                  <TrendingUp className="w-12 h-12 mx-auto mb-4" style={{color: 'var(--matrix-green)'}} />
-                  <h3 className="text-xl font-light mb-4">
-                    CONVERSATION ANALYSIS
-                  </h3>
-                  <p className="text-sm opacity-70 leading-relaxed">
-                    Real-time processing of uploaded conversations to extract psychological patterns, 
-                    credibility markers, and vulnerability indicators across all investor interactions.
-                  </p>
-                </div>
-                
-                <div className="text-center">
-                  <Brain className="w-12 h-12 mx-auto mb-4" style={{color: 'var(--matrix-green)'}} />
-                  <h3 className="text-xl font-light mb-4">
-                    ARCHETYPE MAPPING
-                  </h3>
-                  <p className="text-sm opacity-70 leading-relaxed">
-                    Advanced behavioral classification using linguistic pattern analysis, decision-making
-                    frameworks, and psychological vulnerability assessment protocols.
-                  </p>
-                </div>
-                
-                <div className="text-center">
-                  <Zap className="w-12 h-12 mx-auto mb-4" style={{color: 'var(--matrix-green)'}} />
-                  <h3 className="text-xl font-light mb-4">
-                    STRATEGIC DEPLOYMENT
-                  </h3>
-                  <p className="text-sm opacity-70 leading-relaxed">
-                    Dynamic strategy generation for optimal engagement tactics, persuasion vectors,
-                    and psychological leverage points based on real-time archetype analysis.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </Authenticated>
     </div>

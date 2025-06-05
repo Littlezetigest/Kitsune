@@ -142,50 +142,6 @@ function CommandCenterPage() {
             </div>
           </div>
 
-          {/* CIA Strategist Evaluation Box */}
-          <div className="max-w-7xl mx-auto px-8 mb-16">
-            <div className="ultra-premium-card p-8 depth-layer-2 border-l-4" style={{borderLeftColor: 'var(--electric-arterial)'}}>
-              <div className="flex items-center gap-4 mb-6">
-                <Brain className="w-6 h-6" style={{color: 'var(--electric-arterial)'}} />
-                <h3 className="text-xl font-light spirit-hologram text-black bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text" data-text="CIA STRATEGIC ASSESSMENT">
-                  CIA STRATEGIC ASSESSMENT
-                </h3>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-4 text-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-                  <p className="text-sm leading-relaxed">
-                    <strong>OPERATIONAL OVERVIEW:</strong> This command center represents the most advanced 
-                    psychological warfare platform ever developed for investor intelligence. Each module 
-                    has been designed to exploit specific cognitive vulnerabilities identified through 
-                    decades of behavioral analysis and social engineering research.
-                  </p>
-                  
-                  <p className="text-sm leading-relaxed">
-                    <strong>TACTICAL ADVANTAGE:</strong> By systematically profiling investor psychology, 
-                    we gain unprecedented insight into decision-making patterns, fear responses, and 
-                    manipulation vectors. This intelligence enables precision-targeted persuasion campaigns 
-                    with success rates exceeding 94% in controlled environments.
-                  </p>
-                </div>
-                
-                <div className="space-y-4 text-black bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text">
-                  <p className="text-sm leading-relaxed">
-                    <strong>INVESTOR ASSESSMENT:</strong> Target investors are categorized by sophistication 
-                    level and communication preferences. High-value targets require advanced psychological 
-                    persuasion techniques, while others respond to basic social proof 
-                    and authority positioning strategies.
-                  </p>
-                  
-                  <p className="text-sm leading-relaxed">
-                    <strong>OPERATIONAL SECURITY:</strong> All intelligence gathering and analysis 
-                    operates under strict confidentiality protocols. Psychological profiles contain 
-                    sensitive personal data that must be protected at all times.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
 
           {/* Command Modules Grid */}
           {isAuthenticated && (
