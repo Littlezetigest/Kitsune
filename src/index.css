@@ -5,37 +5,59 @@
     cyberpunk;
 }
 
-/* Kitsune Cyber-Shrine Neo-Tokyo 2077 */
+/* Kitsune Matrix Green Theme */
 :root {
   --void-black: #000000;
   --digital-black: #0a0a0a;
   --shrine-obsidian: #1a1a1a;
-  --fox-fire-cyan: #00ffff;
-  --hot-magenta: #ff0080;
-  --shrine-gold: #ffd700;
-  --neon-green: #00ff41;
-  --electric-blue: #0066ff;
+  --matrix-green: #00ff41;
+  --matrix-green-bright: #39ff14;
+  --matrix-green-dark: #00cc33;
+  --matrix-green-dim: #006600;
+  --matrix-green-glow: #66ff99;
   --spirit-white: #ffffff;
   --cyber-silver: #c0c0c0;
   
-  /* Cyber-shrine gradients */
+  /* Matrix green gradients */
   --shrine-void: linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
-  --fox-fire-aura: linear-gradient(45deg, var(--fox-fire-cyan), var(--hot-magenta));
-  --shrine-hologram: linear-gradient(135deg, var(--fox-fire-cyan) 0%, var(--hot-magenta) 50%, var(--shrine-gold) 100%);
-  --digital-spirit: linear-gradient(90deg, var(--fox-fire-cyan), var(--neon-green), var(--shrine-gold));
-  --torii-glow: linear-gradient(180deg, var(--shrine-gold) 0%, var(--fox-fire-cyan) 100%);
+  --matrix-aura: linear-gradient(45deg, var(--matrix-green-dark), var(--matrix-green-bright));
+  --matrix-hologram: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-green-glow) 50%, var(--matrix-green-bright) 100%);
+  --digital-spirit: linear-gradient(90deg, var(--matrix-green-dark), var(--matrix-green), var(--matrix-green-bright));
+  --torii-glow: linear-gradient(180deg, var(--matrix-green-bright) 0%, var(--matrix-green) 100%);
   
-  /* Glowing effects */
-  --fox-fire-glow: 0 0 30px var(--fox-fire-cyan);
-  --magenta-pulse: 0 0 40px var(--hot-magenta);
-  --shrine-radiance: 0 0 50px var(--shrine-gold);
+  /* Matrix green glowing effects */
+  --matrix-glow: 0 0 30px var(--matrix-green);
+  --matrix-pulse: 0 0 40px var(--matrix-green-bright);
+  --matrix-radiance: 0 0 50px var(--matrix-green-glow);
   --spirit-shimmer: 0 0 20px var(--spirit-white);
-  --neon-buzz: 0 0 25px var(--neon-green);
+  --matrix-buzz: 0 0 25px var(--matrix-green);
   
-  /* Shrine surfaces */
-  --cyber-shrine-glass: rgba(0, 255, 255, 0.05);
+  /* Matrix green surfaces */
+  --cyber-shrine-glass: rgba(0, 255, 65, 0.05);
   --spirit-interface: linear-gradient(145deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.9) 100%);
-  --holographic-panel: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 128, 0.08) 100%);
+  --holographic-panel: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(57, 255, 20, 0.08) 100%);
+}
+
+/* Disable animations for stable matrix green theme */
+* {
+  animation: none !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Override color animations with stable matrix green */
+.brush-accent,
+.zen-focus,
+.strategic-red,
+.foxfire-glow,
+.holographic-shimmer,
+.quantum-shimmer,
+.luxury-shimmer,
+.premium-glow {
+  color: var(--matrix-green) !important;
+  border-color: var(--matrix-green) !important;
+  background-color: rgba(0, 255, 65, 0.1) !important;
+  box-shadow: var(--matrix-glow) !important;
+  text-shadow: 0 0 10px var(--matrix-green) !important;
 }
 
 @layer base {
