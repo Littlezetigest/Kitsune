@@ -1,6 +1,7 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+
 // Mutations for storing analysis results
 export const createUserProfile = mutation({
   args: {
