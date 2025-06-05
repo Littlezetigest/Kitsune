@@ -127,7 +127,7 @@ function CommandCenterPage() {
               
               <div className="bamboo-divider w-48 mx-auto mb-8"></div>
               
-              <div className="premium-subtitle mb-8 text-black bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent">
+              <div className="premium-subtitle mb-8" style={{color: 'var(--matrix-green)'}}>
                 PSYCHOLOGICAL WARFARE COMMAND CENTER
               </div>
               
@@ -194,11 +194,11 @@ function CommandCenterPage() {
           <div className="text-center py-8">
             <div className="ultra-premium-card py-6 px-12 max-w-2xl mx-auto depth-layer-2">
               <div className="text-sm opacity-60 mb-2 tracking-wider">ART OF WAR • 孫子兵法</div>
-              <div className="text-lg font-light spirit-hologram text-black bg-gradient-to-r from-yellow-600 to-red-600 bg-clip-text" data-text="知己知彼，百戦不殆">
-                知己知彼，百戦不殆
+              <div className="text-lg font-light spirit-hologram" style={{color: 'var(--matrix-green)'}} data-text="If you know the enemy and know yourself, you need not fear the result of a hundred battles">
+                If you know the enemy and know yourself, you need not fear the result of a hundred battles
               </div>
-              <div className="text-sm opacity-70 mt-2 text-black bg-gradient-to-r from-gray-600 to-gray-800 bg-clip-text">
-                "Know yourself and know your enemy, and you will never be defeated"
+              <div className="text-sm opacity-70 mt-2" style={{color: 'var(--matrix-green)'}}>
+                知己知彼，百戦不殆
               </div>
             </div>
           </div>

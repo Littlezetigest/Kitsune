@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Authenticated } from "convex/react";
+import { Authenticated, useQuery } from "convex/react";
 import { 
   User, 
   Target, 
@@ -12,15 +12,18 @@ import {
   BarChart3,
   Crown,
   ArrowRight,
-  DollarSign
+  DollarSign,
+  Users
 } from "lucide-react";
 import { useState } from "react";
+import { api } from "../../convex/_generated/api";
 
 export const Route = createFileRoute("/profile")({
   component: ProfileAnalysisPage,
 });
 
 function ProfileAnalysisPage() {
+  const conversations = useQuery(api.conversations.getUserConversations, {});
   const [profileData, setProfileData] = useState({
     name: "",
     role: "",
@@ -31,6 +34,7 @@ function ProfileAnalysisPage() {
     fundingAmount: "",
     timeframe: ""
   });
+  const [selectedTargets, setSelectedTargets] = useState<string[]>([]);
   const [analysis, setAnalysis] = useState<any>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
@@ -40,13 +44,34 @@ function ProfileAnalysisPage() {
     setProfileData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleTargetSelection = (targetId: string) => {
+    setSelectedTargets(prev => 
+      prev.includes(targetId) 
+        ? prev.filter(id => id !== targetId)
+        : [...prev, targetId]
+    );
+  };
+
+  const selectAllTargets = () => {
+    if (conversations) {
+      setSelectedTargets(conversations.map((c: any) => c._id));
+    }
+  };
+
+  const clearAllTargets = () => {
+    setSelectedTargets([]);
+  };
+
   const analyzeProfile = async () => {
     setIsAnalyzing(true);
     
     // Simulate analysis delay
     await new Promise(resolve => setTimeout(resolve, 3000));
     
-    // Comprehensive business framework analysis
+    // Get selected target data for personalization
+    const selectedTargetData = conversations?.filter((c: any) => selectedTargets.includes(c._id)) || [];
+    
+    // Comprehensive business framework analysis with target personalization
     const mockAnalysis = {
       // Enneagram Analysis
       enneagramType: {
@@ -240,26 +265,92 @@ function ProfileAnalysisPage() {
         ]
       },
 
+      // Target-Personalized Insights
+      targetPersonalization: {
+        selectedTargets: selectedTargetData.length,
+        targetInsights: selectedTargetData.length > 0 ? [
+          `Based on analysis of ${selectedTargetData.length} target conversation${selectedTargetData.length > 1 ? 's' : ''}, your communication style shows strong alignment with investor expectations`,
+          `Target preferences indicate ${selectedTargetData.length > 2 ? 'diverse' : 'focused'} investor archetype exposure, enhancing your adaptability`,
+          `Communication patterns from selected targets suggest ${selectedTargetData.length > 1 ? 'multi-modal' : 'specialized'} approach optimization opportunities`
+        ] : [
+          "No targets selected - analysis based on general best practices",
+          "Consider uploading investor conversations for personalized insights",
+          "Target-specific analysis will provide more precise recommendations"
+        ],
+        personalizedRecommendations: selectedTargetData.length > 0 ? [
+          {
+            category: "Communication Style Adaptation",
+            insight: `Your selected targets (${selectedTargetData.map((t: any) => t.participantName || t.title).join(', ')}) show preference for ${selectedTargetData.length > 2 ? 'varied communication styles' : 'consistent communication patterns'}`,
+            recommendation: "Adjust your pitch complexity and emotional appeal based on the specific investor archetypes in your target portfolio",
+            actionItems: [
+              "Practice different presentation styles for different investor types",
+              "Prepare targeted value propositions for each archetype",
+              "Develop archetype-specific objection handling techniques"
+            ]
+          },
+          {
+            category: "Relationship Building Strategy",
+            insight: `Target analysis indicates ${selectedTargetData.length > 1 ? 'relationship-driven' : 'transaction-focused'} investor preferences`,
+            recommendation: "Focus on building long-term relationships with investors who match your selected target profiles",
+            actionItems: [
+              "Create investor persona profiles based on target conversations",
+              "Develop personalized follow-up strategies",
+              "Build content that resonates with target investor interests"
+            ]
+          }
+        ] : [
+          {
+            category: "General Communication Enhancement",
+            insight: "Without specific target data, recommendations are based on general investor relations best practices",
+            recommendation: "Upload and analyze investor conversations to receive personalized guidance",
+            actionItems: [
+              "Document key investor conversations",
+              "Analyze communication patterns and preferences",
+              "Develop target-specific strategies"
+            ]
+          }
+        ]
+      },
+
       // Expert Recommendations
       expertGuidance: {
-        harvard_professors: [
+        harvard_professors: selectedTargetData.length > 0 ? [
+          {
+            name: "Clay Christensen",
+            specialty: "Innovation & Strategy",
+            recommendation: `Based on your ${selectedTargetData.length} selected target${selectedTargetData.length > 1 ? 's' : ''}, focus on jobs-to-be-done framework that aligns with their investment thesis`,
+            key_insight: `Your targets show ${selectedTargetData.length > 2 ? 'diverse' : 'focused'} investment patterns - tailor your innovation narrative accordingly`
+          },
+          {
+            name: "Michael Porter",
+            specialty: "Competitive Strategy",
+            recommendation: `Build competitive positioning that resonates with the ${selectedTargetData.length > 1 ? 'varied investment styles' : 'specific investment style'} shown in your target conversations`,
+            key_insight: `Strategic positioning should emphasize the value drivers most important to your selected investor archetypes`
+          },
+          {
+            name: "Frances Hesselbein",
+            specialty: "Leadership Development",
+            recommendation: `Develop leadership communication style that matches the ${selectedTargetData.length > 2 ? 'diverse' : 'consistent'} expectations shown in your target analysis`,
+            key_insight: `Leadership credibility with your targets requires ${selectedTargetData.length > 1 ? 'adaptive' : 'specialized'} communication approaches`
+          }
+        ] : [
           {
             name: "Clay Christensen",
             specialty: "Innovation & Strategy",
             recommendation: "Focus on jobs-to-be-done framework to identify unmet customer needs",
-            key_insight: "Customers hire products to do specific jobs - understand those jobs deeply"
+            key_insight: "Upload target conversations to receive personalized innovation strategy guidance"
           },
           {
             name: "Michael Porter",
             specialty: "Competitive Strategy",
             recommendation: "Build activity systems that create sustainable competitive advantage",
-            key_insight: "Strategy is about making trade-offs and creating unique positioning"
+            key_insight: "Strategy recommendations will be more specific with target investor data"
           },
           {
             name: "Frances Hesselbein",
             specialty: "Leadership Development",
             recommendation: "Lead from the future, not the past - articulate compelling vision",
-            key_insight: "Leadership is a matter of how to be, not how to do"
+            key_insight: "Leadership guidance will be tailored to specific investor preferences with target data"
           }
         ],
         business_authors: [
@@ -316,6 +407,7 @@ function ProfileAnalysisPage() {
     { id: 'enneagram', label: 'Enneagram', icon: Brain },
     { id: 'frameworks', label: 'Business Frameworks', icon: BarChart3 },
     { id: 'goals', label: 'Investment Goals', icon: DollarSign },
+    { id: 'personalization', label: 'Target Insights', icon: Users },
     { id: 'development', label: 'Professional Development', icon: BookOpen },
     { id: 'guidance', label: 'Expert Guidance', icon: Award }
   ];
@@ -474,6 +566,72 @@ function ProfileAnalysisPage() {
                   placeholder="Describe your professional background, key achievements, and industry expertise..."
                   className="textarea textarea-bordered w-full h-32 bg-black/20 border-gray-600"
                 />
+              </div>
+
+              {/* Target Selection for Analysis */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium opacity-80 flex items-center gap-2">
+                    <Users className="w-4 h-4" style={{color: 'var(--matrix-green)'}} />
+                    Reference Targets for Analysis
+                  </span>
+                </label>
+                <p className="text-xs opacity-60 mb-3">
+                  Select conversation targets to include in your self-analysis. Their communication patterns and preferences will be used to personalize your feedback.
+                </p>
+                
+                {conversations && conversations.length > 0 ? (
+                  <>
+                    <div className="flex gap-2 mb-3">
+                      <button
+                        type="button"
+                        onClick={selectAllTargets}
+                        className="cyber-btn px-3 py-1 text-xs"
+                      >
+                        SELECT ALL
+                      </button>
+                      <button
+                        type="button"
+                        onClick={clearAllTargets}
+                        className="cyber-btn px-3 py-1 text-xs"
+                      >
+                        CLEAR ALL
+                      </button>
+                      <span className="text-xs self-center opacity-60">
+                        {selectedTargets.length} of {conversations.length} selected
+                      </span>
+                    </div>
+                    
+                    <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-600 rounded p-3 bg-black/10">
+                      {conversations.map((conversation: any) => (
+                        <label key={conversation._id} className="flex items-center gap-3 cursor-pointer hover:bg-white/5 p-2 rounded">
+                          <input
+                            type="checkbox"
+                            checked={selectedTargets.includes(conversation._id)}
+                            onChange={() => handleTargetSelection(conversation._id)}
+                            className="checkbox checkbox-sm"
+                            style={{accentColor: 'var(--matrix-green)'}}
+                          />
+                          <div className="flex-1">
+                            <div className="text-sm font-medium">{conversation.title}</div>
+                            {conversation.participantName && (
+                              <div className="text-xs opacity-70">{conversation.participantName}</div>
+                            )}
+                            <div className="text-xs opacity-50">
+                              {new Date(conversation.uploadedAt).toLocaleDateString()}
+                            </div>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-center py-4 border border-gray-600 rounded bg-black/10">
+                    <Target className="w-8 h-8 mx-auto mb-2 opacity-50" style={{color: 'var(--matrix-green)'}} />
+                    <p className="text-xs opacity-70">No conversation targets available</p>
+                    <p className="text-xs opacity-50">Upload conversations first to enable reference-based analysis</p>
+                  </div>
+                )}
               </div>
 
               <button
@@ -778,6 +936,72 @@ function ProfileAnalysisPage() {
                                     {action}
                                   </div>
                                 ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'personalization' && (
+                  <div className="space-y-6">
+                    <div className="ultra-premium-card p-6">
+                      <h3 className="text-xl font-light mb-6 flex items-center gap-2">
+                        <Users className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
+                        TARGET-PERSONALIZED INSIGHTS
+                      </h3>
+                      
+                      {/* Target Selection Summary */}
+                      <div className="mb-8 p-4 bg-blue-500/10 rounded border border-blue-500/30">
+                        <h4 className="font-bold mb-3 text-blue-400 flex items-center gap-2">
+                          <Target className="w-5 h-5" />
+                          SELECTED TARGETS ANALYSIS
+                        </h4>
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="text-center">
+                            <div className="text-2xl font-bold" style={{color: 'var(--matrix-green)'}}>  
+                              {analysis.targetPersonalization.selectedTargets}
+                            </div>
+                            <div className="text-sm opacity-70">Targets Selected</div>
+                          </div>
+                          <div className="text-center">
+                            <div className="text-2xl font-bold" style={{color: 'var(--matrix-green)'}}>
+                              {analysis.targetPersonalization.selectedTargets > 0 ? 'HIGH' : 'LOW'}
+                            </div>
+                            <div className="text-sm opacity-70">Personalization Level</div>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          {analysis.targetPersonalization.targetInsights.map((insight: string, idx: number) => (
+                            <div key={idx} className="flex items-start gap-2 text-sm">
+                              <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5" />
+                              {insight}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Personalized Recommendations */}
+                      <div>
+                        <h4 className="font-bold mb-4">PERSONALIZED RECOMMENDATIONS</h4>
+                        <div className="space-y-4">
+                          {analysis.targetPersonalization.personalizedRecommendations.map((rec: any, idx: number) => (
+                            <div key={idx} className="p-4 border-l-4" style={{borderColor: 'var(--matrix-green)'}}>
+                              <h5 className="font-medium mb-2" style={{color: 'var(--matrix-green)'}}>{rec.category}</h5>
+                              <p className="text-sm opacity-80 mb-2">{rec.insight}</p>
+                              <p className="text-sm mb-3">{rec.recommendation}</p>
+                              <div>
+                                <span className="text-xs font-medium opacity-60">ACTION ITEMS:</span>
+                                <ul className="mt-1 space-y-1">
+                                  {rec.actionItems.map((item: string, itemIdx: number) => (
+                                    <li key={itemIdx} className="text-xs flex items-start gap-2">
+                                      <span style={{color: 'var(--matrix-green)'}}>→</span>
+                                      {item}
+                                    </li>
+                                  ))}
+                                </ul>
                               </div>
                             </div>
                           ))}

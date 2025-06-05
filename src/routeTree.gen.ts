@@ -14,8 +14,11 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as UploadImport } from './routes/upload'
 import { Route as SimulatorImport } from './routes/simulator'
 import { Route as ProfileImport } from './routes/profile'
+import { Route as OptimizerImport } from './routes/optimizer'
+import { Route as MetaAnalyzerImport } from './routes/meta-analyzer'
 import { Route as CommandImport } from './routes/command'
 import { Route as ArchetypesImport } from './routes/archetypes'
+import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
 import { Route as AnalysisConversationIdImport } from './routes/analysis.$conversationId'
 
@@ -39,6 +42,18 @@ const ProfileRoute = ProfileImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const OptimizerRoute = OptimizerImport.update({
+  id: '/optimizer',
+  path: '/optimizer',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const MetaAnalyzerRoute = MetaAnalyzerImport.update({
+  id: '/meta-analyzer',
+  path: '/meta-analyzer',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const CommandRoute = CommandImport.update({
   id: '/command',
   path: '/command',
@@ -48,6 +63,12 @@ const CommandRoute = CommandImport.update({
 const ArchetypesRoute = ArchetypesImport.update({
   id: '/archetypes',
   path: '/archetypes',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoute = AdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminImport
+      parentRoute: typeof rootRoute
+    }
     '/archetypes': {
       id: '/archetypes'
       path: '/archetypes'
@@ -86,6 +114,20 @@ declare module '@tanstack/react-router' {
       path: '/command'
       fullPath: '/command'
       preLoaderRoute: typeof CommandImport
+      parentRoute: typeof rootRoute
+    }
+    '/meta-analyzer': {
+      id: '/meta-analyzer'
+      path: '/meta-analyzer'
+      fullPath: '/meta-analyzer'
+      preLoaderRoute: typeof MetaAnalyzerImport
+      parentRoute: typeof rootRoute
+    }
+    '/optimizer': {
+      id: '/optimizer'
+      path: '/optimizer'
+      fullPath: '/optimizer'
+      preLoaderRoute: typeof OptimizerImport
       parentRoute: typeof rootRoute
     }
     '/profile': {
@@ -123,8 +165,11 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/meta-analyzer': typeof MetaAnalyzerRoute
+  '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
@@ -133,8 +178,11 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/meta-analyzer': typeof MetaAnalyzerRoute
+  '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
@@ -144,8 +192,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
   '/command': typeof CommandRoute
+  '/meta-analyzer': typeof MetaAnalyzerRoute
+  '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
@@ -156,8 +207,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/archetypes'
     | '/command'
+    | '/meta-analyzer'
+    | '/optimizer'
     | '/profile'
     | '/simulator'
     | '/upload'
@@ -165,8 +219,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/archetypes'
     | '/command'
+    | '/meta-analyzer'
+    | '/optimizer'
     | '/profile'
     | '/simulator'
     | '/upload'
@@ -174,8 +231,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/archetypes'
     | '/command'
+    | '/meta-analyzer'
+    | '/optimizer'
     | '/profile'
     | '/simulator'
     | '/upload'
@@ -185,8 +245,11 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   ArchetypesRoute: typeof ArchetypesRoute
   CommandRoute: typeof CommandRoute
+  MetaAnalyzerRoute: typeof MetaAnalyzerRoute
+  OptimizerRoute: typeof OptimizerRoute
   ProfileRoute: typeof ProfileRoute
   SimulatorRoute: typeof SimulatorRoute
   UploadRoute: typeof UploadRoute
@@ -195,8 +258,11 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   ArchetypesRoute: ArchetypesRoute,
   CommandRoute: CommandRoute,
+  MetaAnalyzerRoute: MetaAnalyzerRoute,
+  OptimizerRoute: OptimizerRoute,
   ProfileRoute: ProfileRoute,
   SimulatorRoute: SimulatorRoute,
   UploadRoute: UploadRoute,
@@ -214,8 +280,11 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/admin",
         "/archetypes",
         "/command",
+        "/meta-analyzer",
+        "/optimizer",
         "/profile",
         "/simulator",
         "/upload",
@@ -225,11 +294,20 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/admin": {
+      "filePath": "admin.tsx"
+    },
     "/archetypes": {
       "filePath": "archetypes.tsx"
     },
     "/command": {
       "filePath": "command.tsx"
+    },
+    "/meta-analyzer": {
+      "filePath": "meta-analyzer.tsx"
+    },
+    "/optimizer": {
+      "filePath": "optimizer.tsx"
     },
     "/profile": {
       "filePath": "profile.tsx"
