@@ -103,7 +103,7 @@ function UploadPage() {
       console.log(`Claude analysis completed for ${result.results.length} images`);
 
       // Process results
-      const successfulAnalyses = result.results.filter(r => r.success);
+      const successfulAnalyses = result.results.filter((r: any) => r.success);
       setImageAnalyses(result.results);
 
       // Update form with combined text

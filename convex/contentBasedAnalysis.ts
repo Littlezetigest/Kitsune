@@ -5,14 +5,14 @@ import { v } from "convex/values";
 import { api } from "./_generated/api";
 
 // Content-based analysis that derives insights purely from uploaded content
-export const analyzeUploadedContent = action({
+export const analyzeUploadedContent: any = action({
   args: {
     conversationId: v.id("conversations"),
     useClaudeAnalysis: v.optional(v.boolean())
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<any> => {
     // Get the conversation content
-    const conversation = await ctx.runQuery(api.conversations.getConversation, {
+    const conversation: any = await ctx.runQuery(api.conversations.getConversation, {
       id: args.conversationId
     });
 
@@ -359,7 +359,7 @@ function extractSection(text: string, sectionName: string): string[] {
 }
 
 // Store content-based analysis results
-export const storeContentAnalysis = action({
+export const storeContentAnalysis: any = action({
   args: {
     conversationId: v.id("conversations"),
     analysisResults: v.any(),
@@ -368,7 +368,7 @@ export const storeContentAnalysis = action({
       v.literal("direct-content-based")
     )
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<any> => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Not authenticated");

@@ -222,7 +222,7 @@ Would you be available for a strategic discussion this week to explore the partn
         optimization = {
           originalAnalysis: {
             messageAssessment: `LLM Analysis: ${llmResult.analysisBreakdown.originalWeaknesses.join(", ")}`,
-            targetAudience: targetData ? `${conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target"} (${targetData?.archetype} archetype)` : "Generic investor",
+            targetAudience: targetData ? `${conversations?.find((c: any) => c._id === selectedConversationId)?.participantName || "Target"} (${targetData?.archetype} archetype)` : "Generic investor",
             influenceGaps: llmResult.analysisBreakdown.originalWeaknesses,
             professionalLevel: "LLM-Enhanced Analysis"
           },
@@ -261,7 +261,7 @@ Would you be available for a strategic discussion this week to explore the partn
         // Get target data from selected conversation
         const targetData = selectedAnalysis ? {
           archetype: selectedAnalysis?.primaryArchetype,
-          participantName: conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target",
+          participantName: conversations?.find((c: any) => c._id === selectedConversationId)?.participantName || "Target",
           vulnerabilities: selectedAnalysis?.vulnerabilities,
           communicationStyle: selectedAnalysis?.communicationStyle,
           personalityMatrix: selectedAnalysis?.personalityMatrix
@@ -412,7 +412,7 @@ Would you be available for a strategic discussion this week to explore the partn
                       className="select select-bordered bg-black/20 border-gray-600"
                     >
                       <option value="">Select target conversation...</option>
-                      {conversations?.map((conversation) => (
+                      {conversations?.map((conversation: any) => (
                         <option key={conversation._id} value={conversation._id}>
                           {conversation.title} {conversation.participantName ? `- ${conversation.participantName}` : ""}
                         </option>

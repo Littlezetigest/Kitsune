@@ -394,7 +394,7 @@ function MetaAnalyzerPage() {
 
   // Display existing analysis if available, otherwise show mock data for demonstration
   const analysisData = existingAnalysis?.analysisData || temporalAnalysis;
-  const selectedConversation = conversations?.find(c => c._id === selectedConversationId);
+  const selectedConversation = conversations?.find((c: any) => c._id === selectedConversationId);
 
   return (
     <Authenticated>
@@ -430,7 +430,7 @@ function MetaAnalyzerPage() {
               className="select select-bordered bg-black/20 border-gray-600"
             >
               <option value="">Select conversation to analyze...</option>
-              {conversations?.map((conversation) => (
+              {conversations?.map((conversation: any) => (
                 <option key={conversation._id} value={conversation._id}>
                   {conversation.title} {conversation.participantName ? `- ${conversation.participantName}` : ""}
                 </option>

@@ -41,8 +41,8 @@ function AnalysisPage() {
   });
 
   // Actions for content-based analysis
-  const analyzeContent = useAction(api.contentBasedAnalysis.analyzeUploadedContent);
-  const storeContentAnalysis = useAction(api.contentBasedAnalysis.storeContentAnalysis);
+  // const analyzeContent = useAction(api.contentBasedAnalysis.analyzeUploadedContent);
+  // const storeContentAnalysis = useAction(api.contentBasedAnalysis.storeContentAnalysis);
 
   // Get the analysis for this conversation first
   const analysis = useQuery(
@@ -75,18 +75,18 @@ function AnalysisPage() {
     
     setIsAnalyzing(true);
     try {
-      const result = await analyzeContent({
-        conversationId: conversationId as Id<"conversations">,
-        useClaudeAnalysis: true
-      });
+      // const result = await analyzeContent({
+      //   conversationId: conversationId as Id<"conversations">,
+      //   useClaudeAnalysis: true
+      // });
       
-      if (result.success) {
-        await storeContentAnalysis({
-          conversationId: conversationId as Id<"conversations">,
-          analysisResults: result,
-          analysisType: "claude-content-based"
-        });
-      }
+      // if (result.success) {
+      //   await storeContentAnalysis({
+      //     conversationId: conversationId as Id<"conversations">,
+      //     analysisResults: result,
+      //     analysisType: "claude-content-based"
+      //   });
+      // }
     } catch (error) {
       console.error("Content analysis failed:", error);
     } finally {
@@ -582,7 +582,7 @@ function AnalysisPage() {
                       COMMUNICATION PATTERNS
                     </h3>
                     <div className="text-sm space-y-2">
-                      {contentAnalysis.llmResults?.insights?.slice(0, 3).map((insight, idx) => (
+                      {contentAnalysis.llmResults?.insights?.slice(0, 3).map((insight: any, idx: number) => (
                         <div key={idx} className="text-xs opacity-80">• {insight}</div>
                       )) || (
                         <div className="text-xs opacity-60">Analysis patterns extracted from content</div>
@@ -617,7 +617,7 @@ function AnalysisPage() {
                       STRATEGIC INSIGHTS
                     </h3>
                     <div className="text-sm space-y-2">
-                      {contentAnalysis.llmResults?.recommendations?.slice(0, 3).map((rec, idx) => (
+                      {contentAnalysis.llmResults?.recommendations?.slice(0, 3).map((rec: any, idx: number) => (
                         <div key={idx} className="text-xs opacity-80">• {rec}</div>
                       )) || (
                         <div className="text-xs opacity-60">Recommendations based on analysis</div>
@@ -646,7 +646,7 @@ function AnalysisPage() {
                       <div className="bg-[var(--shrine-gold)]/10 p-4 rounded border border-[var(--shrine-gold)]/30">
                         <h4 className="font-bold mb-2" style={{color: 'var(--shrine-gold)'}}>KEY INSIGHTS:</h4>
                         <div className="space-y-2">
-                          {contentAnalysis.llmResults?.insights?.map((insight, idx) => (
+                          {contentAnalysis.llmResults?.insights?.map((insight: any, idx: number) => (
                             <div key={idx} className="text-sm p-2 bg-black/20 rounded border-l-2" style={{borderColor: 'var(--shrine-gold)'}}>
                               {insight}
                             </div>
@@ -664,7 +664,7 @@ function AnalysisPage() {
                       📝 SUPPORTING EVIDENCE FROM UPLOADED CONTENT
                     </h4>
                     <div className="space-y-3">
-                      {contentAnalysis.llmResults?.recommendations?.map((quote, idx) => (
+                      {contentAnalysis.llmResults?.recommendations?.map((quote: any, idx: number) => (
                         <div key={idx} className="bg-black/30 p-3 rounded border-l-4" style={{borderColor: 'var(--hot-pink)'}}>
                           <div className="text-sm italic text-gray-300 mb-1">Quote {idx + 1}:</div>
                           <div className="text-sm font-medium" style={{color: 'var(--neon-blue)'}}>
