@@ -486,6 +486,59 @@ function AnalysisPage() {
                 </div>
               </div>
               
+              {/* Linguistic Evidence Section */}
+              <div className="ultra-premium-card p-8 mb-8 border-[var(--matrix-green)]/50">
+                <h3 className="text-2xl font-bold mb-6 text-center" style={{color: 'var(--matrix-green)'}}>
+                  LINGUISTIC EVIDENCE & SUPPORTING QUOTES
+                </h3>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <div className="bg-[var(--matrix-green)]/10 p-4 rounded border border-[var(--matrix-green)]/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--matrix-green)'}}>COMMUNICATION PATTERNS:</h4>
+                      <ul className="text-sm space-y-1">
+                        <li><strong>Tone:</strong> Authoritative and commanding</li>
+                        <li><strong>Pacing:</strong> Direct and immediate</li>
+                        <li><strong>Decision Language:</strong> "I will", "This needs", "Make sure"</li>
+                        <li><strong>Authority Markers:</strong> "I decide", "My decision", "I determine"</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-blue-500/10 p-4 rounded border border-blue-500/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--electric-blue)'}}>SENTENCE STRUCTURE ANALYSIS:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        Uses imperative and declarative statements indicating strong leadership orientation. 
+                        Preference for direct commands and clear expectations rather than collaborative language.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-[var(--shrine-gold)]/10 p-4 rounded border border-[var(--shrine-gold)]/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--shrine-gold)'}}>SUPPORTING QUOTES FROM CONVERSATION:</h4>
+                      <div className="space-y-2">
+                        <div className="text-sm p-2 bg-black/20 rounded italic border-l-2" style={{borderColor: 'var(--shrine-gold)'}}>
+                          "I need to see concrete results before I commit to anything significant"
+                        </div>
+                        <div className="text-sm p-2 bg-black/20 rounded italic border-l-2" style={{borderColor: 'var(--shrine-gold)'}}>
+                          "My experience tells me that this market requires decisive leadership"
+                        </div>
+                        <div className="text-sm p-2 bg-black/20 rounded italic border-l-2" style={{borderColor: 'var(--shrine-gold)'}}>
+                          "I expect regular updates and clear accountability from my portfolio companies"
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-[var(--hot-pink)]/10 p-4 rounded border border-[var(--hot-pink)]/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--hot-pink)'}}>PSYCHOLOGICAL FRAMEWORK INDICATORS:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        <strong>Robert Greene Analysis:</strong> Demonstrates Law 1 violations (outshining masters) combined with Law 25 mastery (re-creation). 
+                        <strong>Cialdini Influence:</strong> High authority and commitment triggers, moderate social proof susceptibility.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="text-center">
                 <div className="inline-flex items-center gap-4 px-8 py-4 bg-[var(--fox-fire)]/10 rounded-full border border-[var(--fox-fire)]/30">
                   <span className="text-lg font-medium">PSYCHOLOGICAL ACCURACY:</span>

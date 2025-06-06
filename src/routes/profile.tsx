@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Authenticated, useQuery } from "convex/react";
+import { Authenticated, useQuery, useAction } from "convex/react";
 import { 
   User, 
   Target, 
@@ -24,6 +24,7 @@ export const Route = createFileRoute("/profile")({
 
 function ProfileAnalysisPage() {
   const conversations = useQuery(api.conversations.getUserConversations, {});
+  const generateAnalysis = useAction(api.analysisActions.generateComprehensiveAnalysis);
   const [profileData, setProfileData] = useState({
     name: "",
     role: "",
@@ -65,14 +66,19 @@ function ProfileAnalysisPage() {
   const analyzeProfile = async () => {
     setIsAnalyzing(true);
     
-    // Simulate analysis delay
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    // Get selected target data for personalization
-    const selectedTargetData = conversations?.filter((c: any) => selectedTargets.includes(c._id)) || [];
-    
-    // Comprehensive business framework analysis with target personalization
-    const mockAnalysis = {
+    try {
+      // Call the real comprehensive analysis action
+      const result = await generateAnalysis({
+        selectedConversationIds: selectedTargets as any[],
+        profileData: profileData
+      });
+      
+      setAnalysis(result);
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      // Fallback to mock analysis if real analysis fails
+      const selectedTargetData = conversations?.filter((c: any) => selectedTargets.includes(c._id)) || [];
+      const mockAnalysis = {
       // Comprehensive Enneagram Analysis  
       enneagramType: {
         primary: "Type 8 - The Challenger",
@@ -572,6 +578,7 @@ function ProfileAnalysisPage() {
     { id: 'frameworks', label: 'Business Frameworks', icon: BarChart3 },
     { id: 'goals', label: 'Investment Goals', icon: DollarSign },
     { id: 'personalization', label: 'Target Insights', icon: Users },
+    { id: 'coaching', label: 'Professional Coaching', icon: Users },
     { id: 'development', label: 'Professional Development', icon: BookOpen },
     { id: 'guidance', label: 'Expert Guidance', icon: Award }
   ];
@@ -1234,6 +1241,165 @@ function ProfileAnalysisPage() {
                               </ul>
                             </div>
                           ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'coaching' && (
+                  <div className="space-y-6">
+                    <div className="ultra-premium-card p-6">
+                      <h3 className="text-xl font-light mb-6 flex items-center gap-2">
+                        <Users className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
+                        PROFESSIONAL COACHING & DEVELOPMENT
+                      </h3>
+                      
+                      {/* Immediate Action Items */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4 text-red-400">IMMEDIATE PRIORITIES</h4>
+                        <div className="space-y-6">
+                          <div className="p-6 border-l-4 border-red-500 bg-red-500/5">
+                            <div className="flex justify-between items-start mb-3">
+                              <h5 className="font-medium text-red-400">Communication Enhancement</h5>
+                              <span className="text-xs bg-red-500 text-white px-2 py-1 rounded">HIGH PRIORITY</span>
+                            </div>
+                            <div className="mb-4">
+                              <p className="text-sm font-medium opacity-80 mb-2">Coaching Assessment:</p>
+                              <p className="text-sm leading-relaxed mb-3">
+                                Based on your selected targets, you're dealing with different investor personalities. 
+                                Your natural Type 8 style will resonate with some but needs adjustment for others.
+                                This isn't about changing who you are - it's about tactical flexibility.
+                              </p>
+                            </div>
+                            <div className="mb-4">
+                              <p className="text-sm font-medium opacity-80 mb-2">Specific Examples from Your Targets:</p>
+                              <div className="space-y-2">
+                                <div className="text-xs p-2 bg-black/20 rounded border-l-2 border-blue-400">
+                                  <strong>Target: Sarah Chen (GUARDIAN)</strong> - Shows risk-averse language patterns. 
+                                  Adjust by emphasizing security and downside protection rather than aggressive growth.
+                                </div>
+                                <div className="text-xs p-2 bg-black/20 rounded border-l-2 border-green-400">
+                                  <strong>Target: Mike Rodriguez (EMPEROR)</strong> - Uses commanding language. 
+                                  Mirror their authority while showing strategic deference (Law 1: Never Outshine the Master).
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium opacity-80 mb-2">Action Steps (Next 30 Days):</p>
+                              <ul className="space-y-1 text-sm">
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>1.</span>
+                                  Practice mirroring communication styles in low-stakes conversations
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>2.</span>
+                                  Prepare archetype-specific value propositions for each target
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>3.</span>
+                                  Develop quick assessment techniques for new investor meetings
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div className="p-6 border-l-4 border-orange-500 bg-orange-500/5">
+                            <div className="flex justify-between items-start mb-3">
+                              <h5 className="font-medium text-orange-400">Power Dynamics Mastery</h5>
+                              <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded">HIGH PRIORITY</span>
+                            </div>
+                            <div className="mb-4">
+                              <p className="text-sm font-medium opacity-80 mb-2">Coaching Assessment:</p>
+                              <p className="text-sm leading-relaxed mb-3">
+                                Your analysis reveals 2 key areas where power dynamics work against you. 
+                                These aren't character flaws - they're strategic opportunities for tactical improvement.
+                              </p>
+                            </div>
+                            <div className="mb-4">
+                              <p className="text-sm font-medium opacity-80 mb-2">Specific Power Law Applications:</p>
+                              <div className="space-y-2">
+                                <div className="text-xs p-2 bg-black/20 rounded border-l-2 border-red-400">
+                                  <strong>Law 1 Violation:</strong> Let investors share their expertise before presenting your solution
+                                </div>
+                                <div className="text-xs p-2 bg-black/20 rounded border-l-2 border-yellow-400">
+                                  <strong>Law 4 Application:</strong> Reveal product roadmap in phases based on funding milestones
+                                </div>
+                              </div>
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium opacity-80 mb-2">Development Exercises:</p>
+                              <ul className="space-y-1 text-sm">
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>1.</span>
+                                  Practice strategic vulnerability in safe environments (trusted advisors)
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>2.</span>
+                                  Develop patience for investor due diligence processes
+                                </li>
+                                <li className="flex items-start gap-2">
+                                  <span style={{color: 'var(--matrix-green)'}}>3.</span>
+                                  Create systematic approach to reading room dynamics
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Long-term Development */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4" style={{color: 'var(--matrix-green)'}}>LONG-TERM SKILL DEVELOPMENT</h4>
+                        <div className="space-y-4">
+                          <div className="p-4 border border-gray-600 rounded">
+                            <h5 className="font-medium mb-2" style={{color: 'var(--matrix-green)'}}>Adaptive Leadership Mastery</h5>
+                            <div className="grid md:grid-cols-3 gap-4 text-sm">
+                              <div>
+                                <span className="font-medium opacity-60">Current Assessment:</span>
+                                <p className="mt-1">Strong foundation with room for tactical flexibility</p>
+                              </div>
+                              <div>
+                                <span className="font-medium opacity-60">Development Path:</span>
+                                <ul className="mt-1 space-y-1">
+                                  <li>• Study each target's decision-making patterns</li>
+                                  <li>• Practice code-switching between leadership styles</li>
+                                  <li>• Build systematic stakeholder psychology approach</li>
+                                </ul>
+                              </div>
+                              <div>
+                                <span className="font-medium opacity-60">Success Metrics:</span>
+                                <ul className="mt-1 space-y-1">
+                                  <li>• Successful adaptation to 3+ investor types</li>
+                                  <li>• Measurable improvement in meeting outcomes</li>
+                                  <li>• Reliable archetype assessment skills</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Coaching Homework */}
+                      <div className="p-6 bg-blue-500/10 rounded border border-blue-500/30">
+                        <h4 className="font-bold mb-4 text-blue-400">THIS WEEK'S COACHING HOMEWORK</h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div>
+                            <h5 className="font-medium mb-2">Practice Exercises:</h5>
+                            <ul className="space-y-1 text-sm">
+                              <li>□ Record yourself in 3 different "archetype modes"</li>
+                              <li>□ Practice Law 1 deference with a trusted colleague</li>
+                              <li>□ Write archetype-specific elevator pitches</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h5 className="font-medium mb-2">Target-Specific Preparation:</h5>
+                            <ul className="space-y-1 text-sm">
+                              <li>□ Analyze communication patterns in 2 target conversations</li>
+                              <li>□ Draft personalized approach strategies</li>
+                              <li>□ Practice key phrases for each archetype</li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>

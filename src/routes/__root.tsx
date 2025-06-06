@@ -161,11 +161,11 @@ function RootComponent() {
                     <div className="navbar-center hidden lg:flex">
                       <nav className="flex gap-2">
                         <Link
-                          to="/command"
+                          to="/archetypes"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
-                           COMMAND
+                           ARCHETYPES
                         </Link>
                         <Link
                           to="/upload"
@@ -194,13 +194,6 @@ function RootComponent() {
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            OPTIMIZER
-                        </Link>
-                        <Link
-                          to="/archetypes"
-                          className="fox-fire-btn text-xs tracking-widest"
-                          onClick={() => setIsSidebarOpen(false)}
-                        >
-                           ARCHETYPES
                         </Link>
                         <Link
                           to="/profile"
@@ -240,11 +233,11 @@ function RootComponent() {
                       <ul className="space-y-2">
                         <li>
                           <Link
-                            to="/command"
+                            to="/archetypes"
                             onClick={() => setIsSidebarOpen(false)}
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
-                            COMMAND
+                            ARCHETYPES
                           </Link>
                         </li>
                         <li>
@@ -281,15 +274,6 @@ function RootComponent() {
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             OPTIMIZER
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/archetypes"
-                            onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
-                          >
-                            ARCHETYPES
                           </Link>
                         </li>
                         <li>
