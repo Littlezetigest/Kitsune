@@ -8,13 +8,10 @@ import {
   Shield, 
   Crown,
   Brain,
-  Star,
-  Compass,
   AlertTriangle,
-  TrendingUp,
   User,
   Activity,
-  Timeline,
+  Clock,
   BarChart3
 } from "lucide-react";
 import { api } from "../../convex/_generated/api";
@@ -122,12 +119,6 @@ function WarRoomSimulator() {
     personalStakes: [],
     challengesMet: [],
     vulnerabilitiesExposed: []
-  });
-  const [sessionScore, setSessionScore] = useState({
-    persuasiveness: 0,
-    strategicUse: 0,
-    rapport: 0,
-    overallRating: 0
   });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -274,6 +265,24 @@ function WarRoomSimulator() {
           "I'm ready to deploy capital. You've proven you can execute under pressure.",
           "Let's structure this deal properly. I want protection, but I believe in what you've built."
         ]
+      },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: ["Show me the numbers.", "Cut to the chase.", "Facts only."],
+          responses: ["Prove it.", "Numbers work.", "I'm listening."]
+        },
+        negotiation: {
+          openingStyle: ["Here's what I need.", "These are my terms.", "Take it or leave it."],
+          responses: ["Fair deal.", "Acceptable.", "Let's do it."]
+        },
+        followUp: {
+          openingStyle: ["Status report?", "How are metrics?", "Progress update."],
+          responses: ["Good progress.", "On track.", "Solid execution."]
+        },
+        crisis: {
+          openingStyle: ["What's the damage?", "How bad is it?", "Recovery plan?"],
+          responses: ["We'll survive.", "Fought worse.", "Adapt and overcome."]
+        }
       },
       psychologicalHooks: {
         validationNeeds: ['Proven execution', 'Battle-tested strategies', 'Survival instincts'],
@@ -529,6 +538,24 @@ function WarRoomSimulator() {
           "This is the kind of opportunity my analysis has been pointing toward. Let's structure this properly."
         ]
       },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: ["Show me the data.", "Where's your model?", "Prove your assumptions."],
+          responses: ["Data checks out.", "Model is sound.", "Assumptions validated."]
+        },
+        negotiation: {
+          openingStyle: ["Let's analyze terms.", "Risk-adjusted pricing?", "What's the expected value?"],
+          responses: ["Mathematically sound.", "Risk is acceptable.", "Value proposition clear."]
+        },
+        followUp: {
+          openingStyle: ["Updated metrics?", "Model performing?", "New data points?"],
+          responses: ["Tracking projections.", "Model accurate.", "Data validates thesis."]
+        },
+        crisis: {
+          openingStyle: ["What went wrong?", "Root cause analysis?", "How to model this?"],
+          responses: ["Data explains it.", "Pattern identified.", "Model updated."]
+        }
+      },
       psychologicalHooks: {
         validationNeeds: ['Analytical validation', 'Data accuracy', 'Theoretical soundness'],
         statusTriggers: ['Analytical expertise', 'Predictive accuracy', 'Research depth'],
@@ -621,7 +648,7 @@ function WarRoomSimulator() {
     return triggers;
   };
 
-  const updateConversationState = (state: ConversationState, triggers: string[], message: string): ConversationState => {
+  const updateConversationState = (state: ConversationState, triggers: string[], _message: string): ConversationState => {
     const newState = { ...state };
     
     // Update trust and suspicion based on triggers
@@ -725,6 +752,24 @@ function WarRoomSimulator() {
           `You've convinced me. This fits perfectly with my portfolio strategy.`,
           `Let's make this happen. I see the value proposition clearly now.`
         ]
+      },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: [`Let's hear your proposal.`, `What's the opportunity?`, `Tell me more about this.`],
+          responses: [`Interesting approach.`, `Worth considering.`, `Let's explore this.`]
+        },
+        negotiation: {
+          openingStyle: [`Let's discuss terms.`, `What are you thinking?`, `How do we structure this?`],
+          responses: [`That works for me.`, `Reasonable proposal.`, `Let's move forward.`]
+        },
+        followUp: {
+          openingStyle: [`How are things progressing?`, `Any updates?`, `What's the latest?`],
+          responses: [`Good to hear.`, `Keep me posted.`, `Looks promising.`]
+        },
+        crisis: {
+          openingStyle: [`What's happening?`, `How can we address this?`, `What's the plan?`],
+          responses: [`We'll figure it out.`, `Let's work together.`, `Thanks for the update.`]
+        }
       },
       psychologicalHooks: {
         validationNeeds: analysis.keywordPatterns?.statusWords || ['Recognition', 'Success'],
@@ -992,7 +1037,7 @@ function WarRoomSimulator() {
           {simulationMode === 'target' && selectedTargetId && (
             <div className="ultra-premium-card p-6">
               <h3 className="text-lg font-light mb-4 flex items-center gap-2">
-                <Timeline className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                <Clock className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
                 META-ANALYSIS
               </h3>
               
@@ -1094,7 +1139,7 @@ function WarRoomSimulator() {
                     className="cyber-btn text-xs p-2"
                     style={{background: 'var(--matrix-green)', color: 'black'}}
                   >
-                    <Timeline className="w-3 h-3 mr-1" />
+                    <Clock className="w-3 h-3 mr-1" />
                     Generate Meta-Analysis
                   </button>
                   <p className="text-xs opacity-60 mt-2">

@@ -847,23 +847,9 @@ function prioritizeNextSteps(metaNarrative: any, timeline: any, psychology: any)
   const nextSteps = [];
   const currentPhase = determineCurrentPhase(timeline);
   
-  nextSteps.push({
-    priority: "High",
-    action: `Execute ${currentPhase.toLowerCase()} specific engagement strategy`,
-    timeframe: "Immediate (1-3 days)"
-  });
-  
-  nextSteps.push({
-    priority: "Medium", 
-    action: "Deploy identified psychological triggers and archetype optimization",
-    timeframe: "Short-term (1 week)"
-  });
-  
-  nextSteps.push({
-    priority: "Medium",
-    action: "Prepare next phase transition strategy and materials",
-    timeframe: "Medium-term (2 weeks)"
-  });
+  nextSteps.push(`Execute ${currentPhase.toLowerCase()} specific engagement strategy`);
+  nextSteps.push("Deploy identified psychological triggers and archetype optimization");
+  nextSteps.push("Prepare next phase transition strategy and materials");
   
   return nextSteps;
 }

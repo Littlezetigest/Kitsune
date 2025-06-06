@@ -34,9 +34,9 @@ function CommunicationOptimizerPage() {
   const [activeTab, setActiveTab] = useState('analysis');
   const [useLLMEnhancement, setUseLLMEnhancement] = useState(false);
 
-  // LLM-powered analysis mutations
-  const generateLLMAnalysis = useMutation(api.llmAnalysis.generateLLMAnalysis);
-  const enhanceCommunicationWithLLM = useMutation(api.llmAnalysis.enhanceCommunicationWithLLM);
+  // LLM-powered analysis mutations (temporarily disabled)
+  // const generateLLMAnalysis = useMutation(api.llmAnalysis.generateLLMAnalysis);
+  // const enhanceCommunicationWithLLM = useMutation(api.llmAnalysis.enhanceCommunicationWithLLM);
 
   // Real message analysis function
   const analyzeMessageContent = (message: string) => {
@@ -147,7 +147,7 @@ Would you be available for a strategic discussion this week to explore the partn
   };
   
   // Fetch user's conversations and analyses
-  const conversations = useQuery(api.conversations.getConversations);
+  const conversations = useQuery(api.conversations.getUserConversations);
   const selectedAnalysis = selectedConversationId 
     ? useQuery(api.analysis.getAnalysis, { conversationId: selectedConversationId as any })
     : undefined;
@@ -171,7 +171,7 @@ Would you be available for a strategic discussion this week to explore the partn
     try {
       let optimization;
       
-      if (useLLMEnhancement && selectedConversationId) {
+      if (false && useLLMEnhancement && selectedConversationId) { // Temporarily disabled
         // Use LLM-powered enhancement
         const targetData = selectedAnalysis ? {
           archetype: selectedAnalysis.primaryArchetype,
@@ -405,8 +405,8 @@ Would you be available for a strategic discussion this week to explore the partn
                   </div>
                 </div>
 
-                {/* LLM Enhancement Toggle */}
-                <div className="form-control">
+                {/* LLM Enhancement Toggle - Temporarily Hidden */}
+                <div className="form-control hidden">
                   <label className="label cursor-pointer">
                     <span className="label-text font-medium opacity-80">🤖 LLM-Powered Enhancement</span>
                     <input
@@ -414,17 +414,12 @@ Would you be available for a strategic discussion this week to explore the partn
                       checked={useLLMEnhancement}
                       onChange={(e) => setUseLLMEnhancement(e.target.checked)}
                       className="toggle toggle-primary"
-                      disabled={!selectedConversationId}
+                      disabled={true}
                     />
                   </label>
                   <div className="label">
                     <span className="label-text-alt opacity-60">
-                      {!selectedConversationId 
-                        ? "Select a target conversation to enable LLM enhancement" 
-                        : useLLMEnhancement 
-                          ? "Advanced AI analysis for maximum psychological impact"
-                          : "Use traditional pattern-based analysis"
-                      }
+                      LLM enhancement temporarily disabled during development
                     </span>
                   </div>
                 </div>

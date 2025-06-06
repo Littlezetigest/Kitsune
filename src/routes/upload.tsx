@@ -532,7 +532,7 @@ Best regards,
             ) : (
               <>
                 <Brain className="w-4 h-4 mr-2" />
-                {isAdmin ? 'UPLOAD & ANALYZE TARGET' : 'PREVIEW & SUPPORT KITSUNE'}
+                {isAdmin ? 'UPLOAD & ANALYZE TARGET' : 'UPLOAD & MAKE TARGET'}
               </>
             )}
           </button>

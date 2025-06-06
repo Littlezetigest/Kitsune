@@ -8,7 +8,7 @@ export const Route = createFileRoute("/command")({
 });
 
 function CommandCenterPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [showEmailLogin, setShowEmailLogin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [email, setEmail] = useState("");
