@@ -69,9 +69,17 @@ Please provide:
    - What to avoid based on their signals
    - Optimal timing and framing strategies
 
+6. SUPPORTING EVIDENCE from the uploaded content:
+   - Extract 3-5 specific quotes that best demonstrate the patterns identified
+   - Include exact text from conversations/messages as evidence
+   - Show specific examples of language that reveals behavioral indicators
+   - Quote specific phrases that demonstrate motivational drivers
+
+IMPORTANT: If this content was extracted from images (indicated by file headers like "=== filename.jpg ==="), make sure to quote directly from the extracted text to provide concrete evidence for your analysis.
+
 Base your analysis ONLY on patterns, language, and behaviors observable in this specific content. Do not apply external personality frameworks or assume characteristics not evidenced in the text.
 
-Return your analysis in JSON format with clear sections for each category.`;
+Return your analysis in JSON format with clear sections for each category, including the supporting evidence section.`;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {

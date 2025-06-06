@@ -558,17 +558,19 @@ function AnalysisPage() {
         {analysisView === 'target' && (
           <>
             {analysisType === 'content-based' && contentAnalysis ? (
-              <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
-                  style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
-                  data-text="CONTENT-BASED INSIGHTS">
-                CONTENT-BASED INSIGHTS
-              </h2>
+              <div className="archetype-display mb-6">
+                <h2 className="text-6xl font-bold text-center px-8 py-4 bg-[var(--matrix-green)]/20 border-2 border-[var(--matrix-green)] rounded-lg" 
+                    style={{color: 'var(--matrix-green)'}}>
+                  CONTENT-BASED INSIGHTS
+                </h2>
+              </div>
             ) : (
-              <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
-                  style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
-                  data-text={mockAnalysis.primaryArchetype}>
-                {mockAnalysis.primaryArchetype}
-              </h2>
+              <div className="archetype-display mb-6">
+                <h2 className="text-6xl font-bold text-center px-8 py-4 bg-[var(--matrix-green)]/20 border-2 border-[var(--matrix-green)] rounded-lg" 
+                    style={{color: 'var(--matrix-green)'}}>
+                  {mockAnalysis.primaryArchetype}
+                </h2>
+              </div>
             )}
             
             {/* Content-Based Analysis Results */}
@@ -626,9 +628,9 @@ function AnalysisPage() {
                 
                 <div className="ultra-premium-card p-8 mb-8 border-[var(--cyber-green)]/50">
                   <h3 className="text-2xl font-bold mb-6 text-center" style={{color: 'var(--cyber-green)'}}>
-                    CONTENT-BASED INSIGHTS
+                    CONTENT-BASED INSIGHTS & EVIDENCE
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-8">
+                  <div className="grid md:grid-cols-2 gap-8 mb-8">
                     <div className="space-y-4">
                       <div className="bg-[var(--cyber-green)]/10 p-4 rounded border border-[var(--cyber-green)]/30">
                         <h4 className="font-bold mb-2" style={{color: 'var(--cyber-green)'}}>COMMUNICATION ANALYSIS:</h4>
@@ -653,6 +655,30 @@ function AnalysisPage() {
                           )}
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  
+                  {/* Supporting Evidence Section with Quotes */}
+                  <div className="bg-[var(--hot-pink)]/10 p-6 rounded border border-[var(--hot-pink)]/30">
+                    <h4 className="font-bold mb-4 text-lg" style={{color: 'var(--hot-pink)'}}>
+                      📝 SUPPORTING EVIDENCE FROM UPLOADED CONTENT
+                    </h4>
+                    <div className="space-y-3">
+                      {contentAnalysis.llmResults?.recommendations?.map((quote, idx) => (
+                        <div key={idx} className="bg-black/30 p-3 rounded border-l-4" style={{borderColor: 'var(--hot-pink)'}}>
+                          <div className="text-sm italic text-gray-300 mb-1">Quote {idx + 1}:</div>
+                          <div className="text-sm font-medium" style={{color: 'var(--neon-blue)'}}>
+                            "{quote}"
+                          </div>
+                        </div>
+                      )) || (
+                        <div className="text-sm opacity-60 italic">
+                          Supporting quotes will appear here when content analysis includes extracted evidence from uploaded images or text.
+                        </div>
+                      )}
+                    </div>
+                    <div className="mt-4 text-xs opacity-70">
+                      💡 These quotes are extracted directly from your uploaded conversation images/text and demonstrate the behavioral patterns identified in the analysis.
                     </div>
                   </div>
                 </div>
@@ -762,11 +788,12 @@ function AnalysisPage() {
         
         {analysisView === 'self' && (
           <>
-            <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
-                style={{color: 'var(--cyber-green)', textShadow: '0 0 30px var(--cyber-green)', filter: 'brightness(1.3)'}}
-                data-text={mockUserProfile.primaryArchetype}>
-              {mockUserProfile.primaryArchetype}
-            </h2>
+            <div className="archetype-display mb-6">
+              <h2 className="text-6xl font-bold text-center px-8 py-4 bg-[var(--cyber-green)]/20 border-2 border-[var(--cyber-green)] rounded-lg" 
+                  style={{color: 'var(--cyber-green)'}}>
+                {mockUserProfile.primaryArchetype}
+              </h2>
+            </div>
             
             <div className="max-w-4xl mx-auto mb-8">
               <div className="grid md:grid-cols-3 gap-6 mb-8">
