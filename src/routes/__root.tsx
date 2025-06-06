@@ -189,18 +189,18 @@ function RootComponent() {
                            SIMULATE
                         </Link>
                         <Link
-                          to="/archetypes"
-                          className="fox-fire-btn text-xs tracking-widest"
-                          onClick={() => setIsSidebarOpen(false)}
-                        >
-                           ARCHETYPES
-                        </Link>
-                        <Link
                           to="/optimizer"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
                         >
                            OPTIMIZER
+                        </Link>
+                        <Link
+                          to="/archetypes"
+                          className="fox-fire-btn text-xs tracking-widest"
+                          onClick={() => setIsSidebarOpen(false)}
+                        >
+                           ARCHETYPES
                         </Link>
                         <Link
                           to="/meta-analyzer"
@@ -283,20 +283,20 @@ function RootComponent() {
                         </li>
                         <li>
                           <Link
-                            to="/archetypes"
-                            onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
-                          >
-                            ARCHETYPES
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
                             to="/optimizer"
                             onClick={() => setIsSidebarOpen(false)}
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             OPTIMIZER
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/archetypes"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
+                          >
+                            ARCHETYPES
                           </Link>
                         </li>
                         <li>

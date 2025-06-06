@@ -42,6 +42,8 @@ interface ConversationState {
 interface ArchetypePersonality {
   name: string;
   icon: any;
+  isTextFirst?: boolean;
+  isImpatient?: boolean;
   characterTraits: {
     personalBackstory: string;
     coreFears: string[];
@@ -55,6 +57,24 @@ interface ArchetypePersonality {
     skepticalResponses: string[];
     impressedResponses: string[];
     convincedResponses: string[];
+  };
+  scenarioVariations: {
+    pitch: {
+      openingStyle: string[];
+      responses: string[];
+    };
+    negotiation: {
+      openingStyle: string[];
+      responses: string[];
+    };
+    followUp: {
+      openingStyle: string[];
+      responses: string[];
+    };
+    crisis: {
+      openingStyle: string[];
+      responses: string[];
+    };
   };
   psychologicalHooks: {
     validationNeeds: string[];
@@ -146,6 +166,56 @@ function WarRoomSimulator() {
           "Let's do this. I'll even throw in some connections from my wellness network."
         ]
       },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: [
+            "So like, what's the spiritual angle here?",
+            "How does this align with conscious business?",
+            "My shaman says I should only invest in aligned ventures..."
+          ],
+          responses: [
+            "That resonates deeply.",
+            "The universe is calling me to this.",
+            "Let me meditate on it."
+          ]
+        },
+        negotiation: {
+          openingStyle: [
+            "Can we structure this ethically?",
+            "What about impact metrics?",
+            "I want this to be win-win-win for everyone..."
+          ],
+          responses: [
+            "Love the conscious approach.",
+            "This feels right.",
+            "Let's make it beautiful."
+          ]
+        },
+        followUp: {
+          openingStyle: [
+            "How's the energy been since we last talked?",
+            "Any synchronicities happening?",
+            "The retreat taught me to check in intuitively..."
+          ],
+          responses: [
+            "The vibes are good.",
+            "I sense positive momentum.",
+            "Universe is aligning."
+          ]
+        },
+        crisis: {
+          openingStyle: [
+            "What's the lesson here?",
+            "How do we turn this into growth?",
+            "My spiritual advisor says every crisis is an opportunity..."
+          ],
+          responses: [
+            "Trust the process.",
+            "Growth through challenge.",
+            "This too shall pass."
+          ]
+        }
+      },
       psychologicalHooks: {
         validationNeeds: ['Spiritual wisdom', 'Good intentions', 'Making a difference'],
         statusTriggers: ['Exclusive access', 'Being part of something meaningful', 'Early adopter status'],
@@ -212,6 +282,8 @@ function WarRoomSimulator() {
     'THE_JOKER': {
       name: 'The Joker/Affairist',
       icon: Zap,
+      isTextFirst: true,
+      isImpatient: true,
       characterTraits: {
         personalBackstory: 'Serial dealmaker, extensive network, thrives on complex arrangements',
         coreFears: ['Being out-maneuvered', 'Missing angles', 'Static situations'],
@@ -246,6 +318,56 @@ function WarRoomSimulator() {
           "Question is: are you ready to scale this fast?"
         ]
       },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: [
+            "Interesting. What's the real angle here?",
+            "I can see 3 ways to structure this. Which one did you miss?",
+            "Platform or point solution?"
+          ],
+          responses: [
+            "Scale it.",
+            "Who else is in?",
+            "Next move?"
+          ]
+        },
+        negotiation: {
+          openingStyle: [
+            "Here's what I'm thinking...",
+            "Multi-stage deal. You in?",
+            "I have a better structure."
+          ],
+          responses: [
+            "Complex but doable.",
+            "I'm orchestrating this.",
+            "Trust the process."
+          ]
+        },
+        followUp: {
+          openingStyle: [
+            "Connected you to Samsung. Update?",
+            "That intro to Microsoft work?",
+            "Network effects kicking in?"
+          ],
+          responses: [
+            "Leverage that.",
+            "Scale faster.",
+            "More intros coming."
+          ]
+        },
+        crisis: {
+          openingStyle: [
+            "Pivot opportunity?",
+            "New angle needed?",
+            "Emergency network activation?"
+          ],
+          responses: [
+            "Restructure it.",
+            "I have contacts.",
+            "Crisis = opportunity."
+          ]
+        }
+      },
       psychologicalHooks: {
         validationNeeds: ['Strategic brilliance', 'Deal complexity', 'Network value'],
         statusTriggers: ['Master dealmaker', 'Connector reputation', 'Orchestrator identity'],
@@ -262,11 +384,13 @@ function WarRoomSimulator() {
     'THE_EMPEROR': {
       name: 'The Emperor/Daddy',
       icon: Crown,
+      isTextFirst: true,
+      isImpatient: true,
       characterTraits: {
         personalBackstory: 'Built multiple successful companies, enjoys mentoring, expects deference',
         coreFears: ['Loss of control', 'Naive founders', 'Wasted potential'],
         motivationalTriggers: ['Legacy building', 'Control maintenance', 'Mentorship opportunities'],
-        communicationStyle: 'Authoritative, paternalistic, directive',
+        communicationStyle: 'Authoritative, paternalistic, directive, prefers brief texts',
         decisionPattern: 'Dominant decision-maker, expects compliance, strategic vision'
       },
       conversationPatterns: {
@@ -295,6 +419,56 @@ function WarRoomSimulator() {
           "You'll have access to my network, my experience, and my resources. In return, I expect complete transparency and quick execution on my recommendations.",
           "Welcome to the portfolio. Let's build something that outlasts both of us."
         ]
+      },
+      scenarioVariations: {
+        pitch: {
+          openingStyle: [
+            "Skip the deck. Tell me in 30 seconds why this matters.",
+            "I've seen this movie before. What's different?",
+            "You have 2 minutes. Go."
+          ],
+          responses: [
+            "Numbers. Show me real customer revenue.",
+            "Who's your competition and why will you win?",
+            "Next."
+          ]
+        },
+        negotiation: {
+          openingStyle: [
+            "Here are my terms. Take it or leave it.",
+            "I don't negotiate. I make offers.",
+            "This is what's happening."
+          ],
+          responses: [
+            "Non-negotiable.",
+            "That's the deal.",
+            "Moving on."
+          ]
+        },
+        followUp: {
+          openingStyle: [
+            "Status report. 30 seconds.",
+            "Numbers from last week?",
+            "Problems?"
+          ],
+          responses: [
+            "Fix it.",
+            "Execute.",
+            "Report next week."
+          ]
+        },
+        crisis: {
+          openingStyle: [
+            "What happened?",
+            "How bad?",
+            "Solutions. Now."
+          ],
+          responses: [
+            "Implement immediately.",
+            "No excuses.",
+            "Call me tonight."
+          ]
+        }
       },
       psychologicalHooks: {
         validationNeeds: ['Authority recognition', 'Wisdom acknowledgment', 'Legacy importance'],
@@ -361,12 +535,26 @@ function WarRoomSimulator() {
     }
   };
 
-  const generateResponse = (userMessage: string, archetype: ArchetypePersonality, state: ConversationState): string => {
+  const generateResponse = (userMessage: string, archetype: ArchetypePersonality, state: ConversationState, scenario: string): string => {
     // Analyze user message for psychological triggers
     const triggers = analyzeMessageTriggers(userMessage);
     
     // Update conversation state based on triggers
     const newState = updateConversationState(state, triggers, userMessage);
+    
+    // Use scenario-specific responses if available
+    const scenarioKey = scenario as keyof typeof archetype.scenarioVariations;
+    const scenarioData = archetype.scenarioVariations?.[scenarioKey];
+    
+    // Handle text-first and impatient archetypes
+    if (archetype.isTextFirst && archetype.isImpatient) {
+      if (userMessage.length > 100) {
+        return "Too long. Summarize.";
+      }
+      if (scenarioData) {
+        return selectResponse(scenarioData.responses);
+      }
+    }
     
     // Select appropriate response based on phase and triggers
     if (triggers.includes('weakness_shown')) {
@@ -386,6 +574,11 @@ function WarRoomSimulator() {
         newState.phase = 'impressed';
       }
       return selectResponse(archetype.conversationPatterns.impressedResponses);
+    }
+    
+    // Use scenario-specific responses when appropriate
+    if (scenarioData && Math.random() > 0.5) {
+      return selectResponse(scenarioData.responses);
     }
     
     // Default response based on conversation phase
@@ -466,7 +659,7 @@ function WarRoomSimulator() {
         archetype = archetypePersonalities[selectedArchetype];
       }
       
-      const response = generateResponse(currentMessage, archetype, conversationState);
+      const response = generateResponse(currentMessage, archetype, conversationState, scenario);
       
       const investorMessage: Message = {
         role: 'investor',

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Authenticated } from "convex/react";
+import { Authenticated, useQuery } from "convex/react";
 import { 
   Brain, 
   Target, 
@@ -18,6 +18,7 @@ import {
   Award
 } from "lucide-react";
 import { useState } from "react";
+import { api } from "../../convex/_generated/api";
 
 export const Route = createFileRoute("/optimizer")({
   component: CommunicationOptimizerPage,
@@ -25,11 +26,17 @@ export const Route = createFileRoute("/optimizer")({
 
 function CommunicationOptimizerPage() {
   const [inputMessage, setInputMessage] = useState("");
-  const [targetArchetype, setTargetArchetype] = useState("");
+  const [selectedConversationId, setSelectedConversationId] = useState("");
   const [analysisMode, setAnalysisMode] = useState("comprehensive");
   const [optimization, setOptimization] = useState<any>(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [activeTab, setActiveTab] = useState('analysis');
+  
+  // Fetch user's conversations and analyses
+  const conversations = useQuery(api.conversations.getConversations);
+  const selectedAnalysis = selectedConversationId 
+    ? useQuery(api.analysis.getAnalysis, { conversationId: selectedConversationId as any })
+    : undefined;
 
   const archetypes = [
     { id: "prince", name: "THE PRINCE / CHILD", description: "Experience-driven investor" },
@@ -50,13 +57,22 @@ function CommunicationOptimizerPage() {
     // Simulate optimization processing
     await new Promise(resolve => setTimeout(resolve, 3000));
     
-    // Mock comprehensive optimization analysis
+    // Get target data from selected conversation
+    const targetData = selectedAnalysis ? {
+      archetype: selectedAnalysis.primaryArchetype,
+      participantName: conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target",
+      vulnerabilities: selectedAnalysis.vulnerabilities,
+      communicationStyle: selectedAnalysis.communicationStyle,
+      personalityMatrix: selectedAnalysis.personalityMatrix
+    } : null;
+    
+    // Mock comprehensive optimization analysis with target-specific data
     const mockOptimization = {
       originalAnalysis: {
         messageAssessment: "Direct but lacks psychological sophistication and professional authority markers",
-        targetAudience: targetArchetype || "Generic investor",
+        targetAudience: targetData ? `${targetData.participantName} (${targetData.archetype} archetype)` : "Generic investor",
         influenceGaps: [
-          "Missing social proof and credibility indicators",
+          targetData ? `Missing triggers for ${targetData.archetype} psychology` : "Missing social proof and credibility indicators",
           "Lacks urgency and scarcity elements", 
           "No embedded psychological triggers",
           "Amateur language patterns reduce perceived expertise"
@@ -65,9 +81,13 @@ function CommunicationOptimizerPage() {
       },
       strategicObjectives: {
         primaryGoal: "Secure investment commitment and follow-up meeting",
-        targetArchetype: targetArchetype || "Multi-archetype approach",
-        psychologicalProfile: "Authority-seeking, risk-conscious, status-aware",
-        keyInfluencePoints: "Credibility, exclusivity, market timing, competitive advantage"
+        targetArchetype: targetData?.archetype || "Multi-archetype approach",
+        psychologicalProfile: targetData ? 
+          `${targetData.archetype} - Risk tolerance: ${targetData.personalityMatrix.riskTolerance}/10, Decision speed: ${targetData.personalityMatrix.decisionSpeed}/10` :
+          "Authority-seeking, risk-conscious, status-aware",
+        keyInfluencePoints: targetData ?
+          `Exploit: ${targetData.vulnerabilities.map((v: any) => v.type).join(', ')}` :
+          "Credibility, exclusivity, market timing, competitive advantage"
       },
       frameworkApplications: {
         cialdini: {
@@ -183,9 +203,8 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
         </div>
 
         {/* Input Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          <div className="lg:col-span-2">
-            <div className="ultra-premium-card p-8">
+        <div className="max-w-4xl mx-auto mb-8">
+          <div className="ultra-premium-card p-8">
               <div className="flex items-center gap-3 mb-6">
                 <MessageSquare className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
                 <h2 className="text-xl font-light tracking-wide">MESSAGE INPUT</h2>
@@ -207,17 +226,17 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text font-medium opacity-80">Target Archetype</span>
+                      <span className="label-text font-medium opacity-80">Target Conversation</span>
                     </label>
                     <select
-                      value={targetArchetype}
-                      onChange={(e) => setTargetArchetype(e.target.value)}
+                      value={selectedConversationId}
+                      onChange={(e) => setSelectedConversationId(e.target.value)}
                       className="select select-bordered bg-black/20 border-gray-600"
                     >
-                      <option value="">Auto-Detect / Multi-Target</option>
-                      {archetypes.map((archetype) => (
-                        <option key={archetype.id} value={archetype.id}>
-                          {archetype.name}
+                      <option value="">Select target conversation...</option>
+                      {conversations?.map((conversation) => (
+                        <option key={conversation._id} value={conversation._id}>
+                          {conversation.title} {conversation.participantName ? `- ${conversation.participantName}` : ""}
                         </option>
                       ))}
                     </select>
@@ -260,64 +279,6 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
                 </button>
               </div>
             </div>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="space-y-4">
-            <div className="ultra-premium-card p-6">
-              <h3 className="text-lg font-light mb-4 flex items-center gap-2">
-                <Award className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
-                OPTIMIZATION STATS
-              </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm opacity-70">Messages Optimized</span>
-                  <span className="font-bold" style={{color: 'var(--matrix-green)'}}>1,247</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm opacity-70">Response Rate Increase</span>
-                  <span className="font-bold" style={{color: 'var(--matrix-green)'}}>340%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm opacity-70">Frameworks Integrated</span>
-                  <span className="font-bold" style={{color: 'var(--matrix-green)'}}>12</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm opacity-70">Success Rate</span>
-                  <span className="font-bold" style={{color: 'var(--matrix-green)'}}>87%</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="ultra-premium-card p-6">
-              <h3 className="text-lg font-light mb-4 flex items-center gap-2">
-                <Users className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
-                ACTIVE FRAMEWORKS
-              </h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{background: 'var(--matrix-green)'}}></div>
-                  Cialdini's Influence Principles
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{background: 'var(--matrix-green)'}}></div>
-                  Chris Voss FBI Negotiation
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{background: 'var(--matrix-green)'}}></div>
-                  SPIN Selling Methodology
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{background: 'var(--matrix-green)'}}></div>
-                  NLP Language Patterns
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{background: 'var(--matrix-green)'}}></div>
-                  Silicon Valley Terminology
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Results Section */}
