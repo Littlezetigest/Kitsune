@@ -207,8 +207,7 @@ function analyzeInvestorArchetype(text: string) {
   };
 }
 
-function analyzeArchetypeDepth(text: string, patterns: any, archetypeName: string) {
-  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+function analyzeArchetypeDepth(text: string, patterns: any, _archetypeName: string) {
   
   // Score different linguistic dimensions
   const scores = {
@@ -234,7 +233,7 @@ function analyzeArchetypeDepth(text: string, patterns: any, archetypeName: strin
   scores.sentence_structure = analyzeSentenceStructure(text, patterns.sentence_structure);
   
   // Extract supporting quotes
-  const quotes = extractSupportingQuotes(text, patterns, archetypeName);
+  const quotes = extractSupportingQuotes(text, patterns, _archetypeName);
   
   // Calculate weighted total score
   const total_score = (
@@ -293,7 +292,7 @@ function analyzeSentenceStructure(text: string, expectedStructure: string): numb
   return score;
 }
 
-function extractSupportingQuotes(text: string, patterns: any, archetypeName: string): string[] {
+function extractSupportingQuotes(text: string, patterns: any, _archetypeName: string): string[] {
   const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 10);
   const quotes: string[] = [];
   
@@ -339,7 +338,7 @@ function getDominantTone(text: string, patterns: any): string {
   return 'neutral';
 }
 
-function getCommunicationStyle(text: string, patterns: any): string {
+function getCommunicationStyle(text: string, _patterns: any): string {
   const wordCount = text.split(' ').length;
   const sentenceCount = text.split(/[.!?]+/).length;
   const avgWordsPerSentence = wordCount / sentenceCount;
@@ -621,7 +620,7 @@ function analyzeCommunicationStyle(text: string, profileData: any) {
   };
 }
 
-function generatePowerAnalysis(targetAnalyses: any[], communicationStyle: any) {
+function generatePowerAnalysis(_targetAnalyses: any[], communicationStyle: any) {
   const violated_laws = [
     {
       law: "Law 1: Never Outshine the Master",
@@ -661,7 +660,7 @@ function generatePowerAnalysis(targetAnalyses: any[], communicationStyle: any) {
   return { violated_laws, power_strengths, recommended_power_moves: [] };
 }
 
-function generateCoachingRecommendations(archetype: any, powerAnalysis: any, targetAnalyses: any[], profileData: any) {
+function generateCoachingRecommendations(archetype: any, powerAnalysis: any, targetAnalyses: any[], _profileData: any) {
   const targetInsights = targetAnalyses.map(target => ({
     target: target.conversation.participantName || target.conversation.title,
     archetype: target.analysis?.primaryArchetype || "UNKNOWN",
@@ -760,7 +759,7 @@ function generateTargetPersonalization(targetAnalyses: any[]) {
   };
 }
 
-function generateProfessionalDevelopment(archetype: any, powerAnalysis: any) {
+function generateProfessionalDevelopment(_archetype: any, _powerAnalysis: any) {
   return {
     skill_development_plan: [
       {
@@ -793,7 +792,7 @@ function generateNLPProfile(text: string) {
   };
 }
 
-function calculateSuccessMetrics(archetype: any, powerAnalysis: any, targetAnalyses: any[]) {
+function calculateSuccessMetrics(_archetype: any, _powerAnalysis: any, targetAnalyses: any[]) {
   return {
     overall_success_probability: 72 + (targetAnalyses.length * 5),
     investor_appeal_score: 8.1,
