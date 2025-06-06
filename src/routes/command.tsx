@@ -147,7 +147,7 @@ function CommandCenterPage() {
                 </div>
               </div>
               
-              <h1 className="premium-title mb-6" style={{color: 'var(--matrix-green)'}}>
+              <h1 className="premium-title mb-6 text-black">
                 OPERATION KITSUNE
               </h1>
               
@@ -157,6 +157,14 @@ function CommandCenterPage() {
                 PSYCHOLOGICAL WARFARE COMMAND CENTER
               </div>
               
+              {!isAuthenticated && (
+                <button 
+                  onClick={handleAuthentication}
+                  className="fox-fire-btn text-lg tracking-widest px-8 py-4 mb-6"
+                >
+                  AUTHENTICATE ACCESS
+                </button>
+              )}
             </div>
           </div>
 
@@ -288,11 +296,11 @@ function CommandCenterPage() {
                         />
                       </div>
                       
-                      <h3 className="text-xl font-light mb-4 spirit-hologram" style={{color: module.color}} data-text={module.name}>
+                      <h3 className="text-xl font-light mb-4 spirit-hologram text-black bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text" data-text={module.name}>
                         {module.name}
                       </h3>
                       
-                      <p className="text-sm opacity-70 mb-6 leading-relaxed">
+                      <p className="text-sm opacity-70 mb-6 leading-relaxed text-black bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text">
                         {module.description}
                       </p>
                       
