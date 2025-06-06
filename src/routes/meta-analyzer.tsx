@@ -557,7 +557,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-6">
-          {(analysisData.phases || temporalAnalysis.phases).map((phase: any, index: number) => (
+          {(temporalAnalysis.phases || []).map((phase: any, index: number) => (
             <div key={phase.id} className={`border rounded p-4 ${
               phase.status === 'in_progress' ? 'border-[var(--matrix-green)]' : 'border-gray-600'
             }`}>
@@ -586,7 +586,7 @@ function MetaAnalyzerPage() {
                     Key Milestones
                   </h5>
                   <ul className="text-sm space-y-1">
-                    {phase.keyMilestones.map((milestone, idx) => (
+                    {phase.keyMilestones.map((milestone: any, idx: number) => (
                       <li key={idx} className="flex items-start gap-2">
                         <ChevronRight className="w-3 h-3 mt-0.5" style={{color: 'var(--matrix-green)'}} />
                         {milestone}
@@ -623,7 +623,7 @@ function MetaAnalyzerPage() {
                   Strategic Insights
                 </h5>
                 <div className="flex flex-wrap gap-2">
-                  {phase.strategicInsights.map((insight, idx) => (
+                  {phase.strategicInsights.map((insight: any, idx: number) => (
                     <span key={idx} className="px-2 py-1 bg-blue-500/20 rounded text-xs">
                       {insight}
                     </span>
@@ -643,7 +643,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-4">
-          {(analysisData.criticalMoments || temporalAnalysis.criticalMoments).map((moment: any, index: number) => (
+          {(temporalAnalysis.criticalMoments || []).map((moment: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-3">
                 <div>
@@ -681,7 +681,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {(analysisData.predictiveModeling?.scenarioAnalysis || temporalAnalysis.predictiveModeling.scenarioAnalysis).map((scenario: any, index: number) => (
+          {(temporalAnalysis.predictiveModeling?.scenarioAnalysis || []).map((scenario: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-3">
                 <h4 className="font-medium">{scenario.scenario}</h4>
@@ -704,7 +704,7 @@ function MetaAnalyzerPage() {
               <div className="mt-3">
                 <div className="text-xs opacity-70 mb-1">Key Factors:</div>
                 <div className="flex flex-wrap gap-1">
-                  {scenario.keyFactors.map((factor, idx) => (
+                  {scenario.keyFactors.map((factor: any, idx: number) => (
                     <span key={idx} className="px-2 py-1 bg-gray-700/50 rounded text-xs">
                       {factor}
                     </span>
@@ -724,7 +724,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-4">
-          {(analysisData.predictiveModeling?.recommendedActions || temporalAnalysis.predictiveModeling.recommendedActions).map((action: any, index: number) => (
+          {(temporalAnalysis.predictiveModeling?.recommendedActions || []).map((action: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">

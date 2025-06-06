@@ -21,6 +21,35 @@ import { useState } from "react";
 import { api } from "../../convex/_generated/api";
 import { useMutation } from "convex/react";
 
+// Missing function implementation for LLM enhancement
+async function enhanceCommunicationWithLLM(params: any) {
+  // Placeholder implementation for build compatibility
+  return {
+    enhancedMessage: params.originalMessage + " [Enhanced]",
+    confidence: 0.85,
+    reasoning: "LLM enhancement applied based on target archetype",
+    analysisBreakdown: {
+      originalWeaknesses: ["Generic language", "Missing psychological triggers"],
+      psychologicalTriggers: ["Authority", "Social proof", "Scarcity"],
+      improvementAreas: ["Personalization", "Framework application"],
+      enhancementStrategies: ["Psychological triggers", "Framework application"],
+      frameworkApplications: ["Cialdini principles", "Power dynamics"]
+    },
+    professional: {
+      message: params.originalMessage + " [Professional Enhancement]",
+      improvements: ["Enhanced formality", "Clear structure"]
+    },
+    archetypeSpecific: {
+      message: params.originalMessage + " [Archetype-Specific Enhancement]",
+      reasoning: "Tailored for target archetype"
+    },
+    persuasive: {
+      message: params.originalMessage + " [Persuasive Enhancement]",
+      techniques: ["Cialdini principles", "Psychological frameworks"]
+    }
+  };
+}
+
 export const Route = createFileRoute("/optimizer")({
   component: CommunicationOptimizerPage,
 });
@@ -174,10 +203,10 @@ Would you be available for a strategic discussion this week to explore the partn
       if (false && useLLMEnhancement && selectedConversationId) { // Temporarily disabled
         // Use LLM-powered enhancement
         const targetData = selectedAnalysis ? {
-          archetype: selectedAnalysis.primaryArchetype,
-          vulnerabilities: selectedAnalysis.vulnerabilities.map((v: any) => v.type),
-          communicationStyle: selectedAnalysis.communicationStyle.persuasionStyle,
-          emotionalDriver: selectedAnalysis.personalityMatrix.emotionalDriver
+          archetype: selectedAnalysis?.primaryArchetype,
+          vulnerabilities: selectedAnalysis?.vulnerabilities?.map((v: any) => v.type) || [],
+          communicationStyle: selectedAnalysis?.communicationStyle?.persuasionStyle || 'balanced',
+          emotionalDriver: selectedAnalysis?.personalityMatrix?.emotionalDriver || 'growth'
         } : undefined;
 
         const llmResult = await enhanceCommunicationWithLLM({
@@ -187,10 +216,13 @@ Would you be available for a strategic discussion this week to explore the partn
           enhancementGoals: ["professional_sophistication", "psychological_optimization", "influence_maximization"]
         });
 
+        // Create safe archetype key for object
+        const archetypeKey = targetData?.archetype?.toLowerCase() || 'llm_optimized';
+
         optimization = {
           originalAnalysis: {
             messageAssessment: `LLM Analysis: ${llmResult.analysisBreakdown.originalWeaknesses.join(", ")}`,
-            targetAudience: targetData ? `${conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target"} (${targetData.archetype} archetype)` : "Generic investor",
+            targetAudience: targetData ? `${conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target"} (${targetData?.archetype} archetype)` : "Generic investor",
             influenceGaps: llmResult.analysisBreakdown.originalWeaknesses,
             professionalLevel: "LLM-Enhanced Analysis"
           },
@@ -198,7 +230,7 @@ Would you be available for a strategic discussion this week to explore the partn
             primaryGoal: "LLM-optimized investor engagement and commitment acceleration",
             targetArchetype: targetData?.archetype || "Multi-archetype approach",
             psychologicalProfile: targetData ? 
-              `${targetData.archetype} - Emotional driver: ${targetData.emotionalDriver}` :
+              `${targetData?.archetype} - Emotional driver: ${targetData?.emotionalDriver}` :
               "LLM-analyzed psychological profile",
             keyInfluencePoints: llmResult.analysisBreakdown.psychologicalTriggers.join(", ")
           },
@@ -211,9 +243,9 @@ Would you be available for a strategic discussion this week to explore the partn
           },
           optimizedVersions: {
             professional: llmResult.professional,
-            archetypeSpecific: targetData ? {
-              [targetData.archetype.toLowerCase()]: llmResult.archetypeSpecific
-            } : { llm_optimized: llmResult.archetypeSpecific },
+            archetypeSpecific: {
+              [archetypeKey]: llmResult.archetypeSpecific
+            },
             persuasive: llmResult.persuasive
           },
           strategicEnhancements: {
@@ -228,18 +260,18 @@ Would you be available for a strategic discussion this week to explore the partn
         
         // Get target data from selected conversation
         const targetData = selectedAnalysis ? {
-          archetype: selectedAnalysis.primaryArchetype,
+          archetype: selectedAnalysis?.primaryArchetype,
           participantName: conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target",
-          vulnerabilities: selectedAnalysis.vulnerabilities,
-          communicationStyle: selectedAnalysis.communicationStyle,
-          personalityMatrix: selectedAnalysis.personalityMatrix
+          vulnerabilities: selectedAnalysis?.vulnerabilities,
+          communicationStyle: selectedAnalysis?.communicationStyle,
+          personalityMatrix: selectedAnalysis?.personalityMatrix
         } : null;
     
         // Generate comprehensive optimization analysis with real target-specific data
         optimization = {
           originalAnalysis: {
             messageAssessment: generateMessageAssessment(messageAnalysis, targetData),
-            targetAudience: targetData ? `${targetData.participantName} (${targetData.archetype} archetype)` : "Generic investor",
+            targetAudience: targetData ? `Target (${targetData?.archetype} archetype)` : "Generic investor",
             influenceGaps: generateInfluenceGaps(messageAnalysis, targetData),
             professionalLevel: `${messageAnalysis.professionalLevel} - ${getImprovementNote(messageAnalysis.professionalLevel)}`
           },
@@ -247,10 +279,10 @@ Would you be available for a strategic discussion this week to explore the partn
         primaryGoal: "Secure investment commitment and follow-up meeting",
         targetArchetype: targetData?.archetype || "Multi-archetype approach",
         psychologicalProfile: targetData ? 
-          `${targetData.archetype} - Risk tolerance: ${targetData.personalityMatrix.riskTolerance}/10, Decision speed: ${targetData.personalityMatrix.decisionSpeed}/10` :
+          `${targetData?.archetype} - Risk tolerance: ${targetData?.personalityMatrix?.riskTolerance || 5}/10, Decision speed: ${targetData?.personalityMatrix?.decisionSpeed || 5}/10` :
           "Authority-seeking, risk-conscious, status-aware",
         keyInfluencePoints: targetData ?
-          `Exploit: ${targetData.vulnerabilities.map((v: any) => v.type).join(', ')}` :
+          `Exploit: ${targetData?.vulnerabilities?.map((v: any) => v.type).join(', ') || 'General triggers'}` :
           "Credibility, exclusivity, market timing, competitive advantage"
       },
       frameworkApplications: {
