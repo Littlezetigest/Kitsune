@@ -16,6 +16,7 @@ import { Route as SimulatorImport } from './routes/simulator'
 import { Route as ProfileImport } from './routes/profile'
 import { Route as OptimizerImport } from './routes/optimizer'
 import { Route as MetaAnalyzerImport } from './routes/meta-analyzer'
+import { Route as CommandImport } from './routes/command'
 import { Route as ArchetypesImport } from './routes/archetypes'
 import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
@@ -50,6 +51,12 @@ const OptimizerRoute = OptimizerImport.update({
 const MetaAnalyzerRoute = MetaAnalyzerImport.update({
   id: '/meta-analyzer',
   path: '/meta-analyzer',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CommandRoute = CommandImport.update({
+  id: '/command',
+  path: '/command',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -100,6 +107,13 @@ declare module '@tanstack/react-router' {
       path: '/archetypes'
       fullPath: '/archetypes'
       preLoaderRoute: typeof ArchetypesImport
+      parentRoute: typeof rootRoute
+    }
+    '/command': {
+      id: '/command'
+      path: '/command'
+      fullPath: '/command'
+      preLoaderRoute: typeof CommandImport
       parentRoute: typeof rootRoute
     }
     '/meta-analyzer': {
@@ -153,6 +167,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
+  '/command': typeof CommandRoute
   '/meta-analyzer': typeof MetaAnalyzerRoute
   '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
@@ -165,6 +180,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
+  '/command': typeof CommandRoute
   '/meta-analyzer': typeof MetaAnalyzerRoute
   '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
@@ -178,6 +194,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/archetypes': typeof ArchetypesRoute
+  '/command': typeof CommandRoute
   '/meta-analyzer': typeof MetaAnalyzerRoute
   '/optimizer': typeof OptimizerRoute
   '/profile': typeof ProfileRoute
@@ -192,6 +209,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/archetypes'
+    | '/command'
     | '/meta-analyzer'
     | '/optimizer'
     | '/profile'
@@ -203,6 +221,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/archetypes'
+    | '/command'
     | '/meta-analyzer'
     | '/optimizer'
     | '/profile'
@@ -214,6 +233,7 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/archetypes'
+    | '/command'
     | '/meta-analyzer'
     | '/optimizer'
     | '/profile'
@@ -227,6 +247,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   ArchetypesRoute: typeof ArchetypesRoute
+  CommandRoute: typeof CommandRoute
   MetaAnalyzerRoute: typeof MetaAnalyzerRoute
   OptimizerRoute: typeof OptimizerRoute
   ProfileRoute: typeof ProfileRoute
@@ -239,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   ArchetypesRoute: ArchetypesRoute,
+  CommandRoute: CommandRoute,
   MetaAnalyzerRoute: MetaAnalyzerRoute,
   OptimizerRoute: OptimizerRoute,
   ProfileRoute: ProfileRoute,
@@ -260,6 +282,7 @@ export const routeTree = rootRoute
         "/",
         "/admin",
         "/archetypes",
+        "/command",
         "/meta-analyzer",
         "/optimizer",
         "/profile",
@@ -276,6 +299,9 @@ export const routeTree = rootRoute
     },
     "/archetypes": {
       "filePath": "archetypes.tsx"
+    },
+    "/command": {
+      "filePath": "command.tsx"
     },
     "/meta-analyzer": {
       "filePath": "meta-analyzer.tsx"

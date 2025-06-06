@@ -3,28 +3,22 @@
 import { action } from "./_generated/server";
 import { v } from "convex/values";
 
-// Action to analyze images using Claude API
-export const analyzeImageWithClaude = action({
-  args: {
-    imageData: v.string(), // base64 image data
-    fileName: v.string(),
-    prompt: v.optional(v.string())
-  },
-  handler: async (ctx, { imageData, fileName, prompt }) => {
-    try {
-      console.log(`Analyzing image with Claude: ${fileName}`);
-      
-      // Extract image format and base64 data
-      const imageMatch = imageData.match(/^data:image\/([^;]+);base64,(.+)$/);
-      if (!imageMatch) {
-        throw new Error("Invalid image data format");
-      }
-      
-      const [, imageType, base64Data] = imageMatch;
-      console.log(`Image type: ${imageType}, data length: ${base64Data.length}`);
-      
-      // Default prompt for conversation analysis
-      const analysisPrompt = prompt || `Analyze this image and extract all text content including:
+// Helper function for analyzing a single image
+async function analyzeImageDirectly(imageData: string, fileName: string, prompt?: string) {
+  try {
+    console.log(`Analyzing image with Claude: ${fileName}`);
+    
+    // Extract image format and base64 data
+    const imageMatch = imageData.match(/^data:image\/([^;]+);base64,(.+)$/);
+    if (!imageMatch) {
+      throw new Error("Invalid image data format");
+    }
+    
+    const [, imageType, base64Data] = imageMatch;
+    console.log(`Image type: ${imageType}, data length: ${base64Data.length}`);
+    
+    // Default prompt for conversation analysis
+    const analysisPrompt = prompt || `Analyze this image and extract all text content including:
 1. Any conversation messages, chat logs, or email content
 2. Names of speakers/participants 
 3. Timestamps if visible
@@ -47,74 +41,85 @@ EMOJIS/REACTIONS: [any emojis or reactions found]
 
 Be thorough and accurate in extracting all visible text.`;
 
-      // Prepare the request to Claude API
-      const requestBody = {
-        model: "claude-3-5-sonnet-20241022",
-        max_tokens: 4000,
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "text",
-                text: analysisPrompt
-              },
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: `image/${imageType}`,
-                  data: base64Data
-                }
+    // Prepare the request to Claude API
+    const requestBody = {
+      model: "claude-3-5-sonnet-20241022",
+      max_tokens: 4000,
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "text",
+              text: analysisPrompt
+            },
+            {
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: `image/${imageType}`,
+                data: base64Data
               }
-            ]
-          }
-        ]
-      };
+            }
+          ]
+        }
+      ]
+    };
 
-      // Call Claude API
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": process.env.ANTHROPIC_API_KEY!,
-          "anthropic-version": "2023-06-01"
-        },
-        body: JSON.stringify(requestBody)
-      });
+    // Call Claude API
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": process.env.ANTHROPIC_API_KEY!,
+        "anthropic-version": "2023-06-01"
+      },
+      body: JSON.stringify(requestBody)
+    });
 
-      if (!response.ok) {
-        const error = await response.text();
-        console.error("Claude API error:", error);
-        throw new Error(`Claude API error: ${response.status} - ${error}`);
-      }
-
-      const result = await response.json();
-      console.log("Claude analysis completed successfully");
-      
-      // Extract the analysis text
-      const analysisText = result.content?.[0]?.text || "No analysis returned";
-      
-      // Parse the structured response
-      const analysis = parseClaudeAnalysis(analysisText);
-      
-      return {
-        success: true,
-        fileName,
-        analysisText,
-        ...analysis,
-        rawResponse: result
-      };
-      
-    } catch (error) {
-      console.error(`Error analyzing image ${fileName}:`, error);
-      return {
-        success: false,
-        fileName,
-        error: error instanceof Error ? error.message : "Unknown error",
-        analysisText: `Error analyzing image: ${error}`
-      };
+    if (!response.ok) {
+      const error = await response.text();
+      console.error("Claude API error:", error);
+      throw new Error(`Claude API error: ${response.status} - ${error}`);
     }
+
+    const result = await response.json();
+    console.log("Claude analysis completed successfully");
+    
+    // Extract the analysis text
+    const analysisText = result.content?.[0]?.text || "No analysis returned";
+    
+    // Parse the structured response
+    const analysis = parseClaudeAnalysis(analysisText);
+    
+    return {
+      success: true,
+      fileName,
+      analysisText,
+      ...analysis,
+      rawResponse: result
+    };
+    
+  } catch (error) {
+    console.error(`Error analyzing image ${fileName}:`, error);
+    return {
+      success: false,
+      fileName,
+      error: error instanceof Error ? error.message : "Unknown error",
+      analysisText: `Error analyzing image: ${error}`
+    };
+  }
+}
+
+// Action to analyze images using Claude API
+export const analyzeImageWithClaude = action({
+  args: {
+    imageData: v.string(), // base64 image data
+    fileName: v.string(),
+    prompt: v.optional(v.string())
+  },
+  handler: async (ctx, { imageData, fileName, prompt }) => {
+    return await analyzeImageDirectly(imageData, fileName, prompt);
   }
 });
 
@@ -194,11 +199,8 @@ export const batchAnalyzeImages = action({
     // Process images sequentially to avoid rate limiting
     for (const image of images) {
       try {
-        const result = await ctx.runAction(ctx.action("claudeImageAnalysis", "analyzeImageWithClaude"), {
-          imageData: image.imageData,
-          fileName: image.fileName,
-          prompt
-        });
+        // Call the analysis function directly instead of using runAction
+        const result = await analyzeImageDirectly(image.imageData, image.fileName, prompt);
         results.push(result);
         
         // Small delay between requests to be respectful to API
@@ -219,8 +221,8 @@ export const batchAnalyzeImages = action({
       totalImages: images.length,
       results,
       combinedText: results
-        .filter(r => r.success && r.extractedText)
-        .map(r => `=== ${r.fileName} ===\n${r.extractedText}`)
+        .filter(r => r.success && 'extractedText' in r && r.extractedText)
+        .map(r => `=== ${r.fileName} ===\n${(r as any).extractedText}`)
         .join('\n\n---\n\n')
     };
   }
