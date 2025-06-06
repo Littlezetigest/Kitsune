@@ -8,6 +8,22 @@ async function analyzeImageDirectly(imageData: string, fileName: string, prompt?
   try {
     console.log(`Analyzing image with Claude: ${fileName}`);
     
+    // Check if API key is available
+    if (!process.env.ANTHROPIC_API_KEY) {
+      console.log("No ANTHROPIC_API_KEY found, using mock extraction");
+      return {
+        success: true,
+        fileName,
+        analysisText: "Mock analysis - API key not configured",
+        extractedText: `Mock extracted text from ${fileName}:\n\nUser: Hey, are you interested in investing in our startup?\nInvestor: Tell me more about your business model and traction.\nUser: We have 50,000 users and $100K MRR.\nInvestor: That's impressive growth. What's your funding round?\nUser: We're raising $2M Series A.\nInvestor: I'd like to review your pitch deck and financials.`,
+        participants: ["User", "Investor"],
+        platform: "Mock Chat",
+        structure: "Business conversation",
+        emojisReactions: "None",
+        messageCount: 6
+      };
+    }
+    
     // Extract image format and base64 data
     const imageMatch = imageData.match(/^data:image\/([^;]+);base64,(.+)$/);
     if (!imageMatch) {
@@ -85,9 +101,16 @@ Be thorough and accurate in extracting all visible text.`;
 
     const result = await response.json();
     console.log("Claude analysis completed successfully");
+    console.log("Claude response structure:", {
+      hasContent: !!result.content,
+      contentLength: result.content?.length,
+      firstContentType: result.content?.[0]?.type,
+      firstContentText: result.content?.[0]?.text?.substring(0, 200) + "..."
+    });
     
     // Extract the analysis text
     const analysisText = result.content?.[0]?.text || "No analysis returned";
+    console.log("Extracted text preview:", analysisText.substring(0, 300) + "...");
     
     // Parse the structured response
     const analysis = parseClaudeAnalysis(analysisText);
@@ -216,14 +239,23 @@ export const batchAnalyzeImages = action({
       }
     }
     
+    const combinedText = results
+      .filter(r => r.success && 'extractedText' in r && r.extractedText)
+      .map(r => `=== ${r.fileName} ===\n${(r as any).extractedText}`)
+      .join('\n\n---\n\n');
+    
+    console.log("Batch analysis results:", {
+      totalImages: images.length,
+      successfulExtractions: results.filter(r => r.success && 'extractedText' in r && (r as any).extractedText).length,
+      combinedTextLength: combinedText.length,
+      combinedTextPreview: combinedText.substring(0, 500) + "..."
+    });
+
     return {
       success: true,
       totalImages: images.length,
       results,
-      combinedText: results
-        .filter(r => r.success && 'extractedText' in r && r.extractedText)
-        .map(r => `=== ${r.fileName} ===\n${(r as any).extractedText}`)
-        .join('\n\n---\n\n')
+      combinedText
     };
   }
 });

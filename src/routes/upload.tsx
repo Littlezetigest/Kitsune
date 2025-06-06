@@ -91,6 +91,8 @@ function UploadPage() {
       });
 
       console.log("Claude analysis result:", result);
+      console.log("Combined text length:", result.combinedText?.length);
+      console.log("Combined text preview:", result.combinedText?.substring(0, 500));
 
       // Update form with extracted text
       setFormData(prev => ({
@@ -148,11 +150,11 @@ function UploadPage() {
     <div className="not-prose max-w-4xl mx-auto p-6">
       <div className="ultra-premium-card p-8 mb-8">
         <div className="text-center mb-8">
-          <h1 className="premium-title mb-4">NEURAL UPLOAD INTERFACE</h1>
-          <p className="text-lg opacity-80 mb-2">CONVERSATION INTELLIGENCE EXTRACTION SYSTEM</p>
+          <h1 className="premium-title mb-4">CONVERSATION ANALYSIS PLATFORM</h1>
+          <p className="text-lg opacity-80 mb-2">COMMUNICATION INTELLIGENCE SYSTEM</p>
           <p className="text-sm opacity-60">
-            Upload conversations, emails, or chat screenshots for comprehensive psychological analysis. 
-            Advanced OCR technology extracts text from multiple images simultaneously for complete conversation mapping.
+            Upload conversations, emails, or chat screenshots for comprehensive communication analysis. 
+            Advanced OCR technology extracts text from multiple images simultaneously for complete conversation understanding.
           </p>
         </div>
 
@@ -253,6 +255,25 @@ function UploadPage() {
         )}
 
         {/* Form */}
+        {/* Debug Information */}
+        {formData.content && formData.content !== "No text found in images" && uploadMethod === "image" && (
+          <div className="cyber-card p-4 mb-6 border-[var(--cyber-green)]/50">
+            <h3 className="text-sm font-bold mb-2" style={{color: 'var(--cyber-green)'}}>
+              📋 EXTRACTED TEXT DEBUG
+            </h3>
+            <div className="text-xs space-y-1">
+              <div><strong>Text Length:</strong> {formData.content.length} characters</div>
+              <div><strong>Files Processed:</strong> {multipleFiles.length}</div>
+              <div className="mt-2">
+                <strong>Preview:</strong>
+                <div className="bg-black/30 p-2 rounded mt-1 max-h-20 overflow-y-auto text-xs font-mono">
+                  {formData.content.substring(0, 300)}...
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium mb-2">Target Dossier Title</label>

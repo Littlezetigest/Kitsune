@@ -403,7 +403,7 @@ function AnalysisPage() {
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="hologram-text text-5xl font-bold mb-4 sakura-glitch">
-           KITSUNE PSYCHOLOGICAL WARFARE SUITE
+           KITSUNE COMMUNICATION ANALYSIS PLATFORM
         </h1>
         <div className="flex items-center justify-center gap-4 mb-4">
           <Target className="w-8 h-8 fox-fire-glow" style={{color: 'var(--hot-pink)'}} />
@@ -413,7 +413,7 @@ function AnalysisPage() {
             </p>
             {conversation.participantName && (
               <p className="text-lg" style={{color: 'var(--golden-circuit)'}}>
-                SUBJECT: {conversation.participantName}
+                PARTICIPANT: {conversation.participantName}
               </p>
             )}
           </div>

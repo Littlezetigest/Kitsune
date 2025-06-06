@@ -440,16 +440,16 @@ function ArchetypesPage() {
         {/* Header */}
         <div className="text-center mb-20">
           <h1 className="premium-title mb-8">
-            STRATEGIC VULNERABILITIES & APPLICABLE LAWS
+            COMMUNICATION PATTERNS & STRATEGIC FRAMEWORKS
           </h1>
           <div className="bamboo-divider w-48 mx-auto mb-12"></div>
           <p className="premium-subtitle mb-8">
-            COMPREHENSIVE INVESTOR ARCHETYPE WARFARE MATRIX
+            COMPREHENSIVE INVESTOR ARCHETYPE ANALYSIS SYSTEM
           </p>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl font-light leading-relaxed opacity-90">
-              Advanced psychological warfare profiling system combining character analysis, Sun Tzu strategic principles,
-              and 48 Laws of Power applications for systematic investor manipulation and exploitation.
+              Advanced communication profiling system combining character analysis, strategic principles,
+              and influence frameworks for effective business relationship development and optimization.
             </p>
           </div>
         </div>
@@ -458,7 +458,7 @@ function ArchetypesPage() {
         <div className="mb-32">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-light tracking-wider mb-8 premium-subtitle">
-              INVESTOR ARCHETYPE VULNERABILITIES
+              INVESTOR COMMUNICATION PATTERNS
             </h2>
             <div className="bamboo-divider w-32 mx-auto"></div>
           </div>
