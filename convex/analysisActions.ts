@@ -226,7 +226,7 @@ function analyzeArchetypeDepth(text: string, patterns: any, archetypeName: strin
     scores.authority_markers = countModalityWords(text, patterns.linguistic_markers.authority_markers || []);
     
     // Analyze additional marker types
-    const additionalMarkers = Object.values(patterns.linguistic_markers).flat();
+    const additionalMarkers = Object.values(patterns.linguistic_markers).flat().filter((marker): marker is string => typeof marker === 'string');
     scores.authority_markers += countModalityWords(text, additionalMarkers);
   }
   
@@ -690,7 +690,7 @@ function generateCoachingRecommendations(archetype: any, powerAnalysis: any, tar
       {
         category: "Power Dynamics Mastery",
         priority: "HIGH",
-        specific_examples: powerAnalysis.violated_laws.map(law => 
+        specific_examples: powerAnalysis.violated_laws.map((law: any) => 
           `${law.law}: ${law.examples[0]}`
         ),
         coaching_feedback: `Your analysis reveals ${powerAnalysis.violated_laws.length} key areas where power dynamics work against you. These aren't character flaws - they're strategic opportunities.`,
