@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useMutation } from "convex/react";
+import { useMutation, useAction } from "convex/react";
 import { Upload, FileText, MessageCircle, Camera, Eye, Brain, X, Plus } from "lucide-react";
 import { useState, useRef } from "react";
 import { api } from "../../convex/_generated/api";
@@ -13,6 +13,8 @@ function UploadPage() {
   const navigate = useNavigate();
   const { user } = useUser();
   const uploadConversation = useMutation(api.conversations.uploadConversation);
+  const analyzeWithClaude = useAction(api.claudeImageAnalysis.analyzeImageWithClaude);
+  const batchAnalyzeWithClaude = useAction(api.claudeImageAnalysis.batchAnalyzeImages);
   
   const [formData, setFormData] = useState({
     title: "",
@@ -51,110 +53,89 @@ function UploadPage() {
     }
   };
 
-  const handleMultipleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMultipleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
-    if (files.length > 0) {
-      console.log(`Starting upload of ${files.length} files`);
-      setMultipleFiles(files);
-      setIsUploading(true);
-      const newImages: string[] = [];
-      const newAnalyses: any[] = [];
-      
-      let processedCount = 0;
-      let loadedCount = 0;
-      const totalFiles = files.length;
-      
-      const checkCompletion = () => {
-        if (processedCount === totalFiles) {
-          console.log(`All ${totalFiles} files processed. Successfully loaded: ${loadedCount}`);
-          setUploadedImages(newImages);
-          setImageAnalyses(newAnalyses);
-          
-          // Combine all extracted text that succeeded
-          const validAnalyses = newAnalyses.filter(analysis => analysis && analysis.extracted_text);
-          const combinedText = validAnalyses
-            .map((analysis, idx) => {
-              const originalIndex = newAnalyses.indexOf(analysis);
-              const fileName = originalIndex >= 0 ? files[originalIndex].name : `Image ${idx + 1}`;
-              return `=== ${fileName} ===\n${analysis.extracted_text}`;
-            })
-            .join('\n\n---\n\n');
-          
-          setFormData(prev => ({
-            ...prev,
-            content: combinedText || "Unable to extract text from uploaded images. Please try different images or upload as text.",
-            title: prev.title || `Multi-Image Analysis (${validAnalyses.length}/${totalFiles} processed)`
-          }));
-          
-          setIsUploading(false);
-        }
-      };
-      
-      files.forEach((file, index) => {
-        console.log(`Processing file ${index + 1}/${totalFiles}: ${file.name}`);
-        
-        // Validate file type and size
-        if (!file.type.startsWith('image/')) {
-          console.error(`File ${file.name} is not an image`);
-          processedCount++;
-          checkCompletion();
-          return;
-        }
-        
-        if (file.size > 10 * 1024 * 1024) { // 10MB limit
-          console.error(`File ${file.name} is too large (${(file.size / 1024 / 1024).toFixed(1)}MB)`);
-          processedCount++;
-          checkCompletion();
-          return;
-        }
-        
-        const reader = new FileReader();
-        
-        reader.onload = (e) => {
-          try {
-            const result = e.target?.result as string;
-            newImages[index] = result;
-            loadedCount++;
-            console.log(`File ${index + 1} loaded successfully`);
-            
-            // Analyze each image with comprehensive error handling
-            analyzeImage(result, file.name)
-              .then(analysis => {
-                console.log(`Analysis completed for file ${index + 1}`);
-                newAnalyses[index] = analysis;
-                processedCount++;
-                checkCompletion();
-              })
-              .catch(error => {
-                console.error(`Error analyzing image ${index + 1} (${file.name}):`, error);
-                // Set null analysis for failed images
-                newAnalyses[index] = null;
-                processedCount++;
-                checkCompletion();
-              });
-              
-          } catch (error) {
-            console.error(`Error processing file ${index + 1} (${file.name}):`, error);
-            processedCount++;
-            checkCompletion();
+    if (files.length === 0) return;
+
+    console.log(`Starting Claude analysis of ${files.length} images`);
+    setMultipleFiles(files);
+    setIsUploading(true);
+
+    try {
+      // Convert files to base64
+      const imagePromises = files.map(file => {
+        return new Promise<{imageData: string, fileName: string}>((resolve, reject) => {
+          // Validate file
+          if (!file.type.startsWith('image/')) {
+            reject(new Error(`${file.name} is not an image file`));
+            return;
           }
-        };
-        
-        reader.onerror = (error) => {
-          console.error(`Error reading file ${index + 1} (${file.name}):`, error);
-          processedCount++;
-          checkCompletion();
-        };
-        
-        // Start reading the file
-        try {
+          
+          if (file.size > 10 * 1024 * 1024) { // 10MB limit
+            reject(new Error(`${file.name} is too large (max 10MB)`));
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve({
+              imageData: reader.result as string,
+              fileName: file.name
+            });
+          };
+          reader.onerror = () => reject(new Error(`Failed to read ${file.name}`));
           reader.readAsDataURL(file);
-        } catch (error) {
-          console.error(`Error starting to read file ${index + 1} (${file.name}):`, error);
-          processedCount++;
-          checkCompletion();
-        }
+        });
       });
+
+      const images = await Promise.all(imagePromises);
+      console.log(`All ${images.length} images loaded, sending to Claude...`);
+
+      // Store images for display
+      setUploadedImages(images.map(img => img.imageData));
+
+      // Analyze with Claude API
+      const result = await batchAnalyzeWithClaude({ 
+        images,
+        prompt: "Analyze these conversation images and extract all text content. Focus on business/investment conversations. Include speaker names, messages, timestamps, and any emoji reactions."
+      });
+
+      console.log(`Claude analysis completed for ${result.results.length} images`);
+
+      // Process results
+      const successfulAnalyses = result.results.filter(r => r.success);
+      setImageAnalyses(result.results);
+
+      // Update form with combined text
+      setFormData(prev => ({
+        ...prev,
+        content: result.combinedText || "No text content extracted from images",
+        title: prev.title || `Claude Image Analysis (${successfulAnalyses.length}/${files.length} processed)`
+      }));
+
+    } catch (error) {
+      console.error("Error in Claude image analysis:", error);
+      
+      // Fallback: still show images but with error message
+      const imagePromises = files.map(file => {
+        return new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = () => resolve('');
+          reader.readAsDataURL(file);
+        });
+      });
+
+      const images = await Promise.all(imagePromises);
+      setUploadedImages(images.filter(img => img));
+      
+      setFormData(prev => ({
+        ...prev,
+        content: `Error analyzing images with Claude: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        title: prev.title || `Image Upload Error (${files.length} files)`
+      }));
+    } finally {
+      setIsUploading(false);
     }
   };
 

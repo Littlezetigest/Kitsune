@@ -161,13 +161,6 @@ function RootComponent() {
                     <div className="navbar-center hidden lg:flex">
                       <nav className="flex gap-2">
                         <Link
-                          to="/command"
-                          className="fox-fire-btn text-xs tracking-widest"
-                          onClick={() => setIsSidebarOpen(false)}
-                        >
-                           COMMAND
-                        </Link>
-                        <Link
                           to="/upload"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
@@ -238,15 +231,6 @@ function RootComponent() {
                     <div className="flex-1">
                       <div className="menu-title mb-4">Menu</div>
                       <ul className="space-y-2">
-                        <li>
-                          <Link
-                            to="/command"
-                            onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
-                          >
-                            COMMAND
-                          </Link>
-                        </li>
                         <li>
                           <Link
                             to="/upload"
