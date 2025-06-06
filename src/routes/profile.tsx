@@ -569,6 +569,7 @@ function ProfileAnalysisPage() {
     
     setAnalysis(mockAnalysis);
     setIsAnalyzing(false);
+    }
   };
 
   const tabs = [
