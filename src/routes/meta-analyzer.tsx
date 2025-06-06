@@ -12,7 +12,6 @@ import {
   AlertTriangle,
   CheckCircle,
   ArrowRight,
-  Timeline,
   Compass,
   Network,
   Lightbulb,
@@ -38,12 +37,13 @@ export const Route = createFileRoute("/meta-analyzer")(({
 function MetaAnalyzerPage() {
   const [selectedTimeframe, setSelectedTimeframe] = useState("full_history");
   const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
+  const [selectedTarget, setSelectedTarget] = useState<string | null>("marcus_chen");
   const [analysisMode, setAnalysisMode] = useState<"temporal" | "predictive" | "strategic">("temporal");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [currentPhase, setCurrentPhase] = useState<number | null>(null);
   
   // Convex queries and mutations
-  const conversations = useQuery(api.conversations.getConversations);
+  const conversations = useQuery(api.conversations.getUserConversations, {});
   const existingAnalysis = selectedConversationId 
     ? useQuery(api.metaNarrative.getMetaNarrativeAnalysis, { conversationId: selectedConversationId as any })
     : undefined;
@@ -552,7 +552,7 @@ function MetaAnalyzerPage() {
       {/* Temporal Phase Analysis */}
       <div className="ultra-premium-card p-6">
         <h3 className="text-xl font-light mb-6 flex items-center gap-2">
-          <Timeline className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
+          <Clock className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
           RELATIONSHIP EVOLUTION TIMELINE
         </h3>
 

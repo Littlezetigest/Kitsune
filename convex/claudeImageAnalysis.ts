@@ -118,7 +118,7 @@ export const analyzeImageWithClaude = action({
     fileName: v.string(),
     prompt: v.optional(v.string())
   },
-  handler: async (ctx, { imageData, fileName, prompt }) => {
+  handler: async (_ctx, { imageData, fileName, prompt }) => {
     return await analyzeImageDirectly(imageData, fileName, prompt);
   }
 });
@@ -191,7 +191,7 @@ export const batchAnalyzeImages = action({
     })),
     prompt: v.optional(v.string())
   },
-  handler: async (ctx, { images, prompt }) => {
+  handler: async (_ctx, { images, prompt }) => {
     console.log(`Starting batch analysis of ${images.length} images`);
     
     const results = [];

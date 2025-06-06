@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { api } from "./_generated/api";
 
 // Comprehensive Meta-Narrative Analysis System
 export const generateMetaNarrativeAnalysis = mutation({
@@ -261,7 +260,7 @@ async function mapPsychologicalTrajectory(interactions: any[], existingAnalysis:
   };
 }
 
-async function analyzeStrategicPositioning(interactions: any[], existingAnalysis: any) {
+async function analyzeStrategicPositioning(interactions: any[], _existingAnalysis: any) {
   return {
     marketPositionDevelopment: {
       competitiveAdvantageEvolution: analyzeCompetitiveAdvantage(interactions),
@@ -281,7 +280,7 @@ async function analyzeStrategicPositioning(interactions: any[], existingAnalysis
   };
 }
 
-async function generatePredictiveModels(interactions: any[], existingAnalysis: any) {
+async function generatePredictiveModels(interactions: any[], _existingAnalysis: any) {
   const currentPattern = analyzeCurrentPattern(interactions);
   const historicalTrends = analyzeHistoricalTrends(interactions);
   

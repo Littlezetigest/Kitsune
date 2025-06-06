@@ -642,7 +642,7 @@ function AnalysisPage() {
                     </div>
                   </div>
                   
-                  <div class="space-y-4">
+                  <div className="space-y-4">
                     <div className="bg-[var(--hot-pink)]/10 p-4 rounded border border-[var(--hot-pink)]/30">
                       <h4 className="font-bold mb-2" style={{color: 'var(--hot-pink)'}}>EXACT POSITIONING STATEMENT:</h4>
                       <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
