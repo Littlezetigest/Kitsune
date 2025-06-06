@@ -5,14 +5,14 @@ import { v } from "convex/values";
 import { api } from "./_generated/api";
 
 // Content-based analysis that derives insights purely from uploaded content
-export const analyzeUploadedContent: any = action({
+export const analyzeUploadedContent = action({
   args: {
     conversationId: v.id("conversations"),
     useClaudeAnalysis: v.optional(v.boolean())
   },
   handler: async (ctx, args): Promise<any> => {
     // Get the conversation content
-    const conversation: any = await ctx.runQuery(api.conversations.getConversation, {
+    const conversation = await ctx.runQuery(api.conversations.getConversation, {
       id: args.conversationId
     });
 
@@ -359,7 +359,7 @@ function extractSection(text: string, sectionName: string): string[] {
 }
 
 // Store content-based analysis results
-export const storeContentAnalysis: any = action({
+export const storeContentAnalysis = action({
   args: {
     conversationId: v.id("conversations"),
     analysisResults: v.any(),
