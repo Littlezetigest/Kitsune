@@ -249,4 +249,95 @@ export default defineSchema({
     createdAt: v.number(),
   }).index("by_user", ["userId"])
     .index("by_target", ["targetAnalysisId"]),
+
+  // Meta-Narrative Analysis - Comprehensive temporal relationship intelligence
+  metaNarrativeAnalysis: defineTable({
+    conversationId: v.id("conversations"),
+    userId: v.id("users"),
+    
+    // Comprehensive analysis data structure
+    analysisData: v.object({
+      executiveSummary: v.object({
+        relationshipPhase: v.string(),
+        keyInsights: v.array(v.string()),
+        strategicRecommendations: v.array(v.string()),
+        riskFactors: v.array(v.string()),
+        opportunityMatrix: v.any(),
+        nextStepPriorities: v.array(v.string())
+      }),
+      
+      metaNarrativeDeconstruction: v.object({
+        relationshipStoryArc: v.any(),
+        overallNarrativeThemes: v.array(v.string()),
+        relationshipDepthProgression: v.any(),
+        influencePatternEvolution: v.any()
+      }),
+      
+      detailedTimelineAnalysis: v.object({
+        interactionByInteractionAnalysis: v.array(v.any()),
+        overallTimelineInsights: v.any(),
+        progressionMetrics: v.any(),
+        compoundEffectAnalysis: v.any()
+      }),
+      
+      psychologicalTrajectoryMapping: v.object({
+        investorPsychologicalEvolution: v.any(),
+        psychologicalInfluenceMapping: v.any()
+      }),
+      
+      strategicPositioningEvolution: v.object({
+        marketPositionDevelopment: v.any(),
+        authorityAndExpertiseRecognition: v.any(),
+        investmentAttractivenessEnhancement: v.any()
+      }),
+      
+      predictiveRelationshipModeling: v.object({
+        shortTermTacticalPredictions: v.any(),
+        mediumTermStrategicForecasting: v.any(),
+        longTermPartnershipPotential: v.any()
+      }),
+      
+      criticalPatternAnalysis: v.object({
+        highImpactSuccessMoments: v.array(v.any()),
+        criticalFailurePatternRecognition: v.array(v.any()),
+        missedOpportunityIdentification: v.array(v.any()),
+        replicationStrategies: v.array(v.any()),
+        preventionFrameworks: v.array(v.any())
+      }),
+      
+      recalibrationRecommendations: v.any(),
+      overallConfidence: v.number(),
+      generatedAt: v.number(),
+      analysisDepth: v.string(),
+      timeframeScope: v.string(),
+      focusAreas: v.array(v.string())
+    }),
+    
+    // Analysis configuration
+    analysisDepth: v.union(v.literal("standard"), v.literal("comprehensive"), v.literal("deep_intelligence")),
+    timeframeScope: v.union(v.literal("full_history"), v.literal("recent_6m"), v.literal("recent_3m")),
+    focusAreas: v.array(v.union(
+      v.literal("psychological_trajectory"),
+      v.literal("strategic_positioning"), 
+      v.literal("predictive_modeling"),
+      v.literal("critical_moments"),
+      v.literal("relationship_evolution")
+    )),
+    
+    // Meta information
+    generatedAt: v.number(),
+    lastUpdated: v.optional(v.number()),
+    confidenceScore: v.number(),
+    
+    // Recalibration tracking
+    recalibrationHistory: v.optional(v.array(v.object({
+      timestamp: v.number(),
+      triggerEvent: v.string(),
+      confidenceChange: v.number(),
+      keyUpdates: v.array(v.string())
+    })))
+  }).index("by_conversation", ["conversationId"])
+    .index("by_user", ["userId"])
+    .index("by_confidence", ["confidenceScore"])
+    .index("by_generated_date", ["generatedAt"]),
 });

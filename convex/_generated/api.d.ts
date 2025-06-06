@@ -16,6 +16,7 @@ import type {
 import type * as analysis from "../analysis.js";
 import type * as analysisActions from "../analysisActions.js";
 import type * as conversations from "../conversations.js";
+import type * as metaNarrative from "../metaNarrative.js";
 import type * as selfAnalysis from "../selfAnalysis.js";
 import type * as selfAnalysisMutations from "../selfAnalysisMutations.js";
 import type * as users from "../users.js";
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   analysis: typeof analysis;
   analysisActions: typeof analysisActions;
   conversations: typeof conversations;
+  metaNarrative: typeof metaNarrative;
   selfAnalysis: typeof selfAnalysis;
   selfAnalysisMutations: typeof selfAnalysisMutations;
   users: typeof users;

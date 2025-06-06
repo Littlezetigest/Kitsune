@@ -27,17 +27,28 @@ import {
   Briefcase
 } from "lucide-react";
 import { useState } from "react";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
+import { Authenticated } from "convex/react";
 
 export const Route = createFileRoute("/meta-analyzer")(({
   component: MetaAnalyzerPage,
 }));
 
 function MetaAnalyzerPage() {
-  const [selectedTimeframe, setSelectedTimeframe] = useState("6m");
-  const [selectedTarget, setSelectedTarget] = useState("marcus_rivera");
+  const [selectedTimeframe, setSelectedTimeframe] = useState("full_history");
+  const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
   const [analysisMode, setAnalysisMode] = useState<"temporal" | "predictive" | "strategic">("temporal");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [currentPhase, setCurrentPhase] = useState<number | null>(null);
+  
+  // Convex queries and mutations
+  const conversations = useQuery(api.conversations.getConversations);
+  const existingAnalysis = selectedConversationId 
+    ? useQuery(api.metaNarrative.getMetaNarrativeAnalysis, { conversationId: selectedConversationId as any })
+    : undefined;
+  const generateAnalysis = useMutation(api.metaNarrative.generateMetaNarrativeAnalysis);
+  const updateAnalysis = useMutation(api.metaNarrative.updateMetaNarrativeWithNewData);
 
   // Mock relationship data for comprehensive analysis
   const relationshipTargets = [
@@ -324,19 +335,43 @@ function MetaAnalyzerPage() {
   };
 
   const runTemporalAnalysis = async () => {
+    if (!selectedConversationId) {
+      alert("Please select a conversation to analyze");
+      return;
+    }
+    
     setIsAnalyzing(true);
     setCurrentPhase(null);
     
-    // Simulate comprehensive analysis process
-    const phases = ["Parsing Communication Patterns", "Analyzing Psychological Trajectories", "Mapping Critical Moments", "Generating Predictive Models", "Synthesizing Strategic Recommendations"];
-    
-    for (let i = 0; i < phases.length; i++) {
-      setCurrentPhase(i);
-      await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Show analysis phases
+      const phases = ["Parsing Communication Patterns", "Analyzing Psychological Trajectories", "Mapping Critical Moments", "Generating Predictive Models", "Synthesizing Strategic Recommendations"];
+      
+      for (let i = 0; i < phases.length; i++) {
+        setCurrentPhase(i);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+      
+      // Run actual analysis
+      const focusAreas = [];
+      if (analysisMode === "temporal") focusAreas.push("psychological_trajectory", "relationship_evolution");
+      if (analysisMode === "predictive") focusAreas.push("predictive_modeling", "strategic_positioning");
+      if (analysisMode === "strategic") focusAreas.push("strategic_positioning", "critical_moments");
+      
+      await generateAnalysis({
+        conversationId: selectedConversationId as any,
+        analysisDepth: "comprehensive",
+        timeframeScope: selectedTimeframe as any,
+        focusAreas: focusAreas as any
+      });
+      
+    } catch (error) {
+      console.error("Analysis failed:", error);
+      alert("Analysis failed. Please try again.");
+    } finally {
+      setCurrentPhase(null);
+      setIsAnalyzing(false);
     }
-    
-    setCurrentPhase(null);
-    setIsAnalyzing(false);
   };
 
   const getPhaseStatusColor = (status: string) => {
@@ -357,8 +392,13 @@ function MetaAnalyzerPage() {
     }
   };
 
+  // Display existing analysis if available, otherwise show mock data for demonstration
+  const analysisData = existingAnalysis?.analysisData || temporalAnalysis;
+  const selectedConversation = conversations?.find(c => c._id === selectedConversationId);
+
   return (
-    <div className="not-prose max-w-7xl mx-auto space-y-8">
+    <Authenticated>
+      <div className="not-prose max-w-7xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
         <h1 className="premium-title mb-8">
@@ -379,19 +419,20 @@ function MetaAnalyzerPage() {
       {/* Control Panel */}
       <div className="ultra-premium-card p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Target Selection */}
+          {/* Conversation Selection */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text font-medium opacity-80">Target Selection</span>
+              <span className="label-text font-medium opacity-80">Conversation Selection</span>
             </label>
             <select
-              value={selectedTarget}
-              onChange={(e) => setSelectedTarget(e.target.value)}
+              value={selectedConversationId || ""}
+              onChange={(e) => setSelectedConversationId(e.target.value || null)}
               className="select select-bordered bg-black/20 border-gray-600"
             >
-              {relationshipTargets.map((target) => (
-                <option key={target.id} value={target.id}>
-                  {target.name} - {target.archetype}
+              <option value="">Select conversation to analyze...</option>
+              {conversations?.map((conversation) => (
+                <option key={conversation._id} value={conversation._id}>
+                  {conversation.title} {conversation.participantName ? `- ${conversation.participantName}` : ""}
                 </option>
               ))}
             </select>
@@ -407,11 +448,9 @@ function MetaAnalyzerPage() {
               onChange={(e) => setSelectedTimeframe(e.target.value)}
               className="select select-bordered bg-black/20 border-gray-600"
             >
-              <option value="1m">Last Month</option>
-              <option value="3m">Last 3 Months</option>
-              <option value="6m">Last 6 Months</option>
-              <option value="1y">Last Year</option>
-              <option value="all">Complete History</option>
+              <option value="recent_3m">Last 3 Months</option>
+              <option value="recent_6m">Last 6 Months</option>
+              <option value="full_history">Complete History</option>
             </select>
           </div>
 
@@ -473,36 +512,36 @@ function MetaAnalyzerPage() {
         )}
       </div>
 
-      {/* Target Overview */}
-      {selectedTargetData && (
+      {/* Conversation Overview */}
+      {selectedConversation && (
         <div className="ultra-premium-card p-6">
           <h3 className="text-xl font-light mb-4 flex items-center gap-2">
             <User className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
-            TARGET PROFILE: {selectedTargetData.name.toUpperCase()}
+            CONVERSATION PROFILE: {selectedConversation.title.toUpperCase()}
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="text-center p-3 bg-gray-800/50 rounded">
               <div className="text-2xl font-bold" style={{color: 'var(--matrix-green)'}}>
-                {selectedTargetData.totalInteractions}
+                {selectedConversation.content.split('\n').length}
               </div>
-              <div className="text-xs opacity-70">Total Interactions</div>
+              <div className="text-xs opacity-70">Message Count</div>
             </div>
             <div className="text-center p-3 bg-gray-800/50 rounded">
               <div className="text-2xl font-bold" style={{color: 'var(--matrix-green)'}}>
-                {selectedTargetData.successProbability}%
+                {existingAnalysis ? Math.round(existingAnalysis.confidenceScore * 100) : 85}%
               </div>
-              <div className="text-xs opacity-70">Success Probability</div>
+              <div className="text-xs opacity-70">Analysis Confidence</div>
             </div>
             <div className="text-center p-3 bg-gray-800/50 rounded">
               <div className="text-2xl font-bold" style={{color: 'var(--matrix-green)'}}>
-                {selectedTargetData.keyEvents}
+                {selectedConversation.participantName || "Unknown"}
               </div>
-              <div className="text-xs opacity-70">Critical Events</div>
+              <div className="text-xs opacity-70">Target Name</div>
             </div>
             <div className="text-center p-3 bg-gray-800/50 rounded">
               <div className="text-lg font-bold" style={{color: 'var(--matrix-green)'}}>
-                {selectedTargetData.currentPhase}
+                {existingAnalysis ? existingAnalysis.analysisData.executiveSummary.relationshipPhase : "Initial Analysis"}
               </div>
               <div className="text-xs opacity-70">Current Phase</div>
             </div>
@@ -518,7 +557,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-6">
-          {temporalAnalysis.phases.map((phase, index) => (
+          {(analysisData.phases || temporalAnalysis.phases).map((phase: any, index: number) => (
             <div key={phase.id} className={`border rounded p-4 ${
               phase.status === 'in_progress' ? 'border-[var(--matrix-green)]' : 'border-gray-600'
             }`}>
@@ -604,7 +643,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-4">
-          {temporalAnalysis.criticalMoments.map((moment, index) => (
+          {(analysisData.criticalMoments || temporalAnalysis.criticalMoments).map((moment: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-3">
                 <div>
@@ -642,7 +681,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {temporalAnalysis.predictiveModeling.scenarioAnalysis.map((scenario, index) => (
+          {(analysisData.predictiveModeling?.scenarioAnalysis || temporalAnalysis.predictiveModeling.scenarioAnalysis).map((scenario: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-3">
                 <h4 className="font-medium">{scenario.scenario}</h4>
@@ -685,7 +724,7 @@ function MetaAnalyzerPage() {
         </h3>
 
         <div className="space-y-4">
-          {temporalAnalysis.predictiveModeling.recommendedActions.map((action, index) => (
+          {(analysisData.predictiveModeling?.recommendedActions || temporalAnalysis.predictiveModeling.recommendedActions).map((action: any, index: number) => (
             <div key={index} className="border border-gray-600 rounded p-4">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -713,6 +752,7 @@ function MetaAnalyzerPage() {
           ))}
         </div>
       </div>
-    </div>
+      </div>
+    </Authenticated>
   );
 }
