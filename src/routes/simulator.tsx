@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import React, { useState, useRef, useEffect } from "react";
 import { 
   Send, 
@@ -13,7 +13,9 @@ import {
   AlertTriangle,
   TrendingUp,
   User,
-  Activity
+  Activity,
+  Timeline,
+  BarChart3
 } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 
@@ -94,12 +96,19 @@ function WarRoomSimulator() {
   const conversations = useQuery(api.conversations.getUserConversations, {});
   const [simulationMode, setSimulationMode] = useState<'archetype' | 'target'>('archetype');
   const [selectedTargetId, setSelectedTargetId] = useState<string>('');
+  const [showMetaAnalysis, setShowMetaAnalysis] = useState(false);
   
   // Get analysis data for selected target
   const targetAnalysis = useQuery(
     api.analysis.getAnalysis,
     selectedTargetId ? { conversationId: selectedTargetId as any } : "skip"
   );
+  
+  // Meta-narrative analysis integration
+  const metaAnalysis = selectedTargetId 
+    ? useQuery(api.metaNarrative.getMetaNarrativeAnalysis, { conversationId: selectedTargetId as any })
+    : undefined;
+  const generateMetaAnalysis = useMutation(api.metaNarrative.generateMetaNarrativeAnalysis);
   const [selectedArchetype, setSelectedArchetype] = useState<string>('THE_EMPEROR');
   const [scenario, setScenario] = useState<string>('pitch');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -761,6 +770,22 @@ function WarRoomSimulator() {
     });
   };
 
+  const runMetaAnalysisForSimulation = async () => {
+    if (!selectedTargetId) return;
+    
+    try {
+      await generateMetaAnalysis({
+        conversationId: selectedTargetId as any,
+        analysisDepth: "comprehensive",
+        timeframeScope: "full_history",
+        focusAreas: ["psychological_trajectory", "strategic_positioning", "predictive_modeling"]
+      });
+      setShowMetaAnalysis(true);
+    } catch (error) {
+      console.error("Meta-analysis failed:", error);
+    }
+  };
+
   return (
     <div className="not-prose max-w-7xl mx-auto space-y-8">
       {/* Header */}
@@ -962,6 +987,74 @@ function WarRoomSimulator() {
               </div>
             </div>
           </div>
+
+          {/* Meta-Narrative Analysis Integration */}
+          {simulationMode === 'target' && selectedTargetId && (
+            <div className="ultra-premium-card p-6">
+              <h3 className="text-lg font-light mb-4 flex items-center gap-2">
+                <Timeline className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                META-ANALYSIS
+              </h3>
+              
+              {metaAnalysis ? (
+                <div className="space-y-3">
+                  <div className="text-sm">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="opacity-70">Relationship Phase:</span>
+                      <span className="font-medium">{metaAnalysis.analysisData.executiveSummary.relationshipPhase}</span>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="opacity-70">Confidence Score:</span>
+                      <span className="font-medium" style={{color: 'var(--matrix-green)'}}>{Math.round(metaAnalysis.confidenceScore * 100)}%</span>
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={() => setShowMetaAnalysis(!showMetaAnalysis)}
+                    className="cyber-btn w-full text-xs p-2"
+                  >
+                    <BarChart3 className="w-3 h-3 mr-1" />
+                    {showMetaAnalysis ? 'Hide' : 'Show'} Full Analysis
+                  </button>
+                  
+                  {showMetaAnalysis && (
+                    <div className="mt-3 text-xs space-y-2 max-h-40 overflow-y-auto">
+                      <div>
+                        <span className="opacity-70">Key Insights:</span>
+                        <ul className="mt-1 space-y-1">
+                          {metaAnalysis.analysisData.executiveSummary.keyInsights.slice(0, 3).map((insight: string, idx: number) => (
+                            <li key={idx} className="text-xs opacity-80">• {insight}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <span className="opacity-70">Strategic Recommendations:</span>
+                        <ul className="mt-1 space-y-1">
+                          {metaAnalysis.analysisData.executiveSummary.strategicRecommendations.slice(0, 2).map((rec: string, idx: number) => (
+                            <li key={idx} className="text-xs opacity-80">• {rec}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center">
+                  <button
+                    onClick={runMetaAnalysisForSimulation}
+                    className="cyber-btn text-xs p-2"
+                    style={{background: 'var(--matrix-green)', color: 'black'}}
+                  >
+                    <Timeline className="w-3 h-3 mr-1" />
+                    Generate Meta-Analysis
+                  </button>
+                  <p className="text-xs opacity-60 mt-2">
+                    Analyze relationship evolution patterns
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Chat Interface */}

@@ -19,7 +19,7 @@ function ArchetypesPage() {
       name: "THE PRINCE",
       icon: Target,
       description: "Experience-Driven Investor",
-      characterProfile: "Doesn't know how to make money, provide, or take social responsibility. Lazy, unmotivated, can't sell or make goals. Can be rich but lacks drive. Knows how to talk well but can't react in emergencies. Loves freedom over material things - easily spends on experiences like mountain trips, dance lessons, yoga, gym memberships, vitamins, concerts, surfing. Prone to being influenced by charismatic Joker types.",
+      characterProfile: "Like many inheritors, this investor may struggle with translating wealth into meaningful purpose—a pattern reflecting deeper challenges with self-efficacy and direction that therapy often reveals in high-net-worth individuals. Their preference for experiential investments over traditional assets suggests someone seeking authentic meaning, perhaps compensating for feelings of inadequacy around wealth creation. Consider that their apparent susceptibility to influence might actually be a healthy openness to learning, though it requires careful boundary setting to avoid exploitation.",
       sunTzuVulnerabilities: [
         "\"Know yourself and know your enemy\" - They don't know their own investment capabilities or limits",
         "\"All warfare is based on deception\" - Easily deceived by lifestyle narratives and experiential promises",
@@ -71,7 +71,7 @@ function ArchetypesPage() {
       name: "THE WARRIOR / SOLDIER",
       icon: Shield,
       description: "Traditional Value Investor",
-      characterProfile: "Concrete goals, inflexible thinking. Don't bend, only go in straight lines. Military/soldier mentality. Mildly limited intelligence, less flexibility. Give practical, understandable, necessary things - a fur coat so you don't freeze, a bag because the old one is torn, pays for repairs because the ceiling is collapsing.",
+      characterProfile: "This investor demonstrates the strength of structured thinking and clear boundaries—traits that trauma therapists recognize as protective mechanisms developed through challenging experiences. Their preference for concrete, practical investments reflects a hard-earned wisdom about real versus illusory value. While their approach may seem rigid, it often comes from having learned to trust only what they can verify. Consider that their apparent inflexibility might actually be healthy skepticism born from past disappointments, requiring respectful acknowledgment of their need for security and predictability.",
       sunTzuVulnerabilities: [
         "\"All warfare is based on deception\" - Too straightforward to recognize sophisticated schemes",
         "\"Supreme excellence is breaking enemy's resistance without fighting\" - Always want direct confrontation",
@@ -123,7 +123,7 @@ function ArchetypesPage() {
       name: "THE JOKER / AFFAIRIST",
       icon: Zap,
       description: "Deal-Maker Investor",
-      characterProfile: "Always selling things. All entrepreneurs, all people who sell. Work through schemes, very flexible, great negotiators. Can adjust and be different things. Gives emotions and memories - spa evenings in romantic settings, picnics with Eiffel Tower views, huge bouquets for social media bragging. Likes to shock and stick in memory.",
+      characterProfile: "This investor embodies the entrepreneurial spirit that systemic therapists recognize as both strength and potential vulnerability. Their adaptability and networking skills suggest high emotional intelligence, though their constant need for stimulation may indicate underlying restlessness or fear of missing out. Their focus on memorable experiences and complex deals often reflects a deep need for significance and recognition. Consider that their apparent opportunism might stem from an adaptive survival mechanism, requiring appreciation for their creativity while establishing clear boundaries around ethical considerations.",
       sunTzuVulnerabilities: [
         "\"He who is prudent and lies in wait for an enemy who is not, will be victorious\" - Always moving, rarely patient",
         "Overconfidence in their adaptability and deal-making skills",
@@ -175,7 +175,7 @@ function ArchetypesPage() {
       name: "THE EMPEROR / DADDY",
       icon: Crown,
       description: "Power-Driven Investor",
-      characterProfile: "Boss mentality, creates new businesses. Likes naive people, enjoys having people under their system. Knows luxury attributes and will share the importance of branded things and latest iPhones. You can ask for cars, apartments, money for beauty, traveling, language learning, educational courses.",
+      characterProfile: "This investor demonstrates the leadership characteristics that organizational psychologists associate with high achievement drive and need for control—patterns often developed as adaptive responses to early experiences of powerlessness. Their preference for mentoring relationships and appreciation of luxury may reflect a deep need for validation and legacy building. While their controlling tendencies might seem problematic, they often mask genuine care for others' development, though with clear hierarchical boundaries. Consider that their generosity with resources may be their way of expressing love and connection, requiring recognition of their contribution while maintaining your own autonomy.",
       sunTzuVulnerabilities: [
         "\"Pride goes before destruction\" - Their ego is their greatest weakness",
         "\"The supreme art of war is to subdue enemy without fighting\" - Expect direct challenges to authority",

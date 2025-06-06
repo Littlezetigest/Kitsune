@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Authenticated } from "convex/react";
-import { Shield, Target, Brain, Zap, Users, ChevronRight, Lock, Unlock } from "lucide-react";
+import { Authenticated, useUser } from "convex/react";
+import { Shield, Target, Brain, Zap, Users, ChevronRight, Lock, Unlock, Mail, Crown, Database, BarChart3 } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/command")({
@@ -9,9 +9,35 @@ export const Route = createFileRoute("/command")({
 
 function CommandCenterPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showEmailLogin, setShowEmailLogin] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [adminKey, setAdminKey] = useState("");
+  const { user } = useUser();
+  
+  // Check if user is admin
+  const isAdmin = user?.emailAddresses?.[0]?.emailAddress === "admin@kitsune.ai";
 
   const handleAuthentication = () => {
     setIsAuthenticated(true);
+  };
+
+  const handleEmailLogin = () => {
+    if (email.includes("@")) {
+      // Simulate email login for reports
+      alert(`Report access request sent to ${email}. You will receive analysis reports and insights via email.`);
+      setShowEmailLogin(false);
+      setEmail("");
+    }
+  };
+
+  const handleAdminLogin = () => {
+    if (adminKey === "KITSUNE_NEURAL_OVERRIDE_2077") {
+      // Admin authentication successful
+      window.location.href = "/admin";
+    } else {
+      alert("Invalid admin key. Access denied.");
+    }
   };
 
   const modules = [
@@ -139,6 +165,115 @@ function CommandCenterPage() {
                   AUTHENTICATE ACCESS
                 </button>
               )}
+            </div>
+          </div>
+
+          {/* Email and Admin Login Section */}
+          <div className="max-w-4xl mx-auto px-8 mb-12">
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Email Login for Reports */}
+              <div className="ultra-premium-card p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Mail className="w-6 h-6" style={{color: 'var(--electric-blue)'}} />
+                  <h3 className="text-lg font-light">INTEL REPORTS</h3>
+                </div>
+                <p className="text-sm opacity-70 mb-4">
+                  Receive automated analysis reports and psychological insights directly via email.
+                </p>
+                
+                {!showEmailLogin ? (
+                  <button
+                    onClick={() => setShowEmailLogin(true)}
+                    className="cyber-btn w-full p-3"
+                    style={{background: 'var(--electric-blue)', color: 'black'}}
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    SETUP EMAIL REPORTS
+                  </button>
+                ) : (
+                  <div className="space-y-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email address..."
+                      className="input input-bordered w-full bg-black/20 border-gray-600"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleEmailLogin}
+                        className="cyber-btn flex-1 p-2 text-sm"
+                        style={{background: 'var(--electric-blue)', color: 'black'}}
+                        disabled={!email.includes("@")}
+                      >
+                        <BarChart3 className="w-4 h-4 mr-1" />
+                        REQUEST ACCESS
+                      </button>
+                      <button
+                        onClick={() => setShowEmailLogin(false)}
+                        className="cyber-btn px-4 py-2 text-sm"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Admin Login */}
+              <div className="ultra-premium-card p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Crown className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
+                  <h3 className="text-lg font-light">ADMIN ARCHIVE</h3>
+                </div>
+                <p className="text-sm opacity-70 mb-4">
+                  Access comprehensive user intelligence archive and system analytics.
+                </p>
+                
+                {isAdmin ? (
+                  <Link to="/admin">
+                    <button className="cyber-btn w-full p-3" style={{background: 'var(--matrix-green)', color: 'black'}}>
+                      <Database className="w-4 h-4 mr-2" />
+                      ACCESS ADMIN ARCHIVE
+                    </button>
+                  </Link>
+                ) : !showAdminLogin ? (
+                  <button
+                    onClick={() => setShowAdminLogin(true)}
+                    className="cyber-btn w-full p-3"
+                  >
+                    <Crown className="w-4 h-4 mr-2" />
+                    ADMIN LOGIN
+                  </button>
+                ) : (
+                  <div className="space-y-3">
+                    <input
+                      type="password"
+                      value={adminKey}
+                      onChange={(e) => setAdminKey(e.target.value)}
+                      placeholder="Enter admin override key..."
+                      className="input input-bordered w-full bg-black/20 border-gray-600"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleAdminLogin}
+                        className="cyber-btn flex-1 p-2 text-sm"
+                        style={{background: 'var(--matrix-green)', color: 'black'}}
+                        disabled={!adminKey}
+                      >
+                        <Shield className="w-4 h-4 mr-1" />
+                        AUTHENTICATE
+                      </button>
+                      <button
+                        onClick={() => setShowAdminLogin(false)}
+                        className="cyber-btn px-4 py-2 text-sm"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
