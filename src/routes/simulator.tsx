@@ -120,6 +120,10 @@ function WarRoomSimulator() {
     challengesMet: [],
     vulnerabilitiesExposed: []
   });
+  const [showSimulationReport, setShowSimulationReport] = useState(false);
+  const [simulationReport, setSimulationReport] = useState<any>(null);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+  const [metaCharacterAnalysis, setMetaCharacterAnalysis] = useState<any[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -672,6 +676,168 @@ function WarRoomSimulator() {
     return responses[Math.floor(Math.random() * responses.length)];
   };
 
+  const analyzeMetaCharacters = (userMessage: string, investorResponse: string, archetype: ArchetypePersonality) => {
+    // Analyze what meta-characters are being embodied in the conversation
+    const userCharacteristics = analyzeUserCharacter(userMessage);
+    const investorCharacteristics = analyzeInvestorCharacter(investorResponse, archetype);
+    const interactionDynamics = analyzeInteractionDynamics(userMessage, investorResponse);
+    
+    return {
+      timestamp: Date.now(),
+      userCharacter: userCharacteristics,
+      investorCharacter: investorCharacteristics,
+      dynamics: interactionDynamics,
+      conversationPhase: conversationState.phase
+    };
+  };
+
+  const analyzeUserCharacter = (message: string) => {
+    const characteristics = [];
+    const lowerMessage = message.toLowerCase();
+    
+    // Analyze confidence level
+    if (lowerMessage.includes('definitely') || lowerMessage.includes('absolutely') || lowerMessage.includes('certainly')) {
+      characteristics.push("High Confidence Projection");
+    } else if (lowerMessage.includes('maybe') || lowerMessage.includes('perhaps') || lowerMessage.includes('might')) {
+      characteristics.push("Cautious/Uncertain Demeanor");
+    }
+    
+    // Analyze authority positioning
+    if (lowerMessage.includes('we have') || lowerMessage.includes('our track record') || lowerMessage.includes('we\'ve proven')) {
+      characteristics.push("Authority Through Credentials");
+    }
+    
+    // Analyze emotional appeals
+    if (lowerMessage.includes('excited') || lowerMessage.includes('passionate') || lowerMessage.includes('believe')) {
+      characteristics.push("Emotional Engagement");
+    }
+    
+    // Analyze data-driven approach
+    if (lowerMessage.includes('data') || lowerMessage.includes('metrics') || lowerMessage.includes('numbers')) {
+      characteristics.push("Analytical Presenter");
+    }
+    
+    // Analyze relationship building
+    if (lowerMessage.includes('understand') || lowerMessage.includes('appreciate') || lowerMessage.includes('respect')) {
+      characteristics.push("Relationship Builder");
+    }
+    
+    return {
+      dominantCharacter: characteristics[0] || "Professional Presenter",
+      secondaryTraits: characteristics.slice(1),
+      communicationStyle: lowerMessage.includes('?') ? "Consultative" : "Directive",
+      persuasionApproach: characteristics.includes("Emotional Engagement") ? "Emotional + Logical" : "Logical",
+      confidenceLevel: characteristics.includes("High Confidence Projection") ? "High" : 
+                      characteristics.includes("Cautious/Uncertain Demeanor") ? "Low" : "Medium"
+    };
+  };
+
+  const analyzeInvestorCharacter = (response: string, archetype: ArchetypePersonality) => {
+    const lowerResponse = response.toLowerCase();
+    const embodiedTraits = [];
+    
+    // Analyze which archetype characteristics are being displayed
+    if (lowerResponse.includes('numbers') || lowerResponse.includes('data') || lowerResponse.includes('metrics')) {
+      embodiedTraits.push("Data-Driven Analyzer");
+    }
+    if (lowerResponse.includes('experience') || lowerResponse.includes('seen this before') || lowerResponse.includes('track record')) {
+      embodiedTraits.push("Experience-Based Authority");
+    }
+    if (lowerResponse.includes('risk') || lowerResponse.includes('concern') || lowerResponse.includes('worry')) {
+      embodiedTraits.push("Risk-Conscious Evaluator");
+    }
+    if (lowerResponse.includes('vision') || lowerResponse.includes('potential') || lowerResponse.includes('opportunity')) {
+      embodiedTraits.push("Visionary Investor");
+    }
+    if (lowerResponse.includes('team') || lowerResponse.includes('execution') || lowerResponse.includes('results')) {
+      embodiedTraits.push("Execution-Focused Evaluator");
+    }
+    
+    return {
+      archetypeName: archetype.name,
+      dominantTraits: embodiedTraits,
+      responsePattern: lowerResponse.includes('?') ? "Interrogative" : "Evaluative",
+      emotionalTone: lowerResponse.includes('!') ? "Engaged" : "Professional",
+      decisionSignals: lowerResponse.includes('interested') || lowerResponse.includes('promising') ? "Positive" :
+                      lowerResponse.includes('concerned') || lowerResponse.includes('risky') ? "Negative" : "Neutral"
+    };
+  };
+
+  const analyzeInteractionDynamics = (userMessage: string, investorResponse: string) => {
+    return {
+      powerBalance: userMessage.length > investorResponse.length ? "User Leading" : "Investor Leading",
+      engagementLevel: (userMessage.includes('?') || investorResponse.includes('?')) ? "High" : "Medium",
+      conflictLevel: (investorResponse.includes('but') || investorResponse.includes('however')) ? "Medium" : "Low",
+      rapportBuilding: (userMessage.includes('understand') && investorResponse.includes('appreciate')) ? "High" : "Medium",
+      informationFlow: userMessage.includes('data') && investorResponse.includes('numbers') ? "Data-Heavy" : "Conceptual"
+    };
+  };
+
+  const generateSimulationReport = async (messages: Message[], archetype: ArchetypePersonality) => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const userMessages = messages.filter(m => m.role === 'user');
+        const investorMessages = messages.filter(m => m.role === 'investor');
+        
+        const report = {
+          sessionSummary: {
+            totalMessages: messages.length,
+            userMessages: userMessages.length,
+            investorMessages: investorMessages.length,
+            conversationDuration: messages.length > 0 ? Date.now() - messages[0].timestamp : 0,
+            finalPhase: conversationState.phase,
+            finalTrustLevel: conversationState.trustLevel,
+            finalEngagementLevel: conversationState.engagementLevel
+          },
+          
+          archetypeAnalysis: {
+            investorArchetype: archetype.name,
+            primaryTraits: archetype.characterTraits,
+            embodiedCharacteristics: analyzeEmbodiedCharacteristics(investorMessages, archetype),
+            archetypeConsistency: calculateArchetypeConsistency(investorMessages, archetype),
+            vulnerabilitiesExposed: identifyExposedVulnerabilities(investorMessages, archetype)
+          },
+          
+          userPerformanceAnalysis: {
+            communicationStyle: analyzeOverallUserStyle(userMessages),
+            persuasionEffectiveness: calculatePersuasionEffectiveness(messages),
+            strategicApproach: analyzeStrategicApproach(userMessages),
+            frameworkUsage: identifyFrameworkUsage(userMessages),
+            weaknesses: identifyUserWeaknesses(userMessages, investorMessages)
+          },
+          
+          conversationDynamics: {
+            powerShifts: analyzePowerShifts(messages),
+            trustEvolution: analyzeTrustEvolution(messages),
+            keyMoments: identifyKeyMoments(messages),
+            rapportBuilding: analyzeRapportProgression(messages),
+            objectionHandling: analyzeObjectionHandling(messages)
+          },
+          
+          conglomerateProfile: {
+            investorPersonality: createConglomerateProfile(archetype, investorMessages),
+            communicationPreferences: extractCommunicationPreferences(investorMessages),
+            decisionMakingPattern: analyzeDecisionMakingPattern(investorMessages),
+            influenceVulnerabilities: mapInfluenceVulnerabilities(investorMessages, archetype),
+            optimalApproach: determineOptimalApproach(archetype, investorMessages)
+          },
+          
+          futureStrategy: {
+            recommendedApproach: generateFutureRecommendations(archetype, messages),
+            wordingStrategies: createWordingStrategies(archetype, userMessages),
+            interactionTactics: developInteractionTactics(archetype, messages),
+            frameworkPriority: prioritizeFrameworks(archetype, messages),
+            nextSteps: defineNextSteps(archetype, conversationState)
+          },
+          
+          metaAnalysis: metaCharacterAnalysis
+        };
+        
+        resolve(report);
+      }, 3000);
+    });
+  };
+
   const handleSendMessage = async () => {
     if (!currentMessage.trim()) return;
 
@@ -705,6 +871,10 @@ function WarRoomSimulator() {
 
       setMessages(prev => [...prev, investorMessage]);
       setIsSimulating(false);
+      
+      // Analyze meta-characters for this exchange
+      const metaAnalysis = analyzeMetaCharacters(currentMessage, response, archetype);
+      setMetaCharacterAnalysis(prev => [...prev, metaAnalysis]);
       
       // Update conversation state
       const triggers = analyzeMessageTriggers(currentMessage);
