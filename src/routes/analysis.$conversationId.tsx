@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
+import { useQuery, useAction } from "convex/react";
 import { useState } from "react";
 import { 
   Crown,
@@ -33,13 +33,16 @@ function AnalysisPage() {
   const { conversationId } = Route.useParams();
   const [activeSection, setActiveSection] = useState('target-matrix');
   const [analysisView, setAnalysisView] = useState<'target' | 'self' | 'remodeling'>('target');
+  const [analysisType, setAnalysisType] = useState<'predefined' | 'content-based'>('content-based');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   
   const conversation = useQuery(api.conversations.getConversation, {
     id: conversationId as Id<"conversations">
   });
 
-  // Actions for self-analysis and remodeling (commented out - would need useAction)
-  // const analyzeSelf = useAction(api.selfAnalysis.analyzeSelfCommunication);
+  // Actions for content-based analysis
+  const analyzeContent = useAction(api.contentBasedAnalysis.analyzeUploadedContent);
+  const storeContentAnalysis = useAction(api.contentBasedAnalysis.storeContentAnalysis);
 
   // Get the analysis for this conversation first
   const analysis = useQuery(
@@ -56,6 +59,40 @@ function AnalysisPage() {
     api.selfAnalysisMutations.getCharacterRemodeling, 
     analysis ? { targetAnalysisId: analysis._id } : "skip"
   );
+
+  // Get content-based analysis results
+  const contentAnalysis = useQuery(
+    api.analysis.getLLMAnalysis,
+    conversation ? { 
+      conversationId: conversationId as Id<"conversations">,
+      analysisType: "communication_enhancement"
+    } : "skip"
+  );
+
+  // Function to run content-based analysis
+  const runContentAnalysis = async () => {
+    if (!conversation) return;
+    
+    setIsAnalyzing(true);
+    try {
+      const result = await analyzeContent({
+        conversationId: conversationId as Id<"conversations">,
+        useClaudeAnalysis: true
+      });
+      
+      if (result.success) {
+        await storeContentAnalysis({
+          conversationId: conversationId as Id<"conversations">,
+          analysisResults: result,
+          analysisType: "claude-content-based"
+        });
+      }
+    } catch (error) {
+      console.error("Content analysis failed:", error);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
   
   // Mock analysis data for demonstration (in real app, this would come from the database)
   const mockAnalysis = {
@@ -382,6 +419,73 @@ function AnalysisPage() {
           </div>
         </div>
 
+        {/* Analysis Method Selector */}
+        <div className="cyber-card p-6 mb-6 max-w-4xl mx-auto">
+          <h3 className="text-lg font-bold mb-4 text-center" style={{color: 'var(--neon-blue)'}}>
+            🧠 ANALYSIS METHOD
+          </h3>
+          <div className="flex justify-center gap-4 mb-4">
+            <button
+              onClick={() => setAnalysisType('content-based')}
+              className={`cyber-btn px-6 py-3 ${
+                analysisType === 'content-based' ? 'bg-[var(--cyber-green)] text-black' : ''
+              }`}
+            >
+              <Brain className="w-5 h-5 inline mr-2" />
+              CONTENT-BASED ANALYSIS
+            </button>
+            <button
+              onClick={() => setAnalysisType('predefined')}
+              className={`cyber-btn px-6 py-3 ${
+                analysisType === 'predefined' ? 'bg-[var(--cyber-green)] text-black' : ''
+              }`}
+            >
+              <Target className="w-5 h-5 inline mr-2" />
+              PREDEFINED ARCHETYPES
+            </button>
+          </div>
+          
+          {analysisType === 'content-based' && (
+            <div className="text-center">
+              <p className="text-sm opacity-80 mb-4">
+                Analyzes patterns directly from uploaded content without predefined personality types
+              </p>
+              {!contentAnalysis && (
+                <button
+                  onClick={runContentAnalysis}
+                  disabled={isAnalyzing}
+                  className="cyber-btn px-6 py-3 bg-[var(--hot-pink)] text-white"
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <RefreshCw className="w-5 h-5 inline mr-2 animate-spin" />
+                      ANALYZING CONTENT...
+                    </>
+                  ) : (
+                    <>
+                      <Brain className="w-5 h-5 inline mr-2" />
+                      RUN CONTENT ANALYSIS
+                    </>
+                  )}
+                </button>
+              )}
+              {contentAnalysis && (
+                <div className="text-green-400 text-sm">
+                  ✅ Content analysis completed
+                </div>
+              )}
+            </div>
+          )}
+          
+          {analysisType === 'predefined' && (
+            <div className="text-center">
+              <p className="text-sm opacity-80">
+                Uses predefined investor archetypes and psychological frameworks
+              </p>
+            </div>
+          )}
+        </div>
+
         {/* Analysis Type Selector */}
         <div className="flex justify-center gap-4 mb-6">
           {[
@@ -453,21 +557,119 @@ function AnalysisPage() {
         
         {analysisView === 'target' && (
           <>
-            <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
-                style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
-                data-text={mockAnalysis.primaryArchetype}>
-              {mockAnalysis.primaryArchetype}
-            </h2>
+            {analysisType === 'content-based' && contentAnalysis ? (
+              <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
+                  style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
+                  data-text="CONTENT-BASED INSIGHTS">
+                CONTENT-BASED INSIGHTS
+              </h2>
+            ) : (
+              <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
+                  style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
+                  data-text={mockAnalysis.primaryArchetype}>
+                {mockAnalysis.primaryArchetype}
+              </h2>
+            )}
             
-            <div className="max-w-4xl mx-auto mb-8">
-              <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
-                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>CORE PSYCHOLOGY</h3>
-                  <p className="text-sm leading-relaxed">
-                    Dominant, control-oriented investor who built their empire through decisive action and strategic authority. 
-                    Views investments as extensions of their personal dominion and expects deference from entrepreneurs.
-                  </p>
+            {/* Content-Based Analysis Results */}
+            {analysisType === 'content-based' && contentAnalysis && (
+              <div className="max-w-6xl mx-auto mb-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                  <div className="cyber-card p-6 border-[var(--cyber-green)]/50">
+                    <h3 className="text-lg font-bold mb-3" style={{color: 'var(--cyber-green)'}}>
+                      COMMUNICATION PATTERNS
+                    </h3>
+                    <div className="text-sm space-y-2">
+                      {contentAnalysis.llmResults?.insights?.slice(0, 3).map((insight, idx) => (
+                        <div key={idx} className="text-xs opacity-80">• {insight}</div>
+                      )) || (
+                        <div className="text-xs opacity-60">Analysis patterns extracted from content</div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div className="cyber-card p-6 border-[var(--neon-blue)]/50">
+                    <h3 className="text-lg font-bold mb-3" style={{color: 'var(--neon-blue)'}}>
+                      BEHAVIORAL INDICATORS
+                    </h3>
+                    <div className="text-sm space-y-2">
+                      <div className="text-xs opacity-80">• Decision-making style observed</div>
+                      <div className="text-xs opacity-80">• Risk preferences identified</div>
+                      <div className="text-xs opacity-80">• Authority patterns detected</div>
+                    </div>
+                  </div>
+                  
+                  <div className="cyber-card p-6 border-[var(--shrine-gold)]/50">
+                    <h3 className="text-lg font-bold mb-3" style={{color: 'var(--shrine-gold)'}}>
+                      MOTIVATIONAL DRIVERS
+                    </h3>
+                    <div className="text-sm space-y-2">
+                      <div className="text-xs opacity-80">• Core motivations extracted</div>
+                      <div className="text-xs opacity-80">• Value priorities identified</div>
+                      <div className="text-xs opacity-80">• Concern patterns mapped</div>
+                    </div>
+                  </div>
+                  
+                  <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                    <h3 className="text-lg font-bold mb-3" style={{color: 'var(--hot-pink)'}}>
+                      STRATEGIC INSIGHTS
+                    </h3>
+                    <div className="text-sm space-y-2">
+                      {contentAnalysis.llmResults?.recommendations?.slice(0, 3).map((rec, idx) => (
+                        <div key={idx} className="text-xs opacity-80">• {rec}</div>
+                      )) || (
+                        <div className="text-xs opacity-60">Recommendations based on analysis</div>
+                      )}
+                    </div>
+                  </div>
                 </div>
+                
+                <div className="ultra-premium-card p-8 mb-8 border-[var(--cyber-green)]/50">
+                  <h3 className="text-2xl font-bold mb-6 text-center" style={{color: 'var(--cyber-green)'}}>
+                    CONTENT-BASED INSIGHTS
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <div className="bg-[var(--cyber-green)]/10 p-4 rounded border border-[var(--cyber-green)]/30">
+                        <h4 className="font-bold mb-2" style={{color: 'var(--cyber-green)'}}>COMMUNICATION ANALYSIS:</h4>
+                        <div className="text-sm space-y-1">
+                          <div><strong>Source:</strong> {contentAnalysis.context || "Uploaded content"}</div>
+                          <div><strong>Model:</strong> {contentAnalysis.llmResults?.metadata?.model || "Content analysis"}</div>
+                          <div><strong>Confidence:</strong> {Math.round((contentAnalysis.confidence || 0.85) * 100)}%</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="bg-[var(--shrine-gold)]/10 p-4 rounded border border-[var(--shrine-gold)]/30">
+                        <h4 className="font-bold mb-2" style={{color: 'var(--shrine-gold)'}}>KEY INSIGHTS:</h4>
+                        <div className="space-y-2">
+                          {contentAnalysis.llmResults?.insights?.map((insight, idx) => (
+                            <div key={idx} className="text-sm p-2 bg-black/20 rounded border-l-2" style={{borderColor: 'var(--shrine-gold)'}}>
+                              {insight}
+                            </div>
+                          )) || (
+                            <div className="text-sm opacity-60">No specific insights available</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Predefined Archetype Analysis */}
+            {analysisType === 'predefined' && (
+              <div className="max-w-4xl mx-auto mb-8">
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
+                    <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>CORE PSYCHOLOGY</h3>
+                    <p className="text-sm leading-relaxed">
+                      Dominant, control-oriented investor who built their empire through decisive action and strategic authority. 
+                      Views investments as extensions of their personal dominion and expects deference from entrepreneurs.
+                    </p>
+                  </div>
                 
                 <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
                   <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>DECISION FRAMEWORK</h3>

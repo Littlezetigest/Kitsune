@@ -16,6 +16,7 @@ import type {
 import type * as analysis from "../analysis.js";
 import type * as analysisActions from "../analysisActions.js";
 import type * as claudeImageAnalysis from "../claudeImageAnalysis.js";
+import type * as contentBasedAnalysis from "../contentBasedAnalysis.js";
 import type * as conversations from "../conversations.js";
 import type * as metaNarrative from "../metaNarrative.js";
 import type * as selfAnalysis from "../selfAnalysis.js";
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   analysis: typeof analysis;
   analysisActions: typeof analysisActions;
   claudeImageAnalysis: typeof claudeImageAnalysis;
+  contentBasedAnalysis: typeof contentBasedAnalysis;
   conversations: typeof conversations;
   metaNarrative: typeof metaNarrative;
   selfAnalysis: typeof selfAnalysis;
