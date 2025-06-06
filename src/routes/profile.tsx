@@ -73,34 +73,197 @@ function ProfileAnalysisPage() {
     
     // Comprehensive business framework analysis with target personalization
     const mockAnalysis = {
-      // Enneagram Analysis
+      // Comprehensive Enneagram Analysis  
       enneagramType: {
         primary: "Type 8 - The Challenger",
         secondary: "Type 3 - The Achiever",
         confidence: 87,
         description: "Driven by control and achievement, with strong leadership tendencies",
+        core_motivation: "To be in control of your own life and destiny; to resist weakness in yourself and others",
+        core_fear: "Being controlled or invaded by others; being vulnerable or at the mercy of injustice",
+        core_desire: "To protect yourself and be in control of your environment and destiny",
+        
+        // In-depth psychological analysis
+        psychological_profile: {
+          attention_focus: "Power dynamics, control structures, and who has influence in any situation",
+          defense_mechanism: "Denial of vulnerability and weakness",
+          emotional_intelligence: "Strong ability to read power dynamics but struggles with softer emotions",
+          decision_making_style: "Quick, intuitive, action-oriented with high confidence",
+          conflict_style: "Direct confrontation, sees conflict as energizing rather than draining",
+          leadership_approach: "Commanding presence, protective of team, challenges status quo"
+        },
+
+        // Business context strengths
         strengths: [
-          "Natural leadership and confidence",
-          "Direct communication style", 
-          "High energy and determination",
-          "Ability to make tough decisions"
+          "Natural executive presence and commanding authority",
+          "Ability to make tough decisions under pressure", 
+          "Protective of team members and stakeholders",
+          "High energy and determination to overcome obstacles",
+          "Direct, honest communication that cuts through ambiguity",
+          "Excellent crisis leadership and problem-solving",
+          "Natural ability to challenge systems and drive change",
+          "Strong intuition for power dynamics and strategic positioning"
         ],
+        
+        // Growth areas and vulnerabilities
         weaknesses: [
-          "Can appear overly aggressive",
-          "May dismiss others' opinions",
-          "Impatience with slower processes",
-          "Tendency to micromanage"
+          "Can appear overly aggressive or intimidating to investors",
+          "May dismiss input from perceived 'weaker' team members",
+          "Impatience with detailed financial analysis or lengthy due diligence",
+          "Tendency to rush decisions without full stakeholder consultation",
+          "Difficulty admitting mistakes or showing vulnerability",
+          "May alienate potential partners through overly direct approach",
+          "Struggles with administrative details and bureaucratic processes",
+          "Can be seen as arrogant or dismissive of regulatory compliance"
         ],
+        
+        // Stress response patterns
         stress_patterns: [
-          "Becomes more controlling under pressure",
-          "May alienate team members when stressed",
-          "Rushes decisions without full consultation"
+          "Under stress moves to Type 5: Becomes withdrawn, secretive, and overly analytical",
+          "May become more controlling and micromanaging when pressure increases",
+          "Tendency to isolate rather than seek support during difficult periods",
+          "Can become suspicious of others' motives and overly paranoid",
+          "May rush major business decisions to regain sense of control",
+          "Becomes more confrontational with team members when stressed",
+          "Difficulty delegating during high-pressure periods"
         ],
+        
+        // Growth and integration opportunities
         growth_opportunities: [
-          "Develop emotional intelligence",
-          "Practice active listening",
-          "Learn to delegate effectively",
-          "Build collaborative leadership style"
+          "Moving to Type 2: Develop genuine care and support for others",
+          "Practice vulnerability and admitting when help is needed",
+          "Learn to delegate effectively while maintaining strategic oversight",
+          "Develop emotional intelligence and empathy for different personality types",
+          "Build collaborative leadership style that includes input from all levels",
+          "Create systems for regular feedback and self-reflection",
+          "Practice patience with bureaucratic processes and regulatory requirements",
+          "Develop mentor relationships with experienced executives and advisors"
+        ],
+
+        // Enneagram wings analysis
+        wing_analysis: {
+          type_7_wing: "The Maverick - Adds enthusiasm, vision, and innovative thinking",
+          type_9_wing: "The Bear - Adds steady determination and ability to see multiple perspectives",
+          dominant_wing: "7-wing shows in entrepreneurial vision and willingness to take risks",
+          integration_advice: "Balance Type 7 enthusiasm with Type 9 patience for sustainable leadership"
+        },
+
+        // Investor relations implications
+        investor_relations_impact: {
+          positive_aspects: [
+            "Projects confidence and executive presence that investors seek",
+            "Demonstrates clear vision and determination to execute",
+            "Shows ability to make tough decisions quickly",
+            "Natural ability to pitch and present with authority"
+          ],
+          potential_challenges: [
+            "May come across as too aggressive or domineering",
+            "Resistance to investor input could be perceived as arrogance",
+            "Impatience with due diligence processes may raise red flags",
+            "Difficulty showing vulnerability may limit investor connection"
+          ],
+          optimization_strategies: [
+            "Practice showing calculated vulnerability to build trust",
+            "Develop patience for investor due diligence processes",
+            "Frame investor input as strategic intelligence rather than control",
+            "Build advisory relationships to demonstrate openness to guidance"
+          ]
+        }
+      },
+
+      // Comprehensive Power Dynamics Analysis (Based on 48 Laws of Power)
+      powerAnalysis: {
+        violated_laws: [
+          {
+            law: "Law 1: Never Outshine the Master",
+            violation_level: 8,
+            evidence: "Tendency to dominate conversations and overshadow potential mentors/investors",
+            business_impact: "May alienate senior advisors or board members",
+            correction_strategy: "Practice strategic deference while maintaining executive presence",
+            examples: [
+              "Let investors share their expertise before presenting your solution",
+              "Ask for advice on areas where they have demonstrated success",
+              "Acknowledge their contributions publicly in board meetings"
+            ]
+          },
+          {
+            law: "Law 4: Always Say Less Than Necessary", 
+            violation_level: 7,
+            evidence: "Direct communication style may reveal too much strategic information",
+            business_impact: "Competitors may gain insights into your strategy and vulnerabilities",
+            correction_strategy: "Develop strategic ambiguity while maintaining authenticity",
+            examples: [
+              "Keep specific customer names confidential until contracts are signed",
+              "Reveal product roadmap in phases based on funding milestones",
+              "Practice answering questions with strategic questions"
+            ]
+          },
+          {
+            law: "Law 9: Win Through Actions, Not Arguments",
+            violation_level: 6,
+            evidence: "Tendency to engage in debates rather than demonstrating value",
+            business_impact: "Wastes time and energy that could be spent on execution",
+            correction_strategy: "Let results speak louder than explanations",
+            examples: [
+              "Bring customer testimonials instead of arguing about market fit",
+              "Show usage metrics rather than debating user engagement",
+              "Demonstrate ROI with actual numbers rather than projections"
+            ]
+          },
+          {
+            law: "Law 19: Know Who You're Dealing With",
+            violation_level: 5,
+            evidence: "May use same aggressive approach with all investor types",
+            business_impact: "Mismatched communication style reduces investment success rate",
+            correction_strategy: "Adapt communication style to each investor archetype",
+            examples: [
+              "Research investor's previous investments and communication preferences",
+              "Adjust pitch style based on investor's decision-making process",
+              "Tailor follow-up frequency to match their preferred cadence"
+            ]
+          }
+        ],
+
+        power_strengths: [
+          {
+            law: "Law 25: Re-Create Yourself",
+            mastery_level: 9,
+            application: "Natural ability to adapt and reinvent business strategy",
+            leverage_opportunity: "Use this strength to pivot quickly based on market feedback"
+          },
+          {
+            law: "Law 28: Enter Action With Boldness",
+            mastery_level: 9,
+            application: "Exceptional ability to take decisive action in uncertain situations",
+            leverage_opportunity: "Channel boldness into calculated risks that impress investors"
+          },
+          {
+            law: "Law 37: Create Compelling Spectacles",
+            mastery_level: 8,
+            application: "Strong presence and ability to command attention in presentations",
+            leverage_opportunity: "Create memorable investor experiences and demonstrations"
+          }
+        ],
+
+        recommended_power_moves: [
+          {
+            situation: "Initial investor meeting",
+            strategy: "Use Law 16 (Use Absence to Increase Respect and Honor)",
+            tactic: "Create controlled scarcity by limiting meeting availability",
+            expected_outcome: "Increases perceived value and investor interest"
+          },
+          {
+            situation: "Due diligence phase",
+            strategy: "Use Law 32 (Play to People's Fantasies)",
+            tactic: "Paint vivid picture of market opportunity and potential returns",
+            expected_outcome: "Investor becomes emotionally invested in success vision"
+          },
+          {
+            situation: "Negotiation phase",
+            strategy: "Use Law 22 (Use the Surrender Tactic)",
+            tactic: "Strategically concede on minor points to win major terms",
+            expected_outcome: "Maintains investor relationship while achieving key objectives"
+          }
         ]
       },
 
@@ -405,6 +568,7 @@ function ProfileAnalysisPage() {
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Target },
     { id: 'enneagram', label: 'Enneagram', icon: Brain },
+    { id: 'power', label: '48 Laws Analysis', icon: Crown },
     { id: 'frameworks', label: 'Business Frameworks', icon: BarChart3 },
     { id: 'goals', label: 'Investment Goals', icon: DollarSign },
     { id: 'personalization', label: 'Target Insights', icon: Users },
@@ -715,27 +879,61 @@ function ProfileAnalysisPage() {
                     <div className="ultra-premium-card p-6">
                       <h3 className="text-xl font-light mb-6 flex items-center gap-2">
                         <Brain className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
-                        ENNEAGRAM PERSONALITY ANALYSIS
+                        COMPREHENSIVE ENNEAGRAM ANALYSIS
                       </h3>
                       
-                      <div className="text-center mb-6">
-                        <div className="text-3xl font-bold mb-2" style={{color: 'var(--matrix-green)'}}>
+                      {/* Core Type Overview */}
+                      <div className="text-center mb-8 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg border border-blue-500/30">
+                        <div className="text-4xl font-bold mb-2" style={{color: 'var(--matrix-green)'}}>
                           {analysis.enneagramType.primary}
                         </div>
                         <div className="text-lg opacity-80 mb-4">
                           {analysis.enneagramType.description}
                         </div>
-                        <div className="flex items-center justify-center gap-2">
-                          <span>Confidence:</span>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                          <div>
+                            <span className="opacity-60">Core Motivation:</span>
+                            <div className="font-medium">{analysis.enneagramType.core_motivation}</div>
+                          </div>
+                          <div>
+                            <span className="opacity-60">Core Fear:</span>
+                            <div className="font-medium text-red-400">{analysis.enneagramType.core_fear}</div>
+                          </div>
+                          <div>
+                            <span className="opacity-60">Core Desire:</span>
+                            <div className="font-medium text-blue-400">{analysis.enneagramType.core_desire}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-center gap-2 mt-4">
+                          <span>Analysis Confidence:</span>
                           <span className="font-bold" style={{color: 'var(--matrix-green)'}}>
                             {analysis.enneagramType.confidence}%
                           </span>
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-6">
+                      {/* Psychological Profile */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4 flex items-center gap-2">
+                          <Brain className="w-5 h-5" style={{color: 'var(--matrix-green)'}} />
+                          PSYCHOLOGICAL PROFILE
+                        </h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          {Object.entries(analysis.enneagramType.psychological_profile).map(([key, value]) => (
+                            <div key={key} className="p-3 border border-gray-600 rounded">
+                              <div className="text-sm font-medium capitalize mb-1" style={{color: 'var(--matrix-green)'}}>
+                                {key.replace(/_/g, ' ')}
+                              </div>
+                              <div className="text-sm opacity-80">{value as string}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Strengths and Growth Areas */}
+                      <div className="grid md:grid-cols-2 gap-6 mb-8">
                         <div>
-                          <h4 className="font-bold mb-3 text-green-400">STRENGTHS</h4>
+                          <h4 className="font-bold mb-3 text-green-400">BUSINESS STRENGTHS</h4>
                           <ul className="space-y-2">
                             {analysis.enneagramType.strengths.map((strength: string, idx: number) => (
                               <li key={idx} className="flex items-start gap-2 text-sm">
@@ -747,7 +945,7 @@ function ProfileAnalysisPage() {
                         </div>
                         
                         <div>
-                          <h4 className="font-bold mb-3 text-orange-400">GROWTH AREAS</h4>
+                          <h4 className="font-bold mb-3 text-orange-400">GROWTH OPPORTUNITIES</h4>
                           <ul className="space-y-2">
                             {analysis.enneagramType.weaknesses.map((weakness: string, idx: number) => (
                               <li key={idx} className="flex items-start gap-2 text-sm">
@@ -756,6 +954,165 @@ function ProfileAnalysisPage() {
                               </li>
                             ))}
                           </ul>
+                        </div>
+                      </div>
+
+                      {/* Stress Patterns */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4 text-red-400">STRESS RESPONSE PATTERNS</h4>
+                        <div className="grid gap-3">
+                          {analysis.enneagramType.stress_patterns.map((pattern: string, idx: number) => (
+                            <div key={idx} className="flex items-start gap-2 text-sm p-3 bg-red-500/10 rounded border border-red-500/30">
+                              <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5" />
+                              {pattern}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Wing Analysis */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4">ENNEAGRAM WINGS ANALYSIS</h4>
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="p-4 border border-gray-600 rounded">
+                            <h5 className="font-medium mb-2" style={{color: 'var(--matrix-green)'}}>Type 7 Wing</h5>
+                            <p className="text-sm opacity-80">{analysis.enneagramType.wing_analysis.type_7_wing}</p>
+                          </div>
+                          <div className="p-4 border border-gray-600 rounded">
+                            <h5 className="font-medium mb-2" style={{color: 'var(--matrix-green)'}}>Type 9 Wing</h5>
+                            <p className="text-sm opacity-80">{analysis.enneagramType.wing_analysis.type_9_wing}</p>
+                          </div>
+                        </div>
+                        <div className="mt-4 p-4 bg-blue-500/10 rounded border border-blue-500/30">
+                          <h5 className="font-medium mb-2 text-blue-400">Dominant Wing & Integration</h5>
+                          <p className="text-sm mb-2">{analysis.enneagramType.wing_analysis.dominant_wing}</p>
+                          <p className="text-sm opacity-80">{analysis.enneagramType.wing_analysis.integration_advice}</p>
+                        </div>
+                      </div>
+
+                      {/* Investor Relations Impact */}
+                      <div>
+                        <h4 className="font-bold mb-4">INVESTOR RELATIONS IMPLICATIONS</h4>
+                        <div className="grid md:grid-cols-3 gap-4">
+                          <div className="p-4 bg-green-500/10 rounded border border-green-500/30">
+                            <h5 className="font-medium text-green-400 mb-2">Positive Aspects</h5>
+                            <ul className="space-y-1 text-sm">
+                              {analysis.enneagramType.investor_relations_impact.positive_aspects.map((aspect: string, idx: number) => (
+                                <li key={idx}>• {aspect}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="p-4 bg-red-500/10 rounded border border-red-500/30">
+                            <h5 className="font-medium text-red-400 mb-2">Potential Challenges</h5>
+                            <ul className="space-y-1 text-sm">
+                              {analysis.enneagramType.investor_relations_impact.potential_challenges.map((challenge: string, idx: number) => (
+                                <li key={idx}>• {challenge}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div className="p-4 bg-blue-500/10 rounded border border-blue-500/30">
+                            <h5 className="font-medium text-blue-400 mb-2">Optimization Strategies</h5>
+                            <ul className="space-y-1 text-sm">
+                              {analysis.enneagramType.investor_relations_impact.optimization_strategies.map((strategy: string, idx: number) => (
+                                <li key={idx}>• {strategy}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {activeTab === 'power' && (
+                  <div className="space-y-6">
+                    <div className="ultra-premium-card p-6">
+                      <h3 className="text-xl font-light mb-6 flex items-center gap-2">
+                        <Crown className="w-6 h-6" style={{color: 'var(--matrix-green)'}} />
+                        48 LAWS OF POWER ANALYSIS
+                      </h3>
+                      
+                      {/* Power Law Violations */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4 text-red-400">POWER LAW VIOLATIONS</h4>
+                        <div className="space-y-4">
+                          {analysis.powerAnalysis.violated_laws.map((violation: any, idx: number) => (
+                            <div key={idx} className="p-4 border-l-4 border-red-500 bg-red-500/5">
+                              <div className="flex justify-between items-start mb-2">
+                                <h5 className="font-medium text-red-400">{violation.law}</h5>
+                                <span className="text-xs bg-red-500 text-white px-2 py-1 rounded">
+                                  Severity: {violation.violation_level}/10
+                                </span>
+                              </div>
+                              <p className="text-sm opacity-80 mb-2">{violation.evidence}</p>
+                              <div className="text-xs opacity-60 mb-3">
+                                <span className="font-medium">Business Impact:</span> {violation.business_impact}
+                              </div>
+                              <div className="mb-3">
+                                <span className="text-xs font-medium opacity-60">Correction Strategy:</span>
+                                <p className="text-sm mt-1">{violation.correction_strategy}</p>
+                              </div>
+                              <div>
+                                <span className="text-xs font-medium opacity-60">Practical Examples:</span>
+                                <ul className="mt-1 space-y-1">
+                                  {violation.examples.map((example: string, exIdx: number) => (
+                                    <li key={exIdx} className="text-xs flex items-start gap-2">
+                                      <span style={{color: 'var(--matrix-green)'}}>→</span>
+                                      {example}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Power Strengths */}
+                      <div className="mb-8">
+                        <h4 className="font-bold mb-4 text-green-400">POWER LAW MASTERY</h4>
+                        <div className="space-y-4">
+                          {analysis.powerAnalysis.power_strengths.map((strength: any, idx: number) => (
+                            <div key={idx} className="p-4 border-l-4 border-green-500 bg-green-500/5">
+                              <div className="flex justify-between items-start mb-2">
+                                <h5 className="font-medium text-green-400">{strength.law}</h5>
+                                <span className="text-xs bg-green-500 text-white px-2 py-1 rounded">
+                                  Mastery: {strength.mastery_level}/10
+                                </span>
+                              </div>
+                              <p className="text-sm opacity-80 mb-2">{strength.application}</p>
+                              <div className="text-xs">
+                                <span className="font-medium opacity-60">Leverage Opportunity:</span>
+                                <p className="mt-1">{strength.leverage_opportunity}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Recommended Power Moves */}
+                      <div>
+                        <h4 className="font-bold mb-4" style={{color: 'var(--matrix-green)'}}>STRATEGIC POWER MOVES</h4>
+                        <div className="space-y-4">
+                          {analysis.powerAnalysis.recommended_power_moves.map((move: any, idx: number) => (
+                            <div key={idx} className="p-4 border border-gray-600 rounded">
+                              <h5 className="font-medium mb-2" style={{color: 'var(--matrix-green)'}}>{move.situation}</h5>
+                              <div className="grid md:grid-cols-3 gap-3 text-sm">
+                                <div>
+                                  <span className="font-medium opacity-60">Strategy:</span>
+                                  <p className="mt-1">{move.strategy}</p>
+                                </div>
+                                <div>
+                                  <span className="font-medium opacity-60">Tactic:</span>
+                                  <p className="mt-1">{move.tactic}</p>
+                                </div>
+                                <div>
+                                  <span className="font-medium opacity-60">Expected Outcome:</span>
+                                  <p className="mt-1">{move.expected_outcome}</p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

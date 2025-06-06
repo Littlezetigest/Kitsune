@@ -454,7 +454,7 @@ function AnalysisPage() {
         {analysisView === 'target' && (
           <>
             <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
-                style={{color: 'var(--fox-fire)', textShadow: '0 0 30px var(--fox-fire)', filter: 'brightness(1.3)'}}
+                style={{color: 'var(--matrix-green)', textShadow: '0 0 30px var(--matrix-green)', filter: 'brightness(1.4)'}}
                 data-text={mockAnalysis.primaryArchetype}>
               {mockAnalysis.primaryArchetype}
             </h2>

@@ -21,34 +21,34 @@ function HomePage() {
       {/* Matrix Rain Background */}
       <div className="matrix-rain">
         <div className="matrix-column" style={{left: '5%', animationDelay: '0s', animationDuration: '8s'}}>
-          光闇魂狐炎雷電竜神聖龍妖精霊幻夢想術魔法瞑呪文字列
+          NEVER OUTSHINE THE MASTER • CONCEAL YOUR INTENTIONS • ALWAYS SAY LESS THAN NECESSARY • SO MUCH DEPENDS ON REPUTATION
         </div>
         <div className="matrix-column" style={{left: '15%', animationDelay: '2s', animationDuration: '12s'}}>
-          ネオトーキョー２０７７年未来技術進歩革命電脳世界
+          COURT ATTENTION AT ALL COST • GET OTHERS TO DO THE WORK FOR YOU • MAKE OTHER PEOPLE COME TO YOU • WIN THROUGH ACTIONS
         </div>
         <div className="matrix-column" style={{left: '25%', animationDelay: '4s', animationDuration: '6s'}}>
-          サイバーパンク量子計算機人工知能深層学習神経網絡
+          AVOID THE UNHAPPY AND UNLUCKY • KEEP PEOPLE DEPENDENT ON YOU • USE SELECTIVE HONESTY • APPEAL TO SELF-INTEREST
         </div>
         <div className="matrix-column" style={{left: '35%', animationDelay: '1s', animationDuration: '10s'}}>
-          九尾狐霊魂精神分析心理戦略戦術情報収集解析処理
+          POSE AS A FRIEND WORK AS A SPY • CRUSH YOUR ENEMY TOTALLY • USE ABSENCE TO INCREASE RESPECT • KEEP OTHERS IN TERROR
         </div>
         <div className="matrix-column" style={{left: '45%', animationDelay: '3s', animationDuration: '14s'}}>
-          デジタル神社寺院聖域祈願祝福加護守護霊験力能
+          DO NOT BUILD FORTRESSES • KNOW WHO YOU'RE DEALING WITH • DO NOT COMMIT TO ANYONE • PLAY A SUCKER TO CATCH A SUCKER
         </div>
         <div className="matrix-column" style={{left: '55%', animationDelay: '5s', animationDuration: '7s'}}>
-          ホログラム投影仮想現実拡張現実混合現実超現実
+          USE THE SURRENDER TACTIC • CONCENTRATE YOUR FORCES • PLAY THE PERFECT COURTIER • RE-CREATE YOURSELF
         </div>
         <div className="matrix-column" style={{left: '65%', animationDelay: '0.5s', animationDuration: '11s'}}>
-          炎上爆発破壊創造再生復活転生輪廻因果応報宿命
+          KEEP YOUR HANDS CLEAN • PLAY ON PEOPLE'S NEED TO BELIEVE • ENTER ACTION WITH BOLDNESS • PLAN ALL THE WAY TO THE END
         </div>
         <div className="matrix-column" style={{left: '75%', animationDelay: '2.5s', animationDuration: '9s'}}>
-          光学迷彩透明化隠蔽工作諜報活動秘密任務極秘情報
+          MAKE YOUR ACCOMPLISHMENTS SEEM EFFORTLESS • CONTROL THE OPTIONS • PLAY TO PEOPLE'S FANTASIES • DISCOVER EACH THUMBSCREW
         </div>
         <div className="matrix-column" style={{left: '85%', animationDelay: '4.5s', animationDuration: '13s'}}>
-          電子戦争情報戦心理戦略核兵器量子爆弾時空兵器
+          BE ROYAL IN YOUR OWN FASHION • MASTER THE ART OF TIMING • DISDAIN THINGS YOU CANNOT HAVE • CREATE COMPELLING SPECTACLES
         </div>
         <div className="matrix-column" style={{left: '95%', animationDelay: '1.5s', animationDuration: '8s'}}>
-          終末黙示録審判天罰神罰鬼神悪魔天使堕天使救世主
+          THINK AS YOU LIKE BUT BEHAVE LIKE OTHERS • STIR UP WATERS TO CATCH FISH • DESPISE THE FREE LUNCH • ASSUME FORMLESSNESS
         </div>
       </div>
       
