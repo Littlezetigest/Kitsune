@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "convex/react";
-import { Upload, FileText, MessageCircle, Camera, Eye, Brain, X, Plus, DollarSign, Heart } from "lucide-react";
+import { Upload, FileText, MessageCircle, Camera, Eye, Brain, X, Plus } from "lucide-react";
 import { useState, useRef } from "react";
 import { api } from "../../convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
@@ -24,7 +24,6 @@ function UploadPage() {
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const [imageAnalyses, setImageAnalyses] = useState<any[]>([]);
   const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
-  const [showDonationModal, setShowDonationModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -987,9 +986,13 @@ This analysis was generated from ${analysis.metaData.imageCount} uploaded images
 
         navigate({ to: `/analysis/${conversationId}` });
       } else {
-        // For non-admin text uploads, show donation modal
-        setShowDonationModal(true);
-        return;
+        // For non-admin text uploads, proceed with normal upload
+        const conversationId = await uploadConversation({
+          title: formData.title || "Conversation Analysis",
+          content: formData.content,
+          participantName: formData.participantName,
+        });
+        navigate({ to: `/analysis/${conversationId}` });
       }
     } catch (error) {
       console.error("Upload failed:", error);
@@ -1001,57 +1004,6 @@ This analysis was generated from ${analysis.metaData.imageCount} uploaded images
 
   return (
     <div className="not-prose max-w-5xl mx-auto space-y-8">
-      {/* Donation Modal */}
-      {showDonationModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          <div className="ultra-premium-card p-8 max-w-md w-full mx-4">
-            <div className="text-center mb-6">
-              <Heart className="w-16 h-16 mx-auto mb-4 text-red-500" />
-              <h2 className="text-2xl font-bold mb-2">Support Kitsune Development</h2>
-              <p className="opacity-80">
-                Help us maintain and improve this psychological warfare suite
-              </p>
-            </div>
-            
-            <div className="space-y-4 mb-6">
-              <div className="p-4 bg-blue-500/10 rounded border border-blue-500/30">
-                <div className="flex items-center gap-2 text-blue-400 text-sm mb-2">
-                  <DollarSign className="w-4 h-4" />
-                  PayPal Donation
-                </div>
-                <p className="text-sm opacity-80">
-                  Send contributions to: <strong>{user?.emailAddresses?.[0]?.emailAddress || "admin@kitsune.ai"}</strong>
-                </p>
-              </div>
-              
-              <div className="text-center text-sm opacity-70">
-                Your support helps us continue developing advanced psychological analysis tools
-              </div>
-            </div>
-            
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowDonationModal(false)}
-                className="cyber-btn flex-1 p-3"
-              >
-                Maybe Later
-              </button>
-              <button
-                onClick={() => {
-                  window.open(`https://paypal.me/${user?.emailAddresses?.[0]?.emailAddress || "admin"}`, '_blank');
-                  setShowDonationModal(false);
-                }}
-                className="cyber-btn flex-1 p-3"
-                style={{background: 'var(--matrix-green)', color: 'black'}}
-              >
-                <Heart className="w-4 h-4 mr-2" />
-                Donate Now
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Header */}
       <div className="text-center">
         <h1 className="premium-title mb-8">
@@ -1299,7 +1251,7 @@ This analysis was generated from ${analysis.metaData.imageCount} uploaded images
             ) : (
               <>
                 <Brain className="w-4 h-4 mr-2" />
-                {isAdmin ? 'UPLOAD & ANALYZE TARGET' : 'UPLOAD & MAKE TARGET'}
+                UPLOAD & ANALYZE TARGET
               </>
             )}
           </button>
