@@ -203,13 +203,6 @@ function RootComponent() {
                            ARCHETYPES
                         </Link>
                         <Link
-                          to="/meta-analyzer"
-                          className="fox-fire-btn text-xs tracking-widest"
-                          onClick={() => setIsSidebarOpen(false)}
-                        >
-                           META-ANALYZER
-                        </Link>
-                        <Link
                           to="/profile"
                           className="fox-fire-btn text-xs tracking-widest"
                           onClick={() => setIsSidebarOpen(false)}
@@ -297,15 +290,6 @@ function RootComponent() {
                             className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
                           >
                             ARCHETYPES
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/meta-analyzer"
-                            onClick={() => setIsSidebarOpen(false)}
-                            className="flex items-center p-2 fox-fire-btn mb-2 text-xs tracking-widest"
-                          >
-                            META-ANALYZER
                           </Link>
                         </li>
                         <li>
