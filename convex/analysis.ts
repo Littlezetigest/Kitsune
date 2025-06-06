@@ -271,3 +271,114 @@ export const getRecommendations = query({
       .first();
   },
 });
+
+// Store LLM analysis results
+export const storeLLMAnalysis = mutation({
+  args: {
+    conversationId: v.id("conversations"),
+    analysisType: v.union(
+      v.literal("psychological_profiling"),
+      v.literal("strategic_optimization"),
+      v.literal("communication_enhancement"),
+      v.literal("archetype_refinement"),
+      v.literal("vulnerability_assessment")
+    ),
+    llmResults: v.object({
+      insights: v.array(v.string()),
+      recommendations: v.array(v.string()),
+      confidence: v.number(),
+      metadata: v.object({
+        promptTokens: v.number(),
+        responseTokens: v.number(),
+        model: v.string(),
+        temperature: v.number(),
+        timestamp: v.number()
+      })
+    }),
+    enhancedCommunications: v.optional(v.object({
+      professional: v.string(),
+      archetypeSpecific: v.string(),
+      persuasive: v.string(),
+      analysisBreakdown: v.object({
+        originalWeaknesses: v.array(v.string()),
+        enhancementStrategies: v.array(v.string()),
+        psychologicalTriggers: v.array(v.string()),
+        frameworkApplications: v.array(v.string())
+      })
+    })),
+    personalityInsights: v.optional(v.object({
+      refinedArchetype: v.string(),
+      personalityTraits: v.array(v.string()),
+      communicationPatterns: v.string(),
+      motivationalDrivers: v.array(v.string()),
+      vulnerabilities: v.array(v.string()),
+      trustFactors: v.array(v.string()),
+      decisionMakingStyle: v.string()
+    })),
+    generatedAt: v.number(),
+    confidence: v.number(),
+    context: v.optional(v.string())
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return await ctx.db.insert("llmAnalysisResults", {
+      ...args,
+      userId: user._id,
+    });
+  },
+});
+
+// Get LLM analysis results for a conversation
+export const getLLMAnalysis = query({
+  args: { 
+    conversationId: v.id("conversations"),
+    analysisType: v.optional(v.union(
+      v.literal("psychological_profiling"),
+      v.literal("strategic_optimization"),
+      v.literal("communication_enhancement"),
+      v.literal("archetype_refinement"),
+      v.literal("vulnerability_assessment")
+    ))
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      return null;
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", identity.subject))
+      .unique();
+
+    if (!user) {
+      return null;
+    }
+
+    let query = ctx.db
+      .query("llmAnalysisResults")
+      .withIndex("by_conversation", (q) => q.eq("conversationId", args.conversationId));
+
+    if (args.analysisType) {
+      // If specific type requested, filter by type
+      const results = await query.collect();
+      return results.filter(r => r.analysisType === args.analysisType).slice(-1)[0] || null;
+    }
+
+    // Return most recent analysis
+    return await query.order("desc").first();
+  },
+});

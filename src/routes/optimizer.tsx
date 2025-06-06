@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { api } from "../../convex/_generated/api";
+import { useMutation } from "convex/react";
 
 export const Route = createFileRoute("/optimizer")({
   component: CommunicationOptimizerPage,
@@ -31,6 +32,119 @@ function CommunicationOptimizerPage() {
   const [optimization, setOptimization] = useState<any>(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
   const [activeTab, setActiveTab] = useState('analysis');
+  const [useLLMEnhancement, setUseLLMEnhancement] = useState(false);
+
+  // LLM-powered analysis mutations
+  const generateLLMAnalysis = useMutation(api.llmAnalysis.generateLLMAnalysis);
+  const enhanceCommunicationWithLLM = useMutation(api.llmAnalysis.enhanceCommunicationWithLLM);
+
+  // Real message analysis function
+  const analyzeMessageContent = (message: string) => {
+    const lowerMessage = message.toLowerCase();
+    
+    // Analyze professional level
+    const professionalIndicators = {
+      formal: /\b(professional|industry|enterprise|strategic|comprehensive)\b/.test(lowerMessage),
+      credibility: /\b(experience|track record|proven|established|recognized)\b/.test(lowerMessage),
+      technical: /\b(solution|platform|technology|system|framework)\b/.test(lowerMessage),
+      business: /\b(revenue|growth|market|roi|investment)\b/.test(lowerMessage)
+    };
+    
+    // Identify influence gaps
+    const influenceGaps = [];
+    if (!professionalIndicators.credibility) influenceGaps.push("Lacks credibility markers and social proof");
+    if (!professionalIndicators.business) influenceGaps.push("Missing business value quantification");
+    if (message.length < 100) influenceGaps.push("Too brief - lacks strategic depth");
+    if (!lowerMessage.includes("you") && !lowerMessage.includes("your")) influenceGaps.push("Not personalized to recipient");
+    if (!/\b(exclusive|limited|opportunity|urgent)\b/.test(lowerMessage)) influenceGaps.push("Missing scarcity and urgency elements");
+    
+    // Determine professional level
+    const professionalScore = Object.values(professionalIndicators).filter(Boolean).length;
+    let professionalLevel = "Basic";
+    if (professionalScore >= 3) professionalLevel = "Advanced";
+    else if (professionalScore >= 2) professionalLevel = "Intermediate";
+    
+    return {
+      professionalIndicators,
+      influenceGaps,
+      professionalLevel,
+      messageLength: message.length,
+      formalityScore: professionalScore
+    };
+  };
+
+  // Helper functions for real analysis
+  const generateMessageAssessment = (analysis: any, targetData: any) => {
+    let assessment = `${analysis.professionalLevel} level communication`;
+    if (analysis.messageLength < 50) assessment += " - Too brief for investor engagement";
+    if (analysis.formalityScore < 2) assessment += " - Lacks professional sophistication";
+    if (targetData) assessment += ` - Missing ${targetData.archetype}-specific psychological triggers`;
+    return assessment;
+  };
+
+  const generateInfluenceGaps = (analysis: any, targetData: any) => {
+    const gaps = [...analysis.influenceGaps];
+    if (targetData) {
+      gaps.push(`Missing triggers for ${targetData.archetype} archetype psychology`);
+      if (targetData.vulnerabilities.length > 0) {
+        gaps.push(`Not exploiting known vulnerabilities: ${targetData.vulnerabilities.slice(0, 2).map((v: any) => v.type).join(', ')}`);
+      }
+    }
+    return gaps;
+  };
+
+  const getImprovementNote = (level: string) => {
+    switch (level) {
+      case "Basic": return "Requires significant enhancement for investor-grade communication";
+      case "Intermediate": return "Needs professional sophistication and psychological optimization";
+      case "Advanced": return "Ready for archetype-specific customization";
+      default: return "Requires enhancement";
+    }
+  };
+
+  const generateArchetypeOptimization = (inputMessage: string, targetData: any) => {
+    if (!targetData) return null;
+    
+    const archetype = targetData.archetype;
+    const vulnerabilities = targetData.vulnerabilities.map((v: any) => v.type).join(', ');
+    
+    // Generate archetype-specific versions based on real data
+    switch (archetype) {
+      case "EMPEROR":
+        return `I wanted to personally reach out given your reputation for building market-dominating portfolio companies. Based on our analysis of your investment patterns, this Series A opportunity aligns perfectly with your focus on ${targetData.personalityMatrix.emotionalDriver} and control-oriented investments.
+
+Our platform addresses the exact market dynamics you've identified as critical - we've achieved the type of commanding market position that transforms investor portfolios. Given your preference for ${targetData.communicationStyle.responseTime} decision-making and ${targetData.communicationStyle.persuasionStyle} validation, I believe this represents a signature investment opportunity.
+
+I'd welcome the opportunity to brief you on our strategic roadmap and discuss how we can accelerate your portfolio's market dominance. Are you available for a strategic discussion this week?`;
+        
+      case "SAGE":
+        return `I'm reaching out because your analytical approach to investment evaluation aligns perfectly with our data-driven growth strategy. Based on your preference for ${targetData.communicationStyle.persuasionStyle} analysis and ${targetData.personalityMatrix.analyticalDepth}/10 analytical depth, you'll appreciate our comprehensive approach to market validation.
+
+Our metrics demonstrate strong fundamentals: proven product-market fit with quantifiable growth efficiency. The investment thesis is supported by independent validation and addresses the analytical rigor I know you require for ${targetData.personalityMatrix.emotionalDriver}-focused investments.
+
+Given your systematic due diligence process, I've prepared a comprehensive data room with complete financial models, competitive analysis, and technical architecture review. Would you be interested in scheduling a detailed analytical discussion?`;
+        
+      case "GUARDIAN":
+        return `I'm writing to introduce an investment opportunity that prioritizes sustainable growth and risk-adjusted returns - qualities that align with your conservative investment philosophy and focus on ${targetData.personalityMatrix.emotionalDriver}.
+
+Our Series A features comprehensive downside protection and conservative growth projections that match your ${targetData.personalityMatrix.riskTolerance}/10 risk tolerance. We maintain strong runway and have established multiple funding relationships for future capital needs.
+
+Risk mitigation is built into every aspect: validated market fit, experienced management, and clear competitive protections. This aligns with your preference for ${targetData.personalityMatrix.investmentStyle} investments and ${targetData.communicationStyle.responseTime} decision processes.
+
+Could we schedule a call to review the complete risk assessment framework and protection structures?`;
+        
+      default:
+        return generateGenericOptimization(inputMessage, targetData);
+    }
+  };
+
+  const generateGenericOptimization = (inputMessage: string, targetData: any) => {
+    return `Based on our analysis of your investment focus and communication preferences, I believe you'll find our Series A opportunity compelling. Our platform has achieved strong growth metrics that typically attract institutional investors with your profile.
+
+Given your expertise in identifying market opportunities and preference for ${targetData?.communicationStyle?.persuasionStyle || 'logical'} validation, I'd appreciate the opportunity to share our strategic positioning and discuss alignment with your investment thesis.
+
+Would you be available for a strategic discussion this week to explore the partnership potential?`;
+  };
   
   // Fetch user's conversations and analyses
   const conversations = useQuery(api.conversations.getConversations);
@@ -54,32 +168,82 @@ function CommunicationOptimizerPage() {
     
     setIsOptimizing(true);
     
-    // Simulate optimization processing
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      let optimization;
+      
+      if (useLLMEnhancement && selectedConversationId) {
+        // Use LLM-powered enhancement
+        const targetData = selectedAnalysis ? {
+          archetype: selectedAnalysis.primaryArchetype,
+          vulnerabilities: selectedAnalysis.vulnerabilities.map((v: any) => v.type),
+          communicationStyle: selectedAnalysis.communicationStyle.persuasionStyle,
+          emotionalDriver: selectedAnalysis.personalityMatrix.emotionalDriver
+        } : undefined;
+
+        const llmResult = await enhanceCommunicationWithLLM({
+          originalMessage: inputMessage,
+          targetArchetype: selectedAnalysis?.primaryArchetype,
+          targetPersonality: targetData,
+          enhancementGoals: ["professional_sophistication", "psychological_optimization", "influence_maximization"]
+        });
+
+        optimization = {
+          originalAnalysis: {
+            messageAssessment: `LLM Analysis: ${llmResult.analysisBreakdown.originalWeaknesses.join(", ")}`,
+            targetAudience: targetData ? `${conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target"} (${targetData.archetype} archetype)` : "Generic investor",
+            influenceGaps: llmResult.analysisBreakdown.originalWeaknesses,
+            professionalLevel: "LLM-Enhanced Analysis"
+          },
+          strategicObjectives: {
+            primaryGoal: "LLM-optimized investor engagement and commitment acceleration",
+            targetArchetype: targetData?.archetype || "Multi-archetype approach",
+            psychologicalProfile: targetData ? 
+              `${targetData.archetype} - Emotional driver: ${targetData.emotionalDriver}` :
+              "LLM-analyzed psychological profile",
+            keyInfluencePoints: llmResult.analysisBreakdown.psychologicalTriggers.join(", ")
+          },
+          frameworkApplications: {
+            llmEnhancement: {
+              technique: "Advanced Language Model Optimization",
+              enhancement: llmResult.analysisBreakdown.enhancementStrategies.join(", "),
+              frameworks: llmResult.analysisBreakdown.frameworkApplications.join(", ")
+            }
+          },
+          optimizedVersions: {
+            professional: llmResult.professional,
+            archetypeSpecific: targetData ? {
+              [targetData.archetype.toLowerCase()]: llmResult.archetypeSpecific
+            } : { llm_optimized: llmResult.archetypeSpecific },
+            persuasive: llmResult.persuasive
+          },
+          strategicEnhancements: {
+            llmInsights: llmResult.analysisBreakdown.psychologicalTriggers,
+            enhancementStrategies: llmResult.analysisBreakdown.enhancementStrategies,
+            frameworkApplications: llmResult.analysisBreakdown.frameworkApplications
+          }
+        };
+      } else {
+        // Use traditional analysis
+        const messageAnalysis = analyzeMessageContent(inputMessage);
+        
+        // Get target data from selected conversation
+        const targetData = selectedAnalysis ? {
+          archetype: selectedAnalysis.primaryArchetype,
+          participantName: conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target",
+          vulnerabilities: selectedAnalysis.vulnerabilities,
+          communicationStyle: selectedAnalysis.communicationStyle,
+          personalityMatrix: selectedAnalysis.personalityMatrix
+        } : null;
     
-    // Get target data from selected conversation
-    const targetData = selectedAnalysis ? {
-      archetype: selectedAnalysis.primaryArchetype,
-      participantName: conversations?.find(c => c._id === selectedConversationId)?.participantName || "Target",
-      vulnerabilities: selectedAnalysis.vulnerabilities,
-      communicationStyle: selectedAnalysis.communicationStyle,
-      personalityMatrix: selectedAnalysis.personalityMatrix
-    } : null;
-    
-    // Mock comprehensive optimization analysis with target-specific data
-    const mockOptimization = {
-      originalAnalysis: {
-        messageAssessment: "Direct but lacks psychological sophistication and professional authority markers",
-        targetAudience: targetData ? `${targetData.participantName} (${targetData.archetype} archetype)` : "Generic investor",
-        influenceGaps: [
-          targetData ? `Missing triggers for ${targetData.archetype} psychology` : "Missing social proof and credibility indicators",
-          "Lacks urgency and scarcity elements", 
-          "No embedded psychological triggers",
-          "Amateur language patterns reduce perceived expertise"
-        ],
-        professionalLevel: "Basic - Requires significant enhancement"
-      },
-      strategicObjectives: {
+        // Generate comprehensive optimization analysis with real target-specific data
+        optimization = {
+          originalAnalysis: {
+            messageAssessment: generateMessageAssessment(messageAnalysis, targetData),
+            targetAudience: targetData ? `${targetData.participantName} (${targetData.archetype} archetype)` : "Generic investor",
+            influenceGaps: generateInfluenceGaps(messageAnalysis, targetData),
+            professionalLevel: `${messageAnalysis.professionalLevel} - ${getImprovementNote(messageAnalysis.professionalLevel)}`
+          },
+          strategicObjectives: {
         primaryGoal: "Secure investment commitment and follow-up meeting",
         targetArchetype: targetData?.archetype || "Multi-archetype approach",
         psychologicalProfile: targetData ? 
@@ -110,38 +274,14 @@ function CommunicationOptimizerPage() {
         }
       },
       optimizedVersions: {
-        professional: `Based on our analysis of market dynamics and your portfolio focus, I believe you'll find our Series A opportunity particularly compelling. Our SaaS platform has achieved 40% month-over-month growth with best-in-class unit economics - metrics that typically attract institutional investors like Sequoia and Andreessen Horowitz.
-
-Given your expertise in identifying market leaders before they scale, I'd appreciate the opportunity to share our competitive intelligence and discuss how this aligns with your investment thesis. We're seeing significant inbound interest from strategic acquirers, but we're committed to partnering with investors who understand the long-term value creation potential.
-
-Would you be available for a 30-minute call this week to explore the strategic fit and discuss next steps?`,
+        professional: generateGenericOptimization(inputMessage, targetData),
         
-        archetypeSpecific: {
-          emperor: `I wanted to personally reach out given your reputation for building market-dominating portfolio companies. Our Series A presents exactly the type of category-defining opportunity that transforms investor portfolios.
-
-We've assembled a world-class team with proven track records from Google, Stripe, and Palantir. Our technology platform addresses a $50B market with clear regulatory tailwinds and first-mover advantages that create sustainable competitive moats.
-
-As someone who understands the importance of controlling market narrative, you'll appreciate our strategic positioning and the exclusive access we're providing to select institutional partners. I believe this could be a signature investment for your portfolio.
-
-I'd welcome the opportunity to brief you on our strategic roadmap and discuss how we can accelerate your portfolio's market dominance. Are you available for a strategic discussion this week?`,
-          
-          sage: `I'm reaching out because your analytical approach to investment evaluation aligns perfectly with our data-driven growth strategy. Our Series A opportunity represents a rare combination of product-market fit validation and scalable business model architecture.
-
-Our metrics tell a compelling story: 3.2 LTV/CAC ratio, 95% gross revenue retention, and 140% net revenue retention. We've completed comprehensive market analysis across 47 comparable companies, and our positioning in the 95th percentile for growth efficiency suggests significant value creation potential.
-
-The investment thesis is supported by independent third-party validation from McKinsey's technology practice and endorsements from industry thought leaders including [notable names]. Our technical architecture has been peer-reviewed by engineers from Meta and Amazon.
-
-Given your preference for thorough due diligence, I've prepared a comprehensive data room with full financial models, competitive analysis, and strategic roadmaps. Would you be interested in reviewing our complete investment memorandum and scheduling a detailed technical discussion?`,
-          
-          guardian: `I'm writing to introduce an investment opportunity that prioritizes sustainable growth and risk-adjusted returns - qualities I know are central to your investment philosophy.
-
-Our Series A round features comprehensive downside protection including liquidation preferences, anti-dilution provisions, and board representation rights. We've structured the investment to provide multiple exit strategies and clear milestone-based value creation checkpoints.
-
-Our business model emphasizes recurring revenue streams, diversified customer base, and conservative growth projections. We maintain 18 months of runway and have established relationships with three additional funding sources for future capital needs.
-
-Risk mitigation is built into every aspect of our strategy: validated product-market fit across multiple customer segments, experienced management team with previous exit experience, and clear competitive moats protected by intellectual property.
-
-I'd appreciate the opportunity to walk you through our comprehensive risk assessment framework and discuss how this investment aligns with your portfolio's stability objectives. Could we schedule a call to review the complete due diligence package?`
+        archetypeSpecific: targetData ? {
+          [targetData.archetype.toLowerCase()]: generateArchetypeOptimization(inputMessage, targetData)
+        } : {
+          emperor: generateArchetypeOptimization(inputMessage, {archetype: "EMPEROR", personalityMatrix: {emotionalDriver: "control"}, communicationStyle: {responseTime: "immediate", persuasionStyle: "authoritative"}}),
+          sage: generateArchetypeOptimization(inputMessage, {archetype: "SAGE", personalityMatrix: {emotionalDriver: "knowledge", analyticalDepth: 8}, communicationStyle: {responseTime: "deliberate", persuasionStyle: "logical"}}),
+          guardian: generateArchetypeOptimization(inputMessage, {archetype: "GUARDIAN", personalityMatrix: {emotionalDriver: "security", riskTolerance: 3, investmentStyle: "conservative"}, communicationStyle: {responseTime: "deliberate", persuasionStyle: "logical"}})
         }
       },
       strategicEnhancements: {
@@ -163,11 +303,17 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
           "Created logical progression from problem to solution",
           "Concluded with assumptive next steps"
         ]
+          }
+        };
       }
-    };
-    
-    setOptimization(mockOptimization);
-    setIsOptimizing(false);
+      
+      setOptimization(optimization);
+    } catch (error) {
+      console.error("Optimization failed:", error);
+      alert("Optimization failed. Please try again.");
+    } finally {
+      setIsOptimizing(false);
+    }
   };
 
   const copyToClipboard = (text: string) => {
@@ -259,6 +405,48 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
                   </div>
                 </div>
 
+                {/* LLM Enhancement Toggle */}
+                <div className="form-control">
+                  <label className="label cursor-pointer">
+                    <span className="label-text font-medium opacity-80">🤖 LLM-Powered Enhancement</span>
+                    <input
+                      type="checkbox"
+                      checked={useLLMEnhancement}
+                      onChange={(e) => setUseLLMEnhancement(e.target.checked)}
+                      className="toggle toggle-primary"
+                      disabled={!selectedConversationId}
+                    />
+                  </label>
+                  <div className="label">
+                    <span className="label-text-alt opacity-60">
+                      {!selectedConversationId 
+                        ? "Select a target conversation to enable LLM enhancement" 
+                        : useLLMEnhancement 
+                          ? "Advanced AI analysis for maximum psychological impact"
+                          : "Use traditional pattern-based analysis"
+                      }
+                    </span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 hidden">
+                  <div className="form-control hidden">
+                    <label className="label">
+                      <span className="label-text font-medium opacity-80">Analysis Mode</span>
+                    </label>
+                    <select
+                      value={analysisMode}
+                      onChange={(e) => setAnalysisMode(e.target.value)}
+                      className="select select-bordered bg-black/20 border-gray-600"
+                    >
+                      <option value="comprehensive">Comprehensive Analysis</option>
+                      <option value="quick">Quick Optimization</option>
+                      <option value="frameworks">Framework-Focused</option>
+                      <option value="archetype">Archetype-Specific</option>
+                    </select>
+                  </div>
+                </div>
+
                 <button
                   onClick={optimizeMessage}
                   disabled={isOptimizing || !inputMessage.trim()}
@@ -268,12 +456,21 @@ I'd appreciate the opportunity to walk you through our comprehensive risk assess
                   {isOptimizing ? (
                     <>
                       <div className="loading loading-spinner loading-sm mr-2"></div>
-                      OPTIMIZING COMMUNICATION...
+                      {useLLMEnhancement ? "LLM ANALYZING..." : "OPTIMIZING COMMUNICATION..."}
                     </>
                   ) : (
                     <>
-                      <Brain className="w-4 h-4 mr-2" />
-                      OPTIMIZE FOR MAXIMUM IMPACT
+                      {useLLMEnhancement ? (
+                        <>
+                          <Brain className="w-4 h-4 mr-2" />
+                          🤖 OPTIMIZE WITH AI ENHANCEMENT
+                        </>
+                      ) : (
+                        <>
+                          <Brain className="w-4 h-4 mr-2" />
+                          OPTIMIZE FOR MAXIMUM IMPACT
+                        </>
+                      )}
                     </>
                   )}
                 </button>

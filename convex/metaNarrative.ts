@@ -453,30 +453,237 @@ function calculateOverallConfidence(metaNarrative: any, timeline: any, psycholog
   return Object.values(factors).reduce((sum, factor) => sum + factor, 0) / Object.keys(factors).length;
 }
 
-// Placeholder implementations for helper functions (these would be fully implemented in production)
-function extractTimestamp(segment: string) { return null; }
-function extractContext(segment: string) { return "Standard conversation"; }
-function extractParticipants(segment: string) { return ["User", "Investor"]; }
-function extractKeyTopics(segment: string) { return []; }
-function analyzeEmotionalTone(segment: string) { return "neutral"; }
-function extractInformationShared(segment: string) { return []; }
-function extractCommitments(segment: string) { return []; }
-function extractQuestions(segment: string) { return []; }
-function extractObjections(segment: string) { return []; }
-function calculatePowerBalance(indicators: any) { return 0.5; }
-function extractControlSignals(interaction: any) { return []; }
-function extractAuthorityMarkers(interaction: any) { return []; }
-function extractSubmissionIndicators(interaction: any) { return []; }
-function calculateCredibilityImpact(pattern: RegExp, content: string) { return 0.7; }
-function assessMutualInterest(interaction: any) { return 0.6; }
-function analyzeAuthorityPositioning(interaction: any) { return {}; }
-function detectInitialArchetype(interaction: any, existingAnalysis: any) { return existingAnalysis?.archetype || "VALIDATOR"; }
-function analyzeTrustBuilding(interactions: any[]) { return {}; }
-function analyzePowerShifts(interactions: any[]) { return {}; }
-function identifyCriticalMoments(interactions: any[]) { return []; }
-function extractNarrativeThemes(interactions: any[]) { return []; }
-function measureRelationshipDepth(interactions: any[]) { return {}; }
-function trackInfluencePatterns(interactions: any[]) { return {}; }
+// Real implementations for helper functions
+function extractTimestamp(segment: string) { 
+  const timestampMatch = segment.match(/\d{1,2}\/\d{1,2}\/\d{4}|\d{4}-\d{2}-\d{2}/);
+  return timestampMatch ? timestampMatch[0] : null; 
+}
+
+function extractContext(segment: string) { 
+  if (segment.toLowerCase().includes("meeting") || segment.toLowerCase().includes("call")) return "Meeting/Call";
+  if (segment.toLowerCase().includes("email") || segment.toLowerCase().includes("message")) return "Email/Message";
+  if (segment.toLowerCase().includes("pitch") || segment.toLowerCase().includes("presentation")) return "Pitch/Presentation";
+  return "Standard conversation"; 
+}
+
+function extractParticipants(segment: string) { 
+  const participants = ["User"];
+  if (segment.toLowerCase().includes("investor") || segment.toLowerCase().includes("partner")) participants.push("Investor");
+  return participants; 
+}
+
+function extractKeyTopics(segment: string) { 
+  const topics = [];
+  const lowerSegment = segment.toLowerCase();
+  if (lowerSegment.includes("funding") || lowerSegment.includes("investment")) topics.push("Funding");
+  if (lowerSegment.includes("product") || lowerSegment.includes("solution")) topics.push("Product");
+  if (lowerSegment.includes("market") || lowerSegment.includes("opportunity")) topics.push("Market");
+  if (lowerSegment.includes("team") || lowerSegment.includes("experience")) topics.push("Team");
+  if (lowerSegment.includes("revenue") || lowerSegment.includes("growth")) topics.push("Revenue");
+  return topics; 
+}
+
+function analyzeEmotionalTone(segment: string) { 
+  const lowerSegment = segment.toLowerCase();
+  if (lowerSegment.includes("excited") || lowerSegment.includes("love") || lowerSegment.includes("amazing")) return "positive";
+  if (lowerSegment.includes("concerned") || lowerSegment.includes("worried") || lowerSegment.includes("risk")) return "negative";
+  if (lowerSegment.includes("interested") || lowerSegment.includes("curious")) return "engaged";
+  return "neutral"; 
+}
+
+function extractInformationShared(segment: string) { 
+  const info = [];
+  if (segment.includes("$") || segment.includes("revenue")) info.push("Financial data");
+  if (segment.toLowerCase().includes("customer") || segment.toLowerCase().includes("user")) info.push("Customer information");
+  if (segment.toLowerCase().includes("competition") || segment.toLowerCase().includes("competitor")) info.push("Competitive intel");
+  return info; 
+}
+
+function extractCommitments(segment: string) { 
+  const commitments = [];
+  if (segment.toLowerCase().includes("will") || segment.toLowerCase().includes("commit")) commitments.push("Future action");
+  if (segment.toLowerCase().includes("follow up") || segment.toLowerCase().includes("next step")) commitments.push("Follow-up");
+  return commitments; 
+}
+
+function extractQuestions(segment: string) { 
+  return (segment.match(/\?/g) || []).map((_, index) => `Question ${index + 1}`); 
+}
+
+function extractObjections(segment: string) { 
+  const objections = [];
+  const lowerSegment = segment.toLowerCase();
+  if (lowerSegment.includes("but") || lowerSegment.includes("however")) objections.push("Concern raised");
+  if (lowerSegment.includes("risk") || lowerSegment.includes("worry")) objections.push("Risk concern");
+  if (lowerSegment.includes("expensive") || lowerSegment.includes("cost")) objections.push("Cost concern");
+  return objections; 
+}
+function calculatePowerBalance(indicators: any) { 
+  const score = Object.values(indicators).filter(Boolean).length / Object.keys(indicators).length;
+  return score > 0.5 ? 0.7 : 0.3; 
+}
+
+function extractControlSignals(interaction: any) { 
+  const signals = [];
+  const content = interaction.content.toLowerCase();
+  if (content.includes("agenda") || content.includes("outline")) signals.push("Agenda setting");
+  if (content.includes("time") || content.includes("schedule")) signals.push("Time control");
+  if (content.includes("next") || content.includes("follow")) signals.push("Next step control");
+  return signals; 
+}
+
+function extractAuthorityMarkers(interaction: any) { 
+  const markers = [];
+  const content = interaction.content.toLowerCase();
+  if (content.includes("experience") || content.includes("background")) markers.push("Experience positioning");
+  if (content.includes("success") || content.includes("track record")) markers.push("Success demonstration");
+  if (content.includes("expertise") || content.includes("specialize")) markers.push("Expertise claim");
+  return markers; 
+}
+
+function extractSubmissionIndicators(interaction: any) { 
+  const indicators = [];
+  const content = interaction.content.toLowerCase();
+  if (content.includes("sorry") || content.includes("apologize")) indicators.push("Apologetic language");
+  if (content.includes("maybe") || content.includes("perhaps")) indicators.push("Tentative language");
+  if (content.includes("if that's okay") || content.includes("if you don't mind")) indicators.push("Permission seeking");
+  return indicators; 
+}
+
+function calculateCredibilityImpact(pattern: RegExp, content: string) { 
+  const matches = content.match(pattern);
+  return matches ? Math.min(matches.length * 0.2 + 0.5, 1.0) : 0.3; 
+}
+
+function assessMutualInterest(interaction: any) { 
+  const content = interaction.content.toLowerCase();
+  let score = 0.5;
+  if (content.includes("interested") || content.includes("curious")) score += 0.2;
+  if (content.includes("excited") || content.includes("enthusiastic")) score += 0.3;
+  if (content.includes("concern") || content.includes("hesitant")) score -= 0.2;
+  return Math.max(0.1, Math.min(1.0, score)); 
+}
+
+function analyzeAuthorityPositioning(interaction: any) { 
+  return {
+    credibilityMarkers: extractAuthorityMarkers(interaction),
+    authorityLevel: extractAuthorityMarkers(interaction).length > 2 ? "High" : "Medium",
+    positioningStrategy: extractAuthorityMarkers(interaction).length > 0 ? "Expertise-based" : "Relationship-based"
+  }; 
+}
+
+function detectInitialArchetype(interaction: any, existingAnalysis: any) { 
+  if (existingAnalysis?.primaryArchetype) return existingAnalysis.primaryArchetype;
+  
+  const content = interaction.content.toLowerCase();
+  if (content.includes("control") || content.includes("dominate")) return "EMPEROR";
+  if (content.includes("analyze") || content.includes("data")) return "SAGE";
+  if (content.includes("safe") || content.includes("risk")) return "GUARDIAN";
+  if (content.includes("new") || content.includes("innovation")) return "PIONEER";
+  return "COLLECTOR"; 
+}
+function analyzeTrustBuilding(interactions: any[]) { 
+  const trustIndicators = interactions.map(interaction => {
+    const content = interaction.content.toLowerCase();
+    let trustScore = 0.5;
+    if (content.includes("thank") || content.includes("appreciate")) trustScore += 0.1;
+    if (content.includes("trust") || content.includes("confident")) trustScore += 0.2;
+    if (content.includes("transparent") || content.includes("honest")) trustScore += 0.15;
+    if (content.includes("concern") || content.includes("worry")) trustScore -= 0.1;
+    return { interactionId: interaction.id, trustScore: Math.max(0.1, Math.min(1.0, trustScore)) };
+  });
+  
+  return {
+    progressionPattern: trustIndicators,
+    overallTrend: trustIndicators.length > 1 ? 
+      (trustIndicators[trustIndicators.length - 1].trustScore > trustIndicators[0].trustScore ? "Increasing" : "Decreasing") : "Stable",
+    averageTrustLevel: trustIndicators.reduce((sum, item) => sum + item.trustScore, 0) / trustIndicators.length
+  };
+}
+
+function analyzePowerShifts(interactions: any[]) { 
+  const powerIndicators = interactions.map(interaction => {
+    const controlSignals = extractControlSignals(interaction);
+    const authorityMarkers = extractAuthorityMarkers(interaction);
+    const submissionIndicators = extractSubmissionIndicators(interaction);
+    
+    const powerScore = (controlSignals.length + authorityMarkers.length - submissionIndicators.length) / 5 + 0.5;
+    return { interactionId: interaction.id, powerScore: Math.max(0.1, Math.min(1.0, powerScore)) };
+  });
+  
+  return {
+    powerProgression: powerIndicators,
+    majorShifts: powerIndicators.filter((item, index) => 
+      index > 0 && Math.abs(item.powerScore - powerIndicators[index - 1].powerScore) > 0.3),
+    currentPowerBalance: powerIndicators.length > 0 ? powerIndicators[powerIndicators.length - 1].powerScore : 0.5
+  };
+}
+
+function identifyCriticalMoments(interactions: any[]) { 
+  return interactions.filter(interaction => {
+    const content = interaction.content.toLowerCase();
+    return content.includes("decision") || content.includes("commit") || 
+           content.includes("investment") || content.includes("no") || 
+           content.includes("yes") || content.includes("deal");
+  }).map(interaction => ({
+    interactionId: interaction.id,
+    moment: interaction.content.substring(0, 100),
+    significance: "High",
+    type: interaction.content.toLowerCase().includes("yes") || interaction.content.toLowerCase().includes("commit") ? "Positive" : "Neutral"
+  }));
+}
+
+function extractNarrativeThemes(interactions: any[]) { 
+  const themes = [];
+  const allContent = interactions.map(i => i.content.toLowerCase()).join(" ");
+  
+  if (allContent.includes("growth") || allContent.includes("scale")) themes.push("Growth Focus");
+  if (allContent.includes("risk") || allContent.includes("safe")) themes.push("Risk Management");
+  if (allContent.includes("innovation") || allContent.includes("disrupt")) themes.push("Innovation Drive");
+  if (allContent.includes("team") || allContent.includes("experience")) themes.push("Team Capability");
+  if (allContent.includes("market") || allContent.includes("opportunity")) themes.push("Market Opportunity");
+  
+  return themes;
+}
+
+function measureRelationshipDepth(interactions: any[]) { 
+  const formalityLevels = interactions.map(interaction => {
+    const content = interaction.content.toLowerCase();
+    let formalityScore = 0.5;
+    if (content.includes("dear") || content.includes("sincerely")) formalityScore += 0.3;
+    if (content.includes("hey") || content.includes("thanks!")) formalityScore -= 0.2;
+    if (content.includes("personal") || content.includes("family")) formalityScore -= 0.3;
+    return Math.max(0.1, Math.min(1.0, formalityScore));
+  });
+  
+  return {
+    formalityProgression: formalityLevels,
+    relationshipDepth: formalityLevels.length > 0 ? 
+      (1 - formalityLevels[formalityLevels.length - 1]) : 0.3,
+    intimacyLevel: formalityLevels.reduce((sum, level) => sum + (1 - level), 0) / formalityLevels.length
+  };
+}
+
+function trackInfluencePatterns(interactions: any[]) { 
+  const influenceMarkers = interactions.map(interaction => {
+    const content = interaction.content.toLowerCase();
+    const techniques = [];
+    
+    if (content.includes("proven") || content.includes("successful")) techniques.push("Social Proof");
+    if (content.includes("limited") || content.includes("exclusive")) techniques.push("Scarcity");
+    if (content.includes("expert") || content.includes("authority")) techniques.push("Authority");
+    if (content.includes("because") || content.includes("reason")) techniques.push("Reason Why");
+    if (content.includes("imagine") || content.includes("picture")) techniques.push("Visualization");
+    
+    return { interactionId: interaction.id, techniques };
+  });
+  
+  return {
+    techniquesUsed: influenceMarkers,
+    mostUsedTechniques: ["Social Proof", "Authority", "Scarcity"], // Could be computed from data
+    effectivenessScore: 0.7 // Could be computed based on response patterns
+  };
+}
 function assessPreparationQuality(interaction: any) { return 0.7; }
 function assessStrategicReadiness(interaction: any) { return 0.7; }
 function assessInformationAdvantage(interaction: any) { return 0.6; }
@@ -543,12 +750,123 @@ function calculateConfidenceAdjustments(existing: any, newData: any) { return {}
 function generateStrategicImplications(existing: any, newData: any) { return []; }
 function generateRecommendationUpdates(existing: any, newData: any) { return []; }
 function recalculateConfidence(existing: any, newData: any) { return 0.8; }
-function determineCurrentPhase(timeline: any) { return "Due Diligence"; }
-function extractKeyInsights(metaNarrative: any, psychology: any) { return []; }
-function generateStrategicRecommendations(metaNarrative: any, timeline: any, psychology: any) { return []; }
-function identifyRiskFactors(metaNarrative: any, timeline: any) { return []; }
-function generateOpportunityMatrix(psychology: any, timeline: any) { return {}; }
-function prioritizeNextSteps(metaNarrative: any, timeline: any, psychology: any) { return []; }
+function determineCurrentPhase(timeline: any) { 
+  const interactions = timeline.interactionByInteractionAnalysis || [];
+  if (interactions.length === 0) return "Initial Contact";
+  if (interactions.length <= 2) return "Initial Engagement";
+  if (interactions.length <= 4) return "Relationship Building";
+  if (interactions.length <= 6) return "Due Diligence";
+  return "Decision Phase";
+}
+
+function extractKeyInsights(metaNarrative: any, psychology: any) { 
+  const insights = [];
+  
+  if (metaNarrative.relationshipStoryArc?.relationshipEvolutionTrajectory?.trustBuildingPhaseAnalysis?.averageTrustLevel > 0.7) {
+    insights.push("Strong trust foundation established through consistent engagement");
+  }
+  
+  if (metaNarrative.relationshipDepthProgression?.intimacyLevel > 0.6) {
+    insights.push("Relationship has moved beyond formal business interactions");
+  }
+  
+  if (metaNarrative.influencePatternEvolution?.effectivenessScore > 0.7) {
+    insights.push("Influence techniques showing strong effectiveness");
+  }
+  
+  insights.push("Conversation analysis reveals evolving investor psychology and strategic positioning opportunities");
+  
+  return insights.length > 0 ? insights : ["Preliminary analysis indicates standard business relationship development"];
+}
+
+function generateStrategicRecommendations(metaNarrative: any, timeline: any, psychology: any) { 
+  const recommendations = [];
+  
+  const currentPhase = determineCurrentPhase(timeline);
+  
+  switch (currentPhase) {
+    case "Initial Contact":
+      recommendations.push("Focus on credibility establishment and mutual interest validation");
+      recommendations.push("Deploy authority positioning and social proof techniques");
+      break;
+    case "Initial Engagement":
+      recommendations.push("Deepen relationship through value demonstration and strategic insights");
+      recommendations.push("Begin psychological profiling and archetype identification");
+      break;
+    case "Relationship Building":
+      recommendations.push("Leverage identified psychological triggers and archetype patterns");
+      recommendations.push("Increase interaction frequency and strategic value delivery");
+      break;
+    case "Due Diligence":
+      recommendations.push("Provide comprehensive data and address analytical concerns");
+      recommendations.push("Position for commitment and decision acceleration");
+      break;
+    case "Decision Phase":
+      recommendations.push("Apply closing techniques and commitment reinforcement");
+      recommendations.push("Address final objections and create urgency");
+      break;
+  }
+  
+  return recommendations;
+}
+
+function identifyRiskFactors(metaNarrative: any, timeline: any) { 
+  const risks = [];
+  
+  if (metaNarrative.relationshipStoryArc?.relationshipEvolutionTrajectory?.trustBuildingPhaseAnalysis?.overallTrend === "Decreasing") {
+    risks.push("Trust levels showing declining trend - relationship may be at risk");
+  }
+  
+  if (timeline.interactionByInteractionAnalysis?.length > 5 && determineCurrentPhase(timeline) === "Initial Engagement") {
+    risks.push("Extended engagement phase without progression - may indicate low interest");
+  }
+  
+  risks.push("Standard market volatility and competitive pressure factors");
+  
+  return risks;
+}
+
+function generateOpportunityMatrix(psychology: any, timeline: any) { 
+  return {
+    immediateOpportunities: [
+      "Leverage current engagement momentum for next meeting",
+      "Deploy archetype-specific influence techniques"
+    ],
+    mediumTermOpportunities: [
+      "Develop strategic partnership positioning",
+      "Expand relationship network through introductions"
+    ],
+    longTermOpportunities: [
+      "Establish thought leadership position",
+      "Create sustained competitive advantage"
+    ]
+  };
+}
+
+function prioritizeNextSteps(metaNarrative: any, timeline: any, psychology: any) { 
+  const nextSteps = [];
+  const currentPhase = determineCurrentPhase(timeline);
+  
+  nextSteps.push({
+    priority: "High",
+    action: `Execute ${currentPhase.toLowerCase()} specific engagement strategy`,
+    timeframe: "Immediate (1-3 days)"
+  });
+  
+  nextSteps.push({
+    priority: "Medium", 
+    action: "Deploy identified psychological triggers and archetype optimization",
+    timeframe: "Short-term (1 week)"
+  });
+  
+  nextSteps.push({
+    priority: "Medium",
+    action: "Prepare next phase transition strategy and materials",
+    timeframe: "Medium-term (2 weeks)"
+  });
+  
+  return nextSteps;
+}
 function extractCriticalActions(psychology: any, positioning: any) { return []; }
 function extractHighImpactOpportunities(predictive: any) { return []; }
 function extractRiskMitigation(psychology: any, positioning: any) { return []; }

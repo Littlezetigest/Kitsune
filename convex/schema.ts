@@ -340,4 +340,66 @@ export default defineSchema({
     .index("by_user", ["userId"])
     .index("by_confidence", ["confidenceScore"])
     .index("by_generated_date", ["generatedAt"]),
+
+  // LLM-powered analysis results
+  llmAnalysisResults: defineTable({
+    conversationId: v.id("conversations"),
+    userId: v.id("users"),
+    
+    // Analysis type and configuration
+    analysisType: v.union(
+      v.literal("psychological_profiling"),
+      v.literal("strategic_optimization"),
+      v.literal("communication_enhancement"),
+      v.literal("archetype_refinement"),
+      v.literal("vulnerability_assessment")
+    ),
+    
+    // LLM response data
+    llmResults: v.object({
+      insights: v.array(v.string()),
+      recommendations: v.array(v.string()),
+      confidence: v.number(),
+      metadata: v.object({
+        promptTokens: v.number(),
+        responseTokens: v.number(),
+        model: v.string(),
+        temperature: v.number(),
+        timestamp: v.number()
+      })
+    }),
+    
+    // Enhanced communication versions (if applicable)
+    enhancedCommunications: v.optional(v.object({
+      professional: v.string(),
+      archetypeSpecific: v.string(),
+      persuasive: v.string(),
+      analysisBreakdown: v.object({
+        originalWeaknesses: v.array(v.string()),
+        enhancementStrategies: v.array(v.string()),
+        psychologicalTriggers: v.array(v.string()),
+        frameworkApplications: v.array(v.string())
+      })
+    })),
+    
+    // Personality insights (if applicable)
+    personalityInsights: v.optional(v.object({
+      refinedArchetype: v.string(),
+      personalityTraits: v.array(v.string()),
+      communicationPatterns: v.string(),
+      motivationalDrivers: v.array(v.string()),
+      vulnerabilities: v.array(v.string()),
+      trustFactors: v.array(v.string()),
+      decisionMakingStyle: v.string()
+    })),
+    
+    // Analysis metadata
+    generatedAt: v.number(),
+    confidence: v.number(),
+    context: v.optional(v.string())
+  }).index("by_conversation", ["conversationId"])
+    .index("by_user", ["userId"])
+    .index("by_type", ["analysisType"])
+    .index("by_confidence", ["confidence"])
+    .index("by_generated_date", ["generatedAt"]),
 });

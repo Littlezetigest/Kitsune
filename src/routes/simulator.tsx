@@ -1018,23 +1018,72 @@ function WarRoomSimulator() {
                   </button>
                   
                   {showMetaAnalysis && (
-                    <div className="mt-3 text-xs space-y-2 max-h-40 overflow-y-auto">
+                    <div className="mt-3 text-xs space-y-3 max-h-60 overflow-y-auto">
+                      {/* Executive Summary */}
                       <div>
-                        <span className="opacity-70">Key Insights:</span>
+                        <span className="opacity-70 font-medium">Key Insights:</span>
                         <ul className="mt-1 space-y-1">
                           {metaAnalysis.analysisData.executiveSummary.keyInsights.slice(0, 3).map((insight: string, idx: number) => (
                             <li key={idx} className="text-xs opacity-80">• {insight}</li>
                           ))}
                         </ul>
                       </div>
+                      
+                      {/* Strategic Recommendations */}
                       <div>
-                        <span className="opacity-70">Strategic Recommendations:</span>
+                        <span className="opacity-70 font-medium">Strategic Recommendations:</span>
                         <ul className="mt-1 space-y-1">
                           {metaAnalysis.analysisData.executiveSummary.strategicRecommendations.slice(0, 2).map((rec: string, idx: number) => (
                             <li key={idx} className="text-xs opacity-80">• {rec}</li>
                           ))}
                         </ul>
                       </div>
+
+                      {/* Relationship Evolution */}
+                      {metaAnalysis.analysisData.metaNarrativeDeconstruction?.relationshipStoryArc && (
+                        <div>
+                          <span className="opacity-70 font-medium">Relationship Evolution:</span>
+                          <div className="mt-1 text-xs opacity-80">
+                            Trust Trend: {metaAnalysis.analysisData.metaNarrativeDeconstruction.relationshipStoryArc.relationshipEvolutionTrajectory?.trustBuildingPhaseAnalysis?.overallTrend || "Stable"}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Psychological Triggers */}
+                      {metaAnalysis.analysisData.psychologicalTrajectoryMapping?.psychologicalInfluenceMapping && (
+                        <div>
+                          <span className="opacity-70 font-medium">Effective Triggers:</span>
+                          <div className="mt-1 text-xs opacity-80">
+                            {metaAnalysis.analysisData.psychologicalTrajectoryMapping.psychologicalInfluenceMapping.effectiveTriggers?.slice(0, 2).join(", ") || "Authority, Social Proof"}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Critical Moments */}
+                      {metaAnalysis.analysisData.criticalPatternAnalysis?.highImpactSuccessMoments && (
+                        <div>
+                          <span className="opacity-70 font-medium">Success Pattern:</span>
+                          <div className="mt-1 text-xs opacity-80">
+                            {metaAnalysis.analysisData.criticalPatternAnalysis.highImpactSuccessMoments.length > 0 
+                              ? "Multiple successful engagement moments identified"
+                              : "Building momentum through consistent value delivery"}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Next Steps Priority */}
+                      {metaAnalysis.analysisData.executiveSummary.nextStepPriorities && (
+                        <div>
+                          <span className="opacity-70 font-medium">Priority Actions:</span>
+                          <ul className="mt-1 space-y-1">
+                            {metaAnalysis.analysisData.executiveSummary.nextStepPriorities.slice(0, 2).map((step: any, idx: number) => (
+                              <li key={idx} className="text-xs opacity-80">
+                                • {step.action || `Execute ${metaAnalysis.analysisData.executiveSummary.relationshipPhase} strategy`}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
