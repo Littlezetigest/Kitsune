@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UploadBackupImport } from './routes/upload-backup'
 import { Route as UploadImport } from './routes/upload'
 import { Route as SimulatorImport } from './routes/simulator'
 import { Route as ProfileImport } from './routes/profile'
@@ -23,6 +24,12 @@ import { Route as IndexImport } from './routes/index'
 import { Route as AnalysisConversationIdImport } from './routes/analysis.$conversationId'
 
 // Create/Update Routes
+
+const UploadBackupRoute = UploadBackupImport.update({
+  id: '/upload-backup',
+  path: '/upload-backup',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const UploadRoute = UploadImport.update({
   id: '/upload',
@@ -151,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UploadImport
       parentRoute: typeof rootRoute
     }
+    '/upload-backup': {
+      id: '/upload-backup'
+      path: '/upload-backup'
+      fullPath: '/upload-backup'
+      preLoaderRoute: typeof UploadBackupImport
+      parentRoute: typeof rootRoute
+    }
     '/analysis/$conversationId': {
       id: '/analysis/$conversationId'
       path: '/analysis/$conversationId'
@@ -173,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
+  '/upload-backup': typeof UploadBackupRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -186,6 +201,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
+  '/upload-backup': typeof UploadBackupRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -200,6 +216,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/simulator': typeof SimulatorRoute
   '/upload': typeof UploadRoute
+  '/upload-backup': typeof UploadBackupRoute
   '/analysis/$conversationId': typeof AnalysisConversationIdRoute
 }
 
@@ -215,6 +232,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/simulator'
     | '/upload'
+    | '/upload-backup'
     | '/analysis/$conversationId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -227,6 +245,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/simulator'
     | '/upload'
+    | '/upload-backup'
     | '/analysis/$conversationId'
   id:
     | '__root__'
@@ -239,6 +258,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/simulator'
     | '/upload'
+    | '/upload-backup'
     | '/analysis/$conversationId'
   fileRoutesById: FileRoutesById
 }
@@ -253,6 +273,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   SimulatorRoute: typeof SimulatorRoute
   UploadRoute: typeof UploadRoute
+  UploadBackupRoute: typeof UploadBackupRoute
   AnalysisConversationIdRoute: typeof AnalysisConversationIdRoute
 }
 
@@ -266,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   SimulatorRoute: SimulatorRoute,
   UploadRoute: UploadRoute,
+  UploadBackupRoute: UploadBackupRoute,
   AnalysisConversationIdRoute: AnalysisConversationIdRoute,
 }
 
@@ -288,6 +310,7 @@ export const routeTree = rootRoute
         "/profile",
         "/simulator",
         "/upload",
+        "/upload-backup",
         "/analysis/$conversationId"
       ]
     },
@@ -317,6 +340,9 @@ export const routeTree = rootRoute
     },
     "/upload": {
       "filePath": "upload.tsx"
+    },
+    "/upload-backup": {
+      "filePath": "upload-backup.tsx"
     },
     "/analysis/$conversationId": {
       "filePath": "analysis.$conversationId.tsx"

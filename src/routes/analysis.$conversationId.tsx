@@ -18,6 +18,7 @@ import {
   BarChart3,
   Activity,
   User,
+  Users,
   Shuffle,
   RefreshCw
 } from "lucide-react";
@@ -40,6 +41,12 @@ function AnalysisPage() {
   // Actions for self-analysis and remodeling (commented out - would need useAction)
   // const analyzeSelf = useAction(api.selfAnalysis.analyzeSelfCommunication);
 
+  // Get the analysis for this conversation first
+  const analysis = useQuery(
+    api.analysis.getAnalysis,
+    conversation ? { conversationId: conversationId as Id<"conversations"> } : "skip"
+  );
+
   // Get user profile and remodeling data - handle conditional queries properly
   const userProfile = useQuery(
     api.selfAnalysisMutations.getUserProfile, 
@@ -47,7 +54,7 @@ function AnalysisPage() {
   );
   const characterRemodeling = useQuery(
     api.selfAnalysisMutations.getCharacterRemodeling, 
-    conversation ? { userId: conversation.userId } : "skip"
+    analysis ? { targetAnalysisId: analysis._id } : "skip"
   );
   
   // Mock analysis data for demonstration (in real app, this would come from the database)
@@ -428,51 +435,223 @@ function AnalysisPage() {
       </div>
 
       {/* Archetype Classification */}
-      <div className="cyber-card p-8 mb-8 text-center">
-        <div className="flex justify-center mb-6">
+      <div className="ultra-premium-card p-12 mb-8 text-center border-4 border-[var(--fox-fire)] shadow-2xl">
+        <div className="flex justify-center mb-8">
           {analysisView === 'target' && (
-            <ArchetypeIcon className="w-24 h-24 fox-fire-glow" style={{color: 'var(--golden-circuit)'}} />
+            <div className="relative">
+              <ArchetypeIcon className="w-32 h-32 fox-fire-glow drop-shadow-2xl" style={{color: 'var(--fox-fire)', filter: 'brightness(1.5) saturate(1.2)'}} />
+              <div className="absolute inset-0 w-32 h-32 rounded-full bg-[var(--fox-fire)] opacity-20 animate-pulse"></div>
+            </div>
           )}
           {analysisView === 'self' && (
-            <Brain className="w-24 h-24 fox-fire-glow" style={{color: 'var(--cyber-green)'}} />
+            <Brain className="w-32 h-32 fox-fire-glow" style={{color: 'var(--cyber-green)'}} />
           )}
           {analysisView === 'remodeling' && (
-            <Shuffle className="w-24 h-24 fox-fire-glow" style={{color: 'var(--hot-pink)'}} />
+            <Shuffle className="w-32 h-32 fox-fire-glow" style={{color: 'var(--hot-pink)'}} />
           )}
         </div>
-        <h2 className="text-4xl font-bold mb-4 hologram-text">
-          {analysisView === 'target' && mockAnalysis.primaryArchetype}
-          {analysisView === 'self' && mockUserProfile.primaryArchetype}
-          {analysisView === 'remodeling' && 'ADAPTIVE PERSONA'}
-        </h2>
-        <div className="flex items-center justify-center gap-4 mb-4">
-          <span className="text-xl">
-            {analysisView === 'remodeling' ? 'ADAPTATION LEVEL:' : 'CLASSIFICATION CONFIDENCE:'}
-          </span>
-          <div className="flex items-center gap-2">
-            <div className="w-32 h-4 bg-gray-700 rounded">
-              <div 
-                className="kitsune-rating h-full rounded"
-                style={{width: `${
-                  analysisView === 'target' ? mockAnalysis.archetypeConfidence * 100 :
-                  analysisView === 'self' ? mockUserProfile.archetypeConfidence * 100 :
-                  mockRemodeling.adaptivePersona.adaptationLevel * 10
-                }%`}}
-              />
+        
+        {analysisView === 'target' && (
+          <>
+            <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
+                style={{color: 'var(--fox-fire)', textShadow: '0 0 30px var(--fox-fire)', filter: 'brightness(1.3)'}}
+                data-text={mockAnalysis.primaryArchetype}>
+              {mockAnalysis.primaryArchetype}
+            </h2>
+            
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>CORE PSYCHOLOGY</h3>
+                  <p className="text-sm leading-relaxed">
+                    Dominant, control-oriented investor who built their empire through decisive action and strategic authority. 
+                    Views investments as extensions of their personal dominion and expects deference from entrepreneurs.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>DECISION FRAMEWORK</h3>
+                  <p className="text-sm leading-relaxed">
+                    Makes rapid decisions based on gut instinct and market dominance principles. Prioritizes ROI and strategic 
+                    positioning over detailed analysis. Values entrepreneurs who understand hierarchical respect.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--fox-fire)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--fox-fire)'}}>INFLUENCE TRIGGERS</h3>
+                  <p className="text-sm leading-relaxed">
+                    Responds to acknowledgment of their authority, exclusivity of opportunities, and potential for market 
+                    expansion. Ego-driven but respects competence when presented with proper deference.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center gap-4 px-8 py-4 bg-[var(--fox-fire)]/10 rounded-full border border-[var(--fox-fire)]/30">
+                  <span className="text-lg font-medium">PSYCHOLOGICAL ACCURACY:</span>
+                  <div className="w-40 h-3 bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[var(--fox-fire)] to-[var(--golden-circuit)] fox-fire-glow"
+                      style={{width: `${mockAnalysis.archetypeConfidence * 100}%`}}
+                    />
+                  </div>
+                  <span className="text-2xl font-bold" style={{color: 'var(--fox-fire)'}}>
+                    {Math.round(mockAnalysis.archetypeConfidence * 100)}%
+                  </span>
+                </div>
+              </div>
             </div>
-            <span className="text-xl font-bold" style={{color: 'var(--golden-circuit)'}}>
-              {analysisView === 'target' && Math.round(mockAnalysis.archetypeConfidence * 100)}
-              {analysisView === 'self' && Math.round(mockUserProfile.archetypeConfidence * 100)}
-              {analysisView === 'remodeling' && mockRemodeling.adaptivePersona.adaptationLevel}
-              {analysisView === 'remodeling' ? '/10' : '%'}
-            </span>
-          </div>
-        </div>
-        <p className="text-lg opacity-80">
-          {analysisView === 'target' && 'Primary investor archetype identified through behavioral pattern analysis'}
-          {analysisView === 'self' && 'Your communication archetype based on chat history analysis'}
-          {analysisView === 'remodeling' && mockRemodeling.adaptivePersona.recommendedPersona}
-        </p>
+          </>
+        )}
+        
+        {analysisView === 'self' && (
+          <>
+            <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
+                style={{color: 'var(--cyber-green)', textShadow: '0 0 30px var(--cyber-green)', filter: 'brightness(1.3)'}}
+                data-text={mockUserProfile.primaryArchetype}>
+              {mockUserProfile.primaryArchetype}
+            </h2>
+            
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="cyber-card p-6 border-[var(--cyber-green)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--cyber-green)'}}>ANALYTICAL CORE</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    Deep analytical thinker who processes information systematically before making decisions. 
+                    Values comprehensive understanding and tends to over-explain concepts to ensure clarity.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--cyber-green)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--cyber-green)'}}>COMMUNICATION PATTERN</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    Logical, detail-oriented communication style with tendency toward perfectionism. 
+                    Provides extensive context and background information before reaching conclusions.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--cyber-green)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--cyber-green)'}}>VULNERABILITY MARKERS</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    Susceptible to authority figures and social proof. Hesitates when faced with incomplete 
+                    information and can be influenced through logical frameworks and expert validation.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center gap-4 px-8 py-4 bg-[var(--cyber-green)]/10 rounded-full border border-[var(--cyber-green)]/30">
+                  <span className="text-lg font-medium" style={{color: 'var(--cyber-green)'}}>CLASSIFICATION ACCURACY:</span>
+                  <div className="w-40 h-3 bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[var(--cyber-green)] to-[var(--golden-circuit)] fox-fire-glow"
+                      style={{width: `${mockUserProfile.archetypeConfidence * 100}%`}}
+                    />
+                  </div>
+                  <span className="text-2xl font-bold" style={{color: 'var(--cyber-green)'}}>
+                    {Math.round(mockUserProfile.archetypeConfidence * 100)}%
+                  </span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+        
+        {analysisView === 'remodeling' && (
+          <>
+            <h2 className="text-6xl font-bold mb-6 spirit-hologram" 
+                style={{color: 'var(--hot-pink)', textShadow: '0 0 30px var(--hot-pink)', filter: 'brightness(1.3)'}}
+                data-text="ADAPTIVE PERSONA">
+              ADAPTIVE PERSONA
+            </h2>
+            
+            <div className="max-w-4xl mx-auto mb-8">
+              <div className="ultra-premium-card p-8 mb-8 border-[var(--shrine-gold)]/50">
+                <h3 className="text-2xl font-bold mb-6 text-center" style={{color: 'var(--shrine-gold)'}}>
+                  RECOMMENDED ARCHETYPE: "THE STRATEGIC ORACLE"
+                </h3>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <div className="bg-[var(--shrine-gold)]/10 p-4 rounded border border-[var(--shrine-gold)]/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--shrine-gold)'}}>ARCHETYPE RATIONALE:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        EMPERORS crave exclusive intelligence and strategic foresight. Your analytical nature becomes 
+                        their competitive advantage when positioned as elite market intelligence rather than academic analysis.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-blue-500/10 p-4 rounded border border-blue-500/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--electric-blue)'}}>TARGET'S VULNERABILITY EXPLOITED:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        Their ego vulnerability responds to being the "only one smart enough" to understand your insights. 
+                        Their impatience disappears when information gives them competitive edge over other investors.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div class="space-y-4">
+                    <div className="bg-[var(--hot-pink)]/10 p-4 rounded border border-[var(--hot-pink)]/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--hot-pink)'}}>EXACT POSITIONING STATEMENT:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        "I specialize in institutional-grade market intelligence typically reserved for billion-dollar hedge funds. 
+                        Your strategic instincts are already aligned with what the data reveals - let me confirm your advantage."
+                      </p>
+                    </div>
+                    
+                    <div className="bg-green-500/10 p-4 rounded border border-green-500/30">
+                      <h4 className="font-bold mb-2" style={{color: 'var(--cyber-green)'}}>PSYCHOLOGICAL MECHANISM:</h4>
+                      <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                        Transforms your analytical weakness into their exclusive strength. You become the intelligence 
+                        asset that enhances their empire rather than an advisor seeking validation.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--hot-pink)'}}>PERSONA IDENTITY</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    <strong style={{color: 'var(--shrine-gold)'}}>"The Strategic Oracle"</strong> - Elite intelligence provider who confirms 
+                    their instincts with exclusive market insights. Not seeking approval, but providing ammunition for their empire.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--hot-pink)'}}>COMMUNICATION SHIFT</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    From academic explanation to <strong style={{color: 'var(--shrine-gold)'}}>"exclusive intelligence briefing"</strong>. 
+                    Replace analysis with strategic confirmation of their superior market positioning.
+                  </p>
+                </div>
+                
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-3" style={{color: 'var(--hot-pink)'}}>BEHAVIORAL ADAPTATIONS</h3>
+                  <p className="text-sm leading-relaxed" style={{color: 'var(--neon-blue)'}}>
+                    Present findings as <strong style={{color: 'var(--shrine-gold)'}}>"strategic intelligence that validates your empire-building instincts"</strong> 
+                    rather than academic research requiring their consideration.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center gap-4 px-8 py-4 bg-[var(--hot-pink)]/10 rounded-full border border-[var(--hot-pink)]/30">
+                  <span className="text-lg font-medium" style={{color: 'var(--hot-pink)'}}>ADAPTATION EFFECTIVENESS:</span>
+                  <div className="w-40 h-3 bg-gray-700 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[var(--hot-pink)] to-[var(--golden-circuit)] fox-fire-glow"
+                      style={{width: `${mockRemodeling.adaptivePersona.adaptationLevel * 10}%`}}
+                    />
+                  </div>
+                  <span className="text-2xl font-bold" style={{color: 'var(--hot-pink)'}}>
+                    {mockRemodeling.adaptivePersona.adaptationLevel}/10
+                  </span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Navigation Tabs */}
@@ -1173,69 +1352,556 @@ function AnalysisPage() {
         </div>
       </div>
 
-      {/* Digital Kitsune Evolution Feedback */}
-      <div className="cyber-card p-8">
-        <h2 className="text-3xl font-bold text-center mb-6 hologram-text">
-           DIGITAL KITSUNE EVOLUTION FEEDBACK
-        </h2>
-        <div className="grid md:grid-cols-4 gap-6">
-          {[
-            { label: 'Analysis Accuracy', value: 9.2, color: 'var(--cyber-green)' },
-            { label: 'Strategy Usefulness', value: 8.7, color: 'var(--neon-blue)' },
-            { label: 'Simulator Realism', value: 8.9, color: 'var(--hot-pink)' },
-            { label: 'Overall Power Level', value: 9.0, color: 'var(--golden-circuit)' }
-          ].map((metric, index) => (
-            <div key={index} className="text-center">
-              <h3 className="font-bold mb-3" style={{color: metric.color}}>
-                {metric.label}
-              </h3>
-              <div className="relative w-24 h-24 mx-auto mb-4">
-                <div className="absolute inset-0 rounded-full border-4 border-gray-700"></div>
-                <div 
-                  className="absolute inset-0 rounded-full border-4 border-transparent fox-fire-glow"
-                  style={{
-                    borderTopColor: metric.color,
-                    borderRightColor: metric.color,
-                    transform: `rotate(${(metric.value / 10) * 360}deg)`,
-                    transition: 'transform 2s ease-in-out'
-                  }}
-                ></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-2xl font-bold" style={{color: metric.color}}>
-                    {metric.value}
-                  </span>
+      {/* Psychological Warfare Intelligence & Strategic Frameworks */}
+      {analysisView === 'target' && (
+        <div className="space-y-8">
+          {/* Cialdini Influence Framework Analysis */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--cyber-green)'}}>
+               CIALDINI INFLUENCE FRAMEWORK ANALYSIS
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-green-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--cyber-green)'}}>
+                    <Crown className="w-6 h-6" />
+                    AUTHORITY SUSCEPTIBILITY: 95%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4">
+                    EMPEROR archetypes paradoxically respond to displays of competent authority when presented respectfully. 
+                    They respect hierarchical expertise in specialized domains while maintaining their overall dominance.
+                  </p>
+                  <div className="bg-green-500/10 p-4 rounded border border-green-500/30">
+                    <strong className="text-green-400">Tactical Application:</strong>
+                    <p className="text-sm mt-2">
+                      Reference industry titans, cite prestigious credentials, and mention exclusive advisors. 
+                      Present yourself as the expert they need while acknowledging their superior market position.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-blue-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--neon-blue)'}}>
+                    <Users className="w-6 h-6" />
+                    SOCIAL PROOF RESONANCE: 85%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4">
+                    High sensitivity to peer validation from other successful investors. Values exclusive circles and 
+                    elite group membership as indicators of worthwhile opportunities.
+                  </p>
+                  <div className="bg-blue-500/10 p-4 rounded border border-blue-500/30">
+                    <strong className="text-blue-400">Tactical Application:</strong>
+                    <p className="text-sm mt-2">
+                      Name-drop other EMPEROR-type investors, reference exclusive investment circles, 
+                      and create FOMO through limited partnership opportunities.
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="flex justify-center">
-                {Array.from({length: 5}, (_, i) => (
-                  <Star 
-                    key={i}
-                    className={`w-5 h-5 fox-fire-glow ${i < Math.floor(metric.value / 2) ? '' : 'opacity-30'}`}
-                    style={{color: metric.color}}
-                    fill="currentColor"
-                  />
-                ))}
+
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-orange-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--shrine-gold)'}}>
+                    <Zap className="w-6 h-6" />
+                    SCARCITY ACTIVATION: 90%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4">
+                    Extremely motivated by exclusive, time-limited opportunities. Fear of missing out on empire-building 
+                    chances overrides natural caution and triggers rapid decision-making.
+                  </p>
+                  <div className="bg-orange-500/10 p-4 rounded border border-orange-500/30">
+                    <strong className="text-orange-400">Tactical Application:</strong>
+                    <p className="text-sm mt-2">
+                      Create legitimate urgency through competitor interest, limited allocation rounds, 
+                      and strategic timing pressure.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-purple-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Shield className="w-6 h-6" />
+                    COMMITMENT CONSISTENCY: 80%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4">
+                    Once committed to a strategic direction, maintains consistency to preserve reputation and authority. 
+                    Public commitments become powerful psychological anchors.
+                  </p>
+                  <div className="bg-purple-500/10 p-4 rounded border border-purple-500/30">
+                    <strong className="text-purple-400">Tactical Application:</strong>
+                    <p className="text-sm mt-2">
+                      Secure small initial commitments, document strategic alignment publicly, 
+                      and reference their stated investment thesis.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
-        
-        <div className="mt-8 text-center">
-          <p className="text-lg mb-4" style={{color: 'var(--hot-pink)'}}>
-            Your kitsune powers are evolving! Suggest additional tactical abilities:
-          </p>
-          <div className="flex justify-center gap-4">
-            <input 
-              type="text" 
-              placeholder="Suggest new psychological warfare techniques..."
-              className="input input-bordered flex-1 max-w-md bg-black/50 border-[var(--neon-blue)] text-[var(--neon-blue)]"
-            />
-            <button className="weapon-button px-6 py-3">
-               TRANSMIT EVOLUTION
-            </button>
+          </div>
+
+          {/* Advanced Psychological Warfare Techniques */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--hot-pink)'}}>
+               ADVANCED PSYCHOLOGICAL WARFARE TECHNIQUES
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="cyber-card p-6 border-red-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--vulnerability-red)'}}>
+                  EGO AMPLIFICATION PROTOCOL
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-red-500/10 p-3 rounded">
+                    <strong>Phase 1:</strong> Acknowledge their "legendary" deal-making ability
+                  </div>
+                  <div className="bg-red-500/10 p-3 rounded">
+                    <strong>Phase 2:</strong> Reference their "unmatched market intuition"
+                  </div>
+                  <div className="bg-red-500/10 p-3 rounded">
+                    <strong>Phase 3:</strong> Position opportunity as "worthy of their empire"
+                  </div>
+                </div>
+              </div>
+
+              <div className="cyber-card p-6 border-yellow-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--shrine-gold)'}}>
+                  CONTROL ILLUSION FRAMEWORK
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-yellow-500/10 p-3 rounded">
+                    <strong>Technique:</strong> Offer multiple paths to same outcome
+                  </div>
+                  <div className="bg-yellow-500/10 p-3 rounded">
+                    <strong>Method:</strong> "You could structure this as X or Y"
+                  </div>
+                  <div className="bg-yellow-500/10 p-3 rounded">
+                    <strong>Result:</strong> They feel in control while being guided
+                  </div>
+                </div>
+              </div>
+
+              <div className="cyber-card p-6 border-blue-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--neon-blue)'}}>
+                  STRATEGIC DEFERENCE MODEL
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="bg-blue-500/10 p-3 rounded">
+                    <strong>Position:</strong> Competent subordinate seeking guidance
+                  </div>
+                  <div className="bg-blue-500/10 p-3 rounded">
+                    <strong>Language:</strong> "Your experience suggests..." 
+                  </div>
+                  <div className="bg-blue-500/10 p-3 rounded">
+                    <strong>Outcome:</strong> They provide the reasoning you want
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* NLP & Neurolinguistic Patterns */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--electric-blue)'}}>
+               NEUROLINGUISTIC PROGRAMMING PATTERNS
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="cyber-card p-6 border-[var(--electric-blue)]/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--electric-blue)'}}>
+                  KINESTHETIC DOMINANCE DETECTED
+                </h3>
+                <p className="text-sm leading-relaxed mb-4">
+                  Primary sensory modality is kinesthetic - they "feel" market movements, "grasp" opportunities, 
+                  and need to "get a handle" on investments. Physical metaphors resonate strongly.
+                </p>
+                <div className="bg-[var(--electric-blue)]/10 p-4 rounded">
+                  <strong>Optimized Language Patterns:</strong>
+                  <ul className="text-sm mt-2 space-y-1">
+                    <li>• "Feel the market momentum behind this"</li>
+                    <li>• "Grasp the strategic weight of this move"</li>
+                    <li>• "Get a solid grip on these returns"</li>
+                    <li>• "Touch base on the concrete benefits"</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="cyber-card p-6 border-[var(--electric-blue)]/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--electric-blue)'}}>
+                  EMBEDDED COMMANDS FRAMEWORK
+                </h3>
+                <p className="text-sm leading-relaxed mb-4">
+                  Subconscious directive implantation through embedded linguistic structures. 
+                  EMPEROR archetypes process authority-based commands when properly framed.
+                </p>
+                <div className="bg-[var(--electric-blue)]/10 p-4 rounded">
+                  <strong>Command Structures:</strong>
+                  <ul className="text-sm mt-2 space-y-1">
+                    <li>• "When you DECIDE TO INVEST, you'll see..."</li>
+                    <li>• "As you CONSIDER THE OPPORTUNITY..."</li>
+                    <li>• "You might WANT TO MOVE QUICKLY on this"</li>
+                    <li>• "It's important to SECURE YOUR POSITION"</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* Self-Analysis Psychological Frameworks */}
+      {analysisView === 'self' && (
+        <div className="space-y-8">
+          {/* Personal Communication Pattern Analysis */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--cyber-green)'}}>
+               PERSONAL COMMUNICATION PATTERN ANALYSIS
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-green-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--cyber-green)'}}>
+                    <Brain className="w-6 h-6" />
+                    OVER-EXPLANATION PATTERN: 85%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    <strong style={{color: 'var(--cyber-green)'}}>Detection Quote:</strong> "Let me provide some context before I answer that question..."
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    Analysis shows consistent pattern of front-loading excessive context before reaching conclusions. 
+                    This indicates analytical perfectionism and fear of being misunderstood.
+                  </p>
+                  <div className="bg-green-500/10 p-4 rounded border border-green-500/30">
+                    <strong className="text-green-400">Meta-Analysis Reasoning:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      SAGE archetypes demonstrate this behavior as a defense mechanism against criticism. 
+                      The need to establish credibility through comprehensive explanation reveals underlying insecurity about authority.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-blue-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--neon-blue)'}}>
+                    <Shield className="w-6 h-6" />
+                    AUTHORITY DEFERENCE: 90%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    <strong style={{color: 'var(--cyber-green)'}}>Detection Quote:</strong> "You're probably right, but I was thinking..."
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    High susceptibility to authority figures, often prefacing disagreements with validation. 
+                    Shows automatic deference even when holding contrary evidence.
+                  </p>
+                  <div className="bg-blue-500/10 p-4 rounded border border-blue-500/30">
+                    <strong className="text-blue-400">Meta-Analysis Reasoning:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      SAGE personality's respect for expertise creates exploitable submission to perceived authority. 
+                      This pattern emerges from valuing knowledge hierarchy over personal conviction.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-orange-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--shrine-gold)'}}>
+                    <AlertTriangle className="w-6 h-6" />
+                    PERFECTIONISM PARALYSIS: 75%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    <strong style={{color: 'var(--cyber-green)'}}>Detection Quote:</strong> "I need to think about this more before deciding..."
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    Consistent delay in decision-making when facing incomplete information. 
+                    Analysis paralysis emerges from need for comprehensive understanding before action.
+                  </p>
+                  <div className="bg-orange-500/10 p-4 rounded border border-orange-500/30">
+                    <strong className="text-orange-400">Meta-Analysis Reasoning:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      SAGE archetype's analytical nature creates vulnerability to time pressure and forced decisions. 
+                      Exploitable through artificial urgency and information scarcity tactics.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-purple-500/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Users className="w-6 h-6" />
+                    SOCIAL PROOF DEPENDENCY: 80%
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    <strong style={{color: 'var(--cyber-green)'}}>Detection Quote:</strong> "Most experts seem to agree that..."
+                  </p>
+                  <p className="text-sm leading-relaxed mb-4" style={{color: 'var(--neon-blue)'}}>
+                    Heavy reliance on external validation and expert consensus before forming opinions. 
+                    Seeks safety in majority viewpoints rather than independent analysis.
+                  </p>
+                  <div className="bg-purple-500/10 p-4 rounded border border-purple-500/30">
+                    <strong className="text-purple-400">Meta-Analysis Reasoning:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      SAGE need for intellectual validation creates susceptibility to manufactured consensus. 
+                      Can be influenced through strategic expert testimonials and peer pressure tactics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Power Law Violation Framework */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--hot-pink)'}}>
+               POWER LAW VIOLATION ANALYSIS
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="cyber-card p-6 border-red-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--vulnerability-red)'}}>
+                  LAW 4: "ALWAYS SAY LESS THAN NECESSARY"
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-red-500/10 p-3 rounded">
+                    <strong style={{color: 'var(--vulnerability-red)'}}>Violation Evidence:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      "So let me break this down step by step, starting with the background context you need to understand..."
+                    </p>
+                  </div>
+                  <div className="bg-red-500/10 p-3 rounded">
+                    <strong style={{color: 'var(--vulnerability-red)'}}>Strategic Impact:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      Over-explanation reduces mystique and authority. Creates perception of insecurity and need for validation.
+                    </p>
+                  </div>
+                  <div className="bg-green-500/10 p-3 rounded border border-green-500/30">
+                    <strong className="text-green-400">Remediation Strategy:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      Implement 30-second rule: Make your point in 30 seconds or less. Practice executive summary delivery.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="cyber-card p-6 border-yellow-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--shrine-gold)'}}>
+                  LAW 1: "NEVER OUTSHINE THE MASTER"
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-yellow-500/10 p-3 rounded">
+                    <strong style={{color: 'var(--shrine-gold)'}}>Violation Evidence:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      "Actually, the data shows a different trend than what you mentioned..."
+                    </p>
+                  </div>
+                  <div className="bg-yellow-500/10 p-3 rounded">
+                    <strong style={{color: 'var(--shrine-gold)'}}>Strategic Impact:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      Direct contradiction of authority figures triggers defensive responses and relationship damage.
+                    </p>
+                  </div>
+                  <div className="bg-green-500/10 p-3 rounded border border-green-500/30">
+                    <strong className="text-green-400">Remediation Strategy:</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      Use strategic deference: "Your experience suggests... I'm curious about your thoughts on this additional data..."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Character Remodeling Strategic Frameworks */}
+      {analysisView === 'remodeling' && (
+        <div className="space-y-8">
+          {/* Adaptive Persona Implementation Framework */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--hot-pink)'}}>
+               ADAPTIVE PERSONA IMPLEMENTATION FRAMEWORK
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Shuffle className="w-6 h-6" />
+                    VULNERABILITY-TARGETED TRANSFORMATION
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-red-500/10 p-3 rounded border border-red-500/30">
+                      <strong style={{color: 'var(--vulnerability-red)'}}>Target Quote (Ego Trigger):</strong>
+                      <p className="text-sm mt-2 italic" style={{color: 'var(--neon-blue)'}}>
+                        "I've built multiple successful companies... I know a good opportunity when I see one."
+                      </p>
+                    </div>
+                    <div className="bg-[var(--hot-pink)]/10 p-3 rounded">
+                      <strong style={{color: 'var(--hot-pink)'}}>OLD SAGE Response (Mistake):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "Well, let me walk you through the analysis. There are multiple factors we need to consider, including market dynamics, competitive positioning..."
+                      </p>
+                    </div>
+                    <div className="bg-[var(--shrine-gold)]/10 p-3 rounded border border-[var(--shrine-gold)]/30">
+                      <strong style={{color: 'var(--shrine-gold)'}}>NEW ORACLE Response (Calibrated):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "Your track record speaks to exactly this type of strategic insight. The institutional data I'm seeing confirms what your experience already tells you - this has the same market positioning as your previous empire-building moves."
+                      </p>
+                    </div>
+                    
+                    <div className="bg-blue-500/10 p-3 rounded border border-blue-500/30">
+                      <strong style={{color: 'var(--electric-blue)'}}>Psychological Mechanism:</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        Validates their ego ("your experience already tells you") while positioning your analysis as confirmation of their superior instincts rather than new information they need to process.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Crown className="w-6 h-6" />
+                    IMPATIENCE VULNERABILITY EXPLOITATION
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-red-500/10 p-3 rounded border border-red-500/30">
+                      <strong style={{color: 'var(--vulnerability-red)'}}>Target Quote (Impatience Signal):</strong>
+                      <p className="text-sm mt-2 italic" style={{color: 'var(--neon-blue)'}}>
+                        "I don't have time for lengthy presentations. Give me the bottom line - is this worth my time or not?"
+                      </p>
+                    </div>
+                    <div className="bg-[var(--hot-pink)]/10 p-3 rounded">
+                      <strong style={{color: 'var(--hot-pink)'}}>OLD SAGE Response (Triggers Impatience):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "You're absolutely right about time being valuable. Let me give you a comprehensive overview starting with market trends, then competitive analysis, regulatory factors..."
+                      </p>
+                    </div>
+                    <div className="bg-[var(--shrine-gold)]/10 p-3 rounded border border-[var(--shrine-gold)]/30">
+                      <strong style={{color: 'var(--shrine-gold)'}}>NEW ORACLE Response (Respects Urgency):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "Absolutely worth your time. Three data points confirm this aligns with your M&A strategy: market timing advantage, regulatory moat, and competitor blind spot. The institutional analysis validates your instinct."
+                      </p>
+                    </div>
+                    
+                    <div className="bg-blue-500/10 p-3 rounded border border-blue-500/30">
+                      <strong style={{color: 'var(--electric-blue)'}}>Strategic Calibration:</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        Transforms their impatience from obstacle into asset. Quick decisive confirmation feeds their need for rapid empire-building decisions while positioning you as the intelligence source that accelerates their dominance.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Zap className="w-6 h-6" />
+                    STATUS VULNERABILITY LANGUAGE CALIBRATION
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="bg-red-500/10 p-3 rounded border border-red-500/30">
+                      <strong style={{color: 'var(--vulnerability-red)'}}>Target Quote (Status Concern):</strong>
+                      <p className="text-sm mt-2 italic" style={{color: 'var(--neon-blue)'}}>
+                        "I can't afford to be associated with anything that damages my reputation in the market."
+                      </p>
+                    </div>
+                    <div className="bg-[var(--hot-pink)]/10 p-3 rounded">
+                      <strong style={{color: 'var(--hot-pink)'}}>OLD SAGE Language (Status Threat):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "I think this might be worth considering, though there are some risks we should probably analyze..."
+                      </p>
+                    </div>
+                    <div className="bg-[var(--shrine-gold)]/10 p-3 rounded border border-[var(--shrine-gold)]/30">
+                      <strong style={{color: 'var(--shrine-gold)'}}>NEW ORACLE Language (Status Enhancement):</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        "This positions you ahead of competitors who lack access to institutional-grade intelligence. Your reputation as a visionary investor gets validated by being first to this opportunity."
+                      </p>
+                    </div>
+                    
+                    <div className="bg-blue-500/10 p-3 rounded border border-blue-500/30">
+                      <strong style={{color: 'var(--electric-blue)'}}>Status Language Framework:</strong>
+                      <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                        Replace uncertainty words ("might," "probably") with status-elevating phrases ("positions you ahead," "validates your reputation"). Transform risk discussion into competitive advantage narrative.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="cyber-card p-6 border-[var(--hot-pink)]/50">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{color: 'var(--hot-pink)'}}>
+                    <Target className="w-6 h-6" />
+                    BEHAVIORAL CALIBRATION
+                  </h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="bg-[var(--hot-pink)]/10 p-3 rounded">
+                      <strong style={{color: 'var(--hot-pink)'}}>Timing Adjustments:</strong>
+                      <p className="mt-2" style={{color: 'var(--neon-blue)'}}>Respond within 2 hours (shows respect for their time), keep initial emails under 3 sentences</p>
+                    </div>
+                    <div className="bg-[var(--hot-pink)]/10 p-3 rounded">
+                      <strong style={{color: 'var(--hot-pink)'}}>Structure Changes:</strong>
+                      <p className="mt-2" style={{color: 'var(--neon-blue)'}}>Lead with executive summary, maximum 3 key points, end with clear recommendation</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Psychological Compatibility Analysis */}
+          <div className="ultra-premium-card p-8">
+            <h2 className="text-3xl font-bold text-center mb-8 hologram-text" style={{color: 'var(--electric-blue)'}}>
+               PSYCHOLOGICAL COMPATIBILITY MATRIX
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="cyber-card p-6 border-red-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--vulnerability-red)'}}>
+                  CONFLICT POINTS ANALYSIS
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-red-500/10 p-4 rounded border border-red-500/30">
+                    <strong style={{color: 'var(--vulnerability-red)'}}>Your Detail Orientation vs Their Impatience</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Example Friction:</strong> You naturally provide comprehensive analysis. They want bottom-line results in 30 seconds.
+                    </p>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Mitigation Strategy:</strong> Lead with conclusion, then offer to "dive deeper into the analysis if needed."
+                    </p>
+                  </div>
+                  <div className="bg-red-500/10 p-4 rounded border border-red-500/30">
+                    <strong style={{color: 'var(--vulnerability-red)'}}>Your Analytical Process vs Their Intuitive Decisions</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Example Friction:</strong> You need data to decide. They trust gut instinct and experience.
+                    </p>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Mitigation Strategy:</strong> Frame analysis as "validation of your instinct" rather than contrary evidence.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="cyber-card p-6 border-green-500/50">
+                <h3 className="text-xl font-bold mb-4" style={{color: 'var(--cyber-green)'}}>
+                  HARMONY POINTS LEVERAGE
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-green-500/10 p-4 rounded border border-green-500/30">
+                    <strong className="text-green-400">Shared Respect for Competence</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Strategic Application:</strong> Both value expertise and results. Position your analysis as elite-level intelligence.
+                    </p>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Example Approach:</strong> "This represents institutional-grade analysis typically reserved for billion-dollar decisions."
+                    </p>
+                  </div>
+                  <div className="bg-green-500/10 p-4 rounded border border-green-500/30">
+                    <strong className="text-green-400">Mutual Strategic Thinking</strong>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Strategic Application:</strong> Both appreciate long-term planning and strategic positioning.
+                    </p>
+                    <p className="text-sm mt-2" style={{color: 'var(--neon-blue)'}}>
+                      <strong>Example Approach:</strong> "Your strategic vision aligns perfectly with this 5-year market evolution analysis."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
