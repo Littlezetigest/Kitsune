@@ -755,7 +755,8 @@ function AnalysisPage() {
                   </span>
                 </div>
               </div>
-            </div>
+              </div>
+            )}
           </>
         )}
         
